@@ -1,0 +1,65 @@
+{
+ "amendment": "search-v0.1-amendment-2",
+ "date": "2026-09-22 America/Los_Angeles",
+ "scope": "correctness of the AND-OR search and of what counts as progress; the tasks, the arms, the proposers, the budget, the measures, and the hypotheses are unchanged",
+ "observation": "The run under amendment 1 completed (180 minutes, 47 tasks, 40 stated). Its AND-OR search reported proofs that failed verification: `constructor` on `∃ q, ExpChar R q` yields two goals sharing the metavariable `?w`, and a tactic on the first assigns `?w` and closes the second, so the goal count the search used to separate children from carried goals was off by one and a goal was recorded as proved with no children. This is the shared-metavariable case the design flags. Second, the model proposed `sorry` as a tactic and the REPL accepted it as closing a goal, which ended searches of both kinds with scripts verification then refused. Third, a closing candidate whose script fails verification ended the search instead of being discarded.",
+ "change": "the AND-OR search records the goals of each home state and discards a candidate that changes the carried goals (entangled, counted); tactics containing `sorry` or `admit`, and REPL responses whose proof status mentions sorry, are not progress; both searches verify a closing candidate's script from the statement at once and continue when it is refused (counted), so `proved` and `verified` coincide",
+ "resultsSeenBeforeAmendment": {
+  "hypotheses": {
+   "H14": {
+    "supported": false
+   },
+   "H15": {
+    "supported": false
+   },
+   "H16a": {
+    "supported": false
+   },
+   "H16b": {
+    "supported": false
+   },
+   "armsRun": [
+    "menu",
+    "model"
+   ]
+  },
+  "arms": {
+   "menu": {
+    "tasks": 40,
+    "wholeExpansions": 448,
+    "orderDuplicates": 15,
+    "orderFraction": 0.033482142857142856,
+    "goalDuplicates": 48,
+    "goalFraction": 0.10714285714285714,
+    "wholeProved": 5,
+    "andorProved": 4,
+    "wholeFoundUnverified": 0,
+    "andorFoundUnverified": 1
+   },
+   "model": {
+    "tasks": 40,
+    "wholeExpansions": 521,
+    "orderDuplicates": 11,
+    "orderFraction": 0.02111324376199616,
+    "goalDuplicates": 45,
+    "goalFraction": 0.08637236084452975,
+    "wholeProved": 8,
+    "andorProved": 6,
+    "wholeFoundUnverified": 4,
+    "andorFoundUnverified": 6
+   }
+  },
+  "note": "the order-duplicate mechanism was inspected: `symm` before `constructor` on an iff yields the two subgoals in the other order, so order duplicates arise without goal-selecting tactics"
+ },
+ "implementationSha256BeforeAmendment": {
+  "harness": "c7dc68b8584b3e82e711ada83453df7d7af38d62441bf280a4cccf14177601f2",
+  "repl": "a5130aa317cf7e7b6a6d13264508c064eb6d4d31ef9f9949a4a4d2ab7f5d30ae",
+  "runner": "1694f168ce4c8afafb9c084bf30988999107cc3d8b0511b708f482386e1012ba"
+ },
+ "implementationSha256AfterAmendment": {
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "fea3c23a5dbbe366daa65a5881881524b4ad0f1ff29110f7cce812180e52ac49"
+ },
+ "plan": "the artifacts of that run are discarded and the experiment is rerun from the first task"
+}

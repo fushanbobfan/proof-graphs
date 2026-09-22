@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import queue
+import re
 import subprocess
 import threading
 import time
@@ -97,11 +98,17 @@ class LeanRepl:
         return self._exchange({"cmd": text, "env": self.env}, self.timeout * 4)
 
     def tactic(self, proof_state: int, text: str) -> tuple[list[str], int] | None:
+        """`None` for a Lean error, and for a tactic that admits a goal (`sorry`,
+        `admit`), which is not progress."""
+        if re.search(r"\b(sorry|admit)\b", text):
+            return None
         guarded = f"set_option maxHeartbeats {HEARTBEATS} in ({text})"
         response = self._exchange({"tactic": guarded, "proofState": proof_state}, self.timeout)
         if "goals" not in response or "proofState" not in response:
             return None
         if any(m.get("severity") == "error" for m in response.get("messages", [])):
+            return None
+        if "sorry" in str(response.get("proofStatus", "")):
             return None
         return list(response["goals"]), int(response["proofState"])
 

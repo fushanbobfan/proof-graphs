@@ -323,7 +323,10 @@ def model_proposer(samples: int, temperature: float, model: str) -> Callable[[St
 
 
 def whole_state_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
-                       proposer: Callable[[State], list[str]], budget: int) -> dict[str, Any]:
+                       proposer: Callable[[State], list[str]], budget: int,
+                       verifier: Callable[[list[str]], bool] | None = None) -> dict[str, Any]:
+    """A candidate that closes every goal ends the search only when `verifier`
+    accepts the script from the statement; otherwise it is not progress."""
     states: list[State] = [State(0, root_proof_state, root_goals, None, None, 0)]
     frontier: list[int] = [0]
     seen_exact: set[tuple[str, ...]] = {states[0].ordered_key}
@@ -332,6 +335,7 @@ def whole_state_search(repl: LeanRepl, root_proof_state: int, root_goals: list[s
     expansions: list[dict[str, Any]] = []
     proof: list[str] | None = None
     timeouts = 0
+    rejected = 0  # closing candidates the verifier refused
     started = time.monotonic()
     while frontier and len(expansions) < budget and proof is None:
         state = states[frontier.pop(0)]  # breadth first: depth, then discovery order
@@ -349,17 +353,22 @@ def whole_state_search(repl: LeanRepl, root_proof_state: int, root_goals: list[s
                 continue
             goals, proof_state = result
             child = State(len(states), proof_state, goals, state.id, tactic, state.depth + 1)
-            valid += 1
             if not goals:
-                states.append(child)
-                state.children.append(child.id)
-                proof = []
+                script = []
                 cursor: State | None = child
                 while cursor is not None and cursor.tactic is not None:
-                    proof.append(cursor.tactic)
+                    script.append(cursor.tactic)
                     cursor = states[cursor.parent] if cursor.parent is not None else None
-                proof.reverse()
+                script.reverse()
+                if verifier is not None and not verifier(script):
+                    rejected += 1
+                    continue
+                valid += 1
+                states.append(child)
+                state.children.append(child.id)
+                proof = script
                 break
+            valid += 1
             if child.ordered_key in seen_exact:
                 exact_duplicates += 1
                 continue
@@ -371,7 +380,7 @@ def whole_state_search(repl: LeanRepl, root_proof_state: int, root_goals: list[s
                            "candidates": len(candidates), "valid": valid, "exactDuplicates": exact_duplicates,
                            "orderDuplicate": order_duplicate, "goalDuplicate": goal_duplicate})
     return {"expansions": expansions, "states": len(states), "proof": proof, "timeouts": timeouts,
-            "seconds": round(time.monotonic() - started, 1), "restarts": repl.restarts,
+            "rejected": rejected, "seconds": round(time.monotonic() - started, 1), "restarts": repl.restarts,
             "orderDuplicates": sum(1 for e in expansions if e["orderDuplicate"]),
             "goalDuplicates": sum(1 for e in expansions if e["goalDuplicate"]),
             "uniqueFirstGoals": len(expanded_first_goals)}
@@ -380,27 +389,33 @@ def whole_state_search(repl: LeanRepl, root_proof_state: int, root_goals: list[s
 @dataclass
 class GoalNode:
     key: str
-    home: tuple[int, int, int]  # a REPL proof state, the 1-based position of this goal in it, its goal count
+    home: tuple[int, int, list[str]]  # a REPL proof state, the 1-based position of this goal in it, its goals
     proved_by: tuple[str, list[str]] | None = None  # tactic and child keys
     alternatives: list[tuple[str, list[str]]] = field(default_factory=list)
     expansions: int = 0
 
 
 def and_or_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
-                  proposer: Callable[[State], list[str]], budget: int) -> dict[str, Any]:
+                  proposer: Callable[[State], list[str]], budget: int,
+                  verifier: Callable[[list[str]], bool] | None = None) -> dict[str, Any]:
     """Search over canonical goals: a goal is expanded once whatever states it
     appears in, and it is proved when one tactic turns it into proved goals
     only. `pick_goal` brings a goal to the front of the state it was created
-    in; the goals behind it are carried along and a candidate that changes
-    their number is discarded. Those calls are counted separately."""
+    in; the goals behind it are carried along, and a candidate that changes
+    any of them (a metavariable shared between goals was assigned) is
+    *entangled* and discarded, since the goals were not independent. A
+    completed proof ends the search only when `verifier` accepts its script."""
     root_key = canonical_goal(root_goals[0])
-    nodes: dict[str, GoalNode] = {root_key: GoalNode(root_key, (root_proof_state, 1, len(root_goals)))}
+    nodes: dict[str, GoalNode] = {root_key: GoalNode(root_key, (root_proof_state, 1, list(root_goals)))}
     parents: dict[str, set[str]] = {}
     frontier: list[str] = [root_key]
     expansions: list[dict[str, Any]] = []
     picks = 0
     timeouts = 0
+    entangled = 0
+    rejected = 0
     started = time.monotonic()
+    proof: list[str] | None = None
 
     def settle(key: str) -> None:
         node = nodes[key]
@@ -413,21 +428,38 @@ def and_or_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
                     settle(parent)
                 return
 
-    while frontier and len(expansions) < budget and nodes[root_key].proved_by is None:
+    def root_completed() -> bool:
+        """The root is proved and its script verifies; a refused script drops
+        the alternative that completed the root and the search goes on."""
+        nonlocal rejected, proof
+        root = nodes[root_key]
+        while root.proved_by is not None:
+            script = _script(nodes, root_key)
+            if verifier is None or verifier(script):
+                proof = script
+                return True
+            rejected += 1
+            root.alternatives = [a for a in root.alternatives if a != root.proved_by]
+            root.proved_by = None
+            settle(root_key)
+        return False
+
+    while frontier and len(expansions) < budget and proof is None:
         key = frontier.pop(0)
         node = nodes[key]
         if node.proved_by is not None:
             continue
-        proof_state, position, total = node.home
+        proof_state, position, home_goals = node.home
         if position != 1:
             picked = repl.tactic(proof_state, f"pick_goal {position}")
             picks += 1
             if picked is None:
                 continue
             proof_state = picked[1]
-            node.home = (proof_state, 1, total)
-        carried = total - 1
-        candidates = proposer(State(len(expansions), proof_state, [key], None, None, 0))
+            home_goals = picked[0]
+            node.home = (proof_state, 1, home_goals)
+        carried = [canonical_goal(g) for g in home_goals[1:]]
+        candidates = proposer(State(len(expansions), proof_state, [home_goals[0]], None, None, 0))
         node.expansions += 1
         valid = 0
         for tactic in candidates:
@@ -435,13 +467,16 @@ def and_or_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
             if result is None:
                 continue
             goals, new_state = result
-            if len(goals) < carried:
-                continue  # the tactic acted on carried goals
+            tail = [canonical_goal(g) for g in goals[len(goals) - len(carried):]] if carried else []
+            if len(goals) < len(carried) or tail != carried:
+                entangled += 1
+                continue
             valid += 1
-            child_keys = [canonical_goal(g) for g in goals[:len(goals) - carried]]
+            children_goals = goals[:len(goals) - len(carried)]
+            child_keys = [canonical_goal(g) for g in children_goals]
             for index, child_key in enumerate(child_keys):
                 if child_key not in nodes:
-                    nodes[child_key] = GoalNode(child_key, (new_state, index + 1, len(goals)))
+                    nodes[child_key] = GoalNode(child_key, (new_state, index + 1, list(goals)))
                     frontier.append(child_key)
                 parents.setdefault(child_key, set()).add(key)
             node.alternatives.append((tactic, child_keys))
@@ -449,11 +484,12 @@ def and_or_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
                 node.proved_by = (tactic, child_keys)
                 for parent in parents.get(key, set()):
                     settle(parent)
-                break
+                if root_completed():
+                    break
         expansions.append({"goal": key[:80], "candidates": len(candidates), "valid": valid})
-    proof = _script(nodes, root_key) if nodes[root_key].proved_by is not None else None
     return {"expansions": expansions, "goals": len(nodes), "proof": proof, "picks": picks, "timeouts": timeouts,
-            "seconds": round(time.monotonic() - started, 1), "restarts": repl.restarts}
+            "entangled": entangled, "rejected": rejected, "seconds": round(time.monotonic() - started, 1),
+            "restarts": repl.restarts}
 
 
 def _script(nodes: dict[str, GoalNode], key: str) -> list[str]:

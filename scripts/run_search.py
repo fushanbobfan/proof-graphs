@@ -124,7 +124,8 @@ def registration_payload() -> dict[str, Any]:
                                         "another order, over all whole-state expansions of the arm",
                      "goalDuplicates": "whole-state expansions whose first goal, canonicalized, was already "
                                        "expanded as a first goal, over all whole-state expansions of the arm",
-                     "proved": "tasks whose found proof re-verifies from the statement"},
+                     "proved": "tasks with a proof that re-verifies from the statement; a closing candidate "
+                               "whose script the verifier refuses is not progress and the search continues"},
         "hypotheses": {
             "H14": f"in both arms the order-duplicate fraction is below {ORDER_THRESHOLD:.0%}",
             "H15": f"in both arms the goal-duplicate fraction is at least {SHARING_THRESHOLD:.0%}",
@@ -213,9 +214,9 @@ def run_tasks(tasks: list[dict[str, Any]], arms: list[str], budget: int,
                             proposer = harness.menu_proposer if arm == "menu" else                                 harness.model_proposer(SAMPLES, TEMPERATURE, MODEL_ID)
                             for search in ("whole", "andor"):
                                 function = harness.whole_state_search if search == "whole" else harness.and_or_search
-                                result = function(repl, made.proof_state, [made.goal], proposer, budget)
-                                verified = session.verify(made, result["proof"]) if result["proof"] else False
-                                row[f"{arm}.{search}"] = {**result, "verified": verified}
+                                result = function(repl, made.proof_state, [made.goal], proposer, budget,
+                                                  verifier=lambda script, m=made: session.verify(m, script))
+                                row[f"{arm}.{search}"] = {**result, "verified": result["proof"] is not None}
                         record(row)
                         print(json.dumps({"task": name, **{k: (v["verified"], len(v["expansions"]),
                                                                v.get("goalDuplicates"), v.get("orderDuplicates"))
@@ -257,8 +258,9 @@ def summarize(rows: list[dict[str, Any]], arms: list[str]) -> dict[str, Any]:
             "goalDuplicates": goal, "goalFraction": goal / len(expansions) if expansions else None,
             "wholeProved": sum(1 for w in whole if w["verified"]),
             "andorProved": sum(1 for a in andor if a["verified"]),
-            "wholeFoundUnverified": sum(1 for w in whole if w["proof"] and not w["verified"]),
-            "andorFoundUnverified": sum(1 for a in andor if a["proof"] and not a["verified"]),
+            "wholeRejected": sum(w.get("rejected", 0) for w in whole),
+            "andorRejected": sum(a.get("rejected", 0) for a in andor),
+            "andorEntangled": sum(a.get("entangled", 0) for a in andor),
             "timeouts": sum(w["timeouts"] for w in whole) + sum(a["timeouts"] for a in andor),
             "restarts": max([w["restarts"] for w in whole] + [a["restarts"] for a in andor] + [0]),
             "medianSecondsWhole": statistics.median([w["seconds"] for w in whole]) if whole else None,
@@ -286,16 +288,17 @@ def write_report(summary: dict[str, Any]) -> None:
              "in `preregistration.json` (SHA-256 `" + summary["preregistrationSha256"] + "`).", "",
              f"Tasks: {summary['tasks']}; stated in context: {summary['constructed']}.", "",
              "| Arm | Tasks | Whole-state expansions | Order duplicates | Goal duplicates | Valid tactics per "
-             "expansion | Proved: whole | Proved: AND-OR | Found but unverified (whole / AND-OR) |",
-             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+             "expansion | Proved: whole | Proved: AND-OR | Closings refused by verification (whole / AND-OR) | "
+             "Entangled candidates (AND-OR) |",
+             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for arm, e in summary["arms"].items():
         if not e["wholeExpansions"]:
-            lines.append(f"| {arm} | {e['tasks']} | 0 | n/a | n/a | n/a | n/a | n/a | n/a |")
+            lines.append(f"| {arm} | {e['tasks']} | 0 | n/a | n/a | n/a | n/a | n/a | n/a | n/a |")
             continue
         lines.append(f"| {arm} | {e['tasks']} | {e['wholeExpansions']} | {e['orderDuplicates']} "
                      f"({e['orderFraction']:.1%}) | {e['goalDuplicates']} ({e['goalFraction']:.1%}) | "
                      f"{e['validPerExpansion']:.1f} | {e['wholeProved']} | {e['andorProved']} | "
-                     f"{e['wholeFoundUnverified']} / {e['andorFoundUnverified']} |")
+                     f"{e['wholeRejected']} / {e['andorRejected']} | {e['andorEntangled']} |")
     h = summary["hypotheses"]
     lines += ["", "## Hypotheses", "",
               f"- H14 (order-duplicate fraction below {ORDER_THRESHOLD:.0%} in both arms): supported: {h['H14']['supported']}.",
