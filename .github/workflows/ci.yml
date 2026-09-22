@@ -51,6 +51,8 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed dataset
+        run: python scripts/export_graphs.py --check
       - name: Check the committed golf experiment
         run: |
           if test -f experiments/golf-v0.1/results.jsonl; then

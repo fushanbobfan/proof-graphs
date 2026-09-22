@@ -36,13 +36,25 @@ scripts/run_search.py             steps 2 and 3: register, run, check
 scripts/run_search_deep.py        the same searches at eight times the budget
 scripts/mine_golf.py              golf pairs from Mathlib's history
 scripts/run_golf.py               golfed proofs against their predecessors
+scripts/export_graphs.py          the dataset of step-dependency graphs
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 experiments/search-v0.1/          steps 2 and 3 artifacts
 experiments/search-v0.2/          the deeper searches
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
+datasets/proof-graphs-v0.1.jsonl.gz  7,285 step-dependency graphs
 ```
+
+## Dataset
+
+`datasets/proof-graphs-v0.1.jsonl.gz` holds the step-dependency graph of
+every proof the experiments extracted: 3,994 tactic proofs of ProofNet-IR
+v0.10.0, 2,807 of the Mathlib v4.32.0 slice, and the 484 tactic sides of the
+golf pairs, one JSON line each with its source, module, declaration, steps
+(tactic kind and line), dependency edges, and exact number of orderings.
+`python scripts/export_graphs.py --check` rebuilds it from the committed
+extractions; CI runs it.
 
 ## Reproduction
 

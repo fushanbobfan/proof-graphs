@@ -1,0 +1,87 @@
+{
+ "experiment": "golf-v0.1",
+ "preregistrationSha256": "b3eb3113bb87e2c262fa452febb1d96b0f777ab6c8a43787f7e61f53101a9730",
+ "amendmentsSha256": {
+  "amendment-1.json": "254378522d6a9f58de39a7374c67c91fb456aace40994ada07745e263142ef9c",
+  "amendment-2.json": "b210d26413e395202b9679194f5496bbcf451700b690f17f985aad05706a3bf6"
+ },
+ "pairs": 306,
+ "ok": 294,
+ "excluded": {
+  "before fails": 11,
+  "original fails": 1
+ },
+ "commits": 104,
+ "steps": {
+  "before": {
+   "min": 0,
+   "q1": 4.0,
+   "median": 11.0,
+   "q3": 20.0,
+   "max": 126,
+   "count": 294
+  },
+  "after": {
+   "min": 0,
+   "q1": 0.0,
+   "median": 4.0,
+   "q3": 9.25,
+   "max": 56,
+   "count": 294
+  },
+  "reduction": {
+   "min": -7,
+   "q1": 0.0,
+   "median": 4.5,
+   "q3": 11.0,
+   "max": 126,
+   "count": 294
+  },
+  "termProofs": {
+   "before": 34,
+   "after": 82
+  }
+ },
+ "graphUnchanged": 56,
+ "H20": {
+  "pairsDiffering": 238,
+  "golfedFewer": 210,
+  "golfedMore": 28,
+  "pValue": 5.732255872827435e-36,
+  "supported": true
+ },
+ "H21": {
+  "eligible": 160,
+  "pairsDiffering": 125,
+  "golfedLower": 86,
+  "golfedHigher": 39,
+  "pValue": 1.588805195639367e-05,
+  "pValueOtherDirection": 0.9999930684819398,
+  "supported": true,
+  "structureBefore": {
+   "min": 0.0,
+   "q1": 0.1624779087662523,
+   "median": 0.3149174435046648,
+   "q3": 0.3979418592528882,
+   "max": 0.6595585958857377,
+   "count": 160
+  },
+  "structureAfter": {
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.23648201375604072,
+   "q3": 0.37140646838881963,
+   "max": 0.6014679496805887,
+   "count": 160
+  },
+  "commitLevel": {
+   "commits": 71,
+   "golfedLower": 52,
+   "pValue": 5.6134323447493996e-05,
+   "pValueOtherDirection": 0.9999805762086031
+  }
+ },
+ "extractionSha256": "673fad75411645134919044f6b17d732952364e46b363470f5f4da1285a5dec8",
+ "resultsSha256": "393580f84d1fee24ebb3a136c996559b159a440db5711b04eb09d4d15dbf974c",
+ "pairsSha256": "a6f30ea10efb1efd9e71f9b747001ae2e0a7fc350f78eab9a8b9fdfa2996b73a"
+}

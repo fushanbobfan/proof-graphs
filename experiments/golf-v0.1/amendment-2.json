@@ -1,0 +1,42 @@
+{
+ "amendment": "golf-v0.1-amendment-2",
+ "date": "2026-09-22 America/Los_Angeles",
+ "scope": "the join of counts to pairs in the runner; the extraction of the run under amendment 1 is kept unchanged, and so are the corpus, the extractor, the counter, and the hypotheses",
+ "observation": "The run under amendment 1 extracted both sides correctly (184 pairs have records whose node counts differ), but its report still showed 231 of 294 pairs unchanged and identical structure quartiles on both sides. The runner keyed the counted graphs by (module, declaration, first node line), which the two sides of a pair almost always share, so one side's count overwrote the other's: 180 of the 184 pairs with differing records were reported identical. The same bug was present in the first, already discarded, run.",
+ "change": "counts are keyed by (pair, side); the results, summary, and report are recomputed from the committed extraction with --recount",
+ "resultsSeenBeforeAmendment": {
+  "ok": 294,
+  "excluded": {
+   "before fails": 11,
+   "original fails": 1
+  },
+  "graphUnchanged": 231,
+  "H20": {
+   "pairsDiffering": 63,
+   "golfedFewer": 56,
+   "golfedMore": 7,
+   "pValue": 6.818356990123675e-11,
+   "supported": true
+  },
+  "H21": {
+   "eligible": 193,
+   "pairsDiffering": 0,
+   "supported": false
+  },
+  "note": "both numbers were computed through the faulty join; H21 had no pair whose indices differed"
+ },
+ "implementationSha256BeforeAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "miner": "b99189666f54e65651e3c37a1aa7327ae35938998382472fd15c48cea9c44f10",
+  "runner": "32af22ad588aedddfb70a2a53798a42d38da2c912f3d31e0a074e50e52e3b52b"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "miner": "b99189666f54e65651e3c37a1aa7327ae35938998382472fd15c48cea9c44f10",
+  "runner": "4c4c4ded087abd0463b32cd19aa70d09c1db21295817ad748ef0c16eb3bedc9c"
+ }
+}

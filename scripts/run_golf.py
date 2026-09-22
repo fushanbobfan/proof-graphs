@@ -212,9 +212,10 @@ def extract_module(module: str, pairs: list[dict[str, Any]], scratch: Path) -> l
 
 def pair_results(pairs: list[dict[str, Any]], extraction: list[dict[str, Any]]) -> list[dict[str, Any]]:
     by_key = {(row["pair"], row["side"]): row for row in extraction}
-    records = [row["record"] for row in extraction if row["record"] is not None]
-    counted = {(r["module"], r["declaration"], min(n["line"] for n in r["nodes"])): c
-               for r, c in zip(records, count(records))}
+    # keyed by (pair, side): the two sides of a pair usually share module, name, and first line
+    with_records = [row for row in extraction if row["record"] is not None]
+    counted = {(row["pair"], row["side"]): c
+               for row, c in zip(with_records, count([row["record"] for row in with_records]))}
     out = []
     for pair in pairs:
         row = {"pair": pair["id"], "commit": pair["commit"], "module": pair["module"], "name": pair["name"]}
@@ -226,7 +227,7 @@ def pair_results(pairs: list[dict[str, Any]], extraction: list[dict[str, Any]]) 
             elif record is None:
                 row[side] = {"status": "no tactic record", "steps": 0}
             else:
-                c = counted[(record["module"], record["declaration"], min(n["line"] for n in record["nodes"]))]
+                c = counted[(pair["id"], side)]
                 row[side] = {"status": "ok", "steps": c["steps"], "linearizations": c["linearizations"],
                              "structure": c["structure"], "forest": c["forest"], "roots": c["roots"]}
         both = row["before"]["status"] != "elaboration errors" and row["after"]["status"] != "elaboration errors"
