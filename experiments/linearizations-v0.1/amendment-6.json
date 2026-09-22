@@ -1,0 +1,19 @@
+{
+ "amendment": "linearizations-v0.1-amendment-6",
+ "date": "2026-09-21 America/Los_Angeles",
+ "scope": "checking only; the extractor, the counter, the corpus, the artifacts, and the hypotheses are unchanged",
+ "observation": "the CI check of the committed results failed on Linux with `recounted results differ from the committed results` although every exact field is platform-independent; the two logarithms per row (`log10`, `structure`) come from the platform's math library and can differ in the last bits",
+ "change": "the check compares declaration, module, steps, forest, roots, and the exact count exactly and the two logarithms within a relative tolerance of 1e-9, and names the first differing row",
+ "implementationSha256BeforeAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "5a4a99cd80e5085821c82dadc5b5e67fcfc3c4b8ba27e157df24e2a6b687f9c9"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "cd7cc1125c94b0af5da05d3d20a77153f88ebac553cb59273506f6b18ef7b41d"
+ }
+}

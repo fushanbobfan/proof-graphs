@@ -27,6 +27,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import math
 import statistics
 import subprocess
 import sys
@@ -133,6 +134,19 @@ def count(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     completed = subprocess.run([sys.executable, str(IMPLEMENTATIONS["counter"])], cwd=ROOT, input=payload,
                                capture_output=True, text=True, encoding="utf-8", check=True)
     return [json.loads(line) for line in completed.stdout.splitlines() if line.strip()]
+
+
+def same_row(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    """Exact fields exactly; the two logarithms within floating-point noise,
+    which differs between platforms' math libraries."""
+    if any(a[key] != b[key] for key in ("declaration", "module", "steps", "forest", "roots", "linearizations")):
+        return False
+    for key in ("log10", "structure"):
+        if (a[key] is None) != (b[key] is None):
+            return False
+        if a[key] is not None and not math.isclose(a[key], b[key], rel_tol=1e-9, abs_tol=1e-9):
+            return False
+    return True
 
 
 def stratum(steps: int) -> str:
@@ -307,8 +321,12 @@ def main() -> int:
     records = read_gz_lines(EXTRACTION)
     committed = [json.loads(line) for line in RESULTS.read_text(encoding="utf-8").splitlines() if line.strip()]
     recounted = count(records)
-    if recounted != committed:
-        raise SystemExit("recounted results differ from the committed results")
+    if len(recounted) != len(committed):
+        raise SystemExit(f"recounted {len(recounted)} rows, committed {len(committed)}")
+    for fresh_row, committed_row in zip(recounted, committed):
+        if not same_row(fresh_row, committed_row):
+            raise SystemExit(f"recounted results differ from the committed results at "
+                             f"{committed_row['declaration']}: {fresh_row} vs {committed_row}")
     sample = [(name, path) for name, path in modules() if name in CHECK_SAMPLE_MODULES]
     fresh = {(r["module"], r["declaration"]): r for r in extract(sample)}
     committed_sample = {(r["module"], r["declaration"]): r for r in records if r["module"] in CHECK_SAMPLE_MODULES}
