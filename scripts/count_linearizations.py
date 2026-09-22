@@ -154,7 +154,16 @@ def dag_linearizations(parents: list[set[int]]) -> int:
     return count(0)
 
 
+def validate(record: dict[str, Any]) -> None:
+    """Node indices form the range 0..n-1 and every parent index lies in it."""
+    nodes = record["nodes"]
+    n = len(nodes)
+    if [node["index"] for node in nodes] != list(range(n)) or             any(node["parent"] is not None and not 0 <= node["parent"] < n for node in nodes):
+        raise ValueError(f"{record['module']} {record['declaration']}: node indices or parents out of range")
+
+
 def analyse(record: dict[str, Any]) -> dict[str, Any]:
+    validate(record)
     steps = derive_steps(record["nodes"])
     parents = dependency_graph(steps)
     n = len(steps)

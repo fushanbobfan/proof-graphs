@@ -1,0 +1,28 @@
+{
+ "amendment": "linearizations-v0.1-amendment-1",
+ "date": "2026-09-21 America/Los_Angeles",
+ "scope": "extraction bookkeeping, artifact storage, and checking; the step definition, the counting, the corpus, the strata, and the hypotheses are unchanged",
+ "change": "The first run's extractor grouped tactic nodes by declaration across a whole command, while node indices are per command: the companion declarations of one command (derived instances, @[ext] companions, every `example` of a file) shared one index space. Of 3,992 extracted records, 4 had parent indices outside their own node list (instLawfulBEqLink, instLawfulBEqEdge, instLawfulBEqWaitingCell, UnificationMarking.ext_iff) and the three examples of ProofNetIR.LeanPropSchemaCorpus were merged into one record; the counter failed on the first malformed record and no count, summary, or report was produced. The extractor now splits the nodes of each command per declaration and re-indexes them (a parent outside the declaration becomes none), names private declarations by their user-facing name, and suffixes a name repeated within a file with the line of its first node; the counter rejects a record whose indices or parents are out of range; the extraction is stored as extraction.jsonl.gz (65 MB uncompressed) and hashed decompressed; --check-committed keys the re-extracted sample by (module, declaration) and compares node shapes, since goal names are fresh per elaboration and the committed records never had the `steps` field the check referenced; the runner takes the expected implementation hashes from the latest amendment.",
+ "implementationSha256AtRegistration": {
+  "counter": "f2137b9c2d77315a02fe72191cc053d5d0c96bd9b3df2a573d9bd267f4aeab4e",
+  "extractor": "1bcd9fcd2c37afac61999f9b8bb2236d5b092aa77a66f8eff5a625bef62da601",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "runner": "ba8c4960e21dda4d71d54b0eef2b9f8dfb1637a7ec7b4e5a18c369db5d8bd576"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "aa6fda307f412ef276f6095f54e33d5dc1a47f69d3a927a7f4cc8935131a2d04",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "572021f843353cdf5c4ba6f623411b704bc182c6bd5d2eeb6b059c9427e54921",
+  "runner": "8079b33b47079325ea99fa5b852e19002003c3a1837b1c22994d24281c42da17"
+ },
+ "fixturesAfterAmendment": {
+  "chain": "1",
+  "star": "6",
+  "mixed": "80",
+  "arithmetic": "1",
+  "cases_fixture": "2",
+  "nested_cases": "8"
+ },
+ "resultsAbsentAtAmendment": true,
+ "correction": "preregistration.json records registeredLocalDate 2026-09-22; the registration commit d0e3e92 was made on 2026-09-21 at 18:52 America/Los_Angeles (2026-09-22 UTC)"
+}

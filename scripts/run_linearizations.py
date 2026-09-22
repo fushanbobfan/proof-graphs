@@ -11,14 +11,18 @@ module list, the extractor and counter hashes, the strata, and the
 hypotheses before any proof is extracted. `--run` extracts the step
 dependency graph of every declaration with `proof_graph_extract`, counts the
 linear orderings with `count_linearizations.py`, and writes
-`extraction.jsonl`, `results.jsonl`, `summary.json`, and `report.md`.
+`extraction.jsonl.gz`, `results.jsonl`, `summary.json`, and `report.md`.
 `--check-committed` recounts from the committed extraction, re-extracts a
-fixed sample of modules and compares, and verifies the artifact hashes.
+fixed sample of modules and compares node shapes, and verifies the artifact
+hashes. A committed `amendment-N.json` carrying
+`implementationSha256AfterAmendment` replaces the registered implementation
+hashes; the preregistration itself is never edited.
 """
 
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import statistics
@@ -31,7 +35,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = ROOT / ".lake" / "packages" / "proofnet-ir"
 EXPERIMENT = ROOT / "experiments" / "linearizations-v0.1"
 PREREG = EXPERIMENT / "preregistration.json"
-EXTRACTION = EXPERIMENT / "extraction.jsonl"
+EXTRACTION = EXPERIMENT / "extraction.jsonl.gz"
 RESULTS = EXPERIMENT / "results.jsonl"
 SUMMARY = EXPERIMENT / "summary.json"
 REPORT = EXPERIMENT / "report.md"
@@ -46,11 +50,34 @@ CHECK_SAMPLE_MODULES = ["ProofNetIR.Formula", "ProofNetIR.Certificate", "ProofNe
 
 
 def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    """Content hash; a `.gz` file is hashed decompressed, so the compressor does not matter."""
+    data = gzip.decompress(path.read_bytes()) if path.suffix == ".gz" else path.read_bytes()
+    return hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest()
 
 
 def write_lf(path: Path, text: str) -> None:
     path.write_bytes(text.encode("utf-8"))
+
+
+def write_gz(path: Path, text: str) -> None:
+    path.write_bytes(gzip.compress(text.encode("utf-8"), compresslevel=9, mtime=0))
+
+
+def read_gz_lines(path: Path) -> list[dict[str, Any]]:
+    return [json.loads(line) for line in gzip.decompress(path.read_bytes()).decode("utf-8").splitlines()
+            if line.strip()]
+
+
+def amendments() -> list[Path]:
+    return sorted(EXPERIMENT.glob("amendment-*.json"), key=lambda p: int(p.stem.split("-")[1]))
+
+
+def expected_implementation_hashes(prereg: dict[str, Any]) -> dict[str, str]:
+    expected = dict(prereg["implementationSha256"])
+    for path in amendments():
+        amendment = json.loads(path.read_text(encoding="utf-8"))
+        expected.update(amendment.get("implementationSha256AfterAmendment", {}))
+    return expected
 
 
 def find_lake() -> str:
@@ -172,6 +199,7 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     h10 = all(per_stratum[n]["linearizations"] and per_stratum[n]["linearizations"]["median"] >= 10 for n in large)
     h11 = all(per_stratum[n]["structure"] and per_stratum[n]["structure"]["median"] < 0.5 for n in large)
     return {"experiment": "linearizations-v0.1", "preregistrationSha256": sha256_file(PREREG),
+            "amendmentsSha256": {p.name: sha256_file(p) for p in amendments()},
             "proofs": len(rows), "counted": sum(1 for r in rows if r["linearizations"] is not None),
             "strata": per_stratum, "hypotheses": {"H10": {"supported": h10}, "H11": {"supported": h11}},
             "extractionSha256": sha256_file(EXTRACTION), "resultsSha256": sha256_file(RESULTS)}
@@ -225,13 +253,14 @@ def main() -> int:
         raise SystemExit("dependency revision changed since registration")
     if prereg["corpus"]["moduleList"] != [name for name, _ in modules()]:
         raise SystemExit("module list changed since registration")
+    expected = expected_implementation_hashes(prereg)
     for name in ("extractor", "extractorMain", "counter"):
-        if prereg["implementationSha256"][name] != sha256_file(IMPLEMENTATIONS[name]):
-            raise SystemExit(f"implementation {name} changed since registration")
+        if expected[name] != sha256_file(IMPLEMENTATIONS[name]):
+            raise SystemExit(f"implementation {name} changed since registration or the last amendment")
 
     if args.run:
         records = extract(modules())
-        write_lf(EXTRACTION, "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in records))
+        write_gz(EXTRACTION, "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in records))
         rows = count(records)
         write_lf(RESULTS, "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in rows))
         summary = summarize(rows)
@@ -241,24 +270,29 @@ def main() -> int:
               f"H10={summary['hypotheses']['H10']['supported']} H11={summary['hypotheses']['H11']['supported']}")
         return 0
 
-    records = [json.loads(line) for line in EXTRACTION.read_text(encoding="utf-8").splitlines() if line.strip()]
+    records = read_gz_lines(EXTRACTION)
     committed = [json.loads(line) for line in RESULTS.read_text(encoding="utf-8").splitlines() if line.strip()]
     recounted = count(records)
     if recounted != committed:
         raise SystemExit("recounted results differ from the committed results")
     sample = [(name, path) for name, path in modules() if name in CHECK_SAMPLE_MODULES]
-    fresh = {r["declaration"]: r for r in extract(sample)}
-    committed_sample = {r["declaration"]: r for r in records if r["module"] in CHECK_SAMPLE_MODULES}
+    fresh = {(r["module"], r["declaration"]): r for r in extract(sample)}
+    committed_sample = {(r["module"], r["declaration"]): r for r in records if r["module"] in CHECK_SAMPLE_MODULES}
     if set(fresh) != set(committed_sample):
         raise SystemExit("re-extracted sample declarations differ from the committed extraction")
-    for name, record in fresh.items():
-        want = [(s["kind"], len(s["consumed"]), len(s["produced"])) for s in committed_sample[name]["steps"]]
-        have = [(s["kind"], len(s["consumed"]), len(s["produced"])) for s in record["steps"]]
-        if want != have:
-            raise SystemExit(f"re-extracted steps differ for {name}")
+
+    def shape(record: dict[str, Any]) -> list[tuple[Any, ...]]:
+        # goal names are fresh per elaboration; the tree and the goal counts are not
+        return [(n["index"], n["parent"], n["leaf"], n["kind"], len(n["before"]), len(n["after"]))
+                for n in record["nodes"]]
+
+    for key, record in fresh.items():
+        if shape(record) != shape(committed_sample[key]):
+            raise SystemExit(f"re-extracted nodes differ for {key[1]}")
     summary = json.loads(SUMMARY.read_text(encoding="utf-8"))
     if summary["extractionSha256"] != sha256_file(EXTRACTION) or summary["resultsSha256"] != sha256_file(RESULTS) \
-            or summary["preregistrationSha256"] != sha256_file(PREREG):
+            or summary["preregistrationSha256"] != sha256_file(PREREG) \
+            or summary["amendmentsSha256"] != {p.name: sha256_file(p) for p in amendments()}:
         raise SystemExit("summary hashes do not match the committed files")
     print(f"linearizations-check-ok: proofs={len(committed)} sampleModules={len(sample)} sampleProofs={len(fresh)}")
     return 0
