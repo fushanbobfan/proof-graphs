@@ -51,3 +51,11 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed deep-search experiment
+        run: |
+          if test -f experiments/search-v0.2/results.jsonl; then
+            ~/.elan/bin/lake build repl
+            python scripts/run_search_deep.py --check-committed
+          else
+            echo "no committed results yet"
+          fi

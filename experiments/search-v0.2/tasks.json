@@ -1,0 +1,259 @@
+[
+ {
+  "module": "Mathlib.Algebra.CharP.Defs",
+  "declaration": "ExpChar.exists",
+  "line": 426,
+  "steps": 3,
+  "structure": 0.3868528072345416,
+  "linearizations": "2",
+  "budgetHitInV1": [
+   "menu.whole",
+   "model.whole"
+  ]
+ },
+ {
+  "module": "Mathlib.Algebra.Polynomial.Degree.Operations",
+  "declaration": "Polynomial.eq_C_of_degree_le_zero",
+  "line": 163,
+  "steps": 7,
+  "structure": 0.2914791338890803,
+  "linearizations": "12",
+  "budgetHitInV1": [
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.AlgebraicGeometry.PullbackCarrier",
+  "declaration": "AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback",
+  "line": 417,
+  "steps": 16,
+  "structure": 0.2836643822204446,
+  "linearizations": "6006",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Range",
+  "declaration": "range_cfc_subset",
+  "line": 77,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Analysis.Normed.Group.AddCircle",
+  "declaration": "AddCircle.norm_eq'",
+  "line": 88,
+  "steps": 10,
+  "structure": 0.2933458535647721,
+  "linearizations": "84",
+  "budgetHitInV1": [
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.norm_le_re_iff_eq_norm",
+  "line": 894,
+  "steps": 7,
+  "structure": 0.3176538350898471,
+  "linearizations": "15",
+  "budgetHitInV1": [
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan",
+  "declaration": "Real.arctan_sqrt_three",
+  "line": 203,
+  "steps": 7,
+  "structure": 0.39895988329270726,
+  "linearizations": "30",
+  "budgetHitInV1": [
+   "model.whole"
+  ]
+ },
+ {
+  "module": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+  "declaration": "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+  "line": 140,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Combinatorics.SimpleGraph.Diam",
+  "declaration": "SimpleGraph.eccent_ne_zero",
+  "line": 65,
+  "steps": 7,
+  "structure": 0.2101730856862202,
+  "linearizations": "6",
+  "budgetHitInV1": [
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Combinatorics.SimpleGraph.Diam",
+  "declaration": "SimpleGraph.ediam_eq_top_iff_radius_eq_top",
+  "line": 388,
+  "steps": 6,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "menu.whole",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Data.Nat.Digits.Lemmas",
+  "declaration": "Nat.base_pow_length_digits_le'",
+  "line": 149,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Data.QPF.Univariate.Basic",
+  "declaration": "QPF.liftp_iff",
+  "line": 99,
+  "steps": 20,
+  "structure": 0.452080238609071,
+  "linearizations": "205117920",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Geometry.Manifold.Immersion",
+  "declaration": "ModelWithCorners.isImmersionAt",
+  "line": 670,
+  "steps": 7,
+  "structure": 0.6091329689789274,
+  "linearizations": "180",
+  "budgetHitInV1": [
+   "menu.andor",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.MeasureTheory.Function.ConditionalExpectation.CondJensen",
+  "declaration": "ConvexOn.map_condExp_le_trim_univ",
+  "line": 224,
+  "steps": 4,
+  "structure": 0.5637914160289369,
+  "linearizations": "6",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.ModelTheory.Semantics",
+  "declaration": "FirstOrder.Language.Formula.realize_iExs",
+  "line": 843,
+  "steps": 14,
+  "structure": 0.21756146252637365,
+  "linearizations": "240",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.NumberTheory.LegendreSymbol.ZModChar",
+  "declaration": "ZMod.χ₈_int_eq_if_mod_eight",
+  "line": 143,
+  "steps": 8,
+  "structure": 0.4006274710153962,
+  "linearizations": "70",
+  "budgetHitInV1": [
+   "menu.andor",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Order.CompleteLattice.Finset",
+  "declaration": "Set.iUnion_finset_eq_set",
+  "line": 90,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "menu.andor",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.RingTheory.Localization.FractionRing",
+  "declaration": "IsFractionRing.of_algHom",
+  "line": 285,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.RingTheory.Polynomial.Eisenstein.Basic",
+  "declaration": "Polynomial.IsWeaklyEisensteinAt.pow_natDegree_le_of_aeval_zero_of_monic_mem_map",
+  "line": 154,
+  "steps": 11,
+  "structure": 0.3055087122112317,
+  "linearizations": "210",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ },
+ {
+  "module": "Mathlib.Topology.DiscreteSubset",
+  "declaration": "IsDiscrete.preimage",
+  "line": 153,
+  "steps": 6,
+  "structure": 0.0,
+  "linearizations": "1",
+  "budgetHitInV1": [
+   "menu.whole",
+   "menu.andor",
+   "model.whole",
+   "model.andor"
+  ]
+ }
+]

@@ -33,10 +33,12 @@ scripts/run_mathlib_slice.py      step 1 on a Mathlib slice
 scripts/lean_repl.py              a Lean REPL session
 scripts/search_harness.py         whole-state and AND-OR tactic searches
 scripts/run_search.py             steps 2 and 3: register, run, check
+scripts/run_search_deep.py        the same searches at eight times the budget
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 experiments/search-v0.1/          steps 2 and 3 artifacts
+experiments/search-v0.2/          the deeper searches
 ```
 
 ## Reproduction

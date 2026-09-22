@@ -1,0 +1,41 @@
+{
+ "arms": "those of search-v0.1, unchanged (the menu; the local model sampled four times plus the menu)",
+ "budget": {
+  "checkpoints": [
+   24,
+   48,
+   96,
+   192
+  ],
+  "expansionsPerSearch": 192,
+  "note": "both searches are breadth-first and stop only on a proof, an empty frontier, or the budget, so the first b expansions of a run at 192 are a run at budget b"
+ },
+ "checks": {
+  "C1": "for every task, the menu arm's first 24 expansions of each search equal those committed by search-v0.1 (expansion records and proof), since the menu proposer is deterministic"
+ },
+ "developmentChecksBeforeRegistration": "the runner was exercised on one task at budget 4; no unit of this corpus was run at a larger budget",
+ "execution": "every (task, arm, search) unit in a fresh REPL; four units at a time; the model server with four parallel slots",
+ "experiment": "search-v0.2",
+ "hypotheses": {
+  "H17": "in both arms the goal-duplicate fraction within 192 expansions is at least 2 times the fraction within 24 (on the same runs)",
+  "H18": "within 192 expansions the AND-OR search proves at least as many tasks as the whole-state search in both arms, and strictly more in at least one",
+  "H19": "in both arms the order-duplicate fraction within 192 expansions is below 5%"
+ },
+ "implementationSha256": {
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "cb73a2ecd68bf83bba8ac8611f2ddb261f9012581536522b9355dce7c9dbd218"
+ },
+ "measures": "as in search-v0.1, at each checkpoint: order- and goal-duplicate fractions over the whole-state expansions within the checkpoint, and tasks proved within it by each search",
+ "question": "do the redundancies measured by search-v0.1, and the comparison of whole-state and AND-OR search, change when the searches run eight times deeper",
+ "registeredLocalDate": "2026-09-22 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": "those of search-v0.1 after its amendment 2, unchanged",
+ "tasks": {
+  "count": 20,
+  "rule": "the search-v0.1 tasks on which at least one of the four searches used all 24 expansions without a proof, in search-v0.1 order",
+  "source": "search-v0.1",
+  "v1ResultsSha256": "10e6b3b7d92bf1b0f561d5a9202fc4a3922a7c10f8dbecff71f3375f760c2bdd"
+ },
+ "tasksSha256": "6a0563fa900d4c92d4768a7feb67cfa8fe197ffe2375ba4b86493c0a4367870b"
+}
