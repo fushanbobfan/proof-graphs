@@ -28,6 +28,7 @@ import json
 import statistics
 import subprocess
 import sys
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -181,6 +182,28 @@ def quantiles(values: list[float]) -> dict[str, float] | None:
             "max": ordered[-1], "count": len(ordered)}
 
 
+def int_quantiles(values: list[int]) -> dict[str, Any] | None:
+    """Exact quartiles of integers too large for floats, as decimal strings: the
+    value at rank p*(n-1), or the midpoint of the two neighbouring ranks rounded
+    down, so that `median >= k` holds exactly when the true median is at least k."""
+    if not values:
+        return None
+    ordered = sorted(values)
+    n = len(ordered)
+
+    def at(p: int) -> int:  # p in quarters
+        position = p * (n - 1)
+        lower, upper = position // 4, -(-position // 4)
+        return (ordered[lower] + ordered[upper]) // 2
+
+    return {"min": str(ordered[0]), "q1": str(at(1)), "median": str(at(2)), "q3": str(at(3)),
+            "max": str(ordered[-1]), "count": n}
+
+
+def format_count(text: str) -> str:
+    return text if len(text) <= 7 else format(Decimal(text), ".3e")
+
+
 def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     per_stratum: dict[str, Any] = {}
     for low, high in STRATA:
@@ -190,13 +213,15 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         per_stratum[name] = {
             "proofs": len(members), "counted": len(counted), "excluded": len(members) - len(counted),
             "forests": sum(1 for r in members if r["forest"]),
-            "linearizations": quantiles([float(r["linearizations"]) for r in counted]),
+            "multiRoot": sum(1 for r in members if r["roots"] > 1),
+            "linearizations": int_quantiles([int(r["linearizations"]) for r in counted]),
             "log10": quantiles([r["log10"] for r in counted if r["log10"] is not None]),
             "structure": quantiles([r["structure"] for r in counted if r["structure"] is not None]),
             "fractionSingleOrder": (sum(1 for r in counted if r["linearizations"] == "1") / len(counted)) if counted else None,
         }
     large = [name for name, (low, _) in zip(per_stratum, STRATA) if low >= 6]
-    h10 = all(per_stratum[n]["linearizations"] and per_stratum[n]["linearizations"]["median"] >= 10 for n in large)
+    h10 = all(per_stratum[n]["linearizations"] and int(per_stratum[n]["linearizations"]["median"]) >= 10
+              for n in large)
     h11 = all(per_stratum[n]["structure"] and per_stratum[n]["structure"]["median"] < 0.5 for n in large)
     return {"experiment": "linearizations-v0.1", "preregistrationSha256": sha256_file(PREREG),
             "amendmentsSha256": {p.name: sha256_file(p) for p in amendments()},
@@ -211,15 +236,17 @@ def write_report(summary: dict[str, Any]) -> None:
              "tactic proof in ProofNet-IR v0.10.0; definitions, corpus, and hypotheses are frozen",
              "in `preregistration.json` (SHA-256 `" + summary["preregistrationSha256"] + "`).", "",
              f"Proofs with tactic steps: {summary['proofs']}; counted exactly: {summary['counted']}.", "",
-             "| Steps | Proofs | Forests | Linearizations median (q1, q3, max) | log10 median | Structure median (q1, q3) | Single order |",
-             "| --- | ---: | ---: | --- | ---: | --- | ---: |"]
+             "| Steps | Proofs | Forests | Multi-root | Linearizations median (q1, q3, max) | log10 median | Structure median (q1, q3) | Single order |",
+             "| --- | ---: | ---: | ---: | --- | ---: | --- | ---: |"]
     for name, entry in summary["strata"].items():
         lin = entry["linearizations"]; st = entry["structure"]; lg = entry["log10"]
-        lin_text = "n/a" if not lin else f"{lin['median']:.6g} ({lin['q1']:.6g}, {lin['q3']:.6g}, {lin['max']:.6g})"
+        lin_text = "n/a" if not lin else (f"{format_count(lin['median'])} ({format_count(lin['q1'])}, "
+                                          f"{format_count(lin['q3'])}, {format_count(lin['max'])})")
         st_text = "n/a" if not st else f"{st['median']:.3f} ({st['q1']:.3f}, {st['q3']:.3f})"
         lg_text = "n/a" if not lg else f"{lg['median']:.2f}"
         single = "n/a" if entry["fractionSingleOrder"] is None else f"{entry['fractionSingleOrder']:.1%}"
-        lines.append(f"| {name} | {entry['proofs']} | {entry['forests']} | {lin_text} | {lg_text} | {st_text} | {single} |")
+        lines.append(f"| {name} | {entry['proofs']} | {entry['forests']} | {entry['multiRoot']} | {lin_text} | "
+                     f"{lg_text} | {st_text} | {single} |")
     h = summary["hypotheses"]
     lines += ["", "## Hypotheses", "",
               f"- H10 (median linearizations at least 10 in every stratum of at least 6 steps): supported: {h['H10']['supported']}.",

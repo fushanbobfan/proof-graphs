@@ -1,0 +1,21 @@
+{
+ "amendment": "linearizations-v0.1-amendment-3",
+ "date": "2026-09-21 America/Los_Angeles",
+ "scope": "reporting only; the extractor, the counter, the corpus, the strata, and the hypotheses are unchanged",
+ "observation": "the summary converted linearization counts to floats for the quartiles; a proof of 291 steps with structure index 0.665 has about 10^394 linearizations, beyond the float range, so the run would have failed after writing the extraction and the results",
+ "change": "quartiles of the counts are computed in integer arithmetic (the value at rank p*(n-1), or the midpoint of the two neighbouring ranks rounded down, which decides `median >= 10` exactly) and stored as decimal strings; the report prints counts above seven digits in scientific notation; the per-stratum number of declarations with more than one root is added as a descriptive column",
+ "disclosure": "the changed summary was exercised on the counts of the 306-declaration validation sample of amendment 2; that table and its H10/H11 verdicts were seen (H10 held on the sample, H11 did not in its 51+ stratum). No hypothesis, threshold, or stratum is changed; the corpus run reports whatever it finds.",
+ "implementationSha256BeforeAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "acac6ecc29856b35ddf9e562d3797792032eac8bcc132c93ef47df2f3db59c13",
+  "runner": "8079b33b47079325ea99fa5b852e19002003c3a1837b1c22994d24281c42da17"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "acac6ecc29856b35ddf9e562d3797792032eac8bcc132c93ef47df2f3db59c13",
+  "runner": "cb8625af677a02e7fa616004b825ffc09aa7f614c2ec56e5dfc6fd5d1413a542"
+ },
+ "resultsAbsentAtAmendment": true
+}
