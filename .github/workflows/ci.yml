@@ -34,3 +34,12 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Fetch the Mathlib build cache
+        run: ~/.elan/bin/lake exe cache get
+      - name: Check the committed Mathlib-slice experiment
+        run: |
+          if test -f experiments/linearizations-mathlib-v0.1/results.jsonl; then
+            python scripts/run_mathlib_slice.py --check-committed
+          else
+            echo "no committed results yet"
+          fi

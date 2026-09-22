@@ -20,8 +20,10 @@ ProofGraphs/Extract.lean          goal-dependency graphs from info trees
 ProofGraphsExtract.lean           proof_graph_extract <module> <file> ...
 scripts/count_linearizations.py   exact orderings per graph
 scripts/run_linearizations.py     step 1: register, run, check
+scripts/run_mathlib_slice.py      step 1 on a Mathlib slice
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
+experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 ```
 
 ## Reproduction
@@ -33,6 +35,7 @@ python scripts/run_linearizations.py --check-committed
 ```
 
 `lake build ProofNetIR` compiles the whole dependency, which the extractor
-imports module by module (about ten minutes on CI). On Windows, clone into a short path or set
+imports module by module (about ten minutes on CI); `lake exe cache get`
+fetches Mathlib's build for the slice experiment (about 6 GB). On Windows, clone into a short path or set
 `git config --global core.longpaths true`; several module names of the
 dependency exceed 100 characters.
