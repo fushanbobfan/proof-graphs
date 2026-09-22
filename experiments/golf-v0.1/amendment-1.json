@@ -1,0 +1,44 @@
+{
+ "amendment": "golf-v0.1-amendment-1",
+ "date": "2026-09-22 America/Los_Angeles",
+ "scope": "the construction of the elaborated files; the corpus, the pairs, the extractor, the counter, the quantities, and the hypotheses H20 and H21 are unchanged",
+ "observation": "The first run (45 minutes) was invalid. Git's core.autocrlf had checked Mathlib's working tree out with CRLF line endings, while the pairs were mined from `git show` with LF, so replacing the golfed text by its predecessor silently did nothing for every proof spanning more than one line: in 220 of the 281 pairs that elaborated, both sides were the golfed proof. Separately, 16 pairs were excluded because their unmodified module failed to elaborate: the extractor elaborates with Lean's default options, while Mathlib builds with `autoImplicit false` and `maxSynthPendingDepth 3`, and at least one module (Mathlib.Analysis.Analytic.OfScalars) needs the latter.",
+ "change": "both sides are now elaborated from scratch files written from the upper tag's text as git stores it (LF), with Mathlib's two elaboration options inserted where the header ends, identically on both sides; line numbers are shifted by the inserted lines; a pair whose golfed text is not unique in that text is excluded as a failed splice instead of being elaborated unchanged",
+ "validation": "on three multi-line pairs from golf commits before v4.29.0 (outside the corpus) the two sides now differ (7 and 5 nodes; 7 nodes against a term proof; one predecessor fails to elaborate), and Mathlib.Analysis.Analytic.OfScalars elaborates without errors",
+ "resultsSeenBeforeAmendment": {
+  "ok": 281,
+  "excluded": {
+   "before fails": 9,
+   "original fails": 16
+  },
+  "graphUnchanged": 220,
+  "H20": {
+   "pairsDiffering": 61,
+   "golfedFewer": 54,
+   "golfedMore": 7,
+   "pValue": 2.16105361036667e-10,
+   "supported": true
+  },
+  "H21": {
+   "eligible": 183,
+   "pairsDiffering": 0,
+   "supported": false
+  },
+  "note": "H20's 61 differing pairs were nearly all single-line proofs, the only ones the broken splice changed; H21 had no pair whose indices differed, so the structure question was not answered"
+ },
+ "implementationSha256BeforeAmendment": {
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "miner": "b99189666f54e65651e3c37a1aa7327ae35938998382472fd15c48cea9c44f10",
+  "runner": "33d35cc341b403f69e646f3fe302d89724b32cc0d15e030194713e6530068507"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "miner": "b99189666f54e65651e3c37a1aa7327ae35938998382472fd15c48cea9c44f10",
+  "runner": "32af22ad588aedddfb70a2a53798a42d38da2c912f3d31e0a074e50e52e3b52b"
+ },
+ "plan": "the artifacts of the first run are discarded and the experiment is rerun"
+}

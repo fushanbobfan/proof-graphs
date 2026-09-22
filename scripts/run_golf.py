@@ -55,6 +55,10 @@ IMPLEMENTATIONS = {
 ALPHA = 0.05
 MIN_STRUCTURE_STEPS = 3
 CHECK_SAMPLE = 2
+# the elaboration options of Mathlib's `lake build` (its lakefile's `mathlibLeanOptions`, linters and
+# pretty-printing aside), which the extractor, elaborating with Lean's defaults, would otherwise miss
+MATHLIB_OPTIONS = ["set_option autoImplicit false", "set_option maxSynthPendingDepth 3"]
+HEADER_LINE = __import__("re").compile(r"(module|prelude|(public\s+)?(meta\s+)?import\s)")
 
 
 def amendments() -> list[Path]:
@@ -144,24 +148,62 @@ def match_record(records: list[dict[str, Any]], name: str, first_line: int, line
     return found[0] if len(found) == 1 else None
 
 
+def with_mathlib_options(text: str) -> tuple[str, int]:
+    """The file with Mathlib's elaboration options inserted where its header
+    ends (after the copyright comment, `module`, and the imports), and the
+    number of lines inserted."""
+    lines = text.split("\n")
+    index, in_comment = 0, False
+    while index < len(lines):
+        line = lines[index].strip()
+        if in_comment:
+            in_comment = "-/" not in line
+        elif line.startswith("/-") and not line.startswith("/-!") and not line.startswith("/--"):
+            in_comment = "-/" not in line[2:]
+        elif not (line == "" or line.startswith("--") or HEADER_LINE.match(line)):
+            break
+        index += 1
+    return "\n".join(lines[:index] + MATHLIB_OPTIONS + lines[index:]), len(MATHLIB_OPTIONS)
+
+
+def module_text(module: str) -> str:
+    """The module's text at the upper tag, as git stores it (LF line endings,
+    whatever the working tree's checkout converted them to)."""
+    path = "/".join(module.split(".")) + ".lean"
+    text = mine_golf.git_show(MATHLIB, UPPER, path)
+    if text is None:
+        raise SystemExit(f"{path} is not in {UPPER}")
+    return text
+
+
 def extract_module(module: str, pairs: list[dict[str, Any]], scratch: Path) -> list[dict[str, Any]]:
-    """The extraction rows of one module: its golfed proofs, then each predecessor variant."""
-    source = MATHLIB / (module.replace(".", "/") + ".lean")
-    text = source.read_text(encoding="utf-8")
-    records, diagnostics = extract_file(module, source)
+    """The extraction rows of one module: its golfed proofs, then each predecessor variant. Both
+    sides are elaborated from scratch files: the upper tag's text with Mathlib's options inserted,
+    and the same with the golfed text replaced by the predecessor text."""
+    golfed, shift = with_mathlib_options(module_text(module))
+    stem = module.replace(".", "_")
+    path = scratch / f"{stem}.lean"
+    path.write_bytes(golfed.encode("utf-8"))
+    records, diagnostics = extract_file(module, path)
+    path.unlink()
     original_ok = "errors=0" in diagnostics
     rows = []
     for pair in pairs:
-        after = match_record(records, pair["name"], pair["upperLine"], pair["afterLines"]) if original_ok else None
+        first_line = pair["upperLine"] + shift
+        after = match_record(records, pair["name"], first_line, pair["afterLines"]) if original_ok else None
         rows.append({"pair": pair["id"], "side": "after", "ok": original_ok, "diagnostics": diagnostics,
                      "record": after})
-        variant = text.replace(pair["after"], pair["before"], 1)
-        path = scratch / f"{pair['id']}.lean"
+        if golfed.count(pair["after"]) != 1:
+            rows.append({"pair": pair["id"], "side": "before", "ok": False,
+                         "diagnostics": "splice failed: the golfed text is not unique in the module", "record": None})
+            continue
+        variant = golfed.replace(pair["after"], pair["before"], 1)
+        path = scratch / f"{stem}.{pair['id']}.lean"
         path.write_bytes(variant.encode("utf-8"))
         variant_records, variant_diagnostics = extract_file(module, path)
         path.unlink()
         variant_ok = "errors=0" in variant_diagnostics
-        before = match_record(variant_records, pair["name"], pair["upperLine"], pair["beforeLines"]) \
+        before = match_record(variant_records, pair["name"], first_line, pair["beforeLines"]) \
             if variant_ok else None
         rows.append({"pair": pair["id"], "side": "before", "ok": variant_ok, "diagnostics": variant_diagnostics,
                      "record": before})
@@ -361,8 +403,7 @@ def main() -> int:
                 raise SystemExit(f"recounted results differ at {committed_row['pair']} {side}")
     if len(recomputed) != len(committed):
         raise SystemExit("recounted a different number of pairs")
-    sizes = {m: sum(len(p["after"]) for p in ps) + len((MATHLIB / (m.replace(".", "/") + ".lean")).read_bytes())
-             for m, ps in by_module.items()}
+    sizes = {m: len(module_text(m)) for m in by_module}
     sample = sorted(sizes, key=lambda m: (sizes[m], m))[:CHECK_SAMPLE]
     with tempfile.TemporaryDirectory(prefix="golf-check-") as scratch:
         for module in sample:
