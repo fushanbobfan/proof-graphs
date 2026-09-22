@@ -68,4 +68,8 @@ author and a subject; 157 modules across 23 top-level directories is broad
 enough for medians, not for the tail (14 proofs above 50 steps). The count
 says nothing about how a search explores the orderings, and Lean's
 first-goal convention already fixes one of them; that is what `search-v0.1`
-measures.
+measures. The extractor elaborates with Lean's default options, not with
+those of Mathlib's build (`autoImplicit false`, `maxSynthPendingDepth 3`);
+every module of the slice elaborated without errors, so every proof ran as
+written, but instance synthesis inside a step may have taken another path.
+`golf-v0.1` inserts Mathlib's options.

@@ -83,4 +83,8 @@ their frontier, so these numbers describe where such a search spends its
 expansions, not the best achievable prover; a stronger proposer would move
 both the proof counts and the duplicate fractions. A proof counts only when
 its script re-verifies from the statement in the theorem's own context, and
-`sorry` is not progress.
+`sorry` is not progress. The REPL elaborated each module under Lean's default
+options rather than those of Mathlib's build (`autoImplicit false`,
+`maxSynthPendingDepth 3`); every search and arm shares this, so the
+comparisons stand, but a tactic that needs the deeper instance synthesis
+fails here.
