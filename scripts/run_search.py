@@ -160,7 +160,7 @@ def run_tasks(tasks: list[dict[str, Any]], arms: list[str], budget: int,
               model_log: list[dict[str, Any]] | None, sink: Path | None = None) -> list[dict[str, Any]]:
     """Runs every task; with `sink`, appends each row to it as it completes and
     skips the tasks already in it, so that an interrupted run resumes."""
-    repl = LeanRepl(find_lake(), imports=None)
+    repl: LeanRepl | None = None
     if model_log is not None:
         harness.MODEL_LOG = model_log
     rows: list[dict[str, Any]] = []
@@ -192,9 +192,16 @@ def run_tasks(tasks: list[dict[str, Any]], arms: list[str], budget: int,
             path = ROOT / ".lake" / "packages" / "mathlib" / (module.replace(".", "/") + ".lean")
             remaining = list(module_tasks)
             while remaining:
-                session = harness.ModuleSession(repl, module, path, [(t["declaration"], t["line"]) for t in remaining])
+                # a fresh REPL per module: the REPL keeps every environment it has ever
+                # built, and two per module exhausted memory after a dozen modules
+                if repl is not None:
+                    repl.close()
+                repl = LeanRepl(find_lake(), imports=None)
                 current: dict[str, Any] | None = None
+                session = None
                 try:
+                    session = harness.ModuleSession(repl, module, path,
+                                                    [(t["declaration"], t["line"]) for t in remaining])
                     for name, made in session.tasks_in_order():
                         current = next(t for t in remaining if t["declaration"] == name)
                         if made is None:
@@ -224,10 +231,11 @@ def run_tasks(tasks: list[dict[str, Any]], arms: list[str], budget: int,
                         record({**current, "task": None, "abandoned": "repl timeout"})
                         print(json.dumps({"task": current["declaration"], "abandoned": True}), flush=True)
                         remaining = remaining[remaining.index(current) + 1:]
-                if session.errors:
+                if session is not None and session.errors:
                     record({"module": module, "elaborationErrors": session.errors[:5]})
     finally:
-        repl.close()
+        if repl is not None:
+            repl.close()
     return rows
 
 

@@ -44,6 +44,7 @@ MODEL_ENDPOINT = "http://127.0.0.1:8080/v1/chat/completions"
 SYSTEM_PROMPT = ("You are a Lean 4 and Mathlib expert. Reply with exactly one tactic that makes progress on "
                  "the first goal, on a single line, without explanation, backticks, or `by`.")
 MODEL_LOG: list[dict[str, Any]] | None = None  # raw prompts and replies, when a runner wants them
+IN_PREFIX = re.compile(r"\s*(open|set_option|omit|attribute|unseal|include)\b[^\n]*\bin[ \t]*(?=\n|$)")
 
 
 def canonical_goal(goal: str) -> str:
@@ -180,31 +181,42 @@ class ModuleSession:
         self.cursor = offset_of(self.lines, header_end + 1, 0)
 
     def with_modifiers(self, start: int) -> int:
-        """The declaration range starts at its keyword; attributes and the
-        docstring on the preceding lines belong to it."""
+        """The declaration range starts at its keyword; attributes, the
+        docstring, and `open ... in` / `set_option ... in` lines on the
+        preceding lines belong to it."""
         while True:
             before = self.text[:start].rstrip()
-            if before.endswith("]"):
-                line_start = before.rfind("\n") + 1
-                if before[line_start:].lstrip().startswith("@["):
-                    start = line_start
-                    continue
+            line_start = before.rfind("\n") + 1
+            last_line = before[line_start:]
+            if before.endswith("]") and last_line.lstrip().startswith("@["):
+                start = line_start
+                continue
             if before.endswith("-/"):
                 opener = before.rfind("/--")
                 if opener != -1 and "-/" not in before[opener:-2]:
                     start = opener
                     continue
+            if IN_PREFIX.match(last_line):
+                start = line_start
+                continue
             return start
 
     @staticmethod
-    def declaration_head(declaration: str) -> int | None:
-        """The offset just after `theorem name` (or `lemma name`), skipping the
-        docstring, attributes, and modifiers that precede the keyword."""
+    def declaration_head(declaration: str) -> tuple[int, int] | None:
+        """The offsets where the `... in` prefixes end and just after
+        `theorem name` (or `lemma name`), skipping the docstring, attributes,
+        and modifiers that precede the keyword."""
         position = 0
+        prefix_end = 0
         while True:
             rest = declaration[position:]
             stripped = rest.lstrip()
             position += len(rest) - len(stripped)
+            in_line = IN_PREFIX.match(stripped)
+            if in_line:
+                position += in_line.end()
+                prefix_end = position
+                continue
             if stripped.startswith("/--"):
                 close = stripped.find("-/")
                 if close == -1:
@@ -218,7 +230,7 @@ class ModuleSession:
                 position += close + 1
                 continue
             head = re.match(r"((?:private|protected|nonrec|noncomputable)\s+)*(theorem|lemma)\s+\S+", stripped)
-            return None if head is None else position + head.end()
+            return None if head is None else (prefix_end, position + head.end())
 
     def elaborate(self, text: str) -> int:
         if text.strip():
@@ -247,10 +259,11 @@ class ModuleSession:
                     break
             task = None
             head = self.declaration_head(declaration)
-            if match is not None and head is not None and head < match.start():
+            if match is not None and head is not None and head[1] < match.start():
                 # an `example`: inside `theorem foo := by ...`, `foo` itself is in scope as a
                 # recursive reference and a search would use it
-                statement = "example" + declaration[head:match.start()]
+                prefix = declaration[:head[0]].rstrip()
+                statement = (prefix + "\n" if prefix else "") + "example" + declaration[head[1]:match.start()]
                 response = self.repl._exchange({"cmd": statement + ":= by\n  sorry", "env": self.env},
                                                self.repl.import_timeout)
                 sorries = response.get("sorries", [])

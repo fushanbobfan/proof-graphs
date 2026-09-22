@@ -1,0 +1,19 @@
+{
+ "amendment": "search-v0.1-amendment-1",
+ "date": "2026-09-22 America/Los_Angeles",
+ "scope": "robustness of the runner and of task construction; the tasks, the arms, the searches, the budget, the measures, and the hypotheses are unchanged",
+ "observation": "The first run stopped after 46 minutes and 13 tasks: the Lean REPL keeps every environment it has built, the runner built two per module in one REPL process, and the process died while loading the fourteenth module; the failure surfaced outside the runner's recovery path and ended the run. In the same run, the module prefix before one task (AlgebraicGeometry.Scheme.PartialMap.toPartialMap_toRationalMap_restrict) was cut before the `set_option ... in` line that belongs to the declaration, which the elaborator reported as `unexpected end of input`, and the task was stated without that option. Three tasks could not be stated because their proof is a term with a nested `by` block (Subgroup.le_normalizer, cthickening_cthickening) or a `def` (skewAdjointMatricesLieSubalgebraEquivTranspose); the task rule approximated `one by block` by the root node of the extracted graph, and these are reported as not constructed, as the registration provides.",
+ "change": "a fresh REPL process per module, the session's construction inside the recovery path, and `open ... in` / `set_option ... in` lines preceding a declaration absorbed into it and kept in the example statement",
+ "disclosure": "the per-task rows of the 13 tasks were seen while diagnosing (one task proved by all four searches, goal duplicates in three tasks, order duplicates in one); they are discarded and the run restarts from the first task; no hypothesis or threshold changes",
+ "implementationSha256BeforeAmendment": {
+  "harness": "5634bf1b8dda00650b11e4e2f3f8768d5b2836fe61517c5c586a6d918191ece8",
+  "repl": "a5130aa317cf7e7b6a6d13264508c064eb6d4d31ef9f9949a4a4d2ab7f5d30ae",
+  "runner": "e39b47d9d0068d64d73edc757961c9a74424c80a271c231bad240c967efb0f9f"
+ },
+ "implementationSha256AfterAmendment": {
+  "harness": "c7dc68b8584b3e82e711ada83453df7d7af38d62441bf280a4cccf14177601f2",
+  "repl": "a5130aa317cf7e7b6a6d13264508c064eb6d4d31ef9f9949a4a4d2ab7f5d30ae",
+  "runner": "1694f168ce4c8afafb9c084bf30988999107cc3d8b0511b708f482386e1012ba"
+ },
+ "resultsAbsentAtAmendment": true
+}
