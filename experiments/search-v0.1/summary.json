@@ -1,0 +1,68 @@
+{
+ "experiment": "search-v0.1",
+ "preregistrationSha256": "6e550e29017e14edc6ac5f9eb79599be9476577a8fa71009d06f11ec8d76913f",
+ "amendmentsSha256": {
+  "amendment-1.json": "64828b60f6651d0a3d3bdcf037dbeb66c5ddfe769e5e0938dc781f03959df5ed",
+  "amendment-2.json": "5758ea55a6c8c80a09222138acae8db81dcb4cf9eecf0fd275429bd586236cce"
+ },
+ "tasks": 47,
+ "constructed": 40,
+ "arms": {
+  "menu": {
+   "tasks": 40,
+   "wholeExpansions": 448,
+   "orderDuplicates": 15,
+   "orderFraction": 0.033482142857142856,
+   "goalDuplicates": 48,
+   "goalFraction": 0.10714285714285714,
+   "wholeProved": 5,
+   "andorProved": 4,
+   "wholeRejected": 0,
+   "andorRejected": 0,
+   "andorEntangled": 63,
+   "timeouts": 0,
+   "restarts": 0,
+   "medianSecondsWhole": 12.600000000000001,
+   "medianSecondsAndor": 13.3,
+   "validPerExpansion": 3.2745535714285716
+  },
+  "model": {
+   "tasks": 40,
+   "wholeExpansions": 556,
+   "orderDuplicates": 13,
+   "orderFraction": 0.023381294964028777,
+   "goalDuplicates": 48,
+   "goalFraction": 0.08633093525179857,
+   "wholeProved": 5,
+   "andorProved": 5,
+   "wholeRejected": 0,
+   "andorRejected": 0,
+   "andorEntangled": 67,
+   "timeouts": 0,
+   "restarts": 0,
+   "medianSecondsWhole": 107.5,
+   "medianSecondsAndor": 101.95,
+   "validPerExpansion": 4.017985611510792
+  }
+ },
+ "hypotheses": {
+  "H14": {
+   "supported": false
+  },
+  "H15": {
+   "supported": false
+  },
+  "H16a": {
+   "supported": false
+  },
+  "H16b": {
+   "supported": false
+  },
+  "armsRun": [
+   "menu",
+   "model"
+  ]
+ },
+ "resultsSha256": "10e6b3b7d92bf1b0f561d5a9202fc4a3922a7c10f8dbecff71f3375f760c2bdd",
+ "modelCallsSha256": "06802a1822a83fbd12c675ed86da3aa5d57a21e034f34a424dc3044e048551a5"
+}
