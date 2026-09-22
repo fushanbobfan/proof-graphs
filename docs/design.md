@@ -32,21 +32,35 @@ precisely what exchange and rule permutation quotient in MLL, no more.
    count, and the structure index `log L / log n!` (0 for a chain, 1 when
    every step is independent) as a side quantity. Hypotheses H10 and H11 are
    in the preregistration.
-2. **Measure the redundancy inside a real search.** A minimal best-first
-   tactic search over Lean goals (a fixed tactic menu first, a local model
-   later) records every expanded state; states are canonicalized as goal
-   multisets, and the fraction of expansions that coincide with an earlier
-   state after canonicalization is the budget spent on order redundancy.
-3. **Equal-budget comparison.** The same proposer and budget, searching over
-   ordered states versus canonical states; written so that either can win.
-   If the proposer already works one goal at a time, the arms coincide, and
-   that is the answer: standard goal management absorbs this redundancy.
+2. **Measure the redundancy inside a real search.** Step 1 settled the
+   original form of this step before it was built: Lean applies a tactic to
+   the first goal, and that convention is one linearization of the graph, so
+   a search that keeps to it and has no goal-selecting tactic never produces
+   two states that differ only in goal order. What a whole-state search
+   (the state is the full goal list, as in ReProver-style search) still
+   duplicates relative to the graph is the *goal*: every branch that solves
+   the first goal differently carries the same remaining goals along and
+   attacks each of them again. The revised step therefore drives a
+   best-first whole-state search with a local model as proposer, through
+   the Lean REPL, on theorems the model can make progress on, and records
+   two fractions of the expansions: those whose goal multiset already
+   appeared in another order (order redundancy, expected negligible; the
+   model can emit `swap`, `case`, `rotate_left`), and those whose first goal,
+   canonicalized, was already expanded elsewhere (goal sharing, the
+   redundancy an AND-OR search over the graph removes). The slice of step
+   1b (`experiments/linearizations-mathlib-v0.1`) supplies the theorems.
+3. **Equal-budget comparison.** The same proposer and the same number of
+   model and Lean calls, searching over whole states versus over goals
+   (AND-OR, sharing every canonical goal); written so that either can win.
+   Goals that share metavariables (the non-forest graphs of step 1, 8 of
+   3,994) are where the AND-OR search can be wrong, and are reported.
 
 ## Boundaries
 
 - Only the order of independent steps is quotiented; different proof terms of
   one proposition and different tactic paths to one goal are not.
-- Mature searchers already deduplicate by goal, so the expected outcome of
-  step 3 is that the graph representation adds little at this level; that
-  outcome would locate the MLL gain precisely and is worth writing down.
+- Mature searchers (HyperTree Proof Search and its descendants) already
+  search over goals, so step 3's comparison quantifies a known design choice
+  rather than proposing a new one; a small or absent gain would locate the
+  MLL result precisely and is worth writing down.
 - Lean 4 tactic proofs only; term-mode proofs are not in the corpus.

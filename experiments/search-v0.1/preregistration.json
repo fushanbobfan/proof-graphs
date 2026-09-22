@@ -1,0 +1,50 @@
+{
+ "arms": {
+  "menu": {
+   "proposer": "the fixed menu of scripts/search_harness.py"
+  },
+  "model": {
+   "proposer": "qwen3.6-35b-a3b-ud-q4_k_xl at temperature 0.8, 4 samples per expansion, thinking off, 64 tokens, then the menu"
+  }
+ },
+ "budget": {
+  "expansionsPerSearch": 24,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "developmentChecksBeforeRegistration": "both searches with the menu, budget 8, on three theorems of Mathlib.Logic.Basic in their module context (none proved; one goal duplicate in 8 expansions), the model arm on two of them (one unverified proof that used the theorem's own name, which is why tasks are stated as examples), the full pipeline with both arms at budget 3 on two candidate theorems of Mathlib.Algebra.AddConstMap.Basic that the stride does not select (none proved), and, with the full Mathlib environment and `type_of%` statements, eight library theorems that simp, omega, or exact? closed in one expansion; no task of this corpus was run",
+ "experiment": "search-v0.1",
+ "hypotheses": {
+  "H14": "in both arms the order-duplicate fraction is below 1%",
+  "H15": "in both arms the goal-duplicate fraction is at least 10%",
+  "H16a": "in both arms the AND-OR search proves at least as many tasks as the whole-state search",
+  "H16b": "in the model arm the AND-OR search proves strictly more tasks"
+ },
+ "implementationSha256": {
+  "harness": "5634bf1b8dda00650b11e4e2f3f8768d5b2836fe61517c5c586a6d918191ece8",
+  "repl": "a5130aa317cf7e7b6a6d13264508c064eb6d4d31ef9f9949a4a4d2ab7f5d30ae",
+  "runner": "e39b47d9d0068d64d73edc757961c9a74424c80a271c231bad240c967efb0f9f"
+ },
+ "measures": {
+  "goalDuplicates": "whole-state expansions whose first goal, canonicalized, was already expanded as a first goal, over all whole-state expansions of the arm",
+  "orderDuplicates": "whole-state expansions whose goal multiset was already expanded in another order, over all whole-state expansions of the arm",
+  "proved": "tasks whose found proof re-verifies from the statement"
+ },
+ "question": "how much of a whole-state tactic search is spent on states that differ only in goal order, how much on goals already expanded elsewhere, and whether a search over canonical goals proves more at equal budget",
+ "registeredLocalDate": "2026-09-21 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": {
+  "andor": "breadth-first over canonical goals, each goal expanded once, `pick_goal` to bring a goal to the front of the state it was created in",
+  "whole": "breadth-first over whole states, exact-state deduplication, tactic applied to the first goal"
+ },
+ "tasks": {
+  "context": "each theorem is stated with `sorry` after elaborating its module up to the theorem, so that the search sees exactly the original context and not the theorem itself",
+  "count": 47,
+  "rule": "theorems of the slice whose proof is one `by` block of 3 to 20 steps, not generated, every 29th in (module, line) order",
+  "sliceExtractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b",
+  "sliceResultsSha256": "7a0c29848100e49a774e52f0fdc3dee7e0ecdc4310d40c2420e80c6d107f3f1d",
+  "source": "linearizations-mathlib-v0.1",
+  "stride": 29
+ },
+ "tasksSha256": "ffd091557723a205d14863c6f11d761db74ccabe35be74ba440de0a08662f070"
+}

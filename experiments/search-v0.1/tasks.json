@@ -1,0 +1,378 @@
+[
+ {
+  "module": "Mathlib.Algebra.AddConstMap.Basic",
+  "declaration": "AddConstMapClass.map_const_add",
+  "line": 137,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Algebra.CharP.Defs",
+  "declaration": "ExpChar.exists",
+  "line": 426,
+  "steps": 3,
+  "structure": 0.3868528072345416,
+  "linearizations": "2"
+ },
+ {
+  "module": "Mathlib.Algebra.Group.Subgroup.Defs",
+  "declaration": "Subgroup.le_normalizer",
+  "line": 711,
+  "steps": 5,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Algebra.Lie.SkewAdjoint",
+  "declaration": "skewAdjointMatricesLieSubalgebraEquivTranspose",
+  "line": 145,
+  "steps": 4,
+  "structure": 0.21810429198553155,
+  "linearizations": "2"
+ },
+ {
+  "module": "Mathlib.Algebra.Polynomial.Degree.Operations",
+  "declaration": "Polynomial.eq_C_of_degree_le_zero",
+  "line": 163,
+  "steps": 7,
+  "structure": 0.2914791338890803,
+  "linearizations": "12"
+ },
+ {
+  "module": "Mathlib.Algebra.Polynomial.Degree.Operations",
+  "declaration": "Polynomial.leadingCoeff_sub_of_degree_lt'",
+  "line": 561,
+  "steps": 5,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Algebra.QuadraticAlgebra.Defs",
+  "declaration": "QuadraticAlgebra.smul_C",
+  "line": 488,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Algebra.SkewPolynomial.Basic",
+  "declaration": "SkewPolynomial.sum_eq_of_subset",
+  "line": 541,
+  "steps": 8,
+  "structure": 0.16896054342253738,
+  "linearizations": "6"
+ },
+ {
+  "module": "Mathlib.AlgebraicGeometry.Birational.RationalMap",
+  "declaration": "AlgebraicGeometry.Scheme.PartialMap.toPartialMap_toRationalMap_restrict",
+  "line": 610,
+  "steps": 5,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.AlgebraicGeometry.PullbackCarrier",
+  "declaration": "AlgebraicGeometry.Scheme.image_preimage_eq_of_isPullback",
+  "line": 417,
+  "steps": 16,
+  "structure": 0.2836643822204446,
+  "linearizations": "6006"
+ },
+ {
+  "module": "Mathlib.Analysis.CStarAlgebra.ContinuousFunctionalCalculus.Range",
+  "declaration": "range_cfc_subset",
+  "line": 77,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Analysis.Normed.Group.AddCircle",
+  "declaration": "AddCircle.norm_eq'",
+  "line": 88,
+  "steps": 10,
+  "structure": 0.2933458535647721,
+  "linearizations": "84"
+ },
+ {
+  "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+  "declaration": "cthickening_cthickening",
+  "line": 305,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.one_re",
+  "line": 159,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.ofNat_mul_re",
+  "line": 597,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.norm_le_re_iff_eq_norm",
+  "line": 894,
+  "steps": 7,
+  "structure": 0.3176538350898471,
+  "linearizations": "15"
+ },
+ {
+  "module": "Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan",
+  "declaration": "Real.arctan_sqrt_three",
+  "line": 203,
+  "steps": 7,
+  "structure": 0.39895988329270726,
+  "linearizations": "30"
+ },
+ {
+  "module": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+  "declaration": "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift",
+  "line": 140,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.CategoryTheory.Monoidal.Mod",
+  "declaration": "CategoryTheory.AddMod.hom_ext_iff",
+  "line": 318,
+  "steps": 8,
+  "structure": 0.28249358330791197,
+  "linearizations": "20"
+ },
+ {
+  "module": "Mathlib.Combinatorics.SimpleGraph.Diam",
+  "declaration": "SimpleGraph.eccent_ne_zero",
+  "line": 65,
+  "steps": 7,
+  "structure": 0.2101730856862202,
+  "linearizations": "6"
+ },
+ {
+  "module": "Mathlib.Combinatorics.SimpleGraph.Diam",
+  "declaration": "SimpleGraph.ediam_eq_top_iff_radius_eq_top",
+  "line": 388,
+  "steps": 6,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Data.ENat.Basic",
+  "declaration": "ENat.toNat_add",
+  "line": 250,
+  "steps": 5,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Data.Finsupp.Defs",
+  "declaration": "Finsupp.support_onFinset",
+  "line": 251,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Data.List.Basic",
+  "declaration": "List.mem_dropLast_iff_idxOf_lt",
+  "line": 593,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Data.List.Basic",
+  "declaration": "List.length_erase_add_one",
+  "line": 1005,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Data.Nat.Digits.Lemmas",
+  "declaration": "Nat.base_pow_length_digits_le'",
+  "line": 149,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Data.QPF.Univariate.Basic",
+  "declaration": "QPF.liftp_iff",
+  "line": 99,
+  "steps": 20,
+  "structure": 0.452080238609071,
+  "linearizations": "205117920"
+ },
+ {
+  "module": "Mathlib.Data.ZMod.Factorial",
+  "declaration": "ZMod.cast_descFactorial",
+  "line": 37,
+  "steps": 20,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.FieldTheory.Finite.Basic",
+  "declaration": "Subfield.card_bot",
+  "line": 726,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Geometry.Manifold.Immersion",
+  "declaration": "ModelWithCorners.isImmersionAt",
+  "line": 670,
+  "steps": 7,
+  "structure": 0.6091329689789274,
+  "linearizations": "180"
+ },
+ {
+  "module": "Mathlib.LinearAlgebra.AffineSpace.Matrix",
+  "declaration": "AffineBasis.toMatrix_inv_vecMul_toMatrix",
+  "line": 151,
+  "steps": 7,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.LinearAlgebra.Matrix.Permanent",
+  "declaration": "Matrix.permanent_smul",
+  "line": 91,
+  "steps": 8,
+  "structure": 0.10359768288765515,
+  "linearizations": "3"
+ },
+ {
+  "module": "Mathlib.MeasureTheory.Function.ConditionalExpectation.CondJensen",
+  "declaration": "ConvexOn.map_condExp_le_trim_univ",
+  "line": 224,
+  "steps": 4,
+  "structure": 0.5637914160289369,
+  "linearizations": "6"
+ },
+ {
+  "module": "Mathlib.MeasureTheory.PiSystem",
+  "declaration": "IsPiSystem.dissipate_mem",
+  "line": 115,
+  "steps": 4,
+  "structure": 0.34568712404340535,
+  "linearizations": "3"
+ },
+ {
+  "module": "Mathlib.ModelTheory.Semantics",
+  "declaration": "FirstOrder.Language.LHom.realize_onTerm",
+  "line": 221,
+  "steps": 3,
+  "structure": 0.3868528072345416,
+  "linearizations": "2"
+ },
+ {
+  "module": "Mathlib.ModelTheory.Semantics",
+  "declaration": "FirstOrder.Language.Formula.realize_iExs",
+  "line": 843,
+  "steps": 14,
+  "structure": 0.21756146252637365,
+  "linearizations": "240"
+ },
+ {
+  "module": "Mathlib.NumberTheory.LegendreSymbol.ZModChar",
+  "declaration": "ZMod.\u03c7\u2088_int_eq_if_mod_eight",
+  "line": 143,
+  "steps": 8,
+  "structure": 0.4006274710153962,
+  "linearizations": "70"
+ },
+ {
+  "module": "Mathlib.Order.CompleteLattice.Finset",
+  "declaration": "Set.iUnion_finset_eq_set",
+  "line": 90,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Order.Interval.Set.SuccPred",
+  "declaration": "Set.Ici_succ_eq_Ioi_of_not_isMax",
+  "line": 243,
+  "steps": 5,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.RepresentationTheory.Coinduced",
+  "declaration": "Rep.coind'_ext_iff",
+  "line": 185,
+  "steps": 9,
+  "structure": 0.2777219164233564,
+  "linearizations": "35"
+ },
+ {
+  "module": "Mathlib.RingTheory.Localization.FractionRing",
+  "declaration": "IsFractionRing.of_algHom",
+  "line": 285,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.RingTheory.Polynomial.Eisenstein.Basic",
+  "declaration": "Polynomial.IsWeaklyEisensteinAt.pow_natDegree_le_of_aeval_zero_of_monic_mem_map",
+  "line": 154,
+  "steps": 11,
+  "structure": 0.3055087122112317,
+  "linearizations": "210"
+ },
+ {
+  "module": "Mathlib.RingTheory.WittVector.WittPolynomial",
+  "declaration": "bind\u2081_xInTermsOfW_wittPolynomial",
+  "line": 263,
+  "steps": 12,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Topology.CWComplex.Classical.Basic",
+  "declaration": "Topology.RelCWComplex.union_iUnion_openCell_eq_complex",
+  "line": 513,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Topology.Constructions.SumProd",
+  "declaration": "Filter.Tendsto.prodMap_nhds",
+  "line": 337,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Topology.DiscreteSubset",
+  "declaration": "IsDiscrete.preimage",
+  "line": 153,
+  "steps": 6,
+  "structure": 0.0,
+  "linearizations": "1"
+ },
+ {
+  "module": "Mathlib.Topology.Metrizable.Basic",
+  "declaration": "TopologicalSpace.IsSeparable.secondCountableTopology",
+  "line": 158,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1"
+ }
+]

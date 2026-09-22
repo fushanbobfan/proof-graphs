@@ -21,9 +21,13 @@ ProofGraphsExtract.lean           proof_graph_extract <module> <file> ...
 scripts/count_linearizations.py   exact orderings per graph
 scripts/run_linearizations.py     step 1: register, run, check
 scripts/run_mathlib_slice.py      step 1 on a Mathlib slice
+scripts/lean_repl.py              a Lean REPL session
+scripts/search_harness.py         whole-state and AND-OR tactic searches
+scripts/run_search.py             steps 2 and 3: register, run, check
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
+experiments/search-v0.1/          steps 2 and 3 artifacts
 ```
 
 ## Reproduction
@@ -36,6 +40,8 @@ python scripts/run_linearizations.py --check-committed
 
 `lake build ProofNetIR` compiles the whole dependency, which the extractor
 imports module by module (about ten minutes on CI); `lake exe cache get`
-fetches Mathlib's build for the slice experiment (about 6 GB). On Windows, clone into a short path or set
+fetches Mathlib's build for the slice and search experiments (about 6 GB);
+`lake build repl` builds the Lean REPL the searches drive; the model arm of
+the search experiment needs a local OpenAI-compatible server on port 8080. On Windows, clone into a short path or set
 `git config --global core.longpaths true`; several module names of the
 dependency exceed 100 characters.
