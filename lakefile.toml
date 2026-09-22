@@ -1,0 +1,19 @@
+name = "proof-graphs"
+version = "0.1.0-dev"
+defaultTargets = ["ProofGraphs", "proof_graph_extract"]
+
+[leanOptions]
+warningAsError = true
+
+[[require]]
+name = "proofnet-ir"
+git = "https://github.com/fushanbobfan/proofnet-ir.git"
+rev = "v0.10.0"
+
+[[lean_lib]]
+name = "ProofGraphs"
+
+[[lean_exe]]
+name = "proof_graph_extract"
+root = "ProofGraphsExtract"
+supportInterpreter = true

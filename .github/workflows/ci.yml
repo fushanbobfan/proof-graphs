@@ -1,0 +1,36 @@
+name: proof-graphs CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Elan
+        run: curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+      - name: Build
+        run: ~/.elan/bin/lake build
+      - name: Extract and count the fixtures
+        run: |
+          ~/.elan/bin/lake exe proof_graph_extract Fixtures fixtures/Fixtures.lean > fixtures.jsonl
+          python scripts/count_linearizations.py < fixtures.jsonl > counts.jsonl
+          python - <<'PY'
+          import json
+          rows = {json.loads(l)["declaration"]: json.loads(l)["linearizations"] for l in open("counts.jsonl")}
+          assert rows == {"chain": "1", "star": "6", "mixed": "80", "arithmetic": "1"}, rows
+          print("fixtures ok", rows)
+          PY
+      - name: Check the committed linearization experiment
+        run: |
+          if test -f experiments/linearizations-v0.1/results.jsonl; then
+            python scripts/run_linearizations.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
