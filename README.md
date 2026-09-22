@@ -34,11 +34,14 @@ scripts/lean_repl.py              a Lean REPL session
 scripts/search_harness.py         whole-state and AND-OR tactic searches
 scripts/run_search.py             steps 2 and 3: register, run, check
 scripts/run_search_deep.py        the same searches at eight times the budget
+scripts/mine_golf.py              golf pairs from Mathlib's history
+scripts/run_golf.py               golfed proofs against their predecessors
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 experiments/search-v0.1/          steps 2 and 3 artifacts
 experiments/search-v0.2/          the deeper searches
+experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
 ```
 
 ## Reproduction

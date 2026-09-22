@@ -51,6 +51,13 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed golf experiment
+        run: |
+          if test -f experiments/golf-v0.1/results.jsonl; then
+            python scripts/run_golf.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
       - name: Check the committed deep-search experiment
         run: |
           if test -f experiments/search-v0.2/results.jsonl; then

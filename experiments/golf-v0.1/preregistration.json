@@ -1,0 +1,42 @@
+{
+ "corpus": {
+  "mining": {
+   "ambiguousName": 0,
+   "changedDeclarations": 416,
+   "changedSinceGolf": 76,
+   "commits": 143,
+   "commitsWithPairs": 108,
+   "noSplit": 3,
+   "pairs": 306,
+   "statementChanged": 29,
+   "whitespaceOnly": 2
+  },
+  "pairsSha256": "a6f30ea10efb1efd9e71f9b747001ae2e0a7fc350f78eab9a8b9fdfa2996b73a",
+  "repository": "Mathlib",
+  "revision": "81a5d257c8e410db227a6665ed08f64fea08e997",
+  "rule": "every golf pair of scripts/mine_golf.py: first-parent commits between the tags whose subject contains 'golf', theorems and lemmas whose statement is unchanged and whose proof changed, whose golfed text is verbatim and unique in the file at the upper tag; a declaration golfed twice keeps its last golf",
+  "window": [
+   "v4.29.0",
+   "v4.32.0"
+  ]
+ },
+ "developmentChecksBeforeRegistration": "the miner was run on four windows (v4.28.0, v4.29.0, v4.30.0, v4.31.0 to v4.32.0: 511, 306, 75, 27 pairs) and three pairs' texts were read to check the mining; the splice-and-extract procedure was exercised on two pairs from golf commits before v4.29.0 (outside the corpus): one predecessor failed to elaborate, the other pair matched both records; no corpus pair was elaborated and no graph quantity of the corpus was computed",
+ "experiment": "golf-v0.1",
+ "hypotheses": {
+  "H20": "among pairs whose step counts differ, the golfed proof has fewer steps in more than half (one-sided sign test, alpha 0.05)",
+  "H21": "among pairs where both proofs have at least 3 steps and their structure indices differ, the golfed proof has the lower index in more than half (one-sided sign test, alpha 0.05); this is the proposal's candidate: fewer orderings relative to n! means a more structured proof"
+ },
+ "implementationSha256": {
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "miner": "b99189666f54e65651e3c37a1aa7327ae35938998382472fd15c48cea9c44f10",
+  "runner": "33d35cc341b403f69e646f3fe302d89724b32cc0d15e030194713e6530068507"
+ },
+ "procedure": "each module is elaborated as it is at the upper tag (the golfed proofs) and, once per pair, with the golfed text replaced by the predecessor text; a variant with any elaboration error excludes its pair; the declaration's record is the extractor record whose name ends with the declaration's name and whose first node lies in the declaration's lines; no record means no tactic step (a term proof)",
+ "quantities": "steps, linearizations, and the structure index log L / log n! of linearizations-v0.1, per side; a term proof has 0 steps and no structure index",
+ "question": "does the goal-dependency graph distinguish a proof from the proof Mathlib's reviewers accepted as its golfed replacement, i.e. is the structure index a candidate signal of proof quality (the third layer of the original proposal)",
+ "registeredLocalDate": "2026-09-22 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "secondary": "H21 repeated at the commit level (each commit's majority direction, ties dropped); the fraction of pairs whose steps and linearizations are unchanged (golfs the graph does not see); the lower-tail p-value of H21 is reported so that a significant effect in the other direction is visible"
+}
