@@ -1,0 +1,225 @@
+{
+ "experiment": "linearizations-mathlib-v0.1",
+ "preregistrationSha256": "2f682f677bdf786c33dc6dd2b4d6bf5b30108f575c46183a4c2236ae6f7cf473",
+ "amendmentsSha256": {},
+ "proofs": 2807,
+ "counted": 2806,
+ "modulesExtracted": 147,
+ "modulesFailed": [],
+ "stepsQuartiles": {
+  "min": 0,
+  "q1": 2.0,
+  "median": 3,
+  "q3": 7.0,
+  "max": 126,
+  "count": 2807
+ },
+ "strata": {
+  "steps-1": {
+   "proofs": 561,
+   "counted": 561,
+   "excluded": 0,
+   "forests": 561,
+   "multiRoot": 0,
+   "linearizations": {
+    "min": "1",
+    "q1": "1",
+    "median": "1",
+    "q3": "1",
+    "max": "1",
+    "count": 561
+   },
+   "log10": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0,
+    "q3": 0.0,
+    "max": 0.0,
+    "count": 561
+   },
+   "structure": null,
+   "referenceStructureMedian": null,
+   "fractionSingleOrder": 1.0
+  },
+  "steps-2-5": {
+   "proofs": 1251,
+   "counted": 1251,
+   "excluded": 0,
+   "forests": 1250,
+   "multiRoot": 172,
+   "linearizations": {
+    "min": "1",
+    "q1": "1",
+    "median": "1",
+    "q3": "2",
+    "max": "120",
+    "count": 1251
+   },
+   "log10": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0,
+    "q3": 0.3010299956639812,
+    "max": 2.0791812460476247,
+    "count": 1251
+   },
+   "structure": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0,
+    "q3": 0.34568712404340535,
+    "max": 1.0,
+    "count": 1251
+   },
+   "referenceStructureMedian": 0.0,
+   "fractionSingleOrder": 0.7018385291766587
+  },
+  "steps-6-10": {
+   "proofs": 542,
+   "counted": 542,
+   "excluded": 0,
+   "forests": 541,
+   "multiRoot": 88,
+   "linearizations": {
+    "min": "1",
+    "q1": "1",
+    "median": "10",
+    "q3": "66",
+    "max": "3628800",
+    "count": 542
+   },
+   "log10": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 1.0,
+    "q3": 1.845098040014257,
+    "max": 6.559763032876794,
+    "count": 542
+   },
+   "structure": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.257828430101242,
+    "q3": 0.39289024408898116,
+    "max": 1.0,
+    "count": 542
+   },
+   "referenceStructureMedian": 0.2553655451258026,
+   "fractionSingleOrder": 0.2822878228782288
+  },
+  "steps-11-20": {
+   "proofs": 275,
+   "counted": 275,
+   "excluded": 0,
+   "forests": 275,
+   "multiRoot": 38,
+   "linearizations": {
+    "min": "1",
+    "q1": "29",
+    "median": "880",
+    "q3": "48279",
+    "max": "1126343522304000",
+    "count": 275
+   },
+   "log10": {
+    "min": 0.0,
+    "q1": 1.4471580313422192,
+    "median": 2.9444826721501687,
+    "q3": 4.6858312746260635,
+    "max": 15.051670865726784,
+    "count": 275
+   },
+   "structure": {
+    "min": 0.0,
+    "q1": 0.1315409583649047,
+    "median": 0.2824245204139826,
+    "q3": 0.4144649223655714,
+    "max": 0.9450342473231297,
+    "count": 275
+   },
+   "referenceStructureMedian": 0.3373046196164388,
+   "fractionSingleOrder": 0.14181818181818182
+  },
+  "steps-21-50": {
+   "proofs": 111,
+   "counted": 111,
+   "excluded": 0,
+   "forests": 111,
+   "multiRoot": 11,
+   "linearizations": {
+    "min": "1",
+    "q1": "100654400",
+    "median": "106661318400",
+    "q3": "2285490841920000",
+    "max": "39108355486415998126928012830799875276800000000",
+    "count": 111
+   },
+   "log10": {
+    "min": 0.0,
+    "q1": 7.939030771106505,
+    "median": 11.02800694752899,
+    "q3": 15.490571097753598,
+    "max": 46.592269554172766,
+    "count": 111
+   },
+   "structure": {
+    "min": 0.0,
+    "q1": 0.2894183572692161,
+    "median": 0.3877348689040947,
+    "q3": 0.47825732278721717,
+    "max": 0.875210596141961,
+    "count": 111
+   },
+   "referenceStructureMedian": 0.4131516532510127,
+   "fractionSingleOrder": 0.009009009009009009
+  },
+  "steps-51+": {
+   "proofs": 14,
+   "counted": 13,
+   "excluded": 1,
+   "forests": 13,
+   "multiRoot": 3,
+   "linearizations": {
+    "min": "171864000",
+    "q1": "205701684744396141936080577331200",
+    "median": "1555414710570788430285871630626869084160000",
+    "q3": "1719919572317908558786606361590531327450860772816896000000000000",
+    "max": "10515582090882423535727492946707150025504501924995195509679479011295925988364640481585659297854538869676766907047871458051730758875248629016166400000000000000000000000000000",
+    "count": 13
+   },
+   "log10": {
+    "min": 8.235184915438023,
+    "q1": 30.64723705050894,
+    "median": 42.19184620204453,
+    "q3": 63.601266342883136,
+    "max": 172.02183331809331,
+    "count": 13
+   },
+   "structure": {
+    "min": 0.07794756337300107,
+    "q1": 0.3336829524420636,
+    "median": 0.4446063325556528,
+    "q3": 0.7636913312447042,
+    "max": 0.8861066145990557,
+    "count": 13
+   },
+   "referenceStructureMedian": 0.5024509880135449,
+   "fractionSingleOrder": 0.0
+  }
+ },
+ "testedStrata": [
+  "steps-6-10",
+  "steps-11-20",
+  "steps-21-50"
+ ],
+ "hypotheses": {
+  "H12": {
+   "supported": true
+  },
+  "H13": {
+   "supported": true
+  }
+ },
+ "extractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b",
+ "resultsSha256": "7a0c29848100e49a774e52f0fdc3dee7e0ecdc4310d40c2420e80c6d107f3f1d"
+}
