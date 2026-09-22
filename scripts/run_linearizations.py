@@ -136,8 +136,10 @@ def registration_payload() -> dict[str, Any]:
         },
         "sideQuantity": "the distribution of the structure index per stratum, as a candidate measure of how "
                         "structured a proof is (0: a single chain, 1: every step independent)",
-        "developmentChecksBeforeRegistration": "four hand-checked fixtures (chain 1, star 6, nested 80, "
-                                                "single step 1) extracted and counted; no corpus module had been run",
+        "developmentChecksBeforeRegistration": "six hand-checked fixtures (chain 1, star 6, nested 80, single "
+                                                "step 1, cases 2, nested cases 8) extracted and counted, and the "
+                                                "extractor was exercised on ProofNetIR.Formula and ProofNetIR.Checker "
+                                                "to confirm elaboration; no corpus count was recorded",
         "resultsAbsentAtRegistration": True,
         "registeredLocalDate": "2026-09-22 America/Los_Angeles",
     }

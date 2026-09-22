@@ -24,7 +24,7 @@ jobs:
           python - <<'PY'
           import json
           rows = {json.loads(l)["declaration"]: json.loads(l)["linearizations"] for l in open("counts.jsonl")}
-          assert rows == {"chain": "1", "star": "6", "mixed": "80", "arithmetic": "1"}, rows
+          assert rows == {"chain": "1", "star": "6", "mixed": "80", "arithmetic": "1", "cases_fixture": "2", "nested_cases": "8"}, rows
           print("fixtures ok", rows)
           PY
       - name: Check the committed linearization experiment

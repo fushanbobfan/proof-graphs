@@ -197,7 +197,7 @@
   "revision": "f0fd97f8592938165dbffd91656d226b6102adcc",
   "scope": "every declaration with at least one tactic step in every ProofNetIR module"
  },
- "developmentChecksBeforeRegistration": "four hand-checked fixtures (chain 1, star 6, nested 80, single step 1) extracted and counted; no corpus module had been run",
+ "developmentChecksBeforeRegistration": "six hand-checked fixtures (chain 1, star 6, nested 80, single step 1, cases 2, nested cases 8) extracted and counted, and the extractor was exercised on ProofNetIR.Formula and ProofNetIR.Checker to confirm elaboration; no corpus count was recorded",
  "exclusionPolicy": "a non-forest graph with more than 22 steps has no count and is reported as excluded; a module with an elaboration error aborts the run",
  "experiment": "linearizations-v0.1",
  "hypotheses": {
@@ -205,10 +205,10 @@
   "H11": "in every stratum of at least 6 steps, the median structure index is below 0.5"
  },
  "implementationSha256": {
-  "counter": "1e53e5a3ead342450bc21a77988f6f58f7bff98f2c938d5e284ad32f51f6b02a",
-  "extractor": "c3ddcc64b67f31830d333465bcdf20fa18f860491cce13c46959864e4c351cd8",
+  "counter": "f2137b9c2d77315a02fe72191cc053d5d0c96bd9b3df2a573d9bd267f4aeab4e",
+  "extractor": "1bcd9fcd2c37afac61999f9b8bb2236d5b092aa77a66f8eff5a625bef62da601",
   "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
-  "runner": "a181f9fb72f99b3849ff1618c0bb02a37b29ec5b49c6abc7c6cf6b697cf0a439"
+  "runner": "ba8c4960e21dda4d71d54b0eef2b9f8dfb1637a7ec7b4e5a18c369db5d8bd576"
  },
  "object": "the step-dependency graph of a tactic proof: a step is a leaf tactic node that consumes or produces goals; it depends on the steps that produced the goals it consumes; goals hidden by focusing and reappearing later are not consumed",
  "quantity": "linearizations: orderings of the steps respecting the dependencies, exact by the hook-length formula for forests and by subset dynamic programming otherwise (at most 22 steps); structure: log(linearizations) / log(steps!)",
