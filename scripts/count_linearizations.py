@@ -7,17 +7,22 @@ JSON line per declaration.
 
 Steps are derived from the nodes:
 
-- a goal is *consumed* by a node when it is present before, absent after, and
-  never reappears in a later node of the proof (focusing constructs such as
-  `·` and `case` hide goals without closing them);
-- a leaf node that consumes or produces goals is a step;
-- a goal consumed by a leaf that no leaf produced and that is not a goal of
-  the statement itself (the case goals of `induction ... with`,
-  `cases ... with`, `rcases`, and similar structured tactics) was created
-  inside the deepest enclosing node that did not already hold it; that node
-  is a step producing those goals and consuming what none of its descendant
-  steps consumed; other non-leaf nodes are containers, not steps;
-- a step depends on the step that produced a goal it consumes.
+- a node *produces* the goals present after it and absent before it, and
+  *consumes* the goals present before it, absent after it, and never present
+  before a later node of the proof (focusing constructs such as `·` and
+  `case` hide goals without closing them);
+- the *origin* of a goal is the deepest node producing it (a `have ... := by`
+  node produces its continuation goal itself; a multi-binder `intro` produces
+  through its last child); a goal no node produces (the case goals of
+  `induction ... with`, `cases ... with`, `case tag x y =>`, the goal of a
+  nested `by`) originates in the deepest node enclosing its first mention
+  that did not already hold it; a goal with neither has no origin (the
+  statement's goal, a `decreasing_by` obligation);
+- a node is a step when it is the origin of a goal or when it consumes a goal
+  that none of its descendants consumes; every other node is a container;
+- a step produces the goals it originates and consumes the goals it consumes
+  minus those consumed by its descendant steps;
+- a step depends on the origin of every goal it consumes.
 
 The output fields are:
 
@@ -58,8 +63,6 @@ def derive_steps(nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
         before = set(node["before"])
         consumed.append([g for g in node["before"] if g not in after and g not in later_before[index]])
         produced.append([g for g in node["after"] if g not in before])
-    known = {g for index, node in enumerate(nodes) if node["leaf"] for g in produced[index]}
-    known |= set(nodes[0]["before"]) if nodes else set()  # the statement's own goals
 
     def ancestors(index: int) -> list[int]:
         chain = []
@@ -69,44 +72,46 @@ def derive_steps(nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
             parent = nodes[parent]["parent"]
         return chain
 
-    # Orphan goals consumed by a leaf were created inside the deepest enclosing
-    # node that did not already hold them: that node is their producing step.
-    structured_produced: dict[int, list[str]] = {}
+    # origin of every goal: the deepest producing node, else the deepest node
+    # enclosing the goal's first mention that did not already hold it
+    producers: dict[str, list[int]] = {}
+    for index in range(n):
+        for g in produced[index]:
+            producers.setdefault(g, []).append(index)
+    origin: dict[str, int] = {}
+    for g, candidates in producers.items():
+        ancestor_sets = {i: set(ancestors(i)) for i in candidates}
+        deepest = [i for i in candidates if not any(i in ancestor_sets[j] for j in candidates if j != i)]
+        origin[g] = deepest[0]
     for index, node in enumerate(nodes):
-        if not node["leaf"]:
-            continue
-        for g in consumed[index]:
-            if g in known:
+        for g in node["before"]:
+            if g in origin or g in producers:
                 continue
             for ancestor in ancestors(index):
                 if g not in set(nodes[ancestor]["before"]):
-                    structured_produced.setdefault(ancestor, [])
-                    if g not in structured_produced[ancestor]:
-                        structured_produced[ancestor].append(g)
-                    known.add(g)
+                    origin[g] = ancestor
                     break
-    step_indices = [i for i, node in enumerate(nodes)
-                    if (node["leaf"] and (consumed[i] or produced[i])) or i in structured_produced]
-    step_set = set(step_indices)
-    descendant_steps: dict[int, set[int]] = {}
-    for i in step_indices:
-        for a in ancestors(i):
-            descendant_steps.setdefault(a, set()).add(i)
+            producers.setdefault(g, [])  # first mention seen; do not revisit
+    originated: dict[int, list[str]] = {}
+    for g, index in origin.items():
+        originated.setdefault(index, []).append(g)
+
+    consumed_below: dict[int, set[str]] = {}
+    for index in range(n):
+        for a in ancestors(index):
+            consumed_below.setdefault(a, set()).update(consumed[index])
     steps = []
-    for i in step_indices:
-        node = nodes[i]
-        if node["leaf"]:
-            steps.append({"kind": node["kind"], "consumed": consumed[i], "produced": produced[i],
-                          "line": node["line"]})
-        else:
-            below = {g for d in descendant_steps.get(i, set()) if d in step_set for g in consumed[d]}
-            kind = node["kind"]
-            for a in [i] + ancestors(i):
-                if nodes[a]["kind"] not in ("null",) and "tacticSeq" not in nodes[a]["kind"]:
-                    kind = nodes[a]["kind"]
-                    break
-            steps.append({"kind": kind, "consumed": [g for g in consumed[i] if g not in below],
-                          "produced": structured_produced[i], "line": node["line"]})
+    for index, node in enumerate(nodes):
+        own = [g for g in consumed[index] if g not in consumed_below.get(index, set())]
+        if not own and index not in originated:
+            continue
+        kind = node["kind"]
+        for a in [index] + ancestors(index):
+            if nodes[a]["kind"] != "null" and "tacticSeq" not in nodes[a]["kind"]:
+                kind = nodes[a]["kind"]
+                break
+        steps.append({"kind": kind, "consumed": own, "produced": originated.get(index, []),
+                      "line": node["line"]})
     return steps
 
 

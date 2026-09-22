@@ -1,0 +1,29 @@
+{
+ "amendment": "linearizations-v0.1-amendment-2",
+ "date": "2026-09-21 America/Los_Angeles",
+ "scope": "the derivation of steps from tactic nodes, i.e. the measured object, and the extractor module docstring that described it (no extractor code changes); the corpus, the counting formulas, the strata, and the hypotheses H10 and H11 are unchanged",
+ "observation": "while validating amendment 1 on the five re-extracted modules (306 declarations), the derived graphs had 82 declarations with more than one root and the largest proof (UnificationStep.referenceLinksThreaded, 303 steps) had 19 roots, although a theorem has one statement goal. Two causes: (1) a goal produced by a non-leaf node was not recognised as produced, because only leaves counted as producers, so the continuation goal of `have h : T := by tac` was treated as an orphan and attributed to the enclosing tactic sequence, which became a bogus root step; (2) orphan goals were only attributed when a leaf consumed them, so the goal renamed by `case tag x y =>` and consumed by a non-leaf `cases ... with` had no producer. The steps, roots, and structure indices of these 306 declarations were inspected during the diagnosis; no other module was counted and the hypotheses were not evaluated on them.",
+ "change": "steps are now derived from goal origins: a node produces the goals present after it and absent before it; the origin of a goal is the deepest producing node, or, for a goal no node produces, the deepest node enclosing its first mention that did not already hold it; a node is a step when it originates a goal or consumes a goal none of its descendants consumes; a step produces the goals it originates and consumes its own goals minus those consumed below it; dependencies point to origins. A `case tag x y =>` that renames its goal is therefore one step (it consumes the case goal and originates the renamed one); a plain `case tag =>` or `\u00b7` remains a container.",
+ "effectOnValidationSample": "306 declarations: single-root 224 -> 287; the remaining 19 multi-root declarations are term-mode matches whose alternatives are separate `by` blocks, derived instances (LawfulBEq, DecidableEq), and an `ext_iff` companion; the largest proof went from 303 steps, 19 roots, structure 0.732 to 291 steps, 1 root, structure 0.665; one declaration is a non-forest (an `exact` closing both the goal and a metavariable of an earlier `apply`)",
+ "fixturesAfterAmendment": {
+  "chain": "1",
+  "star": "6",
+  "mixed": "80",
+  "arithmetic": "1",
+  "cases_fixture": "2",
+  "nested_cases": "8"
+ },
+ "implementationSha256BeforeAmendment": {
+  "extractor": "aa6fda307f412ef276f6095f54e33d5dc1a47f69d3a927a7f4cc8935131a2d04",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "572021f843353cdf5c4ba6f623411b704bc182c6bd5d2eeb6b059c9427e54921",
+  "runner": "8079b33b47079325ea99fa5b852e19002003c3a1837b1c22994d24281c42da17"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "acac6ecc29856b35ddf9e562d3797792032eac8bcc132c93ef47df2f3db59c13",
+  "runner": "8079b33b47079325ea99fa5b852e19002003c3a1837b1c22994d24281c42da17"
+ },
+ "resultsAbsentAtAmendment": true
+}

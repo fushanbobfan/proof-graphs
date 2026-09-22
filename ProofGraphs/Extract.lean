@@ -6,9 +6,10 @@ import Lean
 A tactic proof is elaborated with info trees enabled, and every tactic info
 node is recorded with its goals before and after, its parent node, and
 whether it is a leaf. The step-dependency graph is derived downstream
-(`scripts/count_linearizations.py`): leaf nodes that change the goal list are
-steps, and a structured node such as `induction ... with` whose case goals
-are consumed only by its descendants is a step producing those goals.
+(`scripts/count_linearizations.py`): a node that originates goals, such as
+`constructor`, `have ... := by`, or `induction ... with` whose case goals are
+seen only by its descendants, or that closes a goal none of its descendants
+closes, is a step; the others are containers.
 -/
 
 open Lean Elab

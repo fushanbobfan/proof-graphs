@@ -11,10 +11,13 @@ ProofNet-IR v0.11 counted, however, was not nets but *rule-order redundancy*:
 linear proofs that differ only in the order of independent steps and denote
 the same object. That notion transfers to Lean without new theory:
 
-> The goal-dependency graph of a tactic proof: a step is a leaf tactic node
-> that consumes or produces goals; it depends on the steps that produced the
-> goals it consumes. Two tactic scripts are the same graph exactly when they
-> differ only in the order of independent steps.
+> The goal-dependency graph of a tactic proof: a step is a tactic node that
+> originates goals or closes a goal none of its sub-tactics closes; it depends
+> on the steps that originated the goals it consumes. Two tactic scripts are
+> the same graph exactly when they differ only in the order of independent
+> steps. (The exact derivation from Lean's info trees is the docstring of
+> `scripts/count_linearizations.py`; amendments 1 and 2 of the first
+> experiment record how it was corrected before any corpus count.)
 
 This is the most conservative Lean analogue of a proof net: it quotients
 precisely what exchange and rule permutation quotient in MLL, no more.
