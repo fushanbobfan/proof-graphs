@@ -27,12 +27,12 @@ experiments/linearizations-v0.1/  step 1 artifacts
 ## Reproduction
 
 ```text
-lake build
+lake build && lake build ProofNetIR
 lake exe proof_graph_extract Fixtures fixtures/Fixtures.lean | python scripts/count_linearizations.py
 python scripts/run_linearizations.py --check-committed
 ```
 
-The first `lake build` clones and compiles ProofNet-IR v0.10.0 (about ten
-minutes on CI). On Windows, clone into a short path or set
+`lake build ProofNetIR` compiles the whole dependency, which the extractor
+imports module by module (about ten minutes on CI). On Windows, clone into a short path or set
 `git config --global core.longpaths true`; several module names of the
 dependency exceed 100 characters.

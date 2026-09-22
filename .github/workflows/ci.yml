@@ -16,7 +16,7 @@ jobs:
       - name: Install Elan
         run: curl https://elan.lean-lang.org/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
       - name: Build
-        run: ~/.elan/bin/lake build
+        run: ~/.elan/bin/lake build && ~/.elan/bin/lake build ProofNetIR
       - name: Extract and count the fixtures
         run: |
           ~/.elan/bin/lake exe proof_graph_extract Fixtures fixtures/Fixtures.lean > fixtures.jsonl

@@ -86,6 +86,7 @@ def processFile (module : String) (path : System.FilePath) : IO (Array ProofReco
   let (header, parserState, messages) ← Parser.parseHeader inputCtx
   let options := Options.empty.setBool `Elab.async false
   let (env, messages) ← processHeader header options messages inputCtx
+  let headerErrors := messages.toList.filter (·.severity == .error)
   let commandState := { Command.mkState env messages options with
     infoState := { enabled := true, trees := {} } }
   let result ← IO.processCommands inputCtx parserState commandState
@@ -105,7 +106,7 @@ def processFile (module : String) (path : System.FilePath) : IO (Array ProofReco
     let steps := stepsOf (byDeclaration.getD name #[])
     if !steps.isEmpty then
       records := records.push { declaration := name, module, steps }
-  let errors := result.commandState.messages.toList.filter (·.severity == .error)
+  let errors := headerErrors ++ result.commandState.messages.toList.filter (·.severity == .error)
   let mut rendered := ""
   for error in errors.take 3 do
     rendered := rendered ++ " | " ++ (← error.toString)
