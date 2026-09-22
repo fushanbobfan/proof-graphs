@@ -1,0 +1,19 @@
+{
+ "amendment": "linearizations-v0.1-amendment-5",
+ "date": "2026-09-21 America/Los_Angeles",
+ "scope": "checking only; the extractor, the counter, the corpus, the artifacts, and the hypotheses are unchanged",
+ "observation": "the CI check of the committed results failed on Linux with `module list changed since registration`: the module list was sorted as paths, and path ordering ignores case on Windows, where the list was registered, but not on Linux",
+ "change": "modules are sorted by name as strings, which orders the same on every platform, and the registered list is compared as a set; the registered order and the extraction order are unchanged",
+ "implementationSha256BeforeAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "678eb4fa90627fe68a6342b390c3f8cf8b29e31cdca667506a8a8d7d8f96eeea"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "5a4a99cd80e5085821c82dadc5b5e67fcfc3c4b8ba27e157df24e2a6b687f9c9"
+ }
+}

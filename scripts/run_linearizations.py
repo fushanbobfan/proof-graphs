@@ -105,12 +105,13 @@ def dependency_revision() -> str:
 
 
 def modules() -> list[tuple[str, Path]]:
-    files = sorted((PACKAGE / "ProofNetIR").rglob("*.lean"))
+    """Module names and paths, sorted by name as a string, which orders the same
+    on every platform (Path ordering ignores case on Windows)."""
     result = []
-    for path in files:
+    for path in (PACKAGE / "ProofNetIR").rglob("*.lean"):
         relative = path.relative_to(PACKAGE).with_suffix("")
         result.append((".".join(relative.parts), path))
-    return result
+    return sorted(result)
 
 
 def extract(selection: list[tuple[str, Path]]) -> list[dict[str, Any]]:
@@ -281,7 +282,7 @@ def main() -> int:
     prereg = json.loads(PREREG.read_text(encoding="utf-8"))
     if prereg["corpus"]["revision"] != dependency_revision():
         raise SystemExit("dependency revision changed since registration")
-    if prereg["corpus"]["moduleList"] != [name for name, _ in modules()]:
+    if sorted(prereg["corpus"]["moduleList"]) != [name for name, _ in modules()]:
         raise SystemExit("module list changed since registration")
     expected = expected_implementation_hashes(prereg)
     for name in ("extractor", "extractorMain", "counter"):

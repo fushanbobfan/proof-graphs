@@ -9,13 +9,14 @@ goal-dependency graph extracted out of Lean's info trees.
 - `preregistration.json`: the dependency revision, the 190-module list, the
   extractor and counter hashes, the strata, hypotheses H10 and H11, and the
   statement that no corpus count existed; committed on `main` before the run;
-- `amendment-1.json` to `amendment-4.json`: the changes made after the
+- `amendment-1.json` to `amendment-5.json`: the changes made after the
   first extraction failed, each with the hashes it replaces: nodes split per
   declaration and the extraction compressed; steps derived from goal origins
   after a validation sample showed bogus roots; quartiles of counts in
-  integer arithmetic; and, after the corpus had been counted once, failed
+  integer arithmetic; after the corpus had been counted once, failed
   alternatives of `first`/`try`/`repeat` dropped and delegated origins
-  merged, with the first count's table recorded in the amendment;
+  merged, with the first count's table recorded in the amendment; and a
+  platform-independent module order for the check;
 - `extraction.jsonl.gz`: every tactic node of every declaration (goals
   before and after, parent, leaf flag, syntax kind, line), 3,994 records;
 - `results.jsonl`: one row per declaration with the step count, the forest
