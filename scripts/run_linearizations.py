@@ -3,6 +3,7 @@
 
   python scripts/run_linearizations.py --register
   python scripts/run_linearizations.py --run
+  python scripts/run_linearizations.py --recount
   python scripts/run_linearizations.py --check-committed
 
 The corpus is every tactic proof of ProofNet-IR `v0.10.0`, the Lake
@@ -12,7 +13,8 @@ hypotheses before any proof is extracted. `--run` extracts the step
 dependency graph of every declaration with `proof_graph_extract`, counts the
 linear orderings with `count_linearizations.py`, and writes
 `extraction.jsonl.gz`, `results.jsonl`, `summary.json`, and `report.md`.
-`--check-committed` recounts from the committed extraction, re-extracts a
+`--recount` rewrites the last three from the committed extraction, which
+does not depend on the counter. `--check-committed` recounts from the committed extraction, re-extracts a
 fixed sample of modules and compares node shapes, and verifies the artifact
 hashes. A committed `amendment-N.json` carrying
 `implementationSha256AfterAmendment` replaces the registered implementation
@@ -263,6 +265,7 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--register", action="store_true")
     mode.add_argument("--run", action="store_true")
+    mode.add_argument("--recount", action="store_true")
     mode.add_argument("--check-committed", action="store_true")
     args = parser.parse_args()
 
@@ -285,9 +288,12 @@ def main() -> int:
         if expected[name] != sha256_file(IMPLEMENTATIONS[name]):
             raise SystemExit(f"implementation {name} changed since registration or the last amendment")
 
-    if args.run:
-        records = extract(modules())
-        write_gz(EXTRACTION, "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in records))
+    if args.run or args.recount:
+        if args.run:
+            records = extract(modules())
+            write_gz(EXTRACTION, "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in records))
+        else:
+            records = read_gz_lines(EXTRACTION)
         rows = count(records)
         write_lf(RESULTS, "".join(json.dumps(r, separators=(",", ":")) + "\n" for r in rows))
         summary = summarize(rows)

@@ -15,13 +15,21 @@ Steps are derived from the nodes:
   node produces its continuation goal itself; a multi-binder `intro` produces
   through its last child); a goal no node produces (the case goals of
   `induction ... with`, `cases ... with`, `case tag x y =>`, the goal of a
-  nested `by`) originates in the deepest node enclosing its first mention
-  that did not already hold it; a goal with neither has no origin (the
-  statement's goal, a `decreasing_by` obligation);
+  nested `by`, the steps of a `calc`) originates in the deepest node
+  enclosing its first mention that holds some goal but not this one; a goal
+  with neither has no origin (the statement's goal, a `decreasing_by`
+  obligation);
 - a node is a step when it is the origin of a goal or when it consumes a goal
-  that none of its descendants consumes; every other node is a container;
+  that none of its descendants consumes; every other node is a container; an
+  origin that consumes nothing itself because a descendant consumes the goal
+  it held (`simpa ... using (by tac)`, whose `simp` part is a child node) is
+  merged into that descendant, so that one tactic is one step;
 - a step produces the goals it originates and consumes the goals it consumes
   minus those consumed by its descendant steps;
+- a step is *live* when it consumes a goal of a root node (the statement, a
+  `decreasing_by` obligation, a nested `by` in a term) or a goal produced by
+  a live step; the other steps belong to failed alternatives of `first`,
+  `try`, and `repeat`, whose info nodes Lean keeps, and are dropped;
 - a step depends on the origin of every goal it consumes.
 
 The output fields are:
@@ -88,7 +96,8 @@ def derive_steps(nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
             if g in origin or g in producers:
                 continue
             for ancestor in ancestors(index):
-                if g not in set(nodes[ancestor]["before"]):
+                held = set(nodes[ancestor]["before"])
+                if held and g not in held:
                     origin[g] = ancestor
                     break
             producers.setdefault(g, [])  # first mention seen; do not revisit
@@ -100,30 +109,44 @@ def derive_steps(nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for index in range(n):
         for a in ancestors(index):
             consumed_below.setdefault(a, set()).update(consumed[index])
+    own = [[g for g in consumed[index] if g not in consumed_below.get(index, set())] for index in range(n)]
+    consumer = {g: index for index in range(n) for g in own[index]}
+    for index in sorted(originated):
+        if own[index]:
+            continue
+        targets = [consumer[g] for g in nodes[index]["before"]
+                   if g in consumer and index in ancestors(consumer[g])]
+        if targets:
+            originated.setdefault(targets[0], []).extend(originated.pop(index))
     steps = []
     for index, node in enumerate(nodes):
-        own = [g for g in consumed[index] if g not in consumed_below.get(index, set())]
-        if not own and index not in originated:
+        if not own[index] and index not in originated:
             continue
         kind = node["kind"]
         for a in [index] + ancestors(index):
             if nodes[a]["kind"] != "null" and "tacticSeq" not in nodes[a]["kind"]:
                 kind = nodes[a]["kind"]
                 break
-        steps.append({"kind": kind, "consumed": own, "produced": originated.get(index, []),
+        steps.append({"kind": kind, "consumed": own[index], "produced": originated.get(index, []),
                       "line": node["line"]})
-    return steps
+    live_goals = {g for node in nodes if node["parent"] is None for g in node["before"]}
+    live = [False] * len(steps)
+    changed = True
+    while changed:
+        changed = False
+        for index, step in enumerate(steps):
+            if not live[index] and any(g in live_goals for g in step["consumed"]):
+                live[index] = True
+                live_goals.update(step["produced"])
+                changed = True
+    return [step for index, step in enumerate(steps) if live[index]]
 
 
 def dependency_graph(steps: list[dict[str, Any]]) -> list[set[int]]:
     """parents[i] = indices of steps that produced a goal step i consumed."""
-    producer: dict[str, int] = {}
-    parents: list[set[int]] = []
-    for index, step in enumerate(steps):
-        parents.append({producer[goal] for goal in step["consumed"] if goal in producer})
-        for goal in step["produced"]:
-            producer[goal] = index
-    return parents
+    producer = {goal: index for index, step in enumerate(steps) for goal in step["produced"]}
+    return [{producer[goal] for goal in step["consumed"] if goal in producer and producer[goal] != index}
+            for index, step in enumerate(steps)]
 
 
 def forest_linearizations(parents: list[set[int]]) -> int:
@@ -132,9 +155,16 @@ def forest_linearizations(parents: list[set[int]]) -> int:
     for index, ps in enumerate(parents):
         for p in ps:
             children[p].append(index)
-    sizes = [0] * n
-    for index in range(n - 1, -1, -1):  # children have larger indices (elaboration order)
-        sizes[index] = 1 + sum(sizes[c] for c in children[index])
+    sizes = [1] * n
+    order: list[int] = []
+    stack = [index for index, ps in enumerate(parents) if not ps]
+    while stack:
+        index = stack.pop()
+        order.append(index)
+        stack.extend(children[index])
+    for index in reversed(order):  # children before parents
+        for p in parents[index]:
+            sizes[p] += sizes[index]
     product = 1
     for size in sizes:
         product *= size

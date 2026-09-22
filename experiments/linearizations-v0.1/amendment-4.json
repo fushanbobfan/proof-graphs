@@ -1,0 +1,64 @@
+{
+ "amendment": "linearizations-v0.1-amendment-4",
+ "date": "2026-09-21 America/Los_Angeles",
+ "scope": "the derivation of steps, i.e. the measured object, after the corpus had been counted once; the extractor, the extraction, the corpus, the counting formulas, the strata, and the hypotheses are unchanged",
+ "observation": "The corpus was extracted and counted under amendments 1 to 3 (16 minutes; 3,994 declarations, 3,992 counted). A structural audit of the derived graphs then found 141 declarations with a single `by` block but more than one root step, which the definition makes impossible for a correct derivation. Two causes: (1) Lean keeps the info nodes of failed alternatives of `first`, `try`, and `repeat` (their tactic state is restored, the info trees are not); steps inside a failed alternative consume nothing, because the goal they acted on reappears in the successful alternative, but they produce goals and so became rootless steps (all derived LawfulBEq instances and every hand-written proof using such combinators); (2) `simpa ... using (by tac)` expands to a `simp` child node that consumes the goal, so the `simpa` node itself consumed nothing and its nested `by` goal made it a second, rootless step; likewise the `calc` steps' goals were attributed to the `calcSteps` node, which holds no goal, instead of the `calc` tactic.",
+ "change": "an origin that consumes nothing of its own is merged into the descendant step that consumed a goal the origin held; an orphan goal originates in the deepest enclosing node that holds some goal but not this one; steps are kept only when live, i.e. when they consume a goal of a root node or a goal produced by a live step, which removes the failed alternatives; the dependency map and the hook-length sizes no longer assume that producers precede consumers in node order; the runner gains --recount, which recounts the committed extraction without re-extracting, since the extraction does not depend on the counter",
+ "validation": "six fixtures unchanged (1, 6, 80, 1, 2, 8); over the whole extraction no declaration with one root node has more than one root step, no root step consumes nothing or consumes a goal that is not a root node's, no goal is consumed or produced twice; the counts of all 1,603 graphs with 2 to 7 steps agree with a brute-force enumeration of permutations; 146 of 3,994 declarations lose steps (only losses), 145 change their count",
+ "resultsSeenBeforeAmendment": {
+  "hypotheses": {
+   "H10": {
+    "supported": true
+   },
+   "H11": {
+    "supported": false
+   }
+  },
+  "strata": {
+   "steps-1": {
+    "proofs": 221,
+    "linearizationsMedian": "1",
+    "structureMedian": null
+   },
+   "steps-2-5": {
+    "proofs": 1225,
+    "linearizationsMedian": "1",
+    "structureMedian": 0.0
+   },
+   "steps-6-10": {
+    "proofs": 828,
+    "linearizationsMedian": "15",
+    "structureMedian": 0.257828430101242
+   },
+   "steps-11-20": {
+    "proofs": 840,
+    "linearizationsMedian": "7562",
+    "structureMedian": 0.34143437122910364
+   },
+   "steps-21-50": {
+    "proofs": 590,
+    "linearizationsMedian": "82088191584000",
+    "structureMedian": 0.4182654988714392
+   },
+   "steps-51+": {
+    "proofs": 268,
+    "linearizationsMedian": "16157206238663790784321160772988444398885981388800000",
+    "structureMedian": 0.5075867427209702
+   }
+  },
+  "resultsSha256": "6405c66989787f58dae3d323b64e6a41bd83514cec3c08541bfc7f3d3ec7087e"
+ },
+ "implementationSha256BeforeAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "acac6ecc29856b35ddf9e562d3797792032eac8bcc132c93ef47df2f3db59c13",
+  "runner": "cb8625af677a02e7fa616004b825ffc09aa7f614c2ec56e5dfc6fd5d1413a542"
+ },
+ "implementationSha256AfterAmendment": {
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "678eb4fa90627fe68a6342b390c3f8cf8b29e31cdca667506a8a8d7d8f96eeea"
+ },
+ "plan": "recount the extraction of the run with --recount and commit results, summary, and report together with the extraction; the extraction's hash is unchanged by this amendment"
+}
