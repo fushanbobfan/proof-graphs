@@ -1,7 +1,7 @@
 # Design: order redundancy of Lean tactic proofs
 
-Status: the three steps are done; what they answered, and what is left, is
-in "Where this ends" below.
+Status: the three steps and two follow-ups are done; what they answered, and
+what is left, is in "Where this ends" below.
 Corpora: ProofNet-IR v0.10.0 (`f0fd97f8592938165dbffd91656d226b6102adcc`) and
 Mathlib v4.32.0 (`81a5d257c8e410db227a6665ed08f64fea08e997`)
 
@@ -84,21 +84,38 @@ precisely what exchange and rule permutation quotient in MLL, no more.
 
 The three steps answer the question they were written for. Rule-order
 redundancy is real and explodes with proof length — a 461-step proof admits
-10^628 orderings — but almost all of it is already quotiented by Lean's
-convention of acting on the first goal, and what survives into a real search
-is a few percent. Goal sharing, the redundancy a graph representation does
-remove, is of the same small order at this budget, and removing it costs
-`pick_goal` calls and entangled candidates. The honest summary is that the
-MLL gain does not transfer: in a resource logic the graph quotients a
-factorial, in Lean the goal stack has already absorbed it.
+10^628 orderings, and a Mathlib slice has the same distribution — but almost
+all of it is already quotiented by Lean's convention of acting on the first
+goal: in a real tactic search 2 to 4 percent of the expansions are states
+that differ only in goal order, and the fraction falls as the search deepens
+(`search-v0.2`). Goal sharing, the redundancy a graph representation does
+remove, grows with work, from about 10 to 18 percent between 24 and 192
+expansions, but at this proposer strength work is not the bottleneck: eight
+times the budget found no new proof, and the search over goals proves no
+more than the search over states. It proves less where goals share an
+existential witness, which a tactic on one goal assigns for both; treating
+goals as independent must discard exactly those moves. The MLL gain does not
+transfer: in a resource logic the graph quotients a factorial, in Lean the
+goal stack has already absorbed it, and the dependencies it has not absorbed
+are the ones the graph would wrongly cut.
 
-Two things would extend this, neither of them more of the same:
+The proposal's third layer, telling good proofs from mediocre ones, was
+tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the
+community accepted as better is shorter in 210 of 238 pairs, and its lower
+structure index is the shadow of its length, not a structural difference.
+The step-dependency graphs of every proof extracted here are in
+`datasets/proof-graphs-v0.1.jsonl.gz` (7,285 graphs).
 
-- a proposer strong enough that searches run deep (the fractions here are
-  measured on searches that mostly exhaust their frontier within 24
-  expansions);
+What would extend this is not more of the same:
+
+- a proposer strong enough that searches run deep (here every proof was
+  found within a dozen expansions, and the searches that ran longer found
+  nothing);
 - the redundancy this design explicitly does not touch: different tactic
-  paths to the same goal, and different proof terms of one proposition.
+  paths to the same goal, and different proof terms of one proposition;
+- for the third layer, a registered test of another graph quantity (depth,
+  width, branching), or of quantities outside the graph (lemmas used, term
+  size, elaboration time).
 
 Until one of those is worth doing, the repository is a record, not a
 programme.

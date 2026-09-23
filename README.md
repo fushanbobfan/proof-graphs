@@ -13,14 +13,18 @@ in its directory), reported whichever way it comes out, and re-verified in CI
 from the committed artifacts. [docs/design.md](docs/design.md) states the
 research object, the three steps, and the boundaries.
 
-The three steps are done. A proof's step-dependency graph admits enormous
-numbers of orderings (median 8.8·10^13 at 21 to 50 steps, 10^628 for the
-longest proof), and a Mathlib slice gives the same distribution; but Lean's
+The program is done. A proof's step-dependency graph admits enormous numbers
+of orderings (median 8.8·10^13 at 21 to 50 steps, 10^628 for the longest
+proof), and a Mathlib slice gives the same distribution; but Lean's
 convention of acting on the first goal already fixes one ordering, and in a
-real tactic search only 2 to 3 percent of the expansions are states that
+real tactic search only 2 to 4 percent of the expansions are states that
 differ from an earlier one only in goal order. Searching over goals instead
-of whole states, at equal budget, proves 4 and 5 of 40 theorems against 5 and
-5. Each experiment's README carries its numbers and its boundaries.
+of whole states proves no more at equal budget, even at eight times the
+budget, and loses proofs whose goals share an existential witness. Mathlib's
+golfed proofs are shorter than their predecessors, and their lower structure
+index is explained by their length. Each experiment's README carries its
+numbers and its boundaries;
+[docs/design.md](docs/design.md) states the answer in full.
 
 ## Layout
 
