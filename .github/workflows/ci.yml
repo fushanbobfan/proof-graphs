@@ -53,6 +53,8 @@ jobs:
           fi
       - name: Check the committed dataset
         run: python scripts/export_graphs.py --check
+      - name: Audit the structural invariants of every derived graph
+        run: python scripts/audit_graphs.py
       - name: Check the committed golf experiment
         run: |
           if test -f experiments/golf-v0.1/results.jsonl; then

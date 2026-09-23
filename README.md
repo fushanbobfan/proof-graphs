@@ -25,6 +25,8 @@ golfed proofs are shorter than their predecessors, and their lower structure
 index is explained by their length. Each experiment's README carries its
 numbers and its boundaries;
 [docs/design.md](docs/design.md) states the answer in full.
+[HANDOFF.md](HANDOFF.md) maps every claim to the command that re-verifies
+it and lists where an independent cross-check is most valuable.
 
 ## Layout
 
@@ -41,6 +43,7 @@ scripts/run_search_deep.py        the same searches at eight times the budget
 scripts/mine_golf.py              golf pairs from Mathlib's history
 scripts/run_golf.py               golfed proofs against their predecessors
 scripts/export_graphs.py          the dataset of step-dependency graphs
+scripts/audit_graphs.py           structural invariants of every derived graph
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
