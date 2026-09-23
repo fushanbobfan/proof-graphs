@@ -1,0 +1,144 @@
+{
+ "experiment": "search-v0.2",
+ "preregistrationSha256": "47309869cfd3ea84bda96bb85959a6bb1b46d3e747abbb4e370b4329517f6b4c",
+ "amendmentsSha256": {},
+ "tasks": 20,
+ "arms": {
+  "menu": {
+   "constructed": 20,
+   "abandoned": {
+    "whole": 0,
+    "andor": 0
+   },
+   "checkpoints": {
+    "24": {
+     "wholeExpansions": 343,
+     "orderDuplicates": 13,
+     "orderFraction": 0.037900874635568516,
+     "goalDuplicates": 42,
+     "goalFraction": 0.12244897959183673,
+     "wholeProved": 1,
+     "andorProved": 0,
+     "andorExpansions": 357,
+     "andorEntangled": null
+    },
+    "48": {
+     "wholeExpansions": 568,
+     "orderDuplicates": 20,
+     "orderFraction": 0.035211267605633804,
+     "goalDuplicates": 84,
+     "goalFraction": 0.14788732394366197,
+     "wholeProved": 1,
+     "andorProved": 0,
+     "andorExpansions": 621,
+     "andorEntangled": null
+    },
+    "96": {
+     "wholeExpansions": 977,
+     "orderDuplicates": 32,
+     "orderFraction": 0.032753326509723645,
+     "goalDuplicates": 162,
+     "goalFraction": 0.16581371545547594,
+     "wholeProved": 1,
+     "andorProved": 0,
+     "andorExpansions": 1080,
+     "andorEntangled": null
+    },
+    "192": {
+     "wholeExpansions": 1653,
+     "orderDuplicates": 44,
+     "orderFraction": 0.02661826981246219,
+     "goalDuplicates": 300,
+     "goalFraction": 0.18148820326678766,
+     "wholeProved": 1,
+     "andorProved": 0,
+     "andorExpansions": 1832,
+     "andorEntangled": 511
+    }
+   },
+   "frontierExhausted": {
+    "whole": 13,
+    "andor": 13
+   }
+  },
+  "model": {
+   "constructed": 20,
+   "abandoned": {
+    "whole": 0,
+    "andor": 1
+   },
+   "checkpoints": {
+    "24": {
+     "wholeExpansions": 382,
+     "orderDuplicates": 14,
+     "orderFraction": 0.03664921465968586,
+     "goalDuplicates": 34,
+     "goalFraction": 0.08900523560209424,
+     "wholeProved": 2,
+     "andorProved": 1,
+     "andorExpansions": 379,
+     "andorEntangled": null
+    },
+    "48": {
+     "wholeExpansions": 679,
+     "orderDuplicates": 22,
+     "orderFraction": 0.03240058910162003,
+     "goalDuplicates": 84,
+     "goalFraction": 0.12371134020618557,
+     "wholeProved": 2,
+     "andorProved": 1,
+     "andorExpansions": 698,
+     "andorEntangled": null
+    },
+    "96": {
+     "wholeExpansions": 1215,
+     "orderDuplicates": 33,
+     "orderFraction": 0.027160493827160494,
+     "goalDuplicates": 188,
+     "goalFraction": 0.15473251028806584,
+     "wholeProved": 2,
+     "andorProved": 1,
+     "andorExpansions": 1322,
+     "andorEntangled": null
+    },
+    "192": {
+     "wholeExpansions": 2271,
+     "orderDuplicates": 60,
+     "orderFraction": 0.026420079260237782,
+     "goalDuplicates": 415,
+     "goalFraction": 0.18273888154997797,
+     "wholeProved": 2,
+     "andorProved": 1,
+     "andorExpansions": 2410,
+     "andorEntangled": 603
+    }
+   },
+   "frontierExhausted": {
+    "whole": 7,
+    "andor": 7
+   }
+  }
+ },
+ "hypotheses": {
+  "H17": {
+   "supported": false
+  },
+  "H18": {
+   "supported": false
+  },
+  "H19": {
+   "supported": true
+  },
+  "armsRun": [
+   "menu",
+   "model"
+  ]
+ },
+ "C1": {
+  "compared": 40,
+  "matched": 40,
+  "mismatches": []
+ },
+ "resultsSha256": "d454aa802607b1dec805f9a55c3e5908348163aaed2c1effdbc3ddde4f713fb3",
+ "modelCallsSha256": "5b0792313fa544952287bbc9aebd680c0c5e8f3666c4667d43087cd4e97fb8b9"
+}
