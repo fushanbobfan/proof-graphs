@@ -16,10 +16,12 @@ corpus, so their searches must reproduce the committed ones exactly.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import math
 import random
 import sys
+import threading
 import time
 from pathlib import Path
 from typing import Any
@@ -114,6 +116,46 @@ def registration_payload(tasks: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def run_all(tasks: list[dict[str, Any]], workers: int) -> list[dict[str, Any]]:
+    """Every (task, search) unit not yet recorded, four at a time. An exception raised by a unit is recorded as an
+    error row and retried on the next resume; nothing a unit does can stop the recording."""
+    rows: list[dict[str, Any]] = []
+    if RESULTS.exists():
+        rows = [json.loads(l) for l in RESULTS.read_text(encoding="utf-8").splitlines() if l.strip()]
+    done = {(r["module"], r["declaration"], r["search"]) for r in rows if not r.get("error")}
+    lock = threading.Lock()
+
+    def guarded(task: dict[str, Any], search: str) -> dict[str, Any]:
+        started = time.monotonic()
+        try:
+            return v2.run_unit(task, ARM, search, BUDGET)
+        except Exception as error:  # noqa: BLE001
+            return {"module": task["module"], "declaration": task["declaration"], "arm": ARM, "search": search,
+                    "constructed": None, "error": f"{type(error).__name__}: {error}"[:300],
+                    "seconds": round(time.monotonic() - started, 1)}
+
+    def record(row: dict[str, Any]) -> None:
+        with lock:
+            rows.append(row)
+            with RESULTS.open("a", encoding="utf-8", newline="\n") as handle:
+                handle.write(json.dumps(row, separators=(",", ":"), ensure_ascii=False) + "\n")
+            result = row.get("result") or {}
+            print(json.dumps({"unit": [row["declaration"], row["search"]], "expansions": len(result.get("expansions", [])),
+                              "proof": bool(result.get("proof")), "abandoned": row.get("abandoned"),
+                              "error": row.get("error"), "at": time.strftime("%H:%M:%S")}), flush=True)
+
+    units = [(t, s) for t in tasks for s in SEARCHES if (t["module"], t["declaration"], s) not in done]
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = [pool.submit(guarded, t, s) for t, s in units]
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                record(future.result())
+            except Exception as error:  # noqa: BLE001
+                print(json.dumps({"recordError": f"{type(error).__name__}: {error}"[:300]}), flush=True)
+    latest = {(r["module"], r["declaration"], r["search"]): r for r in rows}  # a retried unit keeps its last row
+    return list(latest.values())
+
+
 def ranks(values: list[float]) -> list[float]:
     """Average ranks, 1-based, ties sharing the mean of their positions."""
     order = sorted(range(len(values)), key=lambda i: values[i])
@@ -206,6 +248,7 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]]) -> dict[s
         "tasks": len(tasks),
         "constructed": sum(1 for u in units["whole"] if u is not None and u.get("constructed")),
         "abandoned": {s: sum(1 for u in units[s] if u is not None and u.get("abandoned")) for s in SEARCHES},
+        "errors": {s: sum(1 for u in units[s] if u is not None and u.get("error")) for s in SEARCHES},
         "whole": {"expansions": len(whole), "orderDuplicates": order,
                   "orderFraction": order / len(whole) if whole else None,
                   "goalDuplicates": goal, "goalFraction": goal / len(whole) if whole else None,
@@ -328,7 +371,7 @@ def main() -> int:
     tasks = json.loads(TASKS.read_text(encoding="utf-8"))
 
     if args.run:
-        rows = v2.run_all(tasks, [ARM], BUDGET, args.workers, RESULTS)
+        rows = run_all(tasks, args.workers)
         order = {(t["module"], t["declaration"], s): i for i, (t, s) in
                  enumerate((t, s) for t in tasks for s in SEARCHES)}
         rows.sort(key=lambda r: order[(r["module"], r["declaration"], r["search"])])

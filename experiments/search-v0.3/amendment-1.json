@@ -1,0 +1,17 @@
+{
+ "amendment": 1,
+ "date": "2026-09-25 America/Los_Angeles",
+ "scope": "execution only: the searches, proposer, budget, tasks, measures, hypotheses, and analyses are unchanged",
+ "observation": "The run used run_search_deep.run_all, whose loop records a unit's row only while no unit has raised an exception outside ReplTimeout; after such an exception the executor keeps running the queued units but records none of them. This happened at 10:22 local time, when the machine went to sleep with 1984 unit rows recorded, and again at the first units completed after a resume at 12:48; neither exception was printed, because it surfaces only once the whole queue has run. The two isolated units checked afterwards (FirstOrder.Language.BoundedFormula.realize_foldr_sup, both searches) ran normally.",
+ "change": "run_search_wide.py runs the units with its own loop: an exception raised by a unit becomes an error row (the unit's identity, the exception's type and message), which a later resume runs again, and no exception can stop the recording; a retried unit keeps its last row; the summary also counts error rows per search. The unit itself is still run_search_deep.run_unit, unchanged.",
+ "resultsSeenBeforeAmendment": {
+  "rows": 1984,
+  "note": "the runner's progress log prints each unit's expansion count and whether it found a proof, and its tail was read while diagnosing; operational counts were computed over the recorded rows (228 rows not constructed, none abandoned, no REPL timeouts or restarts); no summary, fraction, or hypothesis was computed"
+ },
+ "implementationSha256BeforeAmendment": {
+  "runner": "4adfeab50a681019e6c58cbb83862de196187d037a78908953cc84485aa0b87e"
+ },
+ "implementationSha256AfterAmendment": {
+  "runner": "d54a8652fdfbc9182bcf75cbb2d9ae3dfe81c0323d5f0717feb75031e2fc0dae"
+ }
+}
