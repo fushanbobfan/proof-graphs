@@ -36,8 +36,10 @@ precisely what exchange and rule permutation quotient in MLL, no more.
    in the preregistration. **Done**: H10 holds (medians 15, 6,720, 8.8·10^13,
    1.9·10^51 by step stratum), H11 fails at 51 steps and more (0.502).
    Repeated on a systematic Mathlib slice (`experiments/linearizations-mathlib-v0.1`,
-   H12 and H13, both hold): the same distribution, so the counts are not an
-   artifact of one library's style.
+   H12 and H13, both hold): its proofs are shorter and more often chains, but
+   the orderings grow the same way with length and the median structure index
+   stays within 0.1 of the library's in every tested stratum, so the growth is
+   not an artifact of one library's style.
 2. **Measure the redundancy inside a real search.** Step 1 settled the
    original form of this step before it was built: Lean applies a tactic to
    the first goal, and that convention is one linearization of the graph, so
@@ -84,7 +86,7 @@ precisely what exchange and rule permutation quotient in MLL, no more.
 
 The three steps answer the question they were written for. Rule-order
 redundancy is real and explodes with proof length — a 461-step proof admits
-10^628 orderings, and a Mathlib slice has the same distribution — but almost
+10^628 orderings, and a Mathlib slice shows the same growth — but almost
 all of it is already quotiented by Lean's convention of acting on the first
 goal: in a real tactic search 2 to 4 percent of the expansions are states
 that differ only in goal order, and the fraction falls as the search deepens
@@ -106,8 +108,8 @@ are the ones the graph would wrongly cut.
 
 The proposal's third layer, telling good proofs from mediocre ones, was
 tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the
-community accepted as better is shorter in 210 of 238 pairs, and its lower
-structure index is the shadow of its length, not a structural difference.
+community accepted as better is shorter in 210 of 238 pairs, and an
+exploratory length adjustment accounts for its lower structure index.
 The step-dependency graphs of every proof extracted here are in
 `datasets/proof-graphs-v0.1.jsonl.gz` (7,285 graphs).
 

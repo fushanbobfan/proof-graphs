@@ -57,13 +57,18 @@ stated; one model AND-OR search was abandoned on a REPL timeout.
 - **H19 supported**: order duplicates stay under 5% and fall with depth, from
   3.8% to 2.7% and from 3.7% to 2.6%.
 
+The model arm samples at temperature 0.8, so its runs differ: here both model
+searches prove `Real.arctan_sqrt_three` at expansion 7, which neither
+search-v0.1 model search proved in 24. "No new proof" compares this run's
+192 expansions with its own first 24.
+
 Why the AND-OR search proves less: the whole-state search proves
 `Set.iUnion_finset_eq_set` with `ext x; aesop; constructor; exact?`. Here
 `constructor` on an `∃` goal leaves two goals, a membership `⟨x, ⋯⟩ ∈ ?w`
 and the witness `?w : Finset ↑s`, and `exact?` on the first closes both at
 once by assigning the witness. A search over independent goals must discard
-exactly that candidate as entangled, 511 and 603 times in all at 192
-expansions. In Lean, goals that share an existential witness are not
+such candidates as entangled: 311 and 180 times on this theorem at 192
+expansions, of 511 and 603 entangled candidates in all. In Lean, goals that share an existential witness are not
 independent, and that is where the graph representation's independence
 assumption fails. This is known: HyperTree Proof Search splits a tactic state
 only into goals that share no metavariable, and Aesop copies the coupled

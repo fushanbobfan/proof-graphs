@@ -15,16 +15,16 @@ research object, the three steps, and the boundaries.
 
 The program is done. A proof's step-dependency graph admits enormous numbers
 of orderings (median 8.8·10^13 at 21 to 50 steps, 10^628 for the longest
-proof), and a Mathlib slice gives the same distribution; but Lean's
-convention of acting on the first goal already fixes one ordering, and in a
+proof), and a Mathlib slice, whose proofs are shorter, shows the same growth;
+but Lean's convention of acting on the first goal already fixes one ordering, and in a
 real tactic search only 2 to 4 percent of the expansions are states that
 differ from an earlier one only in goal order. Searching over goals instead
 of whole states proves no more at equal budget, even at eight times the
 budget, and a goal search that treats goals as independent loses proofs
 whose goals share an existential witness (HyperTree Proof Search and Aesop
 handle such goals explicitly; ours deliberately does not). Mathlib's
-golfed proofs are shorter than their predecessors, and their lower structure
-index is explained by their length. Each experiment's README carries its
+golfed proofs are shorter than their predecessors, and in an exploratory
+comparison their lower structure index is accounted for by their length. Each experiment's README carries its
 numbers and its boundaries;
 [docs/design.md](docs/design.md) states the answer in full.
 [HANDOFF.md](HANDOFF.md) maps every claim to the command that re-verifies

@@ -49,7 +49,8 @@ seven.
 
 - **H14 not supported**: 3.3% and 2.3% of the expansions are states whose
   goal multiset had already been expanded in another order, above the
-  registered 1%. The mechanism is not goal selection: `symm` before
+  registered 1%. In the menu arm, which has no goal-selecting tactic, the
+  mechanism cannot be goal selection: `symm` before
   `constructor` on an `↔` yields the same two subgoals in the other order, as
   does `constructor` after a commuting rewrite. Order redundancy survives the
   first-goal convention, but it is a few percent, not the factorial of

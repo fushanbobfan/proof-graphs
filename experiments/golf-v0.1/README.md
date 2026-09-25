@@ -44,8 +44,10 @@ after the header, the predecessor spliced in for the golfed proof.
 ## Outcome
 
 294 pairs from 104 commits elaborate on both sides; 11 predecessors no longer
-elaborate at v4.32.0 (they use lemmas that were renamed or removed), and one
-unmodified module fails under the extractor.
+elaborate in the v4.32.0 file (two refer to names that no longer exist; nine
+fail on a `simp` call that makes no progress, unsolved goals, a failed
+rewrite, a type mismatch, or a missing instance), and one unmodified module
+fails under the extractor.
 
 | | Predecessor | Golfed |
 | --- | --- | --- |
@@ -65,13 +67,14 @@ unmodified module fails under the extractor.
   and it follows the length change here. It falls in 83 of the
   111 pairs whose golfed proof is shorter, and rises in 11 of the 14 whose
   golfed proof is longer. No pair of equal length changed its index: all 56
-  equal-length golfs keep the ordering count exactly, so as far as the graph
-  can tell they reword tactics and nothing else. Measured against the Mathlib
-  slice's median index at the same length, golfed proofs and their
-  predecessors do not differ (70 of 136 lower, p = 0.40).
+  golfs that keep the number of steps keep the ordering count too, but 28 of
+  them are term proofs on both sides and only 22 have three or more steps.
+  Measured against the Mathlib slice's median index at the same length,
+  golfed proofs and their predecessors show no difference (70 of 136 lower,
+  p = 0.40); the reference medians rest on few slice proofs beyond 20 steps.
 
-So the proposal's candidate does not tell a better proof from a worse one
-beyond telling a shorter proof from a longer one. What golfing changes, as
+So nothing here shows the proposal's candidate telling a better proof from a
+worse one beyond telling a shorter proof from a longer one. What golfing changes, as
 the graph sees it, is how many steps there are, not how they depend on each
 other.
 
@@ -81,7 +84,6 @@ A golf is one notion of quality among several (shorter, faster, more
 robust, more idiomatic), and a reviewer accepts it as better on balance,
 not on structure. The length adjustment uses the slice's medians and is a
 post-hoc check, stated as such. Pairs whose predecessor no longer elaborates
-are excluded, which removes the golfs that deleted the lemmas their
-predecessors used. Other graph quantities (depth, width, branching) were
+are excluded, which removes the golfs whose predecessors later broke. Other graph quantities (depth, width, branching) were
 not registered and are not tested here; they are in the dataset
 (`datasets/proof-graphs-v0.1.jsonl.gz`) for whoever wants to register them.
