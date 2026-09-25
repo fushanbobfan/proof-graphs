@@ -69,7 +69,8 @@ enough for medians, not for the tail (14 proofs above 50 steps). The count
 says nothing about how a search explores the orderings, and Lean's
 first-goal convention already fixes one of them; that is what `search-v0.1`
 measures. The extractor elaborates with Lean's default options, not with
-those of Mathlib's build (`autoImplicit false`, `maxSynthPendingDepth 3`);
-every module of the slice elaborated without errors, so every proof ran as
-written, but instance synthesis inside a step may have taken another path.
-`golf-v0.1` inserts Mathlib's options.
+those of Mathlib's build (`autoImplicit false`, `maxSynthPendingDepth 3`).
+That changes none of these graphs: re-extracting all 157 modules with
+Mathlib's options inserted gives the same nodes for every one of the 2,784
+distinct declaration names (`options-check.json`, from
+`scripts/check_slice_options.py`, 2026-09-24).

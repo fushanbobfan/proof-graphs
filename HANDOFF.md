@@ -89,9 +89,11 @@ In order of what an independent pass would most likely catch:
    definitional equality would test both duplicate fractions.
 3. **Options.** The slice and both search experiments elaborated under
    Lean's default options, not Mathlib's (`autoImplicit false`,
-   `maxSynthPendingDepth 3`); golf inserts Mathlib's. Every slice module
-   still elaborated without error. Re-running the slice with Mathlib's
-   options would show whether any graph changes.
+   `maxSynthPendingDepth 3`); golf inserts Mathlib's. For the slice this is
+   now checked: re-extracted with Mathlib's options, all 2,784 distinct
+   declarations keep identical graphs
+   (`scripts/check_slice_options.py`). The searches ran their tactics
+   through the REPL under the defaults, which that check does not cover.
 4. **Golf mining** (`scripts/mine_golf.py`). Declarations are found by
    regular expression and statements compared as whitespace-normalized
    text; 12 of 306 pairs are excluded. An independent miner using Lean's

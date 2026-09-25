@@ -44,6 +44,7 @@ scripts/mine_golf.py              golf pairs from Mathlib's history
 scripts/run_golf.py               golfed proofs against their predecessors
 scripts/export_graphs.py          the dataset of step-dependency graphs
 scripts/audit_graphs.py           structural invariants of every derived graph
+scripts/check_slice_options.py    the slice's graphs under Mathlib's options
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
