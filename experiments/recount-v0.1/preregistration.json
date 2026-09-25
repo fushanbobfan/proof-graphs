@@ -1,0 +1,40 @@
+{
+ "checks": {
+  "C3": "the invariants of scripts/audit_graphs.py hold for every recounted graph",
+  "C4": "the 30 blind reconstructions of extraction-audit-v0.1 agree with the recounted graphs"
+ },
+ "correction": "a node consumes a goal present before it, absent after it, and never present before a later node outside its own subtree (previously: any later node); scripts/count_linearizations_v2.py",
+ "disclosure": "before this registration the correction was checked on the committed extractions: the invariants hold for all 7,285 graphs (3,307 brute-forced), the six fixtures keep their counts, all 30 blind reconstructions agree, and the numbers of graphs whose steps or counts change were seen (steps: 838 library, 114 slice, 40 golf; counts: 774, 54, 34); no stratum, quantile, median, or hypothesis under the correction had been computed",
+ "experiment": "recount-v0.1",
+ "hypotheses": {
+  "H10r": "library: in every stratum of at least 6 steps, the median number of linearizations is at least 10",
+  "H11r": "library: in every stratum of at least 6 steps, the median structure index is below 0.5",
+  "H12r": "slice: in every stratum of at least 6 steps with at least 30 counted proofs, the median structure index is within 0.1 of the library's median recounted here",
+  "H13r": "slice: in every stratum of at least 6 steps with at least 30 counted proofs, the median number of linearizations is at least 10",
+  "H20r": "golf: among pairs whose step counts differ, the golfed proof has fewer steps in more than half (one-sided sign test, alpha 0.05)",
+  "H21r": "golf: among pairs where both proofs have at least 3 steps and their structure indices differ, the golfed proof has the lower index in more than half (one-sided sign test, alpha 0.05)",
+  "H28r": "golf structure: as H28 of golf-structure-v0.1, with the quantities and the slice reference recomputed under the correction"
+ },
+ "implementationSha256": {
+  "counter": "1b31cff799255d58719ebb0c16480385a1924adf90b26b0e4f1e39ee8c5264d0",
+  "earlierCounter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "501a507fe6055ef6f2e7688308774814f27c0620739466bb8d47b0f14146f292"
+ },
+ "inputs": {
+  "auditReconstructions": "adc40530fbea1788cb76ef78b23f17b9c70be72950d4faa3d44f9cb6bb572ff8",
+  "auditSample": "36c7aa81a9419f6479ccd915d9b670bde9e94cdb73095916d3364b41625addff",
+  "golf": "673fad75411645134919044f6b17d732952364e46b363470f5f4da1285a5dec8",
+  "golfPairs": "a6f30ea10efb1efd9e71f9b747001ae2e0a7fc350f78eab9a8b9fdfa2996b73a",
+  "golfResults": "393580f84d1fee24ebb3a136c996559b159a440db5711b04eb09d4d15dbf974c",
+  "library": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff",
+  "slice": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b"
+ },
+ "outputs": [
+  "per-proof rows for the library and the slice, per-pair rows for golf, as in the earlier experiments",
+  "the counts' changes against the earlier rule",
+  "datasets/proof-graphs-v0.2.jsonl.gz, the dataset under the correction"
+ ],
+ "question": "what the counts, the hypotheses decided on them, and the dataset are under the corrected step derivation",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true
+}
