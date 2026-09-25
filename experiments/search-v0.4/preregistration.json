@@ -1,0 +1,61 @@
+{
+ "analyses": {
+  "bootstrap": "95% percentile intervals of every fraction by resampling modules with replacement (2000 resamples, seed 0), since the tasks of one module share context",
+  "coarseMerges": "hammer-free AND-OR expansions whose goal's coarse key equals that of a goal expanded earlier in the same search (goals the search would merge under the coarse key)",
+  "perTask": "quartiles of the per-task number of goal duplicates, over tasks with at least one expansion"
+ },
+ "arms": {
+  "hammerFree": "both searches with the menu without simp, simp_all, aesop, norm_num, exact?, simp at *, simp [*] (19 tactics: omega, decide, rfl, assumption, trivial, ring, linarith, positivity, constructor, intro x, ext x, rcases ‹_ ∧ _› with ⟨h₁, h₂⟩, left, right, use 0, contradiction, exfalso, symm, push_neg) at 96 expansions, recording keys; the AND-OR search sets a goal's proof once",
+  "keys": "the whole-state search of search-v0.3 with the standard 26-tactic menu at 24 expansions, recording the keys of every expanded state's goals"
+ },
+ "budget": {
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C5": "for every task of the keys arm, the whole-state search's expansion records (the fields of search-v0.3) and proof equal those committed in search-v0.3",
+  "C6": "the default-key duplicate flags recomputed from the recorded digests equal the flags the search computed from the texts"
+ },
+ "developmentChecksBeforeRegistration": "the runner's --develop mode ran both arms at 4 expansions on AddConstMapClass.map_const_add, the first candidate outside the sample, twice: the first time every fine key was undefined, because the REPL reports trace output in a field of its own rather than among the messages, which fine_goals then read; the trace was also inspected on that task's root state and on the two goals that constructor leaves in FirstOrder.Language.BoundedFormula.realize_ex, also outside the sample",
+ "execution": "every (arm, task, search) unit in a fresh REPL, resumable; an exception raised by a unit is recorded as an error row and the unit is run again on the next resume",
+ "experiment": "search-v0.4",
+ "hypotheses": {
+  "H30": "keys arm: under each of the three keys, the goal-duplicate fraction is at least 2 times the order-duplicate fraction",
+  "H31": "keys arm: the goal-duplicate fraction under the fine key is at least 0.8 times the goal-duplicate fraction under the default key",
+  "H32": "hammer-free arm: the AND-OR search proves more tasks than the whole-state search (one-sided sign test on the tasks proved by exactly one of them, alpha 0.05)",
+  "H33": "hammer-free arm: the whole-state search's goal-duplicate fraction under the default key is at least 2 times its order-duplicate fraction"
+ },
+ "implementationSha256": {
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "b1dd5982b81e12d45d1a3bd883bf61139539e444883b8db95e8f867d1bf7db47"
+ },
+ "keys": {
+  "coarse": "the canonical goal with its hypotheses renamed by position in the context",
+  "default": "the canonical goal of search-v0.1 to v0.3",
+  "fine": "the goal printed with pp.all (set_option pp.all true in trace_state on the expanded state), case tag removed and metavariable numbers erased",
+  "storage": "the first 16 hexadecimal digits of the SHA-256 of the key's text"
+ },
+ "measures": {
+  "entangled": "candidates the AND-OR search discarded as entangled",
+  "fineUndefined": "expansions whose fine keys are undefined (the trace failed or did not split into the state's goals)",
+  "goalFraction[key]": "whole-state expansions whose first goal's key was already expanded as a first goal, over the same expansions",
+  "orderFraction[key]": "whole-state expansions whose goal multiset under the key was already expanded in another order, over the whole-state expansions whose keys are defined",
+  "proved": "tasks with a proof that re-verifies from the statement, per search"
+ },
+ "questions": {
+  "hammerFree": "when the menu has no one-shot prover, so that proofs take several steps and searches run deep, does a search over goals prove more than a search over whole states",
+  "keys": "do the duplicate measures of search-v0.1 to v0.3 depend on how goals are identified: printed text that hides implicit arguments, or text that keeps hypothesis names"
+ },
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "search-v0.3's results under the default key, which the keys arm replicates, as far as its run had progressed (its progress log, and the diagnosis of its one error row); no fine or coarse key and no hammer-free search had been computed on any task of the sample",
+ "tasks": {
+  "count": 300,
+  "rule": "the 1,347 candidates in a random order (Python random.Random(20260926).shuffle of their indices); the first 300 for the keys arm and the first 135 of those for the hammer-free arm",
+  "source": "search-v0.3/tasks.json",
+  "sourceSha256": "9f0bb3d1c3596ff82593c3d7e001b92af1a0c2de85deb3fa15a1e0583f00e321"
+ },
+ "tasksSha256": "f05245d923c27fb104858afcf4062e82dc2f1970a7bf014193bd6d9d1f2c0212"
+}
