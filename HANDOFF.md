@@ -28,7 +28,7 @@ GitHub.
 | Tactic proofs admit enormous numbers of step orderings (ProofNet-IR median 8.8·10^13 at 21–50 steps; max 10^628) | `experiments/linearizations-v0.1` | `python scripts/run_linearizations.py --check-committed` |
 | A systematic Mathlib slice has the same distribution | `experiments/linearizations-mathlib-v0.1` | `python scripts/run_mathlib_slice.py --check-committed` |
 | In a real search only 2–4% of expansions are order duplicates; searching over goals proves no more than over states | `experiments/search-v0.1` | `python scripts/run_search.py --check-committed` |
-| Eight times the budget adds goal sharing (to ~18%) but no proof; goals that share an existential witness defeat the goal-level search | `experiments/search-v0.2` | `python scripts/run_search_deep.py --check-committed` |
+| Eight times the budget adds goal sharing (to ~18%) but no proof; goals that share an existential witness defeat a goal search that treats goals as independent (HTPS and Aesop handle them explicitly) | `experiments/search-v0.2` | `python scripts/run_search_deep.py --check-committed` |
 | Mathlib's golfed proofs are shorter; their lower structure index is explained by length | `experiments/golf-v0.1` | `python scripts/run_golf.py --check-committed` |
 | 7,285 step-dependency graphs | `datasets/proof-graphs-v0.1.jsonl.gz` | `python scripts/export_graphs.py --check` |
 | Every derived graph satisfies the structural invariants below | all three extractions | `python scripts/audit_graphs.py` |

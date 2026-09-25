@@ -72,7 +72,11 @@ The AND-OR search pays for what it saves: 68 and 73 `pick_goal` calls, and
 63 and 67 candidates discarded as entangled — a tactic on the goal changed
 another open goal, because they share a metavariable. That is 4% and 3% of
 the candidates it could otherwise have used, and it is the price of treating
-goals as independent.
+goals as independent. Mature goal searches do not pay it in this form:
+HyperTree Proof Search keeps goals that share a metavariable together, and
+Aesop copies the coupled goals into the assigning rule application; this
+search treats every goal as independent on purpose, to measure how often the
+assumption fails.
 
 ## Interpretation boundary
 

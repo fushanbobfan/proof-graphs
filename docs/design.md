@@ -94,7 +94,12 @@ expansions, but at this proposer strength work is not the bottleneck: eight
 times the budget found no new proof, and the search over goals proves no
 more than the search over states. It proves less where goals share an
 existential witness, which a tactic on one goal assigns for both; treating
-goals as independent must discard exactly those moves. The MLL gain does not
+goals as independent must discard exactly those moves. Mature goal searches
+anticipate this: HyperTree Proof Search splits a tactic state into goals
+only where they share no metavariable, and Aesop adds the coupled goals, with
+the assignment applied, as extra subgoals of the assigning rule. Our search
+treats every goal as independent on purpose, to measure how often that
+assumption fails. The MLL gain does not
 transfer: in a resource logic the graph quotients a factorial, in Lean the
 goal stack has already absorbed it, and the dependencies it has not absorbed
 are the ones the graph would wrongly cut.

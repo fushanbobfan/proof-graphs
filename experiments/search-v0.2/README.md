@@ -65,7 +65,11 @@ once by assigning the witness. A search over independent goals must discard
 exactly that candidate as entangled, 511 and 603 times in all at 192
 expansions. In Lean, goals that share an existential witness are not
 independent, and that is where the graph representation's independence
-assumption fails.
+assumption fails. This is known: HyperTree Proof Search splits a tactic state
+only into goals that share no metavariable, and Aesop copies the coupled
+goals into the rule application that assigns the witness; either design
+would keep this proof. What the experiment adds is how often the assumption
+fails in a whole-state search on Mathlib theorems.
 
 So deeper search makes goal sharing a larger share of the work, as the
 AND-OR design expects, but at this proposer strength the work was never the

@@ -20,7 +20,9 @@ convention of acting on the first goal already fixes one ordering, and in a
 real tactic search only 2 to 4 percent of the expansions are states that
 differ from an earlier one only in goal order. Searching over goals instead
 of whole states proves no more at equal budget, even at eight times the
-budget, and loses proofs whose goals share an existential witness. Mathlib's
+budget, and a goal search that treats goals as independent loses proofs
+whose goals share an existential witness (HyperTree Proof Search and Aesop
+handle such goals explicitly; ours deliberately does not). Mathlib's
 golfed proofs are shorter than their predecessors, and their lower structure
 index is explained by their length. Each experiment's README carries its
 numbers and its boundaries;
