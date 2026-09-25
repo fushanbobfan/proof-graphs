@@ -1,0 +1,50 @@
+{
+ "adjustment": "as golf-structure-v0.1: each quantity minus the median of that quantity among the first Mathlib slice's proofs with the same number of steps (pooled from 30), recomputed under the corrected derivation, as in H28r of recount-v0.1",
+ "corpus": {
+  "mining": {
+   "ambiguousName": 0,
+   "changedDeclarations": 1329,
+   "changedSinceGolf": 231,
+   "commits": 122,
+   "commitsWithPairs": 89,
+   "noSplit": 6,
+   "overlapWithGolfV01": 0,
+   "pairs": 511,
+   "statementChanged": 580,
+   "whitespaceOnly": 1
+  },
+  "pairsSha256": "555c6b3201df6b965498fe4df869a6e442a13035dd73c325eff63fb7e5833bc6",
+  "repository": "Mathlib",
+  "revision": "81a5d257c8e410db227a6665ed08f64fea08e997",
+  "rule": "every golf pair of scripts/mine_golf.py from the first-parent commits between the window's tags whose subject contains 'golf', with the golfed text verbatim and unique in the file at v4.32.0; a declaration golfed twice keeps its last golf; pairs of a declaration that golf-v0.1 paired are dropped",
+  "survivalTag": "v4.32.0",
+  "window": [
+   "v4.26.0",
+   "v4.29.0"
+  ]
+ },
+ "derivation": "the corrected step derivation of scripts/count_linearizations_v2.py",
+ "developmentChecksBeforeRegistration": "the numbers of golf commits and surviving pairs were computed for the windows v4.22.0, v4.24.0, and v4.26.0 to v4.29.0 (373, 233, and 122 commits; 1,166, 907, and 511 pairs) to choose a window of three releases, as golf-v0.1's; no pair was elaborated or counted",
+ "elaboration": "as golf-v0.1: both sides elaborated from the file at v4.32.0 with Mathlib's two options, the predecessor spliced in for the golfed text; a pair counts when both sides elaborate",
+ "experiment": "golf-v0.2",
+ "hypotheses": {
+  "H40": "among pairs with at least 3 steps on both sides whose length-adjusted branching differs, the golfed proof has the higher adjusted branching in more than half (one-sided sign test, alpha 0.05)",
+  "H41": "among pairs whose step counts differ, the golfed proof has fewer steps in more than half (one-sided sign test, alpha 0.05; H20 of golf-v0.1)",
+  "H42": "among pairs with at least 3 steps on both sides whose structure indices differ, the golfed proof has the lower index in more than half (one-sided sign test, alpha 0.05; H21)",
+  "H43": "among pairs with at least 3 steps on both sides whose length-adjusted structure indices differ, a two-sided sign test does not reject equal proportions at alpha 0.05 (golf-v0.1's exploratory length analysis, registered)",
+  "H44": "for at least one of depth, width, and branching, the adjusted value differs (Holm-corrected two-sided sign tests, family-wise alpha 0.05; H28r)"
+ },
+ "implementationSha256": {
+  "counter": "1b31cff799255d58719ebb0c16480385a1924adf90b26b0e4f1e39ee8c5264d0",
+  "extractor": "e8f2c46dd75c3d2f52f1f44f0bbd576c155740d16a0053fb814a1ef96612541d",
+  "extractorMain": "9346b461793642061765c4e82eadf927578de30ddb108859ec1aed3983f6f009",
+  "golfRunner": "4c4c4ded087abd0463b32cd19aa70d09c1db21295817ad748ef0c16eb3bedc9c",
+  "miner": "b99189666f54e65651e3c37a1aa7327ae35938998382472fd15c48cea9c44f10",
+  "runner": "e8f0cd31b5acec1d2f11e0232199c29498659374a64b9d34d6ed2617bc1d5e9a",
+  "structureRunner": "3d5dd3030693e1f9ba6c0842332b83413ba264e5d0056866f84db8e5c8a06abf"
+ },
+ "question": "do the golf findings, and above all the branching difference seen only after the correction of the step derivation, hold on golf pairs that no experiment has seen",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "golf-v0.1, golf-structure-v0.1, and recount-v0.1 on golf-v0.1's pairs"
+}
