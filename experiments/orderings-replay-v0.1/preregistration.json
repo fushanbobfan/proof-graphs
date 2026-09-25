@@ -1,0 +1,37 @@
+{
+ "developmentChecksBeforeRegistration": "the procedure was exercised on two eligible library proofs outside the sample: one could not be stated as an example, and all 21 orderings of the other replayed after `pick_goal`, which modules without Mathlib lack, was replaced by the core `rotate_left`; no proof of the sample had been replayed",
+ "experiment": "orderings-replay-v0.1",
+ "hypotheses": {
+  "H29": "at least 90% of the orderings other than the original replay"
+ },
+ "implementationSha256": {
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "0fe7dc4a28b0aa50976e25127a6759b83d86b445e592daa5b2d9107f6f3373f1"
+ },
+ "measures": {
+  "failures": "for each ordering that does not replay, the first failure: goal selection, tactic error, goal count, goal missing, goals left, or verification",
+  "replayed": "the orderings other than the original that replay, over all orderings other than the original of the proofs whose original order replays"
+ },
+ "procedure": [
+  "a fresh REPL per proof; the theorem is stated as an `example` in its module's context before it, as in the search experiments",
+  "each ordering, the original first, is replayed step by step: `rotate_left k` brings the goal the step consumed in the original proof to the front, then the step's tactic text runs",
+  "an ordering replays when every tactic succeeds, every step leaves exactly the number of goals the graph says it creates, no goal is left, and the script re-verifies from the statement",
+  "a proof whose original order does not replay is reported and excluded from the measure"
+ ],
+ "question": "how many of the orderings counted by L replay as Lean scripts in the theorem's own context",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sample": {
+  "count": 64,
+  "libraryExtractionSha256": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff",
+  "pools": {
+   "mathlib-slice": 24,
+   "proofnet-ir": 57
+  },
+  "rule": "seed 20260925; for each corpus of step 1, up to 40 proofs drawn uniformly from those with one root `by` block, a name that is not generated, 3 to 8 steps, a forest graph whose steps each consume one goal, 2 to 24 orderings, and steps that can be cut out of the source one line each (every other line of the body blank, a comment, or a bullet; no step line with `<;>`, `;`, a nested `by`, or a structural tactic)",
+  "sliceExtractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b"
+ },
+ "sampleSha256": "7374bc83e5d1771d6d7cd9d74e3573a50e6c7d49a156bde9ff296694aebbddc9"
+}

@@ -1,0 +1,578 @@
+[
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7MarkedTargetRawReturnTerminalCausalOrder",
+  "declaration": "ProofNetIR.SequentialFigure7.MarkedConclusionChain.rawMarkedBefore_or_eq",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7MarkedTargetRawReturnTerminalCausalOrder.lean",
+  "byLine": 321,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.mem_closureN_iff_walkWithin",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 4341,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.WaitingFlagComplete.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8343,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.expandVertex_lt",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1685,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.adjacent_right_in_bounds",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 4284,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7RegionBoundaries",
+  "declaration": "ProofNetIR.SequentialFigure7.carrierFresh",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7RegionBoundaries.lean",
+  "byLine": 53,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.declarativelyCorrect_iff_structural_cuspAcyclic_referenceConnected",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 12837,
+  "steps": 6,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.QueueFlagComplete.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8318,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_initialEnqueues",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8192,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_core",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8159,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialConsumerIndex",
+  "declaration": "ProofNetIR.ConsumerIndex.build_sound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialConsumerIndex.lean",
+  "byLine": 332,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.WaitingNodup.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8355,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.compactVertex_lt",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1675,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7QueueHistory",
+  "declaration": "ProofNetIR.SequentialFigure7.CanonicalTagHistory.newEnabled_iff_inputNecessary",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7QueueHistory.lean",
+  "byLine": 320,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.ReachableByImplementedDispatcher.dispatch_or_allMarked",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 2472,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.expandVertex_ne",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1693,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentEscapeTemporal",
+  "declaration": "ProofNetIR.SequentialFigure7.submittedParPremise_bound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ActiveTopDebtParentEscapeTemporal.lean",
+  "byLine": 133,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.DerivationTree",
+  "declaration": "ProofNetIR.CutFreeDerivation.reorderCandidate?_map",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/DerivationTree.lean",
+  "byLine": 438,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentTemporalOutcome",
+  "declaration": "ProofNetIR.SequentialFigure7.submittedTensorPremise_bound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ActiveTopDebtParentTemporalOutcome.lean",
+  "byLine": 76,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.initializeWorklist_firingsAccounted",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 9428,
+  "steps": 5,
+  "orderings": 24
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.canonicalWorklistRun_runInvariant",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 14017,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.WaitingFlagSound.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8306,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.VertexRenaming.contains_map_forward",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 49,
+  "steps": 7,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFreshSourceLeftRun",
+  "declaration": "ProofNetIR.SequentialUnification.FreshSourceLeftRun.execution_iff_nonempty",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFreshSourceLeftRun.lean",
+  "byLine": 542,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.mem_enqueueWorklist_of_mem",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 7500,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.SchedulerCoverage.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8379,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_waitingFlags_size",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8366,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.EdgeSimplePath.sources_nodup",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 2434,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_successfulFirings",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8170,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.canonicalWorklistRun_coreInvariant",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 13592,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7PriorityEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.dispatch?_kind_success_iff_priorityEnabled",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7PriorityEnabled.lean",
+  "byLine": 544,
+  "steps": 7,
+  "orderings": 20
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_balance",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8098,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.NetEquivalence",
+  "declaration": "ProofNetIR.Graph.adjacent_iff_of_edges_perm",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/NetEquivalence.lean",
+  "byLine": 10,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.IntrinsicCanonical",
+  "declaration": "ProofNetIR.Certificate.uniqueProducer?_eq_some_of_count",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/IntrinsicCanonical.lean",
+  "byLine": 153,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_waitingRequeues",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8181,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_waiting",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8214,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.QueueFlagSound.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8263,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7QueueHistory",
+  "declaration": "ProofNetIR.SequentialFigure7.ReachableByImplementedDispatcher.newEnabled_iff_inputNecessary",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7QueueHistory.lean",
+  "byLine": 353,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Graph.Adjacent.symm",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 3901,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Graph.isTree_iff_bounded_connected_acyclic",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 3140,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.CharP.Defs",
+  "declaration": "expChar_one_iff_char_zero",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/CharP/Defs.lean",
+  "byLine": 416,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.AlgebraicGeometry.PullbackCarrier",
+  "declaration": "AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff",
+  "source": ".lake/packages/mathlib/Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "byLine": 248,
+  "steps": 7,
+  "orderings": 15
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.Constructions.SumProd",
+  "declaration": "isOpenMap_prodMap_iff",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Constructions/SumProd.lean",
+  "byLine": 610,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Sites.Point.Basic",
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "byLine": 227,
+  "steps": 6,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.FieldTheory.Finite.Basic",
+  "declaration": "FiniteField.sum_subgroup_units",
+  "source": ".lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean",
+  "byLine": 173,
+  "steps": 7,
+  "orderings": 15
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+  "declaration": "smul_closedBall",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Module/Ball/Pointwise.lean",
+  "byLine": 371,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.Polynomial.Eisenstein.Basic",
+  "declaration": "Polynomial.IsEisensteinAt.coeff_mem",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean",
+  "byLine": 217,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+  "declaration": "smul_sphere",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Module/Ball/Pointwise.lean",
+  "byLine": 388,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.KrullDimension.Zero",
+  "declaration": "Ring.KrullDimLE.radical_eq_maximalIdeal",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Zero.lean",
+  "byLine": 121,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.inv_I",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 541,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Logic.Nontrivial.Defs",
+  "declaration": "Function.Injective.exists_ne",
+  "source": ".lake/packages/mathlib/Mathlib/Logic/Nontrivial/Defs.lean",
+  "byLine": 47,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.PowerSeries.Restricted",
+  "declaration": "PowerSeries.IsRestricted.one",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Restricted.lean",
+  "byLine": 47,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Geometry.Manifold.VectorBundle.Tensoriality",
+  "declaration": "TensorialAt.pointwise₂",
+  "source": ".lake/packages/mathlib/Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean",
+  "byLine": 174,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.ENat.Basic",
+  "declaration": "ENat.lift_eq_toNat_of_lt_top",
+  "source": ".lake/packages/mathlib/Mathlib/Data/ENat/Basic.lean",
+  "byLine": 173,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+  "declaration": "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+  "byLine": 57,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.List.Basic",
+  "declaration": "List.IsPrefix.mem_iff_idxOf_lt_length",
+  "source": ".lake/packages/mathlib/Mathlib/Data/List/Basic.lean",
+  "byLine": 571,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives",
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.le_largerSubobject",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+  "byLine": 175,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Subfunctor.Basic",
+  "declaration": "CategoryTheory.Subfunctor.eq_top_iff_isIso",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Subfunctor/Basic.lean",
+  "byLine": 179,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.MeasureTheory.PiSystem",
+  "declaration": "generateFrom_piiUnionInter_measurableSet",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/PiSystem.lean",
+  "byLine": 486,
+  "steps": 6,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Logic.Nontrivial.Defs",
+  "declaration": "Decidable.exists_ne",
+  "source": ".lake/packages/mathlib/Mathlib/Logic/Nontrivial/Defs.lean",
+  "byLine": 54,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.Constructions.SumProd",
+  "declaration": "isClosedMap_sum",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Constructions/SumProd.lean",
+  "byLine": 842,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.AlgebraicTopology.SimplicialSet.Monoidal",
+  "declaration": "SSet.Subcomplex.range_tensorHom",
+  "source": ".lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+  "byLine": 147,
+  "steps": 7,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.List.Basic",
+  "declaration": "Decidable.List.eq_or_ne_mem_of_mem",
+  "source": ".lake/packages/mathlib/Mathlib/Data/List/Basic.lean",
+  "byLine": 66,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.Homology.HomotopyCategory.ShortExact",
+  "declaration": "CochainComplex.mappingCone.descShortComplex_naturality",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+  "byLine": 172,
+  "steps": 4,
+  "orderings": 2
+ }
+]
