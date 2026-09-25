@@ -1,0 +1,32 @@
+{
+ "adjustment": {
+  "reference": "linearizations-mathlib-v0.1",
+  "referenceSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b",
+  "rule": "subtract the median of the quantity among the slice's proofs of at least 3 steps with the same number of steps, pooled from 30 steps on"
+ },
+ "corpus": {
+  "extractionSha256": "673fad75411645134919044f6b17d732952364e46b363470f5f4da1285a5dec8",
+  "pairsSha256": "a6f30ea10efb1efd9e71f9b747001ae2e0a7fc350f78eab9a8b9fdfa2996b73a",
+  "resultsSha256": "393580f84d1fee24ebb3a136c996559b159a440db5711b04eb09d4d15dbf974c",
+  "rule": "the pairs of golf-v0.1 that elaborate on both sides and have at least 3 steps on both sides",
+  "source": "golf-v0.1"
+ },
+ "disclosure": "the pairs' step counts, ordering counts, and structure indices were computed and reported by golf-v0.1, with an exploratory length adjustment of the structure index; depth, width, and branching had not been computed for any pair or slice proof before this registration",
+ "experiment": "golf-structure-v0.1",
+ "hypotheses": {
+  "H28": "for at least one of depth, width, and branching, the adjusted value differs between golfed proofs and their predecessors (Holm-corrected two-sided sign test, family-wise alpha 0.05)"
+ },
+ "implementationSha256": {
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "3d5dd3030693e1f9ba6c0842332b83413ba264e5d0056866f84db8e5c8a06abf"
+ },
+ "quantities": {
+  "branching": "the mean number of dependent steps over the steps that have any",
+  "depth": "the most steps on one chain of dependencies",
+  "width": "the most steps at one depth, a step's depth being one more than its parents' greatest depth"
+ },
+ "question": "do golfed proofs and their predecessors differ in depth, width, or branching of the goal-origin graph once proof length is accounted for",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "test": "for each quantity, over the pairs whose adjusted values differ, a two-sided sign test of the golfed proof's adjusted value being lower; Holm's correction over the three quantities"
+}
