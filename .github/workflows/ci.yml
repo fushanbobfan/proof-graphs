@@ -70,3 +70,25 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed population search experiment
+        run: |
+          if test -f experiments/search-v0.3/summary.json; then
+            ~/.elan/bin/lake build repl
+            python scripts/run_search_wide.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
+      - name: Check the committed golf-structure experiment
+        run: |
+          if test -f experiments/golf-structure-v0.1/results.jsonl; then
+            python scripts/run_golf_structure.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
+      - name: Check the committed extraction audit
+        run: |
+          if test -f experiments/extraction-audit-v0.1/results.jsonl; then
+            python scripts/run_extraction_audit.py --check-committed
+          else
+            echo "no committed results yet"
+          fi

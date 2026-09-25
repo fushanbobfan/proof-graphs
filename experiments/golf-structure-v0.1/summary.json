@@ -1,0 +1,43 @@
+{
+ "experiment": "golf-structure-v0.1",
+ "preregistrationSha256": "c7632e44337aab4147899a1b547b43c02543706e7e6ca833ff2aa6a5c5963da6",
+ "pairs": 160,
+ "tests": {
+  "depth": {
+   "pairs": 104,
+   "golfedLower": 51,
+   "pValue": 0.9219488276264309,
+   "unadjusted": {
+    "pairs": 113,
+    "golfedLower": 103
+   },
+   "holm": 0.9219488276264309
+  },
+  "width": {
+   "pairs": 92,
+   "golfedLower": 40,
+   "pValue": 0.25132210347485445,
+   "unadjusted": {
+    "pairs": 75,
+    "golfedLower": 65
+   },
+   "holm": 0.5026442069497089
+  },
+  "branching": {
+   "pairs": 120,
+   "golfedLower": 48,
+   "pValue": 0.035323682537769574,
+   "unadjusted": {
+    "pairs": 123,
+    "golfedLower": 66
+   },
+   "holm": 0.10597104761330872
+  }
+ },
+ "hypotheses": {
+  "H28": {
+   "supported": false
+  }
+ },
+ "resultsSha256": "fc6e2eb006beb2a658c25f92199d73a610d27bedfb0cadff7b9aa76a80b8afa4"
+}
