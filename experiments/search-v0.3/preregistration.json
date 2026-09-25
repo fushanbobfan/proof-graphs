@@ -1,0 +1,50 @@
+{
+ "analyses": {
+  "discordant": "tasks proved by exactly one search, with a two-sided sign test",
+  "goalVsOrderings": "the same with goal-duplicate expansions",
+  "orderVsOrderings": "Spearman correlation, over tasks with at least one whole-state expansion, between log10 of the original proof's number of orderings and the task's number of order-duplicate expansions; two-sided permutation p-value (10000 permutations, seed 0)"
+ },
+ "arm": "menu only: the fixed menu of scripts/search_harness.py, unchanged; the model arm is not run, since it is stochastic and costs about four times as much per search",
+ "budget": {
+  "expansionsPerSearch": 24,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C2": "for every task stated in search-v0.1, both menu searches equal the committed ones (expansion records and proof), since the menu proposer is deterministic"
+ },
+ "developmentChecksBeforeRegistration": "the runner was exercised on the first candidate task, whole-state search, at budget 4; no other unit was run",
+ "execution": "every (task, search) unit in a fresh REPL, four units at a time, resumable",
+ "experiment": "search-v0.3",
+ "hypotheses": {
+  "H22": "the order-duplicate fraction of the whole-state search is below 5%",
+  "H23": "the goal-duplicate fraction is at least 2 times the order-duplicate fraction",
+  "H24": "the AND-OR search proves at least as many tasks as the whole-state search",
+  "H25": "of the tasks that the whole-state search proves and the AND-OR search does not, at least half have at least one candidate discarded as entangled by the AND-OR search (undecidable if there is no such task)"
+ },
+ "implementationSha256": {
+  "deepRunner": "cb73a2ecd68bf83bba8ac8611f2ddb261f9012581536522b9355dce7c9dbd218",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "4adfeab50a681019e6c58cbb83862de196187d037a78908953cc84485aa0b87e",
+  "v1Runner": "fea3c23a5dbbe366daa65a5881881524b4ad0f1ff29110f7cce812180e52ac49"
+ },
+ "measures": {
+  "entangled": "candidates the AND-OR search discarded as entangled",
+  "goalFraction": "whole-state expansions whose first goal, canonicalized, was already expanded as a first goal, over all whole-state expansions",
+  "orderFraction": "whole-state expansions whose goal multiset was already expanded in another order, over all whole-state expansions",
+  "proved": "tasks with a proof that re-verifies from the statement, per search"
+ },
+ "question": "are the redundancy measures and the search comparison of search-v0.1 properties of the whole population of candidate theorems rather than of its 47-task sample",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": "those of search-v0.1 after its amendment 2, unchanged (breadth-first whole-state search with exact-state deduplication; breadth-first AND-OR search over canonical goals with the entanglement rule; closing candidates verified inside the search, sorry refused)",
+ "tasks": {
+  "count": 1347,
+  "rule": "every theorem of the slice whose proof is one `by` block of 3 to 20 steps, not generated, in (module, line) order: the candidate list of search-v0.1, all of it",
+  "sliceExtractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b",
+  "sliceResultsSha256": "7a0c29848100e49a774e52f0fdc3dee7e0ecdc4310d40c2420e80c6d107f3f1d",
+  "source": "linearizations-mathlib-v0.1"
+ },
+ "tasksSha256": "9f0bb3d1c3596ff82593c3d7e001b92af1a0c2de85deb3fa15a1e0583f00e321"
+}
