@@ -1,0 +1,25 @@
+{
+ "experiment": "orderings-replay-v0.1",
+ "preregistrationSha256": "2d6914ddba45011a104f423def789f1d7ad31f1268f6cf32a3fb1e472d38f5a3",
+ "proofs": 64,
+ "stated": 45,
+ "errors": 0,
+ "abandoned": 0,
+ "originalReplays": 41,
+ "originalFailures": {
+  "tactic error": 4
+ },
+ "orderings": 197,
+ "replayed": 197,
+ "fraction": 1.0,
+ "failures": {},
+ "proofsAllReplay": 41,
+ "proofsNoneReplay": 0,
+ "proofsWithOthers": 41,
+ "hypotheses": {
+  "H29": {
+   "supported": true
+  }
+ },
+ "resultsSha256": "0d74589c0589e76ee7d6177a2b2f340a916711ea133b5456395fee6b6cbd71db"
+}
