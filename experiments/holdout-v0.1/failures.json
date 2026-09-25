@@ -1,0 +1,10 @@
+[
+ {
+  "module": "Mathlib.Combinatorics.Matroid.Basic",
+  "diagnostics": "Mathlib.Combinatorics.Matroid.Basic: modules=2344 trees=218 declarations=84 errors=2 | D:\\ucla\\Rowling\u7684\u795e\u5947\u77e5\u8bc6\u5e93\\LEAN with Rowling!\\proof-graphs\\.lake\\packages\\mathlib\\Mathlib\\Combinatorics\\Matroid\\Basic.lean:354:2: error(lean.unknownIdentifier): Unknown constant `_private.0.Matroid.sdiff_subset_ground`"
+ },
+ {
+  "module": "Mathlib.Topology.UnitInterval",
+  "diagnostics": "Mathlib.Topology.UnitInterval: modules=2785 trees=128 declarations=57 errors=2 | D:\\ucla\\Rowling\u7684\u795e\u5947\u77e5\u8bc6\u5e93\\LEAN with Rowling!\\proof-graphs\\.lake\\packages\\mathlib\\Mathlib\\Topology\\UnitInterval.lean:453:10: error(lean.unknownIdentifier): Unknown identifier `eq_convexComb.zero_le`"
+ }
+]

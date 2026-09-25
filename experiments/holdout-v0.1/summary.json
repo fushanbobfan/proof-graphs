@@ -1,0 +1,240 @@
+{
+ "experiment": "holdout-v0.1",
+ "preregistrationSha256": "25293a00adf930a292c35bb528fe22e8fd36142cfdcb9d802a72b93755b1d7ae",
+ "counts": {
+  "proofs": 2244,
+  "counted": 2244,
+  "modulesExtracted": 142,
+  "modulesFailed": [
+   {
+    "module": "Mathlib.Combinatorics.Matroid.Basic",
+    "diagnostics": "Mathlib.Combinatorics.Matroid.Basic: modules=2344 trees=218 declarations=84 errors=2 | D:\\ucla\\Rowling\u7684\u795e\u5947\u77e5\u8bc6\u5e93\\LEAN with Rowling!\\proof-graphs\\.lake\\packages\\mathlib\\Mathlib\\Combinatorics\\Matroid\\Basic.lean:354:2: error(lean.unknownIdentifier): Unknown constant `_private.0.Matroid.sdiff_subset_ground`"
+   },
+   {
+    "module": "Mathlib.Topology.UnitInterval",
+    "diagnostics": "Mathlib.Topology.UnitInterval: modules=2785 trees=128 declarations=57 errors=2 | D:\\ucla\\Rowling\u7684\u795e\u5947\u77e5\u8bc6\u5e93\\LEAN with Rowling!\\proof-graphs\\.lake\\packages\\mathlib\\Mathlib\\Topology\\UnitInterval.lean:453:10: error(lean.unknownIdentifier): Unknown identifier `eq_convexComb.zero_le`"
+   }
+  ],
+  "stepsQuartiles": {
+   "min": 1,
+   "q1": 2.0,
+   "median": 4.0,
+   "q3": 8.0,
+   "max": 122,
+   "count": 2244
+  },
+  "strata": {
+   "steps-1": {
+    "proofs": 486,
+    "counted": 486,
+    "excluded": 0,
+    "forests": 486,
+    "linearizations": {
+     "min": "1",
+     "q1": "1",
+     "median": "1",
+     "q3": "1",
+     "max": "1",
+     "count": 486
+    },
+    "log10": {
+     "min": 0.0,
+     "q1": 0.0,
+     "median": 0.0,
+     "q3": 0.0,
+     "max": 0.0,
+     "count": 486
+    },
+    "structure": null,
+    "fractionSingleOrder": 1.0
+   },
+   "steps-2-5": {
+    "proofs": 975,
+    "counted": 975,
+    "excluded": 0,
+    "forests": 971,
+    "linearizations": {
+     "min": "1",
+     "q1": "1",
+     "median": "1",
+     "q3": "2",
+     "max": "120",
+     "count": 975
+    },
+    "log10": {
+     "min": 0.0,
+     "q1": 0.0,
+     "median": 0.0,
+     "q3": 0.3010299956639812,
+     "max": 2.0791812460476247,
+     "count": 975
+    },
+    "structure": {
+     "min": 0.0,
+     "q1": 0.0,
+     "median": 0.0,
+     "q3": 0.21810429198553155,
+     "max": 1.0,
+     "count": 975
+    },
+    "fractionSingleOrder": 0.7271794871794872
+   },
+   "steps-6-10": {
+    "proofs": 410,
+    "counted": 410,
+    "excluded": 0,
+    "forests": 409,
+    "linearizations": {
+     "min": "1",
+     "q1": "1",
+     "median": "8",
+     "q3": "35",
+     "max": "172800",
+     "count": 410
+    },
+    "log10": {
+     "min": 0.0,
+     "q1": 0.0,
+     "median": 0.9030899869919435,
+     "q3": 1.5440680443502757,
+     "max": 5.237543738142874,
+     "count": 410
+    },
+    "structure": {
+     "min": 0.0,
+     "q1": 0.0,
+     "median": 0.2378193615294719,
+     "q3": 0.3499767707289835,
+     "max": 1.0,
+     "count": 410
+    },
+    "fractionSingleOrder": 0.2707317073170732
+   },
+   "steps-11-20": {
+    "proofs": 239,
+    "counted": 239,
+    "excluded": 0,
+    "forests": 239,
+    "linearizations": {
+     "min": "1",
+     "q1": "70",
+     "median": "1540",
+     "q3": "55440",
+     "max": "540644890705920",
+     "count": 239
+    },
+    "log10": {
+     "min": 0.0,
+     "q1": 1.845098040014257,
+     "median": 3.187520720836463,
+     "q3": 4.74382322160375,
+     "max": 14.732912103102372,
+     "count": 239
+    },
+    "structure": {
+     "min": 0.0,
+     "q1": 0.183659419233831,
+     "median": 0.2824245204139826,
+     "q3": 0.40333021794372165,
+     "max": 1.0,
+     "count": 239
+    },
+    "fractionSingleOrder": 0.0794979079497908
+   },
+   "steps-21-50": {
+    "proofs": 109,
+    "counted": 109,
+    "excluded": 0,
+    "forests": 109,
+    "linearizations": {
+     "min": "15",
+     "q1": "35443980",
+     "median": "141531364800",
+     "q3": "38516392340712000",
+     "max": "10021326224137838633761524154368000000000",
+     "count": 109
+    },
+    "log10": {
+     "min": 1.1760912590556813,
+     "q1": 7.45481487251846,
+     "median": 11.150852694631446,
+     "q3": 16.7280528822293,
+     "max": 40.0009251999455,
+     "count": 109
+    },
+    "structure": {
+     "min": 0.059674788725538705,
+     "q1": 0.29986987363073453,
+     "median": 0.37339472551704955,
+     "q3": 0.4423797591715546,
+     "max": 0.8129654919360993,
+     "count": 109
+    },
+    "fractionSingleOrder": 0.0
+   },
+   "steps-51+": {
+    "proofs": 25,
+    "counted": 25,
+    "excluded": 0,
+    "forests": 25,
+    "linearizations": {
+     "min": "10333692369000",
+     "q1": "117569736524496171907031040000000",
+     "median": "43711566688153805528463370097314834022400",
+     "q3": "13816931601730757794327937633513992535237565835816796160000000",
+     "max": "2516766947965152504582220439500181471588661892903434871085727892888115858962763255164027254368598114877440000000000000",
+     "count": 25
+    },
+    "log10": {
+     "min": 13.014255528582355,
+     "q1": 31.122169795743822,
+     "median": 40.640596372534645,
+     "q3": 67.37769104444087,
+     "max": 117.40084300184206,
+     "count": 25
+    },
+    "structure": {
+     "min": 0.18690338619734542,
+     "q1": 0.3460755754421799,
+     "median": 0.45439546431683725,
+     "q3": 0.5147979480338953,
+     "max": 0.5915391141435065,
+     "count": 25
+    },
+    "fractionSingleOrder": 0.0
+   }
+  },
+  "testedStrata": [
+   "steps-6-10",
+   "steps-11-20",
+   "steps-21-50"
+  ],
+  "hypotheses": {
+   "H34": {
+    "supported": false
+   },
+   "H35": {
+    "supported": true
+   },
+   "H36": {
+    "supported": true
+   }
+  }
+ },
+ "searches": null,
+ "hypotheses": {
+  "H34": {
+   "supported": false
+  },
+  "H35": {
+   "supported": true
+  },
+  "H36": {
+   "supported": true
+  }
+ },
+ "extractionSha256": "a46a0d312c528dcdff8d455909d1b2aaf8a8beed28335c935ea96984d14f4c49",
+ "countsSha256": "e68fbab52fa56ce82301ca601d422aba86fc6d208d38b21fcfe764cd3650b968",
+ "tasksSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e",
+ "searchesSha256": null
+}
