@@ -82,8 +82,8 @@ assumption fails.
 ## Interpretation boundary
 
 Both searches are breadth-first with 24 expansions and a weak proposer
-(a 26-tactic menu; a 35B local model at 15 tokens a reply, sampled four
-times). 13 to 18 tasks per arm exhausted the budget and 17 to 24 exhausted
+(a 26-tactic menu; a 35B local model sampled four times, with replies capped
+at 64 tokens and a median reply of 15 tokens, followed by the menu). 13 to 18 tasks per arm exhausted the budget and 17 to 24 exhausted
 their frontier, so these numbers describe where such a search spends its
 expansions, not the best achievable prover; a stronger proposer would move
 both the proof counts and the duplicate fractions. A proof counts only when
