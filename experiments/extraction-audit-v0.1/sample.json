@@ -1,0 +1,242 @@
+[
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyPayloadEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.unifyPayload?_exists_of_enabled",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyPayloadEnabled.lean",
+  "byLine": 1860,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialComponentReferenceGeometry",
+  "declaration": "ProofNetIR.Certificate.referenceOwnedGraph_edge_mem",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialComponentReferenceGeometry.lean",
+  "byLine": 72,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.requeueWaiting_successfulFirings",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8855,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.Graph.isTree_reindex",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 800,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.restrictTo?_conclusions",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 11107,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.restrictTo?_formula?_idxOf",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 11012,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.distinct_mem_ordered_decomposition",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 25058,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.UnificationComponent.FormulaConsistent.tensor",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 2856,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.producerCount_eq_zero_of_no_connective",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 19621,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ContinuationCreditPreservation",
+  "declaration": "ProofNetIR.SequentialFigure7.DispatchTagEvidence.oldContinuationCredit",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ContinuationCreditPreservation.lean",
+  "byLine": 1016,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.CuspFreeContinuation.firstIntersection_withCycle_cycle",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 6981,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyOneStep.tensorPremisesMarkedAfter",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerInvariant.lean",
+  "byLine": 7267,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7StableEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.ForwardInput.queue_data_exists",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7StableEnabled.lean",
+  "byLine": 853,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Sequential",
+  "declaration": "ProofNetIR.Certificate.length_le_of_nodup_subset",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Sequential.lean",
+  "byLine": 604,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.length_filter_filterMap_eq",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 231,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.I_im'",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 287,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.CWComplex.Classical.Basic",
+  "declaration": "Topology.CWComplex.union",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/CWComplex/Classical/Basic.lean",
+  "byLine": 261,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.Azumaya.Basic",
+  "declaration": "IsAzumaya.mulLeftRight_comp_congr",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Azumaya/Basic.lean",
+  "byLine": 73,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.abs_im_le_norm",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 694,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.Ideal.Quotient.Nilpotent",
+  "declaration": "Ideal.Quotient.isUnit_mk_pow_iff_notMem",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean",
+  "byLine": 88,
+  "stratum": "2-5"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.CharP.Defs",
+  "declaration": "ringExpChar.eq",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/CharP/Defs.lean",
+  "byLine": 389,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Combinatorics.SimpleGraph.Diam",
+  "declaration": "SimpleGraph.ediam_le_two_mul_radius",
+  "source": ".lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Diam.lean",
+  "byLine": 397,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.norm_le_im_iff_eq_I_mul_norm",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 1267,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.NumberTheory.FactorisationProperties",
+  "declaration": "Nat.abundant_iff_two_lt_abundancyIndex",
+  "source": ".lake/packages/mathlib/Mathlib/NumberTheory/FactorisationProperties.lean",
+  "byLine": 198,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.ModelTheory.Semantics",
+  "declaration": "FirstOrder.Language.Formula.realize_equivSentence_symm_con",
+  "source": ".lake/packages/mathlib/Mathlib/ModelTheory/Semantics.lean",
+  "byLine": 668,
+  "stratum": "6-10"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Probability.Kernel.IonescuTulcea.PartialTraj",
+  "declaration": "ProbabilityTheory.Kernel.partialTraj_succ_map_frestrictLe₂",
+  "source": ".lake/packages/mathlib/Mathlib/Probability/Kernel/IonescuTulcea/PartialTraj.lean",
+  "byLine": 258,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.Adjoin.Dimension",
+  "declaration": "Subalgebra.rank_sup_le_of_free",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/Adjoin/Dimension.lean",
+  "byLine": 32,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Normed.Operator.NNNorm",
+  "declaration": "ContinuousLinearMap.nnnorm_def",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Operator/NNNorm.lean",
+  "byLine": 40,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.Sigma.Basic",
+  "declaration": "Sigma.subtype_ext_iff",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Sigma/Basic.lean",
+  "byLine": 79,
+  "stratum": "11-20"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.MeasureTheory.Function.ConditionalExpectation.CondJensen",
+  "declaration": "ConvexOn.map_condExp_le",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Function/ConditionalExpectation/CondJensen.lean",
+  "byLine": 171,
+  "stratum": "11-20"
+ }
+]

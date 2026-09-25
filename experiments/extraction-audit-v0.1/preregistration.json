@@ -1,0 +1,32 @@
+{
+ "developmentChecksBeforeRegistration": "none on the sample; the runner's sampling was run once to write sample.json",
+ "experiment": "extraction-audit-v0.1",
+ "hypotheses": {
+  "H26": "no disagreement is adjudicated as an extractor error"
+ },
+ "implementationSha256": {
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "runner": "fd3cb01706f5e955df36f851e8cd49cf675e603f03ab7bfefb943fdb0abe3ee2"
+ },
+ "measures": {
+  "agreement": "proofs whose steps and edges agree",
+  "countAgreement": "proofs whose number of orderings, computed from each graph by the same formula, agrees"
+ },
+ "protocol": [
+  "the reconstructor receives only sample.json (declaration, module, source file, line of the `by` block) and the definition in the docstring of scripts/count_linearizations.py",
+  "the reconstructor may read any source file and display Lean's goals at any position with the Lean language server, and must not open the extraction, results, dataset, or audit files of this repository or run the extractor or counter",
+  "for each proof the reconstructor records the steps (source line and tactic, in source order) and the dependency edges (step i originated a goal that step j consumes) in reconstructions.json, committed before --compare is first run",
+  "--compare matches steps by source line, and within a line by order; a proof agrees when both graphs have the same steps per line and the same edges",
+  "every disagreement is adjudicated with its evidence (the goals Lean displays) into one of: extractor error; reconstruction error; definition gap"
+ ],
+ "question": "does the derived goal-dependency graph agree with the graph a person reconstructs by hand from the proof and Lean's goal display, following the same definition",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sample": {
+  "count": 30,
+  "libraryExtractionSha256": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff",
+  "rule": "seed 20260925; for each corpus of linearizations-v0.1 and linearizations-mathlib-v0.1, 5 proofs drawn uniformly without replacement from each stratum of 2 to 5, 6 to 10, 11 to 20 steps, among declarations with one root `by` block and a name that is not generated, pools in (module, line) order",
+  "sliceExtractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b"
+ },
+ "sampleSha256": "36c7aa81a9419f6479ccd915d9b670bde9e94cdb73095916d3364b41625addff"
+}
