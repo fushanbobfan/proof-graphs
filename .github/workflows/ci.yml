@@ -92,3 +92,10 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed recount and the corrected dataset
+        run: |
+          if test -f experiments/recount-v0.1/summary.json; then
+            python scripts/run_recount.py --check-committed
+          else
+            echo "no committed results yet"
+          fi

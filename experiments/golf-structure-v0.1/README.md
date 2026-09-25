@@ -48,6 +48,14 @@ correction for three tests. Together with golf-v0.1: none of the four graph
 quantities tested separates the proof reviewers accepted as an improvement
 from its predecessor beyond its length.
 
+**Correction.** These graphs were derived under a rule that loses the
+closing steps of `simpa ... using ...` and similar tactics
+([extraction-audit-v0.1](../extraction-audit-v0.1/README.md)). Under the
+corrected derivation, [recount-v0.1](../recount-v0.1/README.md) re-evaluates
+the same test as H28r, which holds: adjusted for length, the golfed proof
+branches more in 78 of 122 pairs (p = 0.0027, Holm 0.008), while depth and
+width still show nothing. H28r was registered knowing this result.
+
 ## Interpretation boundary
 
 The same 160 pairs as golf-v0.1's structure test, so the samples are not

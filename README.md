@@ -14,8 +14,10 @@ from the committed artifacts. [docs/design.md](docs/design.md) states the
 research object, the three steps, and the boundaries.
 
 The program is done. A proof's step-dependency graph admits enormous numbers
-of orderings (median 8.8·10^13 at 21 to 50 steps, 10^628 for the longest
-proof), and a Mathlib slice, whose proofs are shorter, shows the same growth;
+of orderings (median 9.3·10^13 at 21 to 50 steps, more than 10^652 for the
+longest proof, as recounted under the step derivation that a blind audit
+corrected; `experiments/recount-v0.1`), and a Mathlib slice, whose proofs are
+shorter, shows the same growth;
 but Lean's convention of acting on the first goal already fixes one ordering, and in a
 real tactic search only 2 to 4 percent of the expansions are states that
 differ from an earlier one only in goal order. Searching over goals instead
@@ -23,8 +25,9 @@ of whole states proves no more at equal budget, even at eight times the
 budget, and a goal search that treats goals as independent loses proofs
 whose goals share an existential witness (HyperTree Proof Search and Aesop
 handle such goals explicitly; ours deliberately does not). Mathlib's
-golfed proofs are shorter than their predecessors, and in an exploratory
-comparison their lower structure index is accounted for by their length. Each experiment's README carries its
+golfed proofs are shorter than their predecessors; their lower structure
+index is accounted for by their length, but adjusted for length they branch
+more. Each experiment's README carries its
 numbers and its boundaries;
 [docs/design.md](docs/design.md) states the answer in full.
 [HANDOFF.md](HANDOFF.md) maps every claim to the command that re-verifies
@@ -53,18 +56,23 @@ experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 experiments/search-v0.1/          steps 2 and 3 artifacts
 experiments/search-v0.2/          the deeper searches
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
-datasets/proof-graphs-v0.1.jsonl.gz  7,285 step-dependency graphs
+datasets/proof-graphs-v0.2.jsonl.gz  7,285 step-dependency graphs (corrected derivation)
+datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivation
 ```
 
 ## Dataset
 
-`datasets/proof-graphs-v0.1.jsonl.gz` holds the step-dependency graph of
-every proof the experiments extracted: 3,994 tactic proofs of ProofNet-IR
+`datasets/proof-graphs-v0.2.jsonl.gz` holds the step-dependency graph of
+every proof the experiments extracted, under the corrected derivation of
+`scripts/count_linearizations_v2.py` (`python scripts/run_recount.py
+--check-committed` rebuilds it); `proof-graphs-v0.1` keeps the earlier
+derivation, which loses the closing steps of `simpa ... using ...` and similar
+tactics. Both cover 3,994 tactic proofs of ProofNet-IR
 v0.10.0, 2,807 of the Mathlib v4.32.0 slice, and the 484 tactic sides of the
 golf pairs, one JSON line each with its source, module, declaration, steps
 (tactic kind and line), dependency edges, and exact number of orderings.
-`python scripts/export_graphs.py --check` rebuilds it from the committed
-extractions; CI runs it.
+`python scripts/export_graphs.py --check` rebuilds v0.1 from the committed
+extractions; CI runs both checks.
 
 ## Reproduction
 

@@ -25,12 +25,14 @@ GitHub.
 
 | Claim | Evidence | Re-verification (CI runs all of these) |
 | --- | --- | --- |
-| Tactic proofs admit enormous numbers of step orderings (ProofNet-IR median 8.8·10^13 at 21–50 steps; max 10^628) | `experiments/linearizations-v0.1` | `python scripts/run_linearizations.py --check-committed` |
+| Tactic proofs admit enormous numbers of step orderings (ProofNet-IR median 8.8·10^13 at 21–50 steps as registered; 9.3·10^13 and a maximum above 10^652 under the corrected derivation) | `experiments/linearizations-v0.1`, `experiments/recount-v0.1` | `python scripts/run_linearizations.py --check-committed`, `python scripts/run_recount.py --check-committed` |
 | A systematic Mathlib slice shows the same growth (structure index within 0.1 of the library's) | `experiments/linearizations-mathlib-v0.1` | `python scripts/run_mathlib_slice.py --check-committed` |
 | In a real search only 2–4% of expansions are order duplicates; searching over goals proves no more than over states | `experiments/search-v0.1` | `python scripts/run_search.py --check-committed` |
 | Eight times the budget adds goal sharing (to ~18%) but no proof; goals that share an existential witness defeat a goal search that treats goals as independent (HTPS and Aesop handle them explicitly) | `experiments/search-v0.2` | `python scripts/run_search_deep.py --check-committed` |
 | Mathlib's golfed proofs are shorter; their lower structure index is explained by length | `experiments/golf-v0.1` | `python scripts/run_golf.py --check-committed` |
-| 7,285 step-dependency graphs | `datasets/proof-graphs-v0.1.jsonl.gz` | `python scripts/export_graphs.py --check` |
+| Adjusted for length, golfed proofs branch more (under the corrected derivation only) | `experiments/golf-structure-v0.1`, `experiments/recount-v0.1` | `python scripts/run_golf_structure.py --check-committed` |
+| A blind reconstruction of 30 graphs found one extractor defect, since corrected | `experiments/extraction-audit-v0.1` | `python scripts/run_extraction_audit.py --check-committed` |
+| 7,285 step-dependency graphs, corrected derivation | `datasets/proof-graphs-v0.2.jsonl.gz` | `python scripts/run_recount.py --check-committed` |
 | Every derived graph satisfies the structural invariants below | all three extractions | `python scripts/audit_graphs.py` |
 
 Each experiment directory holds its `preregistration.json` (committed
@@ -75,9 +77,12 @@ In order of what an independent pass would most likely catch:
    goals of the statement, no goal is consumed or originated twice, and
    exact counts match brute force on every graph of 2 to 7 steps (7,285
    graphs, 3,299 brute-forced, no violation). An invariant cannot catch a
-   derivation that is consistently wrong, so the independent test is to take
-   a random sample of proofs from the dataset, read each in the infoview, and
-   check its edges by hand. Constructs worth a look: `first`/`try`/`repeat`
+   derivation that is consistently wrong: `extraction-audit-v0.1` had two
+   model agents rebuild 30 random graphs blind, found one systematic defect
+   (closings of `simpa ... using ...` and similar tactics lost), and
+   `recount-v0.1` corrects it (`scripts/count_linearizations_v2.py`; all 30
+   then agree). A person's reconstruction of a subsample is still the
+   strongest check. Constructs worth a look: `first`/`try`/`repeat`
    (Lean keeps the info nodes of failed alternatives), `<;>`, `calc`, `conv`,
    `case`/`next`, `rcases`/`obtain` patterns, `induction ... with`,
    `simpa ... using (by ...)`.

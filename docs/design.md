@@ -34,7 +34,9 @@ precisely what exchange and rule permutation quotient in MLL, no more.
    count, and the structure index `log L / log n!` (0 for a chain, 1 when
    every step is independent) as a side quantity. Hypotheses H10 and H11 are
    in the preregistration. **Done**: H10 holds (medians 15, 6,720, 8.8·10^13,
-   1.9·10^51 by step stratum), H11 fails at 51 steps and more (0.502).
+   1.9·10^51 by step stratum), H11 fails at 51 steps and more (0.502); under
+   the corrected derivation of `experiments/recount-v0.1` the medians are 15,
+   6,720, 9.3·10^13, 1.6·10^52 and the index 0.509, with the same decisions.
    Repeated on a systematic Mathlib slice (`experiments/linearizations-mathlib-v0.1`,
    H12 and H13, both hold): its proofs are shorter and more often chains, but
    the orderings grow the same way with length and the median structure index
@@ -85,8 +87,9 @@ precisely what exchange and rule permutation quotient in MLL, no more.
 ## Where this ends
 
 The three steps answer the question they were written for. Rule-order
-redundancy is real and explodes with proof length — a 461-step proof admits
-10^628 orderings, and a Mathlib slice shows the same growth — but almost
+redundancy is real and explodes with proof length — a 471-step proof admits
+more than 10^652 orderings under the corrected derivation of `recount-v0.1`,
+and a Mathlib slice shows the same growth — but almost
 all of it is already quotiented by Lean's convention of acting on the first
 goal: in a real tactic search 2 to 4 percent of the expansions are states
 that differ only in goal order, and the fraction falls as the search deepens
@@ -109,9 +112,12 @@ are the ones the graph would wrongly cut.
 The proposal's third layer, telling good proofs from mediocre ones, was
 tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the
 community accepted as better is shorter in 210 of 238 pairs, and an
-exploratory length adjustment accounts for its lower structure index.
-The step-dependency graphs of every proof extracted here are in
-`datasets/proof-graphs-v0.1.jsonl.gz` (7,285 graphs).
+exploratory length adjustment accounts for its lower structure index. Of
+depth, width, and branching (`golf-structure-v0.1`), only branching separates
+the two once length is accounted for, and only under the corrected
+derivation of `recount-v0.1`: the golfed proof branches more. The
+step-dependency graphs of every proof extracted here are in
+`datasets/proof-graphs-v0.2.jsonl.gz` (7,285 graphs).
 
 What would extend this is not more of the same:
 
@@ -120,9 +126,9 @@ What would extend this is not more of the same:
   nothing);
 - the redundancy this design explicitly does not touch: different tactic
   paths to the same goal, and different proof terms of one proposition;
-- for the third layer, a registered test of another graph quantity (depth,
-  width, branching), or of quantities outside the graph (lemmas used, term
-  size, elaboration time).
+- for the third layer, quantities outside the graph (lemmas used, term size,
+  elaboration time), and a registered replication of the branching
+  difference on new golf pairs.
 
 Until one of those is worth doing, the repository is a record, not a
 programme.

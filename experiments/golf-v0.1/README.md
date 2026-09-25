@@ -85,5 +85,5 @@ robust, more idiomatic), and a reviewer accepts it as better on balance,
 not on structure. The length adjustment uses the slice's medians and is a
 post-hoc check, stated as such. Pairs whose predecessor no longer elaborates
 are excluded, which removes the golfs whose predecessors later broke. Other graph quantities (depth, width, branching) were
-not registered and are not tested here; they are in the dataset
-(`datasets/proof-graphs-v0.1.jsonl.gz`) for whoever wants to register them.
+not registered here; [golf-structure-v0.1](../golf-structure-v0.1/README.md)
+tests them.
