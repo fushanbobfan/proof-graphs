@@ -284,7 +284,7 @@ def main() -> int:
     if args.run:
         for path, text in texts.items():
             write_lf(path, text)
-        DATASET.write_bytes(dataset)
+        DATASET.write_bytes(gzip.compress(dataset, compresslevel=9, mtime=0))
         summary["datasetSha256"] = sha256_file(DATASET)
         write_lf(SUMMARY, json.dumps(summary, indent=1) + "\n")
         write_report(summary)
@@ -293,7 +293,7 @@ def main() -> int:
     for path, text in texts.items():
         if path.read_text(encoding="utf-8") != text:
             raise SystemExit(f"{path.name} does not follow from the committed extractions")
-    if DATASET.read_bytes() != dataset:
+    if gzip.decompress(DATASET.read_bytes()) != dataset:
         raise SystemExit("the committed dataset does not follow from the committed extractions")
     summary["datasetSha256"] = sha256_file(DATASET)
     if json.loads(SUMMARY.read_text(encoding="utf-8")) != summary:

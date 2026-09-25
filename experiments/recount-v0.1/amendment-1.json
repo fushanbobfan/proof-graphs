@@ -1,0 +1,14 @@
+{
+ "amendment": 1,
+ "date": "2026-09-25 America/Los_Angeles",
+ "scope": "output writing only: the derivation, the inputs, the hypotheses, and the checks are unchanged",
+ "observation": "The first run wrote the per-proof rows and then wrote the dataset uncompressed to its .gz path, so hashing it failed before the summary was written or printed. The rows and the dataset file were deleted unread.",
+ "change": "the dataset is written gzip-compressed (level 9, no timestamp), as export_graphs.py writes the earlier one, and the check compares its decompressed content",
+ "resultsSeenBeforeAmendment": "none",
+ "implementationSha256BeforeAmendment": {
+  "runner": "501a507fe6055ef6f2e7688308774814f27c0620739466bb8d47b0f14146f292"
+ },
+ "implementationSha256AfterAmendment": {
+  "runner": "ae46392f99e9e805edbc24be883da550afc2ab13b9dcdeeacaab6958048162b7"
+ }
+}
