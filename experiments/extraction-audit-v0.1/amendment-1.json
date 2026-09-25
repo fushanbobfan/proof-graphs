@@ -1,0 +1,14 @@
+{
+ "amendment": 1,
+ "date": "2026-09-25 America/Los_Angeles",
+ "scope": "the description of the reconstructor and of what it was given; the sample, the comparison, the categories, and the hypothesis are unchanged",
+ "observation": "the registration asks whether the derived graph agrees with 'the graph a person reconstructs by hand'. The reconstructors are two separate language-model agent instances with Lean tool access (one per corpus), not people, so that wording overstates the audit.",
+ "change": "the question reads: does the derived goal-dependency graph agree with the graph an independent reconstructor derives from the proof and Lean's goal display, following the same definition. The reconstructors were given sample.json, the definition (the docstring of scripts/count_linearizations.py and the 'research object' section of docs/design.md), and three statements of Lean semantics that the definition relies on, verbatim: (1) Lean's info tree has one node per tactic invocation; a tactic that runs on several goals (the second tactic of `t <;> s`, the body of `all_goals`) is one node, hence possibly one step, per goal it runs on; (2) almost every tactic that changes a goal (its target or its local context) replaces that goal with a new goal, and a tactic that closes a goal produces no goal, so a step that transforms a goal consumes the old goal and originates the new one; (3) focusing (`·`, `next`, `case tag =>` without new names) and tactic sequences only select or hide goals; they are containers, not steps. They were forbidden to read the experiments' artifacts, the dataset, or the repository's Python scripts, and to run the extractor or any script. A reconstruction by a person remains the stronger check and is left open.",
+ "resultsAbsentAtAmendment": true,
+ "implementationSha256BeforeAmendment": {
+  "runner": "fd3cb01706f5e955df36f851e8cd49cf675e603f03ab7bfefb943fdb0abe3ee2"
+ },
+ "implementationSha256AfterAmendment": {
+  "runner": "36f4b46f2776cc69d201099cd6c716f9c8e590fbe4ce26b5c5502fb1e0f51657"
+ }
+}

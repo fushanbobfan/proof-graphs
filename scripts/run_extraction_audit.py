@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extraction audit v0.1: goal-dependency graphs reconstructed by hand, blind.
+"""Extraction audit v0.1: goal-dependency graphs reconstructed independently, blind.
 
   python scripts/run_extraction_audit.py --register
   python scripts/run_extraction_audit.py --compare
@@ -93,7 +93,7 @@ def draw_sample() -> list[dict[str, Any]]:
 def registration_payload(sample: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "experiment": "extraction-audit-v0.1",
-        "question": "does the derived goal-dependency graph agree with the graph a person reconstructs by hand from "
+        "question": "does the derived goal-dependency graph agree with the graph an independent reconstructor derives from "
                     "the proof and Lean's goal display, following the same definition",
         "sample": {"rule": f"seed {SEED}; for each corpus of linearizations-v0.1 and linearizations-mathlib-v0.1, "
                            f"{PER_STRATUM} proofs drawn uniformly without replacement from each stratum of "
