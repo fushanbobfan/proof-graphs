@@ -47,7 +47,7 @@ stated; one model AND-OR search was abandoned on a REPL timeout.
 (48 and 96 lie between, monotonically; see `report.md`.)
 
 - **H17 not supported**: goal sharing grows steadily with work, from 12.2% to
-  18.1% in the menu arm and from 8.9% to 18.3% in the model arm. That is 2.06
+  18.1% in the menu arm and from 8.9% to 18.3% in the model arm. That is 2.05
   times in the model arm but only 1.48 times in the menu arm, and the
   hypothesis asked for two in both.
 - **H18 not supported**: eight times the budget found no new proof in either

@@ -47,7 +47,7 @@ precisely what exchange and rule permutation quotient in MLL, no more.
    duplicates relative to the graph is the *goal*: every branch that solves
    the first goal differently carries the same remaining goals along and
    attacks each of them again. The revised step therefore drives a
-   best-first whole-state search with a local model as proposer, through
+   breadth-first whole-state search with a local model as proposer, through
    the Lean REPL, on theorems the model can make progress on, and records
    two fractions of the expansions: those whose goal multiset already
    appeared in another order (order redundancy, expected negligible; the
