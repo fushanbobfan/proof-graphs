@@ -17,7 +17,9 @@ earlier experiments keep their registered rule and numbers.
   and C4, and what had been seen before registration (the correction's checks
   and the number of changed graphs; no median or decision under it);
   `amendment-1.json`: the dataset is written compressed (the first run failed
-  writing it, before any result was read);
+  writing it, before any result was read); `amendment-2.json`: the check
+  compares floats within a tolerance of 1e-9, since the logarithms differ in
+  their last digits on Linux (checking only);
 - `library.jsonl`, `slice.jsonl`, `golf.jsonl`: per-proof and per-pair rows;
 - `summary.json`, `report.md`; and `datasets/proof-graphs-v0.2.jsonl.gz`.
 

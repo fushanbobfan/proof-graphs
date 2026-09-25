@@ -1,0 +1,14 @@
+{
+ "amendment": 1,
+ "date": "2026-09-25 America/Los_Angeles",
+ "scope": "the committed-results check only; the pairs, the elaboration, the derivation, the adjustment, the tests, and the hypotheses are unchanged",
+ "observation": "recount-v0.1's check, written the same way, failed on the Linux runner of continuous integration because structure indices differ in their last digits between platforms' math libraries; this runner's check compared recomputed results exactly as well",
+ "change": "the recomputed per-pair results are compared with the committed ones as parsed JSON, floats within a relative and absolute tolerance of 1e-9, everything else exactly",
+ "resultsSeenBeforeAmendment": "none: no pair had been elaborated",
+ "implementationSha256BeforeAmendment": {
+  "runner": "e8f0cd31b5acec1d2f11e0232199c29498659374a64b9d34d6ed2617bc1d5e9a"
+ },
+ "implementationSha256AfterAmendment": {
+  "runner": "f82e9d96c64fbd12fd2451ec3e757142d2b8a1e808be8c0a42a0674d1e624780"
+ }
+}

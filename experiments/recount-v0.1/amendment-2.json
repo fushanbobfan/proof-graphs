@@ -1,0 +1,14 @@
+{
+ "amendment": 2,
+ "date": "2026-09-25 America/Los_Angeles",
+ "scope": "the committed-results check only: the derivation, the inputs, the outputs, the hypotheses, and the decisions are unchanged",
+ "observation": "on the Linux runner of continuous integration, --check-committed failed on the first file it compared (library.jsonl): the check compared the recomputed rows as text, and the base-10 logarithms behind the structure index differ in their last digits between platforms' math libraries, as linearizations-v0.1 amendment 6 had found for its own check",
+ "change": "rows, dataset records, and the summary are compared as parsed JSON, floats within a relative and absolute tolerance of 1e-9 (the tolerance of linearizations-v0.1 amendment 6), everything else exactly; the summary's dataset hash is compared with the committed dataset's",
+ "resultsSeenBeforeAmendment": "all committed results (checking only)",
+ "implementationSha256BeforeAmendment": {
+  "runner": "ae46392f99e9e805edbc24be883da550afc2ab13b9dcdeeacaab6958048162b7"
+ },
+ "implementationSha256AfterAmendment": {
+  "runner": "31183f0491efe4a48fbc0d04e3815904118b69ac7c6833bd76095bdd9d707423"
+ }
+}

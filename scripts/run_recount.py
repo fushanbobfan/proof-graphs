@@ -290,16 +290,36 @@ def main() -> int:
         write_report(summary)
         print(json.dumps({"hypotheses": summary["hypotheses"], "checks": summary["checks"]}))
         return 0
-    for path, text in texts.items():
-        if path.read_text(encoding="utf-8") != text:
+    for path, name in ((LIBRARY, "library"), (SLICE, "slice"), (GOLF, "golf")):
+        if not close(jsonl(path.read_text(encoding="utf-8")), json.loads(json.dumps(rows[name]))):
             raise SystemExit(f"{path.name} does not follow from the committed extractions")
-    if gzip.decompress(DATASET.read_bytes()) != dataset:
+    if not close(jsonl(gzip.decompress(DATASET.read_bytes()).decode("utf-8")), jsonl(dataset.decode("utf-8"))):
         raise SystemExit("the committed dataset does not follow from the committed extractions")
-    summary["datasetSha256"] = sha256_file(DATASET)
-    if json.loads(SUMMARY.read_text(encoding="utf-8")) != summary:
+    committed = json.loads(SUMMARY.read_text(encoding="utf-8"))
+    if committed.get("datasetSha256") != sha256_file(DATASET):
+        raise SystemExit("the summary's dataset hash does not match the committed dataset")
+    summary["datasetSha256"] = committed["datasetSha256"]
+    if not close(committed, json.loads(json.dumps(summary))):
         raise SystemExit("the committed summary does not follow from the committed extractions")
     print(f"recount-check-ok: graphs={summary['checks']['C3']['graphs']}")
     return 0
+
+
+def jsonl(text: str) -> list[Any]:
+    return [json.loads(line) for line in text.splitlines() if line.strip()]
+
+
+def close(a: Any, b: Any) -> bool:
+    """Equal, floats within the relative tolerance of linearizations amendment 6: the logarithms behind the
+    structure index differ in their last digits between platforms' math libraries (amendment 2)."""
+    if isinstance(a, float) or isinstance(b, float):
+        return isinstance(a, (int, float)) and isinstance(b, (int, float)) and not isinstance(a, bool) \
+            and not isinstance(b, bool) and math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-9)
+    if isinstance(a, dict):
+        return isinstance(b, dict) and a.keys() == b.keys() and all(close(a[k], b[k]) for k in a)
+    if isinstance(a, list):
+        return isinstance(b, list) and len(a) == len(b) and all(close(x, y) for x, y in zip(a, b))
+    return a == b
 
 
 if __name__ == "__main__":

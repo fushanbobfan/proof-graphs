@@ -314,13 +314,26 @@ def main() -> int:
 
     extraction = read_gz_lines(EXTRACTION)
     committed = [json.loads(l) for l in RESULTS.read_text(encoding="utf-8").splitlines() if l.strip()]
-    if json.loads(json.dumps(pair_results(pairs, extraction))) != committed:
+    if not close(json.loads(json.dumps(pair_results(pairs, extraction))), committed):
         raise SystemExit("the committed results do not follow from the committed extraction")
     summary = json.loads(SUMMARY.read_text(encoding="utf-8"))
     if json.loads(json.dumps(summarize(committed))) != summary:
         raise SystemExit("the committed summary does not follow from the committed results")
     print(f"golf-v0.2-check-ok: pairs={len(committed)}")
     return 0
+
+
+def close(a: Any, b: Any) -> bool:
+    """Equal, floats within a relative and absolute tolerance of 1e-9: structure indices are ratios of
+    logarithms, whose last digits differ between platforms' math libraries (amendment 1)."""
+    if isinstance(a, float) or isinstance(b, float):
+        return isinstance(a, (int, float)) and isinstance(b, (int, float)) and not isinstance(a, bool) \
+            and not isinstance(b, bool) and math.isclose(a, b, rel_tol=1e-9, abs_tol=1e-9)
+    if isinstance(a, dict):
+        return isinstance(b, dict) and a.keys() == b.keys() and all(close(a[k], b[k]) for k in a)
+    if isinstance(a, list):
+        return isinstance(b, list) and len(a) == len(b) and all(close(x, y) for x, y in zip(a, b))
+    return a == b
 
 
 if __name__ == "__main__":
