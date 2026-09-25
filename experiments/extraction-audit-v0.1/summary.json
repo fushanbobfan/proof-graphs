@@ -1,0 +1,22 @@
+{
+ "experiment": "extraction-audit-v0.1",
+ "preregistrationSha256": "8d27d090c35ea5dd1a26371857dce62accda5f4b4fa666f94b79212ca99fb410",
+ "reconstructionsSha256": "adc40530fbea1788cb76ef78b23f17b9c70be72950d4faa3d44f9cb6bb572ff8",
+ "adjudicationSha256": "bf3cce5a0f73eb57ca696378d7fea67d8c5a9420ebfb3913556828af7716b6f7",
+ "proofs": 30,
+ "agree": 29,
+ "countAgree": 29,
+ "disagreements": 1,
+ "byCategory": {
+  "extractor error": 1,
+  "reconstruction error": 0,
+  "definition gap": 0
+ },
+ "unadjudicated": [],
+ "hypotheses": {
+  "H26": {
+   "supported": false
+  }
+ },
+ "resultsSha256": "5e31db02c465d73ddaed8113a38c24ebd8e82bdc874511868fd5194ae78ec420"
+}

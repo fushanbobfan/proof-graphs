@@ -1,0 +1,11 @@
+{
+ "adjudicator": "the extractor's author, after the comparison; the evidence below is in the committed extraction and the source",
+ "verdicts": [
+  {
+   "module": "ProofNetIR.Sequentialization",
+   "declaration": "ProofNetIR.length_filter_filterMap_eq",
+   "category": "extractor error",
+   "note": "The graphs agree except that the derived one lacks the two `simpa [equation] using ...` steps at lines 245 and 249 and their edges from the `have` steps at 244 and 248. Each `simpa` node closes the goal its `have` created (goal before, none after), but its own internal child node lists that goal before it and leaves it as it was, and the rule counts a goal as consumed only if no later node mentions it, the node's own descendants included. The goal is therefore consumed by no step and the closing step is lost; the reconstruction, which records both steps, is right. The reconstructor's note attributes the difference to `cases h : e with`, but both graphs have two steps for each of those. With later nodes inside the node's own subtree ignored, the derived graph equals the reconstruction; that correction is scripts/count_linearizations_v2.py, and recount-v0.1 applies it to every committed extraction."
+  }
+ ]
+}
