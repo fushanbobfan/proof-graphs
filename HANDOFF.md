@@ -1,7 +1,10 @@
 # Handoff
 
 2026-09-22. The project passes from Bob to Rowling, who will investigate and
-cross-check it (with Codex) and carry it forward. Two public repositories:
+cross-check it (with Codex) and carry it forward. It came back on 2026-09-24
+with one ProofNet-IR commit, `34cd793`, a trust gate over every compiled
+library declaration; the cross-check priorities below were not taken up and
+remain open. Two public repositories:
 
 - [ProofNet-IR](https://github.com/fushanbobfan/proofnet-ir): the Lean 4
   library for MLL proof nets (stable release `v0.10.0`, `main` is
@@ -134,10 +137,10 @@ other option on the table.
 
 ## Logistics
 
-- Both repositories are public; pushing requires a collaborator invitation
-  from Bob, and `main` has no branch protection.
-- While Rowling holds the project, Bob's agents do not push to either
-  repository; resuming is coordinated first.
+- Both repositories are public, Rowling has write access to both, and
+  `main` has no branch protection.
+- Since the handback, Bob's agents push to `main` directly again; if both
+  sides work at the same time, agree first on who pushes to `main`.
 - Outside the repositories there are only Bob's notes to Rowling (a
   two-month summary, the Beyond-MLL design draft, and its results note),
   which he sends separately. They add context, not evidence.
