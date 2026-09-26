@@ -1,0 +1,36 @@
+{
+ "note": "not registered: the error units of search-v0.3 rerun with search_keys.and_or_search, which sets a goal's proof once; the registered summary is unchanged",
+ "resultsSha256": "78a0e7275a125d8eb154c1bb9f7a58ce7d931f9bfb30a237b7afbb3a2c537694",
+ "reruns": [
+  {
+   "module": "Mathlib.ModelTheory.Semantics",
+   "declaration": "FirstOrder.Language.BoundedFormula.realize_ex",
+   "search": "andor",
+   "registeredError": "RecursionError: maximum recursion depth exceeded",
+   "constructed": true,
+   "result": {
+    "proof": [
+     "constructor",
+     "· aesop",
+     "  exact?",
+     "· exact?"
+    ],
+    "expansions": 5,
+    "entangled": 0,
+    "rejected": 0
+   }
+  }
+ ],
+ "analysis": {
+  "proved": {
+   "whole": 103,
+   "andor": 103
+  },
+  "discordant": {
+   "wholeOnly": 2,
+   "andorOnly": 2,
+   "signTestTwoSided": 1.0
+  },
+  "H24WithReruns": true
+ }
+}

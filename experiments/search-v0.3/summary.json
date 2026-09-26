@@ -1,0 +1,72 @@
+{
+ "experiment": "search-v0.3",
+ "preregistrationSha256": "f0aafd5e3fe4f2a58ca1002114670c62af3044eaf9f40440d7c040c772e661f7",
+ "amendmentsSha256": {
+  "amendment-1.json": "da5184c2f10e778f1eb8ef71c4d1fb3431737fe861cd99d85338ba980781daa4"
+ },
+ "tasks": 1347,
+ "constructed": 1171,
+ "abandoned": {
+  "whole": 0,
+  "andor": 0
+ },
+ "errors": {
+  "whole": 0,
+  "andor": 1
+ },
+ "whole": {
+  "expansions": 16095,
+  "orderDuplicates": 728,
+  "orderFraction": 0.04523143833488661,
+  "goalDuplicates": 2400,
+  "goalFraction": 0.14911463187325255,
+  "validPerExpansion": 3.7640882261571917,
+  "proved": 103,
+  "frontierExhausted": 586
+ },
+ "andor": {
+  "expansions": 15875,
+  "proved": 102,
+  "entangled": 2609,
+  "entangledShare": 0.04083517240299886,
+  "picks": 1994
+ },
+ "discordant": {
+  "wholeOnly": 3,
+  "andorOnly": 2,
+  "wholeOnlyWithEntangled": 1,
+  "signTestTwoSided": 1.0
+ },
+ "analyses": {
+  "orderVsOrderings": {
+   "n": 1171,
+   "rho": -0.0052783897430525506,
+   "pValue": 0.8604139586041396
+  },
+  "goalVsOrderings": {
+   "n": 1171,
+   "rho": 0.0521505585783917,
+   "pValue": 0.07849215078492151
+  }
+ },
+ "hypotheses": {
+  "H22": {
+   "supported": true
+  },
+  "H23": {
+   "supported": true
+  },
+  "H24": {
+   "supported": false
+  },
+  "H25": {
+   "supported": false
+  }
+ },
+ "C2": {
+  "compared": 80,
+  "matched": 80,
+  "mismatches": []
+ },
+ "resultsSha256": "78a0e7275a125d8eb154c1bb9f7a58ce7d931f9bfb30a237b7afbb3a2c537694"
+}
