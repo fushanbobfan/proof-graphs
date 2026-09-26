@@ -1,0 +1,244 @@
+{
+ "experiment": "search-v0.4",
+ "preregistrationSha256": "860c788816406be41ac9c65e15faa36296b48ebdbdc6a609b733dabeef3f46ed",
+ "amendmentsSha256": {},
+ "keys": {
+  "tasks": 300,
+  "constructed": {
+   "whole": 258
+  },
+  "abandoned": {
+   "whole": 0
+  },
+  "errors": {
+   "whole": 0
+  },
+  "missing": {
+   "whole": 0
+  },
+  "whole": {
+   "fine": {
+    "expansions": 3417,
+    "undefined": 0,
+    "orderDuplicates": 179,
+    "goalDuplicates": 527,
+    "orderFraction": 0.05238513315774071,
+    "goalFraction": 0.15422885572139303,
+    "bootstrap": {
+     "order": [
+      0.04142809026608286,
+      0.06056633455689565
+     ],
+     "goal": [
+      0.13188901558342836,
+      0.17328398384925975
+     ],
+     "modules": 73
+    }
+   },
+   "default": {
+    "expansions": 3417,
+    "undefined": 0,
+    "orderDuplicates": 181,
+    "goalDuplicates": 543,
+    "orderFraction": 0.05297044190810653,
+    "goalFraction": 0.15891132572431957,
+    "bootstrap": {
+     "order": [
+      0.04186851211072665,
+      0.06125080593165699
+     ],
+     "goal": [
+      0.1343065693430657,
+      0.1810859963626916
+     ],
+     "modules": 73
+    }
+   },
+   "coarse": {
+    "expansions": 3417,
+    "undefined": 0,
+    "orderDuplicates": 179,
+    "goalDuplicates": 956,
+    "orderFraction": 0.05238513315774071,
+    "goalFraction": 0.27977758267486097,
+    "bootstrap": {
+     "order": [
+      0.04104183109707971,
+      0.060814383923849816
+     ],
+     "goal": [
+      0.25227568270481143,
+      0.3087414755114693
+     ],
+     "modules": 73
+    }
+   }
+  },
+  "perTaskGoalDuplicates": {
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 5.0,
+   "max": 14.0,
+   "count": 258
+  },
+  "proved": {
+   "whole": [
+    "DualNumber.commute_eps_left",
+    "ENat.add_left_injective_of_ne_top",
+    "ENat.toNat_eq_iff_eq_coe",
+    "FirstOrder.Language.Formula.realize_graph",
+    "Homeomorph.sumCongr_trans",
+    "IsPiSystem.insert_empty",
+    "IsPiSystem.singleton",
+    "List.filterMap_none",
+    "List.filter_false",
+    "List.filter_true",
+    "Polynomial.natDegree_X_sub_C",
+    "QuadraticAlgebra.C_mul_eq_smul",
+    "RCLike.div_I",
+    "Set.Icc_succ_left_eq_Ioc_of_not_isMax",
+    "Set.Ici_succ_eq_Ioi_of_not_isMax",
+    "Set.Iio_succ_eq_Iic_of_not_isMax",
+    "Set.Ioc_pred_left_eq_Icc_of_not_isMin",
+    "Set.insert_Icc_left_eq_Icc_pred",
+    "Set.insert_Icc_right_eq_Icc_succ",
+    "SkewPolynomial.X_pow_eq_monomial",
+    "SkewPolynomial.coeff_update_same",
+    "isClosed_range_inr"
+   ]
+  },
+  "frontierExhausted": {
+   "whole": 138
+  }
+ },
+ "hammerFree": {
+  "tasks": 135,
+  "constructed": {
+   "whole": 115,
+   "andor": 115
+  },
+  "abandoned": {
+   "whole": 0,
+   "andor": 0
+  },
+  "errors": {
+   "whole": 0,
+   "andor": 0
+  },
+  "missing": {
+   "whole": 0,
+   "andor": 0
+  },
+  "whole": {
+   "fine": {
+    "expansions": 3367,
+    "undefined": 0,
+    "orderDuplicates": 127,
+    "goalDuplicates": 824,
+    "orderFraction": 0.03771903771903772,
+    "goalFraction": 0.24472824472824473,
+    "bootstrap": {
+     "order": [
+      0.023466309084813945,
+      0.05297636001139277
+     ],
+     "goal": [
+      0.16228373702422144,
+      0.3203688853247795
+     ],
+     "modules": 49
+    }
+   },
+   "default": {
+    "expansions": 3367,
+    "undefined": 0,
+    "orderDuplicates": 129,
+    "goalDuplicates": 873,
+    "orderFraction": 0.03831303831303831,
+    "goalFraction": 0.2592812592812593,
+    "bootstrap": {
+     "order": [
+      0.023466309084813945,
+      0.05416666666666667
+     ],
+     "goal": [
+      0.16235392320534223,
+      0.3460376481524518
+     ],
+     "modules": 49
+    }
+   },
+   "coarse": {
+    "expansions": 3367,
+    "undefined": 0,
+    "orderDuplicates": 129,
+    "goalDuplicates": 873,
+    "orderFraction": 0.03831303831303831,
+    "goalFraction": 0.2592812592812593,
+    "bootstrap": {
+     "order": [
+      0.023466309084813945,
+      0.05416666666666667
+     ],
+     "goal": [
+      0.16235392320534223,
+      0.3460376481524518
+     ],
+     "modules": 49
+    }
+   }
+  },
+  "perTaskGoalDuplicates": {
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 1.0,
+   "q3": 6.0,
+   "max": 75.0,
+   "count": 115
+  },
+  "proved": {
+   "whole": [],
+   "andor": []
+  },
+  "andor": {
+   "expansions": 3170,
+   "entangled": 398,
+   "coarseMerges": 1
+  },
+  "discordant": {
+   "wholeOnly": 0,
+   "andorOnly": 0,
+   "signTestAndorMore": null
+  },
+  "frontierExhausted": {
+   "whole": 91,
+   "andor": 95
+  }
+ },
+ "hypotheses": {
+  "H30": {
+   "supported": true
+  },
+  "H31": {
+   "supported": true
+  },
+  "H32": {
+   "supported": false
+  },
+  "H33": {
+   "supported": true
+  }
+ },
+ "C5": {
+  "compared": 258,
+  "matched": 258,
+  "mismatches": []
+ },
+ "C6": {
+  "expansions": 6784,
+  "differing": 0
+ },
+ "resultsSha256": "1ac8aef721bb1028eac9114ace4592b73713bf3cbf32d06a50a0b8f84b3d4e92"
+}
