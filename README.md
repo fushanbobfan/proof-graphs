@@ -28,9 +28,12 @@ whole states proves neither more nor fewer theorems (103 against 102, sign
 test p = 1), at eight times the budget, or with the menu's one-shot provers
 removed, where neither search proves anything at all. With a step-level Lean
 prover (BFS-Prover-V2-7B) as the proposer, searches run deep and the depth
-pays, not one expansion is an order duplicate, and the goal search proves 10
-theorems against 8: its first lead, and not a significant one (p = 0.5, on 47
-theorems, with a sampled proposer). A goal search that treats goals as
+pays and order duplicates all but vanish; the goal search first led by 10
+theorems to 8, but with the prover's draws shared between the two searches the
+lead disappears on the same tasks, and over 169 theorems the two prove 41 and
+39. Most of the goal sharing such a search meets is between goals alike up to
+the names of their hypotheses, which a goal search keyed on printed goals
+cannot merge. A goal search that treats goals as
 independent also loses proofs whose goals share an existential witness
 (HyperTree Proof Search and Aesop handle such goals explicitly; ours
 deliberately does not). Mathlib's
@@ -60,6 +63,8 @@ scripts/search_keys.py            the searches recording three goal identities
 scripts/run_search_keys.py        goal identity, and a menu without hammers
 scripts/step_prover.py            a step-level Lean prover as a proposer
 scripts/run_search_prover.py      both searches with that proposer
+scripts/common_draws.py           the proposer's draws shared by two searches
+scripts/run_search_paired.py      both searches with shared draws
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
@@ -80,6 +85,7 @@ experiments/search-v0.2/          the deeper searches
 experiments/search-v0.3/          every candidate theorem
 experiments/search-v0.4/          goal identity, and no one-shot provers
 experiments/search-v0.5/          a step-level prover as the proposer
+experiments/search-v0.6/          the same, with shared draws
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
 experiments/holdout-v0.1/         the second slice
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
