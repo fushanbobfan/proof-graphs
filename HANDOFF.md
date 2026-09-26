@@ -33,6 +33,7 @@ GitHub.
 | Adjusted for length, golfed proofs branch more; replicated on 479 unseen pairs, where the structure index does not separate the two proofs at all | `experiments/golf-structure-v0.1`, `experiments/recount-v0.1`, `experiments/golf-v0.2` | `python scripts/run_golf_replication.py --check-committed` |
 | The sample's search measures hold on all 1,347 candidate theorems; the two search designs prove 103 and 102 (p = 1) | `experiments/search-v0.3` | `python scripts/run_search_wide.py --check-committed` |
 | Goal sharing is 15.9% of expansions by printed text, 28.0% once hypothesis names are normalized; without one-shot provers neither search proves anything | `experiments/search-v0.4` | `python scripts/run_search_keys.py --check-committed` |
+| With a step-level prover as proposer no expansion is an order duplicate, and the goal search leads 10 to 8 (p = 0.5) | `experiments/search-v0.5` | `python scripts/run_search_prover.py --check-committed` |
 | Every ordering of 41 small proofs' graphs replays as a Lean script | `experiments/orderings-replay-v0.1` | `python scripts/run_orderings_replay.py --check-committed` |
 | A second, disjoint Mathlib slice grows the same way; its 6-to-10-step median is 8, below the first slice's threshold of 10 | `experiments/holdout-v0.1` | `python scripts/run_holdout.py --check-committed` |
 | A blind reconstruction of 30 graphs found one extractor defect, since corrected | `experiments/extraction-audit-v0.1` | `python scripts/run_extraction_audit.py --check-committed` |

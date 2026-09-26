@@ -26,9 +26,13 @@ percent of its expansions, and 28.0 percent once goals that differ only in
 the names of their hypotheses are identified. Searching over goals instead of
 whole states proves neither more nor fewer theorems (103 against 102, sign
 test p = 1), at eight times the budget, or with the menu's one-shot provers
-removed, where neither search proves anything at all; and a goal search that
-treats goals as independent loses proofs whose goals share an existential
-witness (HyperTree Proof Search and Aesop handle such goals explicitly; ours
+removed, where neither search proves anything at all. With a step-level Lean
+prover (BFS-Prover-V2-7B) as the proposer, searches run deep and the depth
+pays, not one expansion is an order duplicate, and the goal search proves 10
+theorems against 8: its first lead, and not a significant one (p = 0.5, on 47
+theorems, with a sampled proposer). A goal search that treats goals as
+independent also loses proofs whose goals share an existential witness
+(HyperTree Proof Search and Aesop handle such goals explicitly; ours
 deliberately does not). Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
@@ -54,6 +58,8 @@ scripts/run_search_deep.py        the same searches at eight times the budget
 scripts/run_search_wide.py        the same searches on every candidate theorem
 scripts/search_keys.py            the searches recording three goal identities
 scripts/run_search_keys.py        goal identity, and a menu without hammers
+scripts/step_prover.py            a step-level Lean prover as a proposer
+scripts/run_search_prover.py      both searches with that proposer
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
@@ -73,6 +79,7 @@ experiments/search-v0.1/          steps 2 and 3 artifacts
 experiments/search-v0.2/          the deeper searches
 experiments/search-v0.3/          every candidate theorem
 experiments/search-v0.4/          goal identity, and no one-shot provers
+experiments/search-v0.5/          a step-level prover as the proposer
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
 experiments/holdout-v0.1/         the second slice
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
