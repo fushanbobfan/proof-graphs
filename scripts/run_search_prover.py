@@ -132,11 +132,24 @@ def registration_payload(task_list: list[dict[str, Any]]) -> dict[str, Any]:
                                                "hand, none from any corpus (a universally quantified identity, a "
                                                "linear inequality, and a list-length equation): 0.3 s for 4 "
                                                "completions and about 1 s for 16, which fixed the sampling "
-                                               "parameters; the server caps n at its parallel slot count, so the "
-                                               "client batches; no task of this corpus was run",
-        "resultsSeenBeforeRegistration": "every earlier search experiment, and holdout-v0.1's counts. Its menu "
-                                         "searches on these tasks, the baseline of H45, were still running and "
-                                         "no summary, proof count, or row of them had been read",
+                                               "parameters; one task outside the corpus was searched end to end "
+                                               "at budget 4 and was proved in one expansion by both searches. A "
+                                               "first launch under the earlier registration was then stopped "
+                                               "after three units because llama.cpp generates the completions of "
+                                               "one request sequentially inside a slot, which made an expansion "
+                                               "cost about 8 s instead of 1; the client now issues the same "
+                                               "number of completions as concurrent single-completion requests "
+                                               "(16 in 1.5 s against 43 s), which changes how the samples are "
+                                               "requested and not what is sampled. Those three units' rows and "
+                                               "their model calls were deleted",
+        "resultsSeenBeforeRegistration": "every earlier search experiment, and holdout-v0.1 in full, including "
+                                         "its menu searches on these tasks, which are the baseline of H45: they "
+                                         "prove 11 of the 169 statable tasks with the whole-state search and 10 "
+                                         "with the AND-OR search. Of this experiment's own units, three were run "
+                                         "under the earlier registration and read before being deleted: "
+                                         "csSup_mem_of_not_isSuccLimit under both searches and "
+                                         "AlgebraicIndependent.matroid_isFlat_iff under the whole-state search, "
+                                         "none of them proved",
         "resultsAbsentAtRegistration": True,
         "registeredLocalDate": time.strftime("%Y-%m-%d") + " America/Los_Angeles",
     }
@@ -336,7 +349,6 @@ def main() -> int:
     if args.develop:
         if not prover.server_alive():
             raise SystemExit("no model server on 127.0.0.1:8080")
-        prover.probe_max_n(MODEL_PATH)
         drawn = {(t["module"], t["declaration"]) for t in tasks()}
         candidates = json.loads((ROOT / "experiments" / "search-v0.3" / "tasks.json").read_text(encoding="utf-8"))
         task = next(t for t in candidates if (t["module"], t["declaration"]) not in drawn)
@@ -370,7 +382,6 @@ def main() -> int:
     if args.run:
         if not prover.server_alive():
             raise SystemExit("no model server on 127.0.0.1:8080")
-        prover.probe_max_n(MODEL_PATH)
         rows = run_all(task_list, args.workers)
         order = {(t["module"], t["declaration"], s): i for i, (t, s) in
                  enumerate((t, s) for t in task_list for s in SEARCHES)}

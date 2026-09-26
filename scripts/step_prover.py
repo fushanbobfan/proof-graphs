@@ -2,8 +2,8 @@
 """A proposer backed by a step-level Lean tactic model served by llama.cpp.
 
 BFS-Prover-V2 is a completion model, not a chat model: the prompt is a Lean tactic state followed by `:::`, and
-the reply echoes the state and then one tactic. `propose` therefore calls `/v1/completions`, strips the echoed
-state, and returns the first line of what follows. Sampling `n` completions at a temperature gives the several
+the reply is one tactic. `propose` therefore calls `/v1/completions`, strips whatever of the prompt the model
+echoed, and returns the first line of what follows. Sampling several completions at a temperature gives the
 candidates an expansion needs; duplicates are dropped, order preserved.
 
   python scripts/step_prover.py --benchmark   # latency and candidates on three fixed states, no Lean
@@ -14,6 +14,7 @@ The model is served by `D:\\ucla\\agent-harness\\scripts\\start-llama-server.ps1
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 import re
 import statistics
@@ -29,57 +30,43 @@ MODEL_LOG: list[dict[str, Any]] | None = None  # prompts and replies, when a run
 CONTROL = re.compile(r"[\x00-\x08\x0b-\x1f]")
 
 
-MAX_N = 4  # llama.cpp caps `n` at its parallel slot count; `probe_max_n` raises this to what the server allows
+# llama.cpp generates the `n` completions of one request one after another inside a single slot, so a request
+# for n costs n times a single completion: measured on this server, 16 completions as two requests of n=8 took
+# 43 s while the same 16 as concurrent single-completion requests took 1.5 s. `complete` therefore asks for one
+# completion per request and issues them together. What is sampled is unchanged: `samples` independent
+# completions of the same prompt at the same temperature.
+MAX_CONCURRENT = 16
 
 
-def probe_max_n(model: str, ceiling: int = 64) -> int:
-    """The largest `n` the server accepts, by doubling until it refuses. Called once by a runner at startup."""
-    global MAX_N
-    found = 1
-    n = 1
-    while n <= ceiling:
-        body = {"model": model, "prompt": "probe:::", "temperature": 0.0, "max_tokens": 1, "n": n}
-        request = urllib.request.Request(ENDPOINT, data=json.dumps(body).encode("utf-8"),
-                                         headers={"Content-Type": "application/json"})
-        try:
-            with urllib.request.urlopen(request, timeout=60) as response:
-                json.loads(response.read().decode("utf-8"))
-            found = n
-        except Exception:  # noqa: BLE001
-            break
-        n *= 2
-    MAX_N = found
-    return found
+def one_completion(prompt: str, temperature: float, max_tokens: int, model: str,
+                   timeout: float = 180.0) -> str | None:
+    body = {"model": model, "prompt": prompt, "temperature": temperature, "max_tokens": max_tokens,
+            "n": 1, "stop": ["\n\n"]}
+    request = urllib.request.Request(ENDPOINT, data=json.dumps(body).encode("utf-8"),
+                                     headers={"Content-Type": "application/json"})
+    started = time.monotonic()
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            reply = json.loads(response.read().decode("utf-8"))
+    except Exception as error:  # noqa: BLE001 - a server failure is recorded as no candidate
+        if MODEL_LOG is not None:
+            MODEL_LOG.append({"model": model, "prompt": prompt, "error": f"{type(error).__name__}: {error}"[:200],
+                              "seconds": round(time.monotonic() - started, 2)})
+        return None
+    text = (reply.get("choices") or [{}])[0].get("text", "")
+    if MODEL_LOG is not None:
+        MODEL_LOG.append({"model": model, "prompt": prompt, "reply": text, "usage": reply.get("usage"),
+                          "seconds": round(time.monotonic() - started, 2)})
+    return text
 
 
 def complete(prompt: str, samples: int, temperature: float, max_tokens: int, model: str,
              timeout: float = 180.0) -> list[str]:
-    """The model's `samples` completions of one prompt, in the order returned, in batches of at most `MAX_N`."""
-    texts: list[str] = []
-    remaining = samples
-    while remaining > 0:
-        batch = min(remaining, MAX_N)
-        remaining -= batch
-        body = {"model": model, "prompt": prompt, "temperature": temperature, "max_tokens": max_tokens,
-                "n": batch, "stop": ["\n\n"]}
-        request = urllib.request.Request(ENDPOINT, data=json.dumps(body).encode("utf-8"),
-                                         headers={"Content-Type": "application/json"})
-        started = time.monotonic()
-        try:
-            with urllib.request.urlopen(request, timeout=timeout) as response:
-                reply = json.loads(response.read().decode("utf-8"))
-        except Exception as error:  # noqa: BLE001 - a server failure is recorded as no candidate
-            if MODEL_LOG is not None:
-                MODEL_LOG.append({"model": model, "prompt": prompt, "n": batch,
-                                  "error": f"{type(error).__name__}: {error}"[:200],
-                                  "seconds": round(time.monotonic() - started, 2)})
-            continue
-        batch_texts = [choice.get("text", "") for choice in reply.get("choices", [])]
-        texts += batch_texts
-        if MODEL_LOG is not None:
-            MODEL_LOG.append({"model": model, "prompt": prompt, "n": batch, "replies": batch_texts,
-                              "usage": reply.get("usage"), "seconds": round(time.monotonic() - started, 2)})
-    return texts
+    """The model's `samples` completions of one prompt, as concurrent single-completion requests."""
+    with concurrent.futures.ThreadPoolExecutor(max_workers=min(samples, MAX_CONCURRENT)) as pool:
+        futures = [pool.submit(one_completion, prompt, temperature, max_tokens, model, timeout)
+                   for _ in range(samples)]
+        return [text for text in (f.result() for f in futures) if text is not None]
 
 
 def tactic_of(text: str, prompt: str = "") -> str | None:
