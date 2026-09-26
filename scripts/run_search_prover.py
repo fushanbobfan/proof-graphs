@@ -176,11 +176,22 @@ def run_all(task_list: list[dict[str, Any]], workers: int) -> list[dict[str, Any
     if RESULTS.exists():
         rows = [json.loads(l) for l in RESULTS.read_text(encoding="utf-8").splitlines() if l.strip()]
     done = {unit_key(r) for r in rows if not r.get("error")}
+    # The model calls are flushed as units complete, not only at the end, so a run that dies keeps its log.
     calls: list[dict[str, Any]] = []
     if CALLS.exists():
         calls = [json.loads(l) for l in gzip.decompress(CALLS.read_bytes()).decode("utf-8").splitlines() if l.strip()]
     prover.MODEL_LOG = calls
+    flushed = len(calls)
     lock = threading.Lock()
+
+    def flush() -> None:
+        nonlocal flushed
+        if len(calls) == flushed:
+            return
+        CALLS.write_bytes(gzip.compress(
+            "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in calls).encode("utf-8"),
+            compresslevel=6, mtime=0))
+        flushed = len(calls)
 
     def guarded(task: dict[str, Any], search: str) -> dict[str, Any]:
         started = time.monotonic()
@@ -196,6 +207,7 @@ def run_all(task_list: list[dict[str, Any]], workers: int) -> list[dict[str, Any
             rows.append(row)
             with RESULTS.open("a", encoding="utf-8", newline="\n") as handle:
                 handle.write(json.dumps(row, separators=(",", ":"), ensure_ascii=False) + "\n")
+            flush()
             result = row.get("result") or {}
             print(json.dumps({"unit": [row["declaration"], row["search"]],
                               "expansions": len(result.get("expansions", [])), "proof": bool(result.get("proof")),
@@ -210,7 +222,7 @@ def run_all(task_list: list[dict[str, Any]], workers: int) -> list[dict[str, Any
                 record(future.result())
             except Exception as error:  # noqa: BLE001
                 print(json.dumps({"recordError": f"{type(error).__name__}: {error}"[:300]}), flush=True)
-    CALLS.write_bytes(gzip.compress(
+    CALLS.write_bytes(gzip.compress(  # the final write uses the strongest compression, as the other runners do
         "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in calls).encode("utf-8"), compresslevel=9, mtime=0))
     latest = {unit_key(r): r for r in rows}
     return list(latest.values())

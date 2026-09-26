@@ -26,7 +26,7 @@
   "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
   "prover": "eae34ab14a1b2baf793edd01d944a3451857faf3928918debfe970bb7c5e11db",
   "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
-  "runner": "c7b533840e8ffe643f7277a54983723c90e404ff025db62b46afa073a2ad437e"
+  "runner": "d7ab51de745e42b35b68d91754173f6f4eef93572991473b1ad10c09ec7df3f3"
  },
  "measures": {
   "entangled": "candidates the AND-OR search discarded as entangled",
