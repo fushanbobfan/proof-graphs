@@ -107,6 +107,13 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed step-prover search
+        run: |
+          if test -f experiments/search-v0.5/summary.json; then
+            python scripts/run_search_prover.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
       - name: Check the committed holdout slice
         run: |
           if test -f experiments/holdout-v0.1/summary.json; then

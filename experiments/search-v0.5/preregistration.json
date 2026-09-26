@@ -1,0 +1,56 @@
+{
+ "analyses": {
+  "bootstrap": "95% percentile intervals of every fraction, resampling modules with replacement (2,000 resamples, seed 0)",
+  "byKey": "the duplicate fractions under all three keys, as search-v0.4",
+  "discordant": "tasks proved by exactly one search at the full budget, with a two-sided sign test"
+ },
+ "budget": {
+  "baselineCheckpoint": 24,
+  "expansionsPerSearch": 48,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "developmentChecksBeforeRegistration": "the proposer was benchmarked on three fixed goals written by hand, none from any corpus (a universally quantified identity, a linear inequality, and a list-length equation): 0.3 s for 4 completions and about 1 s for 16, which fixed the sampling parameters; the server caps n at its parallel slot count, so the client batches; no task of this corpus was run",
+ "execution": "every (task, search) unit in a fresh REPL, resumable; an exception raised by a unit is recorded as an error row and the unit is run again on the next resume; every prompt and reply is committed",
+ "experiment": "search-v0.5",
+ "hypotheses": {
+  "H45": "at 24 expansions the whole-state search with this proposer proves more tasks than holdout-v0.1's menu whole-state search on the same tasks (one-sided sign test on the tasks proved by exactly one of them, alpha 0.05)",
+  "H46": "at 48 expansions the AND-OR search proves at least as many tasks as the whole-state search",
+  "H47": "the whole-state goal-duplicate fraction under the default key is at least 2 times its order-duplicate fraction",
+  "H48": "the whole-state order-duplicate fraction under the default key is below 5%",
+  "H49": "at least one search finds a proof after expansion 24, so that the budget beyond the baseline is used"
+ },
+ "implementationSha256": {
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "holdoutRunner": "fa4d15134cffccad7d53a05141d147a5a6be36ea084d61a1fd0b0a40aaeb4aff",
+  "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "prover": "eae34ab14a1b2baf793edd01d944a3451857faf3928918debfe970bb7c5e11db",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "c7b533840e8ffe643f7277a54983723c90e404ff025db62b46afa073a2ad437e"
+ },
+ "measures": {
+  "entangled": "candidates the AND-OR search discarded as entangled",
+  "modelSeconds": "wall clock spent in the model, per unit",
+  "orderFraction[key]/goalFraction[key]": "as search-v0.4, under the fine, default, and coarse keys",
+  "proved": "tasks with a proof that re-verifies from the statement, per search, at the baseline checkpoint and at the full budget",
+  "provedAfterBaseline": "tasks whose proof was found after expansion 24"
+ },
+ "proposer": {
+  "endpoint": "/v1/completions (the model is a completion model, not a chat model)",
+  "model": "BFS-Prover-V2-7B.Q8_0.gguf",
+  "prompt": "the first goal of the state being expanded, pretty-printed by Lean, followed by ':::' as the model's card specifies; the reply's first line is the tactic",
+  "quantization": "Q8_0 GGUF of ByteDance-Seed/BFS-Prover-V2-7B (Apache-2.0), base Qwen2.5-Math-7B, served by llama.cpp",
+  "sampling": "16 completions at temperature 1.0, at most 64 tokens each, duplicates dropped, order preserved; no menu is appended, so the proposer is the model alone"
+ },
+ "question": "with a proposer trained to propose Lean tactics, does a search over goals prove more than a search over whole states, and do the redundancy measures change",
+ "registeredLocalDate": "2026-09-25 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier search experiment, and holdout-v0.1's counts. Its menu searches on these tasks, the baseline of H45, were still running and no summary, proof count, or row of them had been read",
+ "searches": "those of search-v0.4 (search_keys.py): breadth-first whole-state with exact-state deduplication, and breadth-first AND-OR over canonical goals with the entanglement rule and a goal's proof set once; closing candidates verified inside the search, sorry refused",
+ "tasks": {
+  "count": 200,
+  "rule": "the holdout slice's search tasks, unchanged, so that holdout-v0.1's menu searches on the same theorems are the baseline",
+  "source": "holdout-v0.1/tasks.json",
+  "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
+ }
+}
