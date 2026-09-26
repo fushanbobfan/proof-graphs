@@ -1,0 +1,106 @@
+{
+ "experiment": "golf-v0.2",
+ "preregistrationSha256": "ee15be40f91e0dd5ff1b6360179a4afa1c929ab28bd934241ac68029d633d7e8",
+ "pairs": 511,
+ "ok": 479,
+ "commits": 84,
+ "excluded": {
+  "before fails": 28,
+  "original fails": 4
+ },
+ "steps": {
+  "before": {
+   "min": 0,
+   "q1": 3.0,
+   "median": 8,
+   "q3": 15.0,
+   "max": 179,
+   "count": 479
+  },
+  "after": {
+   "min": 0,
+   "q1": 1.0,
+   "median": 4,
+   "q3": 9.0,
+   "max": 179,
+   "count": 479
+  }
+ },
+ "eligible": 261,
+ "H40": {
+  "pairs": 198,
+  "golfedHigher": 137,
+  "pValue": 3.427202452158066e-08,
+  "supported": true
+ },
+ "H41": {
+  "pairsDiffering": 409,
+  "golfedFewer": 356,
+  "pValue": 1.6161042753469925e-56,
+  "supported": true
+ },
+ "H42": {
+  "pairsDiffering": 202,
+  "golfedLower": 103,
+  "pValue": 0.4164454120223839,
+  "supported": false
+ },
+ "H43": {
+  "pairs": 224,
+  "golfedLower": 84,
+  "pValue": 0.00022221771173715923,
+  "supported": false
+ },
+ "structureTests": {
+  "depth": {
+   "pairs": 174,
+   "golfedLower": 108,
+   "pValue": 0.001800199793547577,
+   "unadjusted": {
+    "pairs": 182,
+    "golfedLower": 174
+   },
+   "holm": 0.003600399587095154
+  },
+  "width": {
+   "pairs": 103,
+   "golfedLower": 38,
+   "pValue": 0.010063333265586337,
+   "unadjusted": {
+    "pairs": 65,
+    "golfedLower": 57
+   },
+   "holm": 0.010063333265586337
+  },
+  "branching": {
+   "pairs": 198,
+   "golfedLower": 61,
+   "pValue": 6.854404904316132e-08,
+   "unadjusted": {
+    "pairs": 197,
+    "golfedLower": 62
+   },
+   "holm": 2.0563214712948394e-07
+  }
+ },
+ "hypotheses": {
+  "H40": {
+   "supported": true
+  },
+  "H41": {
+   "supported": true
+  },
+  "H42": {
+   "supported": false
+  },
+  "H43": {
+   "supported": false
+  },
+  "H44": {
+   "supported": true
+  }
+ },
+ "extractionSha256": "077d029dbd07437989019eaaa38ce0f5665fc5bdc6918c80f9565df1d6f4c1b6",
+ "resultsSha256": "16664aecf1437547bd2b8214ea3b55c7ede17e2a34d73c3d4e8be56f4bdfe0ee",
+ "pairsSha256": "555c6b3201df6b965498fe4df869a6e442a13035dd73c325eff63fb7e5833bc6"
+}
