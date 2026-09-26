@@ -1,0 +1,276 @@
+{
+ "experiment": "search-v0.6",
+ "preregistrationSha256": "0c811dec14a6d5b8e2448f182ce893796f6f05fa8dd0b609b500112f8844c452",
+ "amendmentsSha256": {},
+ "test": {
+  "tasks": 140,
+  "stated": {
+   "whole": 122,
+   "andor": 122
+  },
+  "abandoned": {
+   "whole": 0,
+   "andor": 0
+  },
+  "errors": {
+   "whole": 0,
+   "andor": 0
+  },
+  "missing": {
+   "whole": 0,
+   "andor": 0
+  },
+  "proved": {
+   "whole": 30,
+   "andor": 32
+  },
+  "provedTasks": {
+   "whole": [
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MultilinearMap.map_update_sub",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.neighborFinset_boxProd",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "andor": [
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MultilinearMap.map_update_sub",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.neighborFinset_boxProd",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ]
+  },
+  "discordant": {
+   "wholeOnly": 0,
+   "andorOnly": 2,
+   "signTestAndorMore": 0.25,
+   "signTestTwoSided": 0.5
+  },
+  "bothProved": 30,
+  "expansionsToProof": {
+   "differing": 10,
+   "andorFewer": 6,
+   "signTestAndorFewer": 0.376953125
+  },
+  "entangled": 142,
+  "draws": {
+   "whole": {
+    "drawn": 2050,
+    "shared": 1230
+   },
+   "andor": {
+    "drawn": 2236,
+    "shared": 1149
+   }
+  }
+ },
+ "replication": {
+  "tasks": 60,
+  "stated": {
+   "whole": 47,
+   "andor": 47
+  },
+  "abandoned": {
+   "whole": 0,
+   "andor": 0
+  },
+  "errors": {
+   "whole": 0,
+   "andor": 0
+  },
+  "missing": {
+   "whole": 0,
+   "andor": 0
+  },
+  "proved": {
+   "whole": 9,
+   "andor": 9
+  },
+  "provedTasks": {
+   "whole": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "ContinuousOn.le_sSup_image_Icc",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.subsingleton_iff"
+   ],
+   "andor": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "ContinuousOn.le_sSup_image_Icc",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.subsingleton_iff"
+   ]
+  },
+  "discordant": {
+   "wholeOnly": 0,
+   "andorOnly": 0,
+   "signTestAndorMore": null,
+   "signTestTwoSided": null
+  },
+  "bothProved": 9,
+  "expansionsToProof": {
+   "differing": 4,
+   "andorFewer": 1,
+   "signTestAndorFewer": 0.9375
+  },
+  "entangled": 58,
+  "draws": {
+   "whole": {
+    "drawn": 1098,
+    "shared": 373
+   },
+   "andor": {
+    "drawn": 837,
+    "shared": 681
+   }
+  }
+ },
+ "whole": {
+  "fine": {
+   "expansions": 4751,
+   "undefined": 0,
+   "orderDuplicates": 5,
+   "goalDuplicates": 226,
+   "orderFraction": 0.0010524100189433804,
+   "goalFraction": 0.047568932856240795,
+   "bootstrap": {
+    "order": [
+     0.00018681113394358303,
+     0.0023965141612200436
+    ],
+    "goal": [
+     0.031067961165048542,
+     0.06461086637298091
+    ],
+    "modules": 71
+   }
+  },
+  "default": {
+   "expansions": 4751,
+   "undefined": 0,
+   "orderDuplicates": 5,
+   "goalDuplicates": 233,
+   "orderFraction": 0.0010524100189433804,
+   "goalFraction": 0.049042306882761524,
+   "bootstrap": {
+    "order": [
+     0.00018681113394358303,
+     0.0023965141612200436
+    ],
+    "goal": [
+     0.033651551312649165,
+     0.06580414900736115
+    ],
+    "modules": 71
+   }
+  },
+  "coarse": {
+   "expansions": 4751,
+   "undefined": 0,
+   "orderDuplicates": 8,
+   "goalDuplicates": 1241,
+   "orderFraction": 0.0016838560303094085,
+   "goalFraction": 0.261208166701747,
+   "bootstrap": {
+    "order": [
+     0.0005151098901098901,
+     0.003277972027972028
+    ],
+    "goal": [
+     0.2233879781420765,
+     0.29573982502852797
+    ],
+    "modules": 71
+   }
+  }
+ },
+ "searchSeconds": {
+  "min": 0.0,
+  "q1": 31.800000000000004,
+  "median": 360.8,
+  "q3": 1414.475,
+  "max": 2470.2,
+  "count": 338
+ },
+ "C7": {
+  "draws": 6221,
+  "repeated": 0
+ },
+ "hypotheses": {
+  "H50": {
+   "supported": false
+  },
+  "H51": {
+   "supported": false
+  },
+  "H52": {
+   "supported": true
+  },
+  "H53": {
+   "supported": true
+  }
+ },
+ "resultsSha256": "34347dac6811903aa0c8e6b728e97c8b0709e91f4cdf5f2e2f6c3b0cc9fa0abb",
+ "drawsSha256": "f86a6e35346e930f0d51a5848aa5c7dadd5d554e6ef69f0e9801300190f09f9b"
+}
