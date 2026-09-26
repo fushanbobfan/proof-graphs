@@ -1,0 +1,56 @@
+{
+ "analyses": {
+  "bootstrap": "95% percentile intervals of the duplicate fractions, resampling modules (2,000 resamples, seed 0)",
+  "discordant": "tasks proved by exactly one search, per set, with a two-sided sign test"
+ },
+ "budget": {
+  "expansionsPerSearch": 48,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C7": "within a task, no goal is drawn twice for the same occurrence"
+ },
+ "developmentChecksBeforeRegistration": "the runner's --develop mode ran both searches with shared draws at 4 expansions on AddConstMapClass.map_const_add, outside the corpus",
+ "draws": "shared by the two searches of a task (common random numbers): the n-th time a search expands a goal it gets the n-th set of candidates drawn for that goal in this task, whichever search drew it first; goals identified by canonical_goal; so both searches see identical candidates the first time each meets a goal, the AND-OR search (which expands a goal once) only ever uses the first set, and the whole-state search draws afresh on each later expansion of a goal",
+ "execution": "each unit is one task: the two searches in turn, each in a fresh REPL, whole-state first on tasks of even index and AND-OR first on odd; a unit that raises is recorded as two error rows and run again, both searches with fresh draws, on the next resume; every draw is committed",
+ "experiment": "search-v0.6",
+ "hypotheses": {
+  "H50": "on the test set, the AND-OR search proves more tasks than the whole-state search (one-sided sign test on the tasks proved by exactly one of them, alpha 0.05)",
+  "H51": "on the test set, among the tasks both searches prove with different numbers of expansions, the AND-OR search needs fewer in more than half (one-sided sign test, alpha 0.05)",
+  "H52": "over all tasks, the whole-state search's order-duplicate fraction under the default key is below 1%",
+  "H53": "on the replication set, the AND-OR search proves at least as many tasks as the whole-state search (H46 of search-v0.5, under shared draws)"
+ },
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "d220693dcaedbb815f1c755988b60829913f854df270096ae9bb136b9847fa2d"
+ },
+ "measures": {
+  "draws": "per search, the expansions that drew candidates and those that used a set already drawn",
+  "entangled": "candidates the AND-OR search discarded as entangled",
+  "expansionsToProof": "the expansion at which a search completed its proof",
+  "orderFraction[key]/goalFraction[key]": "as search-v0.4, whole-state search, all tasks",
+  "proved": "tasks with a proof that re-verifies from the statement, per search and set"
+ },
+ "power": "at search-v0.5's rates about a fifth of the statable tasks are proved, so the test set may yield only a handful of discordant tasks and H50 has little power; the decision is reported whichever way it comes out",
+ "proposer": "as search-v0.5: BFS-Prover-V2-7B in Q8_0, the first goal pretty-printed and followed by ':::', 16 completions at temperature 1.0, at most 64 tokens each, duplicates dropped in order, no menu",
+ "question": "with a step-level prover as the proposer and its draws shared between the two searches, does a search over goals prove more than a search over whole states",
+ "registeredLocalDate": "2026-09-26 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier experiment, including search-v0.5 in full: on the replication set its AND-OR search proved 10 tasks and its whole-state search 8, with 2 proved by the AND-OR search alone; no model search had run on the test set",
+ "searches": "those of search-v0.4 and v0.5 (search_keys.py), unchanged",
+ "tasks": {
+  "count": 200,
+  "executionOrder": "the test set first, then the replication set",
+  "sets": {
+   "replication": "the first 60, which search-v0.5 ran",
+   "test": "the 140 tasks after the first 60 of the draw's seeded random order, which no model search has run"
+  },
+  "source": "holdout-v0.1/tasks.json",
+  "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
+ }
+}
