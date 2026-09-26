@@ -56,6 +56,10 @@ SAMPLES = 16
 TEMPERATURE = 1.0
 MAX_TOKENS = 64
 BUDGET = 48
+# The model server sustains about two completions a second on real Mathlib goals, which are prefill-bound
+# (about 180 prompt tokens for 13 generated), so all 200 drawn tasks would take some fifteen hours. The
+# experiment takes the first 60 of the draw's random order.
+TASK_LIMIT = 60
 BASELINE_BUDGET = 24  # holdout-v0.1's budget, the checkpoint the two proposers are compared at
 SEARCHES = ("whole", "andor")
 ORDER_CEILING = 0.05
@@ -76,7 +80,8 @@ def expected_implementation_hashes(prereg: dict[str, Any]) -> dict[str, str]:
 
 
 def tasks() -> list[dict[str, Any]]:
-    return json.loads(holdout.TASKS.read_text(encoding="utf-8"))
+    """The first TASK_LIMIT of holdout-v0.1's tasks, which are already in a seeded random order."""
+    return json.loads(holdout.TASKS.read_text(encoding="utf-8"))[:TASK_LIMIT]
 
 
 def registration_payload(task_list: list[dict[str, Any]]) -> dict[str, Any]:
@@ -86,8 +91,9 @@ def registration_payload(task_list: list[dict[str, Any]]) -> dict[str, Any]:
                     "search over whole states, and do the redundancy measures change",
         "tasks": {"source": "holdout-v0.1/tasks.json", "sourceSha256": sha256_file(holdout.TASKS),
                   "count": len(task_list),
-                  "rule": "the holdout slice's search tasks, unchanged, so that holdout-v0.1's menu searches on "
-                          "the same theorems are the baseline"},
+                  "rule": f"the first {TASK_LIMIT} of holdout-v0.1's search tasks, which its own registration "
+                          "drew in a seeded random order, so that its menu searches on the same theorems are "
+                          "the baseline; the remaining tasks are not run, for compute"},
         "proposer": {"model": MODEL, "quantization": "Q8_0 GGUF of ByteDance-Seed/BFS-Prover-V2-7B (Apache-2.0), "
                                                     "base Qwen2.5-Math-7B, served by llama.cpp",
                      "prompt": "the first goal of the state being expanded, pretty-printed by Lean, followed by "
@@ -140,16 +146,27 @@ def registration_payload(task_list: list[dict[str, Any]]) -> dict[str, Any]:
                                                "cost about 8 s instead of 1; the client now issues the same "
                                                "number of completions as concurrent single-completion requests "
                                                "(16 in 1.5 s against 43 s), which changes how the samples are "
-                                               "requested and not what is sampled. Those three units' rows and "
-                                               "their model calls were deleted",
+                                               "requested and not what is sampled. A second launch, of nine "
+                                               "units, then established the server's sustained rate: about two "
+                                               "completions a second on real goals, which are prefill-bound, "
+                                               "whatever the concurrency (measured at 4, 16 and 64 concurrent "
+                                               "requests on synthetic prompts, and at 4 and 8 worker processes "
+                                               "on the corpus). All 200 drawn tasks would therefore take some "
+                                               "fifteen hours, so the experiment was cut to the first 60 of the "
+                                               "draw. Every row and model call of both launches was deleted",
         "resultsSeenBeforeRegistration": "every earlier search experiment, and holdout-v0.1 in full, including "
-                                         "its menu searches on these tasks, which are the baseline of H45: they "
-                                         "prove 11 of the 169 statable tasks with the whole-state search and 10 "
-                                         "with the AND-OR search. Of this experiment's own units, three were run "
-                                         "under the earlier registration and read before being deleted: "
-                                         "csSup_mem_of_not_isSuccLimit under both searches and "
-                                         "AlgebraicIndependent.matroid_isFlat_iff under the whole-state search, "
-                                         "none of them proved",
+                                         "the menu baseline of H45: on all 200 of its tasks the whole-state "
+                                         "search proves 11 of 169 statable and the AND-OR search 10; on the 60 "
+                                         "this experiment keeps, the whole-state search proves 3 of 47 statable. "
+                                         "Of this experiment's own units, twelve were run under the two earlier "
+                                         "registrations and their outcomes read before deletion: "
+                                         "csSup_mem_of_not_isSuccLimit, AlgebraicIndependent.matroid_isFlat_iff, "
+                                         "SimpleGraph.boxProdFintypeNeighborSet, "
+                                         "IsLocalRing.maximalIdeal_sq_lt_maximalIdeal, "
+                                         "WeierstrassCurve.integralModel_c6_eq and "
+                                         "ProbabilityTheory.Kernel.HasSubgaussianMGF.prodMkLeft_compProd, under "
+                                         "one or both searches; none was proved, and four of them could not be "
+                                         "stated in context at all",
         "resultsAbsentAtRegistration": True,
         "registeredLocalDate": time.strftime("%Y-%m-%d") + " America/Los_Angeles",
     }
@@ -258,8 +275,9 @@ def summarize(rows: list[dict[str, Any]], task_list: list[dict[str, Any]]) -> di
     at_baseline = {s: {u["declaration"] for u in ran[s] if u["result"]["proof"]
                        and len(u["result"]["expansions"]) <= BASELINE_BUDGET} for s in SEARCHES}
     baseline_rows = [json.loads(l) for l in holdout.SEARCHES.read_text(encoding="utf-8").splitlines() if l.strip()]
-    menu_proved = {r["declaration"] for r in baseline_rows
-                   if r["search"] == "whole" and (r.get("result") or {}).get("proof")}
+    here = {t["declaration"] for t in task_list}  # the baseline is the menu on these tasks, not on all 200
+    menu_proved = {r["declaration"] for r in baseline_rows if r["declaration"] in here
+                   and r["search"] == "whole" and (r.get("result") or {}).get("proof")}
     model_only = at_baseline["whole"] - menu_proved
     menu_only = menu_proved - at_baseline["whole"]
     p45 = sign_upper(len(model_only), len(model_only) + len(menu_only))

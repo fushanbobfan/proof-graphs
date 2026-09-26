@@ -10,7 +10,7 @@
   "heartbeats": 40000,
   "tacticWallClockSeconds": 60
  },
- "developmentChecksBeforeRegistration": "the proposer was benchmarked on three fixed goals written by hand, none from any corpus (a universally quantified identity, a linear inequality, and a list-length equation): 0.3 s for 4 completions and about 1 s for 16, which fixed the sampling parameters; one task outside the corpus was searched end to end at budget 4 and was proved in one expansion by both searches. A first launch under the earlier registration was then stopped after three units because llama.cpp generates the completions of one request sequentially inside a slot, which made an expansion cost about 8 s instead of 1; the client now issues the same number of completions as concurrent single-completion requests (16 in 1.5 s against 43 s), which changes how the samples are requested and not what is sampled. Those three units' rows and their model calls were deleted",
+ "developmentChecksBeforeRegistration": "the proposer was benchmarked on three fixed goals written by hand, none from any corpus (a universally quantified identity, a linear inequality, and a list-length equation): 0.3 s for 4 completions and about 1 s for 16, which fixed the sampling parameters; one task outside the corpus was searched end to end at budget 4 and was proved in one expansion by both searches. A first launch under the earlier registration was then stopped after three units because llama.cpp generates the completions of one request sequentially inside a slot, which made an expansion cost about 8 s instead of 1; the client now issues the same number of completions as concurrent single-completion requests (16 in 1.5 s against 43 s), which changes how the samples are requested and not what is sampled. A second launch, of nine units, then established the server's sustained rate: about two completions a second on real goals, which are prefill-bound, whatever the concurrency (measured at 4, 16 and 64 concurrent requests on synthetic prompts, and at 4 and 8 worker processes on the corpus). All 200 drawn tasks would therefore take some fifteen hours, so the experiment was cut to the first 60 of the draw. Every row and model call of both launches was deleted",
  "execution": "every (task, search) unit in a fresh REPL, resumable; an exception raised by a unit is recorded as an error row and the unit is run again on the next resume; every prompt and reply is committed",
  "experiment": "search-v0.5",
  "hypotheses": {
@@ -26,7 +26,7 @@
   "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
   "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
   "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
-  "runner": "45f5ca06b1756927fd115f9ecd2ac1892ef28bd56ed09d044c3a8e88f400bc21"
+  "runner": "d09abc98fd09f817188fc4ceac6c7ed0cf7d9ee657e91277fd54b9cc3c03c5f6"
  },
  "measures": {
   "entangled": "candidates the AND-OR search discarded as entangled",
@@ -45,11 +45,11 @@
  "question": "with a proposer trained to propose Lean tactics, does a search over goals prove more than a search over whole states, and do the redundancy measures change",
  "registeredLocalDate": "2026-09-25 America/Los_Angeles",
  "resultsAbsentAtRegistration": true,
- "resultsSeenBeforeRegistration": "every earlier search experiment, and holdout-v0.1 in full, including its menu searches on these tasks, which are the baseline of H45: they prove 11 of the 169 statable tasks with the whole-state search and 10 with the AND-OR search. Of this experiment's own units, three were run under the earlier registration and read before being deleted: csSup_mem_of_not_isSuccLimit under both searches and AlgebraicIndependent.matroid_isFlat_iff under the whole-state search, none of them proved",
+ "resultsSeenBeforeRegistration": "every earlier search experiment, and holdout-v0.1 in full, including the menu baseline of H45: on all 200 of its tasks the whole-state search proves 11 of 169 statable and the AND-OR search 10; on the 60 this experiment keeps, the whole-state search proves 3 of 47 statable. Of this experiment's own units, twelve were run under the two earlier registrations and their outcomes read before deletion: csSup_mem_of_not_isSuccLimit, AlgebraicIndependent.matroid_isFlat_iff, SimpleGraph.boxProdFintypeNeighborSet, IsLocalRing.maximalIdeal_sq_lt_maximalIdeal, WeierstrassCurve.integralModel_c6_eq and ProbabilityTheory.Kernel.HasSubgaussianMGF.prodMkLeft_compProd, under one or both searches; none was proved, and four of them could not be stated in context at all",
  "searches": "those of search-v0.4 (search_keys.py): breadth-first whole-state with exact-state deduplication, and breadth-first AND-OR over canonical goals with the entanglement rule and a goal's proof set once; closing candidates verified inside the search, sorry refused",
  "tasks": {
-  "count": 200,
-  "rule": "the holdout slice's search tasks, unchanged, so that holdout-v0.1's menu searches on the same theorems are the baseline",
+  "count": 60,
+  "rule": "the first 60 of holdout-v0.1's search tasks, which its own registration drew in a seeded random order, so that its menu searches on the same theorems are the baseline; the remaining tasks are not run, for compute",
   "source": "holdout-v0.1/tasks.json",
   "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
  }
