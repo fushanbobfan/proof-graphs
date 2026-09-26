@@ -1,0 +1,73 @@
+{
+ "analyses": {
+  "bootstrap": "95% percentile intervals of the whole-state duplicate fractions, resampling modules (2,000 resamples, seed 0)",
+  "expansionsToProof": "for each hypothesis's pair, among tasks both prove with different numbers of expansions, how often the first needs fewer",
+  "perSet": "the four counts on search-v0.6's test and replication sets"
+ },
+ "budget": {
+  "expansionsPerSearch": 48,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C8": "the whole and andor searches replay search-v0.6: on every task they reach the same outcome (proved or not, and after the same number of expansions) and draw nothing new; proofs found with a different script are counted, since the AND-OR search's choice between proofs completing at once depends on string hashing",
+  "C9": "within a task, no goal has two sets for the same occurrence, seeded sets included"
+ },
+ "decisionRule": "H54 to H57 are one family, decided by Holm's step-down procedure at family-wise alpha 0.05; H58 is a count comparison",
+ "developmentChecksBeforeRegistration": [
+  "scripts/test_renaming.py: 11 cases of the renaming step on printed goals",
+  "scripts/check_renaming_repl.py: 6 cases in a full-Mathlib REPL with a fixed proposer (rename', rename_i, no step, a swap, a merged goal behind pick_goal, and the whole-state search dropping two states alike up to renaming), every proof verified from the statement",
+  "the four searches with the prover, outside the corpus: at 4 expansions on AddConstMapClass.map_const_add; at 16 expansions on the first 8 tasks of search-v0.3's list, stopped after 2 (AddConstMapClass.map_const_add and map_nsmul_add, which all four proved at the first expansion), then --develop 6 --budget 16 on six theorems of the first slice that neither of search-v0.3's menu searches proved, drawn with seed 7: all four proved the same three (at expansions 1, 4, and 1) and none proved the other three; the renaming AND-OR search merged 16 goals by a renaming on two of them (15 checks, none refused), the renaming whole-state search dropped 7 states, and no verifier rejected a proof",
+  "--replay-check 6: the two replays on the first six stated tasks of the execution order reproduced search-v0.6's outcomes and scripts on all 12 units (eight of them 48-expansion searches without a proof) and drew nothing new"
+ ],
+ "draws": "shared by the four searches of a task and seeded with search-v0.6's: the n-th time a search expands a goal (canonical_goal of the goal the proposer sees) it gets the n-th set of candidates for that goal in this task, first the sets search-v0.6 drew, in their order, then sets drawn anew by whichever search first needs them",
+ "execution": "each unit is one task: whole and andor, then wholeRenamed and andorRenamed, the latter two in this order on tasks of even index and reversed on odd, each in a fresh REPL; the tasks search-v0.5 did not run first; a unit that raises is recorded as four error rows and run again, with the seeds and fresh new draws, on the next resume; every new draw is committed",
+ "experiment": "search-v0.7",
+ "hypotheses": {
+  "H54": "over all tasks, the AND-OR search up to renaming proves more tasks than the whole-state search (one-sided sign test on the tasks proved by exactly one of them)",
+  "H55": "over all tasks, the AND-OR search up to renaming proves more tasks than the AND-OR search (one-sided sign test on the tasks proved by exactly one of them)",
+  "H56": "over all tasks, the AND-OR search up to renaming proves more tasks than the whole-state search up to renaming (one-sided sign test on the tasks proved by exactly one of them)",
+  "H57": "over all tasks, the whole-state search up to renaming proves more tasks than the whole-state search (one-sided sign test on the tasks proved by exactly one of them)",
+  "H58": "in the AND-OR search up to renaming, over all tasks, more created goals are merged into an existing goal by a renaming than by identical print"
+ },
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "0fd2983b97ed6e2406b99ba513e37fa03630337bb5a0bc3710a4ec7d71dfbaa7",
+  "searchRenaming": "6372491b801b6b00aaffafd255558b93981599cac1c55031b1f7b2ea2b42afbf"
+ },
+ "measures": {
+  "draws": "per search, the expansions that used a seeded set, a set another search drew here, or a new draw",
+  "expansionsToProof": "the expansion at which a search completed its proof",
+  "merges": "andorRenamed: goals created by valid candidates, merged into an existing goal by print, merged by a renaming (and how many of those print identically after it), renaming checks run and refused",
+  "proved": "tasks with a proof that re-verifies from the statement, per search",
+  "renamedDuplicates": "wholeRenamed: child states dropped as duplicates up to renaming but not in print"
+ },
+ "power": "search-v0.6's searches proved about a quarter of the 169 statable tasks and differed on two, so the discordant tasks of each comparison may be few and the tests have little power; decisions are reported whichever way they come out",
+ "proposer": "as search-v0.5 and v0.6: BFS-Prover-V2-7B in Q8_0, the first goal pretty-printed and followed by ':::', 16 completions at temperature 1.0, at most 64 tokens each, duplicates dropped in order, no menu",
+ "question": "with a step-level prover as the proposer and its draws shared, does identifying goals up to the names of their hypotheses make a search over goals prove more, and is any gain the goal decomposition's or the renaming's",
+ "registeredLocalDate": "2026-09-26 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier experiment, search-v0.6 in full, including its per-task outcomes, which the replays repeat; the development runs above; no renaming search had run on a corpus task",
+ "searches": {
+  "andor": "search-v0.6's AND-OR search (search_keys.py), unchanged",
+  "andorRenamed": "the AND-OR search merging a new goal into an earlier goal alike up to renaming (coarse_goal) when a renaming step (rename' for accessible hypotheses, rename_i for those printed with a dagger) turns it into that goal, as the REPL checks: the renamed goal must print as the earlier one up to the names of the earlier one's inaccessible hypotheses; the step precedes the earlier goal's proof in the script",
+  "names": "whole is the whole-state search, andor the AND-OR search, wholeRenamed the whole-state search up to renaming, andorRenamed the AND-OR search up to renaming",
+  "whole": "search-v0.6's whole-state search (search_keys.py), unchanged",
+  "wholeRenamed": "the whole-state search dropping a child state whose goals agree in order with those of a state already generated up to renaming (coarse_goal), not only in print"
+ },
+ "seedDraws": {
+  "sha256": "f86a6e35346e930f0d51a5848aa5c7dadd5d554e6ef69f0e9801300190f09f9b",
+  "source": "search-v0.6/draws.jsonl.gz"
+ },
+ "tasks": {
+  "count": 200,
+  "note": "search-v0.6's 200 tasks; every hypothesis is tested on all of them, and the two sets of search-v0.6 are reported apart",
+  "source": "holdout-v0.1/tasks.json",
+  "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
+ }
+}
