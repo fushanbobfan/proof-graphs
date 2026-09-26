@@ -1,0 +1,137 @@
+{
+ "experiment": "search-v0.5",
+ "preregistrationSha256": "2e0f9161cce26876a759db31b7b00108939df398a5ec9347457412e0fbceb2d6",
+ "amendmentsSha256": {},
+ "tasks": 60,
+ "constructed": {
+  "whole": 47,
+  "andor": 47
+ },
+ "abandoned": {
+  "whole": 1,
+  "andor": 1
+ },
+ "errors": {
+  "whole": 0,
+  "andor": 0
+ },
+ "missing": {
+  "whole": 0,
+  "andor": 0
+ },
+ "whole": {
+  "fine": {
+   "expansions": 1457,
+   "undefined": 0,
+   "orderDuplicates": 0,
+   "goalDuplicates": 86,
+   "orderFraction": 0.0,
+   "goalFraction": 0.059025394646533974,
+   "bootstrap": {
+    "order": [
+     0.0,
+     0.0
+    ],
+    "goal": [
+     0.026657552973342446,
+     0.09495708154506438
+    ],
+    "modules": 34
+   }
+  },
+  "default": {
+   "expansions": 1457,
+   "undefined": 0,
+   "orderDuplicates": 0,
+   "goalDuplicates": 93,
+   "orderFraction": 0.0,
+   "goalFraction": 0.06382978723404255,
+   "bootstrap": {
+    "order": [
+     0.0,
+     0.0
+    ],
+    "goal": [
+     0.030325443786982247,
+     0.0989010989010989
+    ],
+    "modules": 34
+   }
+  },
+  "coarse": {
+   "expansions": 1457,
+   "undefined": 0,
+   "orderDuplicates": 1,
+   "goalDuplicates": 300,
+   "orderFraction": 0.0006863417982155113,
+   "goalFraction": 0.2059025394646534,
+   "bootstrap": {
+    "order": [
+     0.0,
+     0.002385211687537269
+    ],
+    "goal": [
+     0.15022091310751104,
+     0.25872093023255816
+    ],
+    "modules": 34
+   }
+  }
+ },
+ "proved": {
+  "whole": 8,
+  "andor": 10
+ },
+ "provedAtBaseline": {
+  "whole": 7,
+  "andor": 9
+ },
+ "menuBaselineProved": 3,
+ "againstMenu": {
+  "modelOnly": 5,
+  "menuOnly": 1,
+  "pValue": 0.109375
+ },
+ "provedAfterBaseline": 2,
+ "andor": {
+  "expansions": 1379,
+  "entangled": 75,
+  "picks": 192
+ },
+ "discordant": {
+  "wholeOnly": 0,
+  "andorOnly": 2,
+  "signTestTwoSided": 0.5
+ },
+ "searchSeconds": {
+  "min": 17.8,
+  "q1": 132.5,
+  "median": 1466.1999999999998,
+  "q3": 1811.425,
+  "max": 2375.8,
+  "count": 46
+ },
+ "frontierExhausted": {
+  "whole": 11,
+  "andor": 11
+ },
+ "hypotheses": {
+  "H45": {
+   "supported": false
+  },
+  "H46": {
+   "supported": true
+  },
+  "H47": {
+   "supported": true
+  },
+  "H48": {
+   "supported": true
+  },
+  "H49": {
+   "supported": true
+  }
+ },
+ "resultsSha256": "a468d778e70e12c07818357ed9285312b644b2c62f47dceccf07e48f6faf666b",
+ "callsSha256": "372e19216867242bf193bb203f1a12e26c9678201cf759ea6efc982ed07df9d4"
+}
