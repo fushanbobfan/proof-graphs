@@ -221,7 +221,108 @@
    }
   }
  },
- "searches": null,
+ "searches": {
+  "tasks": 200,
+  "constructed": {
+   "whole": 169,
+   "andor": 169
+  },
+  "abandoned": {
+   "whole": 0,
+   "andor": 0
+  },
+  "errors": {
+   "whole": 0,
+   "andor": 0
+  },
+  "missing": {
+   "whole": 0,
+   "andor": 0
+  },
+  "whole": {
+   "fine": {
+    "expansions": 2413,
+    "undefined": 0,
+    "orderDuplicates": 110,
+    "goalDuplicates": 341,
+    "orderFraction": 0.04558640696228761,
+    "goalFraction": 0.1413178615830916,
+    "bootstrap": {
+     "order": [
+      0.03301435406698565,
+      0.05631210894368789
+     ],
+     "goal": [
+      0.11298076923076923,
+      0.1654228855721393
+     ],
+     "modules": 71
+    }
+   },
+   "default": {
+    "expansions": 2413,
+    "undefined": 0,
+    "orderDuplicates": 112,
+    "goalDuplicates": 343,
+    "orderFraction": 0.04641525072523829,
+    "goalFraction": 0.14214670534604226,
+    "bootstrap": {
+     "order": [
+      0.03424340583063397,
+      0.057035803497085764
+     ],
+     "goal": [
+      0.1136254212806933,
+      0.1667308432807085
+     ],
+     "modules": 71
+    }
+   },
+   "coarse": {
+    "expansions": 2413,
+    "undefined": 0,
+    "orderDuplicates": 110,
+    "goalDuplicates": 697,
+    "orderFraction": 0.04558640696228761,
+    "goalFraction": 0.2888520513883133,
+    "bootstrap": {
+     "order": [
+      0.03369140625,
+      0.05584192439862543
+     ],
+     "goal": [
+      0.25654664484451717,
+      0.32054077627562144
+     ],
+     "modules": 71
+    }
+   }
+  },
+  "proved": {
+   "whole": 11,
+   "andor": 10
+  },
+  "andor": {
+   "expansions": 2386,
+   "entangled": 468
+  },
+  "discordant": {
+   "wholeOnly": 1,
+   "andorOnly": 0,
+   "signTestTwoSided": 1.0
+  },
+  "hypotheses": {
+   "H37": {
+    "supported": true
+   },
+   "H38": {
+    "supported": true
+   },
+   "H39": {
+    "supported": false
+   }
+  }
+ },
  "hypotheses": {
   "H34": {
    "supported": false
@@ -231,10 +332,19 @@
   },
   "H36": {
    "supported": true
+  },
+  "H37": {
+   "supported": true
+  },
+  "H38": {
+   "supported": true
+  },
+  "H39": {
+   "supported": false
   }
  },
  "extractionSha256": "a46a0d312c528dcdff8d455909d1b2aaf8a8beed28335c935ea96984d14f4c49",
  "countsSha256": "e68fbab52fa56ce82301ca601d422aba86fc6d208d38b21fcfe764cd3650b968",
  "tasksSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e",
- "searchesSha256": null
+ "searchesSha256": "162afbdd9fa60f39d0aaa6b32e2abac93083215b3ddee2bfed7b470a0c1b9128"
 }

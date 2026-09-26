@@ -16,8 +16,13 @@ Modules extracted: 142; dropped: 2. Proofs: 2244; counted: 2244.
 
 Strata tested: steps-6-10, steps-11-20, steps-21-50.
 
+Searches on 200 tasks: whole-state order duplicates 112 of 2413 (4.6%), goal duplicates 343 (14.2%); proved: {'whole': 11, 'andor': 10}; discordant: {'wholeOnly': 1, 'andorOnly': 0, 'signTestTwoSided': 1.0}; entangled candidates: 468.
+
 ## Hypotheses
 
 - H34: supported: False.
 - H35: supported: True.
 - H36: supported: True.
+- H37: supported: True.
+- H38: supported: True.
+- H39: supported: False.
