@@ -16,18 +16,24 @@ research object, the three steps, and the boundaries.
 The program is done. A proof's step-dependency graph admits enormous numbers
 of orderings (median 9.3·10^13 at 21 to 50 steps, more than 10^652 for the
 longest proof, as recounted under the step derivation that a blind audit
-corrected; `experiments/recount-v0.1`), and a Mathlib slice, whose proofs are
-shorter, shows the same growth;
-but Lean's convention of acting on the first goal already fixes one ordering, and in a
-real tactic search only 2 to 4 percent of the expansions are states that
-differ from an earlier one only in goal order. Searching over goals instead
-of whole states proves no more at equal budget, even at eight times the
-budget, and a goal search that treats goals as independent loses proofs
-whose goals share an existential witness (HyperTree Proof Search and Aesop
-handle such goals explicitly; ours deliberately does not). Mathlib's
-golfed proofs are shorter than their predecessors; their lower structure
-index is accounted for by their length, but adjusted for length they branch
-more. Each experiment's README carries its
+corrected; `experiments/recount-v0.1`), and two disjoint Mathlib slices, whose
+proofs are shorter, show the same growth;
+but Lean's convention of acting on the first goal already fixes one ordering,
+and over every one of the 1,171 theorems of a slice that can be posed, 4.5
+percent of a real search's expansions are states that differ from an earlier
+one only in goal order. What the search does meet is goal sharing: 14.9
+percent of its expansions, and 28.0 percent once goals that differ only in
+the names of their hypotheses are identified. Searching over goals instead of
+whole states proves neither more nor fewer theorems (103 against 102, sign
+test p = 1), at eight times the budget, or with the menu's one-shot provers
+removed, where neither search proves anything at all; and a goal search that
+treats goals as independent loses proofs whose goals share an existential
+witness (HyperTree Proof Search and Aesop handle such goals explicitly; ours
+deliberately does not). Mathlib's
+golfed proofs are shorter than their predecessors and, adjusted for length,
+branch more, on two windows of Mathlib's history; the structure index, which
+this program proposed as a quality measure, separates the two proofs on one
+window and not on the other, so it does not survive replication. Each experiment's README carries its
 numbers and its boundaries;
 [docs/design.md](docs/design.md) states the answer in full.
 [HANDOFF.md](HANDOFF.md) maps every claim to the command that re-verifies
@@ -45,8 +51,18 @@ scripts/lean_repl.py              a Lean REPL session
 scripts/search_harness.py         whole-state and AND-OR tactic searches
 scripts/run_search.py             steps 2 and 3: register, run, check
 scripts/run_search_deep.py        the same searches at eight times the budget
+scripts/run_search_wide.py        the same searches on every candidate theorem
+scripts/search_keys.py            the searches recording three goal identities
+scripts/run_search_keys.py        goal identity, and a menu without hammers
+scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
+scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
 scripts/run_golf.py               golfed proofs against their predecessors
+scripts/run_golf_structure.py     depth, width, and branching of golf pairs
+scripts/run_golf_replication.py   the golf findings on an earlier window
+scripts/run_extraction_audit.py   derived graphs against blind reconstructions
+scripts/count_linearizations_v2.py the step derivation the audit corrected
+scripts/run_recount.py            every extraction under the corrected rule
 scripts/export_graphs.py          the dataset of step-dependency graphs
 scripts/audit_graphs.py           structural invariants of every derived graph
 scripts/check_slice_options.py    the slice's graphs under Mathlib's options
@@ -55,7 +71,15 @@ experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 experiments/search-v0.1/          steps 2 and 3 artifacts
 experiments/search-v0.2/          the deeper searches
+experiments/search-v0.3/          every candidate theorem
+experiments/search-v0.4/          goal identity, and no one-shot provers
+experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
+experiments/holdout-v0.1/         the second slice
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
+experiments/golf-structure-v0.1/  depth, width, branching
+experiments/golf-v0.2/            the same tests on an earlier window
+experiments/extraction-audit-v0.1/  the blind reconstruction
+experiments/recount-v0.1/         the corrected counts
 datasets/proof-graphs-v0.2.jsonl.gz  7,285 step-dependency graphs (corrected derivation)
 datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivation
 ```

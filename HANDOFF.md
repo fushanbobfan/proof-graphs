@@ -30,7 +30,11 @@ GitHub.
 | In a real search only 2–4% of expansions are order duplicates; searching over goals proves no more than over states | `experiments/search-v0.1` | `python scripts/run_search.py --check-committed` |
 | Eight times the budget adds goal sharing (to ~18%) but no proof; goals that share an existential witness defeat a goal search that treats goals as independent (HTPS and Aesop handle them explicitly) | `experiments/search-v0.2` | `python scripts/run_search_deep.py --check-committed` |
 | Mathlib's golfed proofs are shorter; their lower structure index is explained by length | `experiments/golf-v0.1` | `python scripts/run_golf.py --check-committed` |
-| Adjusted for length, golfed proofs branch more (under the corrected derivation only) | `experiments/golf-structure-v0.1`, `experiments/recount-v0.1` | `python scripts/run_golf_structure.py --check-committed` |
+| Adjusted for length, golfed proofs branch more; replicated on 479 unseen pairs, where the structure index does not separate the two proofs at all | `experiments/golf-structure-v0.1`, `experiments/recount-v0.1`, `experiments/golf-v0.2` | `python scripts/run_golf_replication.py --check-committed` |
+| The sample's search measures hold on all 1,347 candidate theorems; the two search designs prove 103 and 102 (p = 1) | `experiments/search-v0.3` | `python scripts/run_search_wide.py --check-committed` |
+| Goal sharing is 15.9% of expansions by printed text, 28.0% once hypothesis names are normalized; without one-shot provers neither search proves anything | `experiments/search-v0.4` | `python scripts/run_search_keys.py --check-committed` |
+| Every ordering of 41 small proofs' graphs replays as a Lean script | `experiments/orderings-replay-v0.1` | `python scripts/run_orderings_replay.py --check-committed` |
+| A second, disjoint Mathlib slice grows the same way; its 6-to-10-step median is 8, below the first slice's threshold of 10 | `experiments/holdout-v0.1` | `python scripts/run_holdout.py --check-committed` |
 | A blind reconstruction of 30 graphs found one extractor defect, since corrected | `experiments/extraction-audit-v0.1` | `python scripts/run_extraction_audit.py --check-committed` |
 | 7,285 step-dependency graphs, corrected derivation | `datasets/proof-graphs-v0.2.jsonl.gz` | `python scripts/run_recount.py --check-committed` |
 | Every derived graph satisfies the structural invariants below | all three extractions | `python scripts/audit_graphs.py` |

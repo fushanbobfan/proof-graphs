@@ -115,9 +115,13 @@ community accepted as better is shorter in 210 of 238 pairs, and an
 exploratory length adjustment accounts for its lower structure index. Of
 depth, width, and branching (`golf-structure-v0.1`), only branching separates
 the two once length is accounted for, and only under the corrected
-derivation of `recount-v0.1`: the golfed proof branches more. The
-step-dependency graphs of every proof extracted here are in
-`datasets/proof-graphs-v0.2.jsonl.gz` (7,285 graphs).
+derivation of `recount-v0.1`: the golfed proof branches more. On 479 pairs
+from an earlier window, registered afterwards (`golf-v0.2`), that branching
+difference replicates at p = 3.4e-8 and the structure index does not separate
+the two proofs at all, so the measure this program proposed fails replication
+while the flatter-graph finding survives. The step-dependency graphs of every
+proof extracted here are in `datasets/proof-graphs-v0.2.jsonl.gz` (7,285
+graphs).
 
 What would extend this is not more of the same:
 
@@ -127,8 +131,7 @@ What would extend this is not more of the same:
 - the redundancy this design explicitly does not touch: different tactic
   paths to the same goal, and different proof terms of one proposition;
 - for the third layer, quantities outside the graph (lemmas used, term size,
-  elaboration time), and a registered replication of the branching
-  difference on new golf pairs.
+  elaboration time).
 
 Until one of those is worth doing, the repository is a record, not a
 programme.
