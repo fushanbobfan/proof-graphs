@@ -1,0 +1,71 @@
+{
+ "analyses": {
+  "interval": "95% percentile interval of the mean per-task difference in proof rate, resampling modules (2,000 resamples, seed 0)",
+  "perSet": "each set's counts and discordant tasks"
+ },
+ "budget": {
+  "expansionsPerSearch": 48,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C13": "within a set and task, no goal has two new draws for one occurrence",
+  "C14": "at least 99% of the searches export through the defined tactic"
+ },
+ "decisionRule": "H64 to H66 are one family, decided by Holm's step-down procedure at family-wise alpha 0.05",
+ "developmentChecksBeforeRegistration": [
+  "scripts/check_faithful_repl.py: 6 cases in a Mathlib REPL with a fixed proposer: the coupled-group search proves a theorem whose two goals share a witness (refine, exact 2, rfl), which the independent-goal search cannot, discarding 2 entangled candidates, and the whole-state search proves it; goals alike up to bound names and up to hypothesis names are merged; a renamed state is dropped; every proof verified from the statement",
+  "--develop 3 --budget 16: the three searches with the prover in one fresh set of draws on the first three of search-v0.7's development theorems (outside the corpus; seed 7): all three proved RCLike.conj_mul (at expansion 1) and FirstOrder.Language.Formula.realize_rel₂ (at 4) and not ContMDiffAt.iff_comp_isImmersionAtOfComplement; every search exported through the defined tactic with no failure; no group of several goals arose",
+  "measured before registration: the draw throughput of concurrent single completions (840 draws an hour with 8 draws in flight) against sequential completions of one prompt (537 to 634), which kept the concurrent requests; and an export's cost as a run_tac block (about 0.5 s) against the defined tactic (2 to 3 ms)"
+ ],
+ "execution": "a unit is one task in one set: the three searches in turn, the order rotating with the task index plus the set, each in a fresh REPL; the sets run in order; a unit that raises is recorded as three error rows and run again, with fresh new draws, on the next resume",
+ "experiment": "search-v0.8",
+ "hypotheses": {
+  "H64": "over the tasks stated in every set, the coupled-group search proves more tasks than the independent-goal search: per task, the number of sets in which each proves it; one-sided sign test on the tasks where the numbers differ",
+  "H65": "over the tasks stated in every set, the coupled-group search proves more tasks than the whole-state search: per task, the number of sets in which each proves it; one-sided sign test on the tasks where the numbers differ",
+  "H66": "over the tasks stated in every set, the independent-goal search proves more tasks than the whole-state search: per task, the number of sets in which each proves it; one-sided sign test on the tasks where the numbers differ"
+ },
+ "identity": "goal_identity.py's export, defined once per task environment as the tactic pg_export_goals (search_faithful.ExportingSession), the run_tac block where the definition fails",
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "00808f6b59f0c0d311ba3248505e9685e2ec95502f12a04446dda2251291daef"
+ },
+ "measures": {
+  "cost": "expansions, draws (seeded, shared, new) and their tokens, REPL calls and seconds by kind (candidate tactics, exports, harness steps, commands), search seconds",
+  "mechanisms": "entangled discards (goals), outside-coupled discards and groups of several goals made and used in proofs (groups), faithful duplicate shares and proofs through a goal's later draw (whole)",
+  "perTaskCounts": "for each task, the number of sets in which a search proves it",
+  "proved": "tasks with a proof that re-verifies from the statement, per search and set"
+ },
+ "power": "earlier experiments found few discordant tasks between search designs; three sets give each task 0 to 3 proofs per search, and the test counts tasks, not task-sets",
+ "proposer": "as search-v0.5 to v0.7: BFS-Prover-V2-7B in Q8_0, 16 completions at temperature 1.0, at most 64 tokens, the first goal followed by ':::', duplicates dropped",
+ "question": "with goal identity taken from Lean's expressions and the prover's draws repeated three times, does a search over metavariable-coupled goal groups prove more than a search over independent goals or over whole states",
+ "registeredLocalDate": "2026-09-27 America/Los_Angeles",
+ "replicates": {
+  "0": "seeded with search-v0.6's and search-v0.7's recorded draws (7,731 sets), extended with new draws by whichever search needs them first",
+  "1-2": "drawn afresh",
+  "count": 3,
+  "seedSources": {
+   "searchV06Draws": "f86a6e35346e930f0d51a5848aa5c7dadd5d554e6ef69f0e9801300190f09f9b",
+   "searchV07Draws": "95b54cb7bf0ba1154ee27e06318cacc15ee39be4ea2e312d9c65850d46690e3e"
+  },
+  "sharing": "within a set, the draws of a task are shared by its three searches as in search-v0.6 (the n-th expansion of a printed goal gets the n-th set drawn for it)"
+ },
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier experiment, including search-v0.7 in full; keys-v0.1 was running and its results had not been read",
+ "searches": {
+  "goals": "search_faithful.and_or_search: single goals merged by faithful goal key, behind a renaming step when hypothesis names differ; entangled candidates discarded",
+  "groups": "search_faithful.coupled_search: groups of goals coupled by metavariables; a candidate that changes a goal of its own group is kept; a one-goal group merged as in goals, a larger one only if it prints identically",
+  "whole": "search_faithful.whole_state_search: whole states, dropped when their faithful state key was generated before"
+ },
+ "tasks": {
+  "count": 200,
+  "source": "holdout-v0.1/tasks.json",
+  "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
+ }
+}

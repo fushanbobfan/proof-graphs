@@ -127,6 +127,7 @@ jobs:
           ~/.elan/bin/lake build repl
           python scripts/check_renaming_repl.py
           python scripts/check_goal_identity.py
+          python scripts/check_faithful_repl.py
       - name: Check the committed renaming search
         run: |
           if test -f experiments/search-v0.7/summary.json; then

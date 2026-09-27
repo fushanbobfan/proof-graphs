@@ -74,6 +74,10 @@ scripts/test_renaming.py          the renaming step on printed goals
 scripts/check_renaming_repl.py    the renaming searches in a Mathlib REPL
 scripts/audit_goal_keys.py        the text keys audited on the logged goals
 scripts/goal_identity.py          goal identity from Lean's expressions
+scripts/recording_repl.py         a REPL session that records what a search does
+scripts/run_key_replay.py         finished searches re-keyed by Lean expressions
+scripts/search_faithful.py        searches over states, goals, and coupled goal groups
+scripts/run_search_coupled.py     the three, over three sets of draws
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
