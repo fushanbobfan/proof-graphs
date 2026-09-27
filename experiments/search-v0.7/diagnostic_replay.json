@@ -1,0 +1,45 @@
+{
+ "task": "MultilinearMap.map_update_sum",
+ "newDraws": 0,
+ "units": [
+  {
+   "search": "whole",
+   "outcome": [
+    false,
+    48
+   ],
+   "searchV06": [
+    false,
+    48
+   ],
+   "abandoned": null,
+   "draws": {
+    "seeded": 48,
+    "shared": 0,
+    "drawn": 0
+   },
+   "seconds": 45.3
+  },
+  {
+   "search": "andor",
+   "outcome": [
+    false,
+    48
+   ],
+   "searchV06": [
+    false,
+    48
+   ],
+   "abandoned": null,
+   "draws": {
+    "seeded": 48,
+    "shared": 0,
+    "drawn": 0
+   },
+   "seconds": 46.1
+  }
+ ],
+ "wallSeconds": 139.0,
+ "reproduces": true,
+ "localDate": "2026-09-26"
+}

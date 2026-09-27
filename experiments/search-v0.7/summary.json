@@ -1,0 +1,1151 @@
+{
+ "experiment": "search-v0.7",
+ "preregistrationSha256": "2db1517766f77d7a0ddf36de71d3653dfa67205905f3e2e150d43205af5b7214",
+ "amendmentsSha256": {},
+ "overall": {
+  "tasks": 200,
+  "stated": {
+   "whole": 169,
+   "andor": 169,
+   "wholeRenamed": 169,
+   "andorRenamed": 169
+  },
+  "abandoned": {
+   "whole": 1,
+   "andor": 1,
+   "wholeRenamed": 0,
+   "andorRenamed": 0
+  },
+  "errors": {
+   "whole": 0,
+   "andor": 0,
+   "wholeRenamed": 0,
+   "andorRenamed": 0
+  },
+  "missing": {
+   "whole": 0,
+   "andor": 0,
+   "wholeRenamed": 0,
+   "andorRenamed": 0
+  },
+  "proved": {
+   "whole": 39,
+   "andor": 41,
+   "wholeRenamed": 42,
+   "andorRenamed": 43
+  },
+  "provedTasks": {
+   "whole": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "andor": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "wholeRenamed": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "andorRenamed": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.acceptsFrom_iUnion",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ]
+  },
+  "expansions": {
+   "whole": 4703,
+   "andor": 4855,
+   "wholeRenamed": 4358,
+   "andorRenamed": 4512
+  },
+  "seconds": {
+   "whole": {
+    "min": 0.0,
+    "q1": 1.0,
+    "median": 8.65,
+    "q3": 19.275000000000002,
+    "max": 237.5,
+    "count": 168
+   },
+   "andor": {
+    "min": 0.0,
+    "q1": 1.2,
+    "median": 9.8,
+    "q3": 20.575000000000003,
+    "max": 163.6,
+    "count": 168
+   },
+   "wholeRenamed": {
+    "min": 0.0,
+    "q1": 0.75,
+    "median": 9.8,
+    "q3": 214.8,
+    "max": 1226.0,
+    "count": 169
+   },
+   "andorRenamed": {
+    "min": 0.0,
+    "q1": 0.9,
+    "median": 10.3,
+    "q3": 164.7,
+    "max": 1603.2,
+    "count": 169
+   }
+  },
+  "rejected": {
+   "whole": 14,
+   "andor": 2,
+   "wholeRenamed": 14,
+   "andorRenamed": 2
+  },
+  "pairs": {
+   "H54": {
+    "first": "andorRenamed",
+    "second": "whole",
+    "firstOnly": 4,
+    "secondOnly": 0,
+    "firstOnlyTasks": [
+     "Finite.card_eq_zero_of_surjective",
+     "MultilinearMap.map_update_sum",
+     "MvPolynomial.mk_eq_eval\u2082",
+     "NFA.acceptsFrom_iUnion"
+    ],
+    "secondOnlyTasks": [],
+    "both": 39,
+    "signTestFirstMore": 0.0625,
+    "signTestTwoSided": 0.125,
+    "expansionsToProof": {
+     "differing": 19,
+     "firstFewer": 14,
+     "signTestFirstFewer": 0.0317840576171875
+    }
+   },
+   "H55": {
+    "first": "andorRenamed",
+    "second": "andor",
+    "firstOnly": 2,
+    "secondOnly": 0,
+    "firstOnlyTasks": [
+     "MultilinearMap.map_update_sum",
+     "NFA.acceptsFrom_iUnion"
+    ],
+    "secondOnlyTasks": [],
+    "both": 41,
+    "signTestFirstMore": 0.25,
+    "signTestTwoSided": 0.5,
+    "expansionsToProof": {
+     "differing": 14,
+     "firstFewer": 14,
+     "signTestFirstFewer": 6.103515625e-05
+    }
+   },
+   "H56": {
+    "first": "andorRenamed",
+    "second": "wholeRenamed",
+    "firstOnly": 2,
+    "secondOnly": 1,
+    "firstOnlyTasks": [
+     "MultilinearMap.map_update_sum",
+     "NFA.acceptsFrom_iUnion"
+    ],
+    "secondOnlyTasks": [
+     "Submodule.ker_liftQ_eq_bot"
+    ],
+    "both": 41,
+    "signTestFirstMore": 0.5,
+    "signTestTwoSided": 1.0,
+    "expansionsToProof": {
+     "differing": 15,
+     "firstFewer": 7,
+     "signTestFirstFewer": 0.696380615234375
+    }
+   },
+   "H57": {
+    "first": "wholeRenamed",
+    "second": "whole",
+    "firstOnly": 3,
+    "secondOnly": 0,
+    "firstOnlyTasks": [
+     "Finite.card_eq_zero_of_surjective",
+     "MvPolynomial.mk_eq_eval\u2082",
+     "Submodule.ker_liftQ_eq_bot"
+    ],
+    "secondOnlyTasks": [],
+    "both": 39,
+    "signTestFirstMore": 0.125,
+    "signTestTwoSided": 0.25,
+    "expansionsToProof": {
+     "differing": 14,
+     "firstFewer": 14,
+     "signTestFirstFewer": 6.103515625e-05
+    }
+   }
+  },
+  "merges": {
+   "arrivals": 14545,
+   "new": 9615,
+   "printed": 2556,
+   "renamed": 2374,
+   "renamedExact": 2044,
+   "reused": 266,
+   "checks": 2243,
+   "refused": 135
+  },
+  "renamedDuplicates": 1618,
+  "entangled": {
+   "andor": 200,
+   "andorRenamed": 196
+  },
+  "draws": {
+   "whole": {
+    "seeded": 4703,
+    "shared": 0,
+    "drawn": 0
+   },
+   "andor": {
+    "seeded": 4855,
+    "shared": 0,
+    "drawn": 0
+   },
+   "wholeRenamed": {
+    "seeded": 3287,
+    "shared": 230,
+    "drawn": 841
+   },
+   "andorRenamed": {
+    "seeded": 3638,
+    "shared": 205,
+    "drawn": 669
+   }
+  }
+ },
+ "sets": {
+  "test": {
+   "tasks": 140,
+   "stated": {
+    "whole": 122,
+    "andor": 122,
+    "wholeRenamed": 122,
+    "andorRenamed": 122
+   },
+   "abandoned": {
+    "whole": 0,
+    "andor": 0,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "errors": {
+    "whole": 0,
+    "andor": 0,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "missing": {
+    "whole": 0,
+    "andor": 0,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "proved": {
+    "whole": 30,
+    "andor": 32,
+    "wholeRenamed": 33,
+    "andorRenamed": 33
+   },
+   "provedTasks": {
+    "whole": [
+     "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+     "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+     "CategoryTheory.Localization.equivalence_counitIso_app",
+     "CategoryTheory.MorphismProperty.map_isoClosure",
+     "CategoryTheory.MorphismProperty.map_map",
+     "DFinsupp.sum_single",
+     "ENat.card_eq_coe_natCard",
+     "Filter.lift'_pure",
+     "FractionalIdeal.one_mem_inv_coe_ideal",
+     "Function.mulSupport_one_sub'",
+     "HomologicalComplex.Hom.comm",
+     "HomologicalComplex.hom_ext",
+     "IsCompact.exists_forall_le'",
+     "Module.Basis.range_extend",
+     "MultilinearMap.map_update_sub",
+     "NFA.evalFrom_iUnion",
+     "NFA.nil_mem_acceptsFrom",
+     "Nat.Ico_succ_right_eq_insert_Ico",
+     "Nat.card_Iic",
+     "Nat.card_eq",
+     "PNat.pos_of_div_pos",
+     "PointedCone.DualFG.dual_of_fg",
+     "Polynomial.monomial_mem_lifts",
+     "SimpleGraph.Connected.ofBoxProdRight",
+     "SimpleGraph.edgeSet_subset_sym2_iff",
+     "SimpleGraph.edge_other_incident_set",
+     "SimpleGraph.neighborFinset_boxProd",
+     "Submodule.spanFinrank_of_not_fg",
+     "ppow_mul",
+     "smoothingFun_nonneg"
+    ],
+    "andor": [
+     "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+     "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+     "CategoryTheory.Localization.equivalence_counitIso_app",
+     "CategoryTheory.MorphismProperty.map_isoClosure",
+     "CategoryTheory.MorphismProperty.map_map",
+     "DFinsupp.sum_single",
+     "ENat.card_eq_coe_natCard",
+     "Filter.lift'_pure",
+     "Finite.card_eq_zero_of_surjective",
+     "FractionalIdeal.one_mem_inv_coe_ideal",
+     "Function.mulSupport_one_sub'",
+     "HomologicalComplex.Hom.comm",
+     "HomologicalComplex.hom_ext",
+     "IsCompact.exists_forall_le'",
+     "Module.Basis.range_extend",
+     "MultilinearMap.map_update_sub",
+     "MvPolynomial.mk_eq_eval\u2082",
+     "NFA.evalFrom_iUnion",
+     "NFA.nil_mem_acceptsFrom",
+     "Nat.Ico_succ_right_eq_insert_Ico",
+     "Nat.card_Iic",
+     "Nat.card_eq",
+     "PNat.pos_of_div_pos",
+     "PointedCone.DualFG.dual_of_fg",
+     "Polynomial.monomial_mem_lifts",
+     "SimpleGraph.Connected.ofBoxProdRight",
+     "SimpleGraph.edgeSet_subset_sym2_iff",
+     "SimpleGraph.edge_other_incident_set",
+     "SimpleGraph.neighborFinset_boxProd",
+     "Submodule.spanFinrank_of_not_fg",
+     "ppow_mul",
+     "smoothingFun_nonneg"
+    ],
+    "wholeRenamed": [
+     "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+     "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+     "CategoryTheory.Localization.equivalence_counitIso_app",
+     "CategoryTheory.MorphismProperty.map_isoClosure",
+     "CategoryTheory.MorphismProperty.map_map",
+     "DFinsupp.sum_single",
+     "ENat.card_eq_coe_natCard",
+     "Filter.lift'_pure",
+     "Finite.card_eq_zero_of_surjective",
+     "FractionalIdeal.one_mem_inv_coe_ideal",
+     "Function.mulSupport_one_sub'",
+     "HomologicalComplex.Hom.comm",
+     "HomologicalComplex.hom_ext",
+     "IsCompact.exists_forall_le'",
+     "Module.Basis.range_extend",
+     "MultilinearMap.map_update_sub",
+     "MvPolynomial.mk_eq_eval\u2082",
+     "NFA.evalFrom_iUnion",
+     "NFA.nil_mem_acceptsFrom",
+     "Nat.Ico_succ_right_eq_insert_Ico",
+     "Nat.card_Iic",
+     "Nat.card_eq",
+     "PNat.pos_of_div_pos",
+     "PointedCone.DualFG.dual_of_fg",
+     "Polynomial.monomial_mem_lifts",
+     "SimpleGraph.Connected.ofBoxProdRight",
+     "SimpleGraph.edgeSet_subset_sym2_iff",
+     "SimpleGraph.edge_other_incident_set",
+     "SimpleGraph.neighborFinset_boxProd",
+     "Submodule.ker_liftQ_eq_bot",
+     "Submodule.spanFinrank_of_not_fg",
+     "ppow_mul",
+     "smoothingFun_nonneg"
+    ],
+    "andorRenamed": [
+     "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+     "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+     "CategoryTheory.Localization.equivalence_counitIso_app",
+     "CategoryTheory.MorphismProperty.map_isoClosure",
+     "CategoryTheory.MorphismProperty.map_map",
+     "DFinsupp.sum_single",
+     "ENat.card_eq_coe_natCard",
+     "Filter.lift'_pure",
+     "Finite.card_eq_zero_of_surjective",
+     "FractionalIdeal.one_mem_inv_coe_ideal",
+     "Function.mulSupport_one_sub'",
+     "HomologicalComplex.Hom.comm",
+     "HomologicalComplex.hom_ext",
+     "IsCompact.exists_forall_le'",
+     "Module.Basis.range_extend",
+     "MultilinearMap.map_update_sub",
+     "MvPolynomial.mk_eq_eval\u2082",
+     "NFA.acceptsFrom_iUnion",
+     "NFA.evalFrom_iUnion",
+     "NFA.nil_mem_acceptsFrom",
+     "Nat.Ico_succ_right_eq_insert_Ico",
+     "Nat.card_Iic",
+     "Nat.card_eq",
+     "PNat.pos_of_div_pos",
+     "PointedCone.DualFG.dual_of_fg",
+     "Polynomial.monomial_mem_lifts",
+     "SimpleGraph.Connected.ofBoxProdRight",
+     "SimpleGraph.edgeSet_subset_sym2_iff",
+     "SimpleGraph.edge_other_incident_set",
+     "SimpleGraph.neighborFinset_boxProd",
+     "Submodule.spanFinrank_of_not_fg",
+     "ppow_mul",
+     "smoothingFun_nonneg"
+    ]
+   },
+   "expansions": {
+    "whole": 3280,
+    "andor": 3385,
+    "wholeRenamed": 2945,
+    "andorRenamed": 3045
+   },
+   "seconds": {
+    "whole": {
+     "min": 0.0,
+     "q1": 0.975,
+     "median": 5.35,
+     "q3": 16.825000000000003,
+     "max": 237.5,
+     "count": 122
+    },
+    "andor": {
+     "min": 0.0,
+     "q1": 0.9,
+     "median": 7.4,
+     "q3": 19.224999999999998,
+     "max": 163.6,
+     "count": 122
+    },
+    "wholeRenamed": {
+     "min": 0.0,
+     "q1": 0.7,
+     "median": 5.0,
+     "q3": 169.325,
+     "max": 1226.0,
+     "count": 122
+    },
+    "andorRenamed": {
+     "min": 0.0,
+     "q1": 0.875,
+     "median": 4.75,
+     "q3": 189.74999999999997,
+     "max": 1603.2,
+     "count": 122
+    }
+   },
+   "rejected": {
+    "whole": 14,
+    "andor": 2,
+    "wholeRenamed": 14,
+    "andorRenamed": 2
+   },
+   "pairs": {
+    "H54": {
+     "first": "andorRenamed",
+     "second": "whole",
+     "firstOnly": 3,
+     "secondOnly": 0,
+     "firstOnlyTasks": [
+      "Finite.card_eq_zero_of_surjective",
+      "MvPolynomial.mk_eq_eval\u2082",
+      "NFA.acceptsFrom_iUnion"
+     ],
+     "secondOnlyTasks": [],
+     "both": 30,
+     "signTestFirstMore": 0.125,
+     "signTestTwoSided": 0.25,
+     "expansionsToProof": {
+      "differing": 14,
+      "firstFewer": 12,
+      "signTestFirstFewer": 0.0064697265625
+     }
+    },
+    "H55": {
+     "first": "andorRenamed",
+     "second": "andor",
+     "firstOnly": 1,
+     "secondOnly": 0,
+     "firstOnlyTasks": [
+      "NFA.acceptsFrom_iUnion"
+     ],
+     "secondOnlyTasks": [],
+     "both": 32,
+     "signTestFirstMore": 0.5,
+     "signTestTwoSided": 1.0,
+     "expansionsToProof": {
+      "differing": 11,
+      "firstFewer": 11,
+      "signTestFirstFewer": 0.00048828125
+     }
+    },
+    "H56": {
+     "first": "andorRenamed",
+     "second": "wholeRenamed",
+     "firstOnly": 1,
+     "secondOnly": 1,
+     "firstOnlyTasks": [
+      "NFA.acceptsFrom_iUnion"
+     ],
+     "secondOnlyTasks": [
+      "Submodule.ker_liftQ_eq_bot"
+     ],
+     "both": 32,
+     "signTestFirstMore": 0.75,
+     "signTestTwoSided": 1.0,
+     "expansionsToProof": {
+      "differing": 11,
+      "firstFewer": 6,
+      "signTestFirstFewer": 0.5
+     }
+    },
+    "H57": {
+     "first": "wholeRenamed",
+     "second": "whole",
+     "firstOnly": 3,
+     "secondOnly": 0,
+     "firstOnlyTasks": [
+      "Finite.card_eq_zero_of_surjective",
+      "MvPolynomial.mk_eq_eval\u2082",
+      "Submodule.ker_liftQ_eq_bot"
+     ],
+     "secondOnlyTasks": [],
+     "both": 30,
+     "signTestFirstMore": 0.125,
+     "signTestTwoSided": 0.25,
+     "expansionsToProof": {
+      "differing": 12,
+      "firstFewer": 12,
+      "signTestFirstFewer": 0.000244140625
+     }
+    }
+   },
+   "merges": {
+    "arrivals": 9848,
+    "new": 6396,
+    "printed": 1684,
+    "renamed": 1768,
+    "renamedExact": 1528,
+    "reused": 213,
+    "checks": 1648,
+    "refused": 93
+   },
+   "renamedDuplicates": 1220,
+   "entangled": {
+    "andor": 142,
+    "andorRenamed": 125
+   },
+   "draws": {
+    "whole": {
+     "seeded": 3280,
+     "shared": 0,
+     "drawn": 0
+    },
+    "andor": {
+     "seeded": 3385,
+     "shared": 0,
+     "drawn": 0
+    },
+    "wholeRenamed": {
+     "seeded": 2126,
+     "shared": 220,
+     "drawn": 599
+    },
+    "andorRenamed": {
+     "seeded": 2390,
+     "shared": 113,
+     "drawn": 542
+    }
+   }
+  },
+  "replication": {
+   "tasks": 60,
+   "stated": {
+    "whole": 47,
+    "andor": 47,
+    "wholeRenamed": 47,
+    "andorRenamed": 47
+   },
+   "abandoned": {
+    "whole": 1,
+    "andor": 1,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "errors": {
+    "whole": 0,
+    "andor": 0,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "missing": {
+    "whole": 0,
+    "andor": 0,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "proved": {
+    "whole": 9,
+    "andor": 9,
+    "wholeRenamed": 9,
+    "andorRenamed": 10
+   },
+   "provedTasks": {
+    "whole": [
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "ContinuousOn.le_sSup_image_Icc",
+     "MulArchimedeanClass.top_eq_mk_iff",
+     "MultilinearMap.mkPiRing_eq_zero_iff",
+     "Multiset.prod_filter_mul_prod_filter_not",
+     "Real.fibRec_charPoly_eq",
+     "Set.inter_indicator_mul",
+     "SimpleGraph.iInf_adj_of_nonempty",
+     "SimpleGraph.subsingleton_iff"
+    ],
+    "andor": [
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "ContinuousOn.le_sSup_image_Icc",
+     "MulArchimedeanClass.top_eq_mk_iff",
+     "MultilinearMap.mkPiRing_eq_zero_iff",
+     "Multiset.prod_filter_mul_prod_filter_not",
+     "Real.fibRec_charPoly_eq",
+     "Set.inter_indicator_mul",
+     "SimpleGraph.iInf_adj_of_nonempty",
+     "SimpleGraph.subsingleton_iff"
+    ],
+    "wholeRenamed": [
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "ContinuousOn.le_sSup_image_Icc",
+     "MulArchimedeanClass.top_eq_mk_iff",
+     "MultilinearMap.mkPiRing_eq_zero_iff",
+     "Multiset.prod_filter_mul_prod_filter_not",
+     "Real.fibRec_charPoly_eq",
+     "Set.inter_indicator_mul",
+     "SimpleGraph.iInf_adj_of_nonempty",
+     "SimpleGraph.subsingleton_iff"
+    ],
+    "andorRenamed": [
+     "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+     "ContinuousOn.le_sSup_image_Icc",
+     "MulArchimedeanClass.top_eq_mk_iff",
+     "MultilinearMap.map_update_sum",
+     "MultilinearMap.mkPiRing_eq_zero_iff",
+     "Multiset.prod_filter_mul_prod_filter_not",
+     "Real.fibRec_charPoly_eq",
+     "Set.inter_indicator_mul",
+     "SimpleGraph.iInf_adj_of_nonempty",
+     "SimpleGraph.subsingleton_iff"
+    ]
+   },
+   "expansions": {
+    "whole": 1423,
+    "andor": 1470,
+    "wholeRenamed": 1413,
+    "andorRenamed": 1467
+   },
+   "seconds": {
+    "whole": {
+     "min": 0.1,
+     "q1": 1.45,
+     "median": 11.4,
+     "q3": 23.025,
+     "max": 55.7,
+     "count": 46
+    },
+    "andor": {
+     "min": 0.1,
+     "q1": 1.3499999999999999,
+     "median": 12.5,
+     "q3": 22.025,
+     "max": 114.0,
+     "count": 46
+    },
+    "wholeRenamed": {
+     "min": 0.0,
+     "q1": 1.2,
+     "median": 67.0,
+     "q3": 299.1,
+     "max": 892.6,
+     "count": 47
+    },
+    "andorRenamed": {
+     "min": 0.1,
+     "q1": 1.6,
+     "median": 26.2,
+     "q3": 111.1,
+     "max": 588.3,
+     "count": 47
+    }
+   },
+   "rejected": {
+    "whole": 0,
+    "andor": 0,
+    "wholeRenamed": 0,
+    "andorRenamed": 0
+   },
+   "pairs": {
+    "H54": {
+     "first": "andorRenamed",
+     "second": "whole",
+     "firstOnly": 1,
+     "secondOnly": 0,
+     "firstOnlyTasks": [
+      "MultilinearMap.map_update_sum"
+     ],
+     "secondOnlyTasks": [],
+     "both": 9,
+     "signTestFirstMore": 0.5,
+     "signTestTwoSided": 1.0,
+     "expansionsToProof": {
+      "differing": 5,
+      "firstFewer": 2,
+      "signTestFirstFewer": 0.8125
+     }
+    },
+    "H55": {
+     "first": "andorRenamed",
+     "second": "andor",
+     "firstOnly": 1,
+     "secondOnly": 0,
+     "firstOnlyTasks": [
+      "MultilinearMap.map_update_sum"
+     ],
+     "secondOnlyTasks": [],
+     "both": 9,
+     "signTestFirstMore": 0.5,
+     "signTestTwoSided": 1.0,
+     "expansionsToProof": {
+      "differing": 3,
+      "firstFewer": 3,
+      "signTestFirstFewer": 0.125
+     }
+    },
+    "H56": {
+     "first": "andorRenamed",
+     "second": "wholeRenamed",
+     "firstOnly": 1,
+     "secondOnly": 0,
+     "firstOnlyTasks": [
+      "MultilinearMap.map_update_sum"
+     ],
+     "secondOnlyTasks": [],
+     "both": 9,
+     "signTestFirstMore": 0.5,
+     "signTestTwoSided": 1.0,
+     "expansionsToProof": {
+      "differing": 4,
+      "firstFewer": 1,
+      "signTestFirstFewer": 0.9375
+     }
+    },
+    "H57": {
+     "first": "wholeRenamed",
+     "second": "whole",
+     "firstOnly": 0,
+     "secondOnly": 0,
+     "firstOnlyTasks": [],
+     "secondOnlyTasks": [],
+     "both": 9,
+     "signTestFirstMore": null,
+     "signTestTwoSided": null,
+     "expansionsToProof": {
+      "differing": 2,
+      "firstFewer": 2,
+      "signTestFirstFewer": 0.25
+     }
+    }
+   },
+   "merges": {
+    "arrivals": 4697,
+    "new": 3219,
+    "printed": 872,
+    "renamed": 606,
+    "renamedExact": 516,
+    "reused": 53,
+    "checks": 595,
+    "refused": 42
+   },
+   "renamedDuplicates": 398,
+   "entangled": {
+    "andor": 58,
+    "andorRenamed": 71
+   },
+   "draws": {
+    "whole": {
+     "seeded": 1423,
+     "shared": 0,
+     "drawn": 0
+    },
+    "andor": {
+     "seeded": 1470,
+     "shared": 0,
+     "drawn": 0
+    },
+    "wholeRenamed": {
+     "seeded": 1161,
+     "shared": 10,
+     "drawn": 242
+    },
+    "andorRenamed": {
+     "seeded": 1248,
+     "shared": 92,
+     "drawn": 127
+    }
+   }
+  }
+ },
+ "wholeKeys": {
+  "whole": {
+   "fine": {
+    "expansions": 4703,
+    "undefined": 0,
+    "orderDuplicates": 5,
+    "goalDuplicates": 224,
+    "orderFraction": 0.00106315118009781,
+    "goalFraction": 0.047629172868381885,
+    "bootstrap": {
+     "order": [
+      0.00019135093761959434,
+      0.0023965141612200436
+     ],
+     "goal": [
+      0.030894710825506672,
+      0.0647571606475716
+     ],
+     "modules": 71
+    }
+   },
+   "default": {
+    "expansions": 4703,
+    "undefined": 0,
+    "orderDuplicates": 5,
+    "goalDuplicates": 231,
+    "orderFraction": 0.00106315118009781,
+    "goalFraction": 0.049117584520518814,
+    "bootstrap": {
+     "order": [
+      0.00019135093761959434,
+      0.0023965141612200436
+     ],
+     "goal": [
+      0.03355866731047803,
+      0.06582141893714594
+     ],
+     "modules": 71
+    }
+   },
+   "coarse": {
+    "expansions": 4703,
+    "undefined": 0,
+    "orderDuplicates": 8,
+    "goalDuplicates": 1231,
+    "orderFraction": 0.0017010418881564958,
+    "goalFraction": 0.2617478205400808,
+    "bootstrap": {
+     "order": [
+      0.0005193905817174516,
+      0.003298878381350341
+     ],
+     "goal": [
+      0.2236175369024014,
+      0.2965372106370767
+     ],
+     "modules": 71
+    }
+   }
+  },
+  "wholeRenamed": {
+   "fine": {
+    "expansions": 4358,
+    "undefined": 0,
+    "orderDuplicates": 6,
+    "goalDuplicates": 176,
+    "orderFraction": 0.0013767783386874712,
+    "goalFraction": 0.04038549793483249,
+    "bootstrap": {
+     "order": [
+      0.00047732696897374703,
+      0.002576581734898368
+     ],
+     "goal": [
+      0.027670278637770898,
+      0.05241009946442234
+     ],
+     "modules": 71
+    }
+   },
+   "default": {
+    "expansions": 4358,
+    "undefined": 0,
+    "orderDuplicates": 6,
+    "goalDuplicates": 184,
+    "orderFraction": 0.0013767783386874712,
+    "goalFraction": 0.04222120238641579,
+    "bootstrap": {
+     "order": [
+      0.00047732696897374703,
+      0.002576581734898368
+     ],
+     "goal": [
+      0.03016550987720235,
+      0.05359511806845317
+     ],
+     "modules": 71
+    }
+   },
+   "coarse": {
+    "expansions": 4358,
+    "undefined": 0,
+    "orderDuplicates": 9,
+    "goalDuplicates": 256,
+    "orderFraction": 0.002065167508031207,
+    "goalFraction": 0.058742542450665444,
+    "bootstrap": {
+     "order": [
+      0.0007129277566539924,
+      0.0038031851675778463
+     ],
+     "goal": [
+      0.04237726098191214,
+      0.07453142227122382
+     ],
+     "modules": 71
+    }
+   }
+  }
+ },
+ "searchSeconds": {
+  "min": 0.0,
+  "q1": 1.0,
+  "median": 9.649999999999999,
+  "q3": 37.875,
+  "max": 1603.2,
+  "count": 674
+ },
+ "C8": {
+  "compared": 338,
+  "differing": 2,
+  "unitsDrawingAnew": 0,
+  "differences": [
+   {
+    "declaration": "MultilinearMap.map_update_sum",
+    "search": "whole",
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "declaration": "MultilinearMap.map_update_sum",
+    "search": "andor",
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   }
+  ],
+  "provedWithAnotherScript": 1,
+  "holds": false
+ },
+ "C9": {
+  "seeded": 6221,
+  "drawn": 1510,
+  "repeated": 0
+ },
+ "holm": {
+  "H54": {
+   "p": 0.0625,
+   "adjusted": 0.25,
+   "rejected": false
+  },
+  "H55": {
+   "p": 0.25,
+   "adjusted": 0.5,
+   "rejected": false
+  },
+  "H56": {
+   "p": 0.5,
+   "adjusted": 0.5,
+   "rejected": false
+  },
+  "H57": {
+   "p": 0.125,
+   "adjusted": 0.375,
+   "rejected": false
+  }
+ },
+ "hypotheses": {
+  "H54": {
+   "supported": false
+  },
+  "H55": {
+   "supported": false
+  },
+  "H56": {
+   "supported": false
+  },
+  "H57": {
+   "supported": false
+  },
+  "H58": {
+   "supported": false
+  }
+ },
+ "resultsSha256": "c72eaaf750fc91269a32e4bc294cac30ee1c0087eb902ab47769febb90a2cf71",
+ "drawsSha256": "95b54cb7bf0ba1154ee27e06318cacc15ee39be4ea2e312d9c65850d46690e3e"
+}
