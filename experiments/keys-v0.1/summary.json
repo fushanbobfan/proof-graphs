@@ -1,0 +1,446 @@
+{
+ "experiment": "keys-v0.1",
+ "preregistrationSha256": "2671c137941c70a2dac8c774f4426f4e31924c110a949727ebc2de88b385c2e0",
+ "proverWhole": {
+  "units": 200,
+  "audited": 159,
+  "errors": 0,
+  "abandoned": 2,
+  "totals": {
+   "expansions": 4472,
+   "children": 12568,
+   "dropped": 2779,
+   "falseDrops": 155,
+   "kept": 9789,
+   "missedDrops": 2660,
+   "undefined": 43,
+   "goalDuplicates": 1217,
+   "orderDuplicates": 4,
+   "faithfulUndefined": 96
+  },
+  "recorded": {
+   "defaultGoal": 223,
+   "defaultOrder": 4,
+   "coarseGoal": 1173,
+   "coarseOrder": 5
+  },
+  "shares": {
+   "faithfulGoal": 0.27213774597495527,
+   "faithfulOrder": 0.0008944543828264759,
+   "defaultGoal": 0.04986583184257603,
+   "coarseGoal": 0.262298747763864,
+   "defaultOrder": 0.0008944543828264759,
+   "falseDrops": 0.05577545879812882,
+   "missedDrops": 0.2717335785064869
+  },
+  "reconstructionMatches": 159
+ },
+ "proverWholeRenamed": {
+  "units": 200,
+  "audited": 157,
+  "errors": 0,
+  "abandoned": 2,
+  "totals": {
+   "expansions": 4093,
+   "children": 11991,
+   "dropped": 4132,
+   "falseDrops": 203,
+   "kept": 7859,
+   "missedDrops": 271,
+   "undefined": 95,
+   "goalDuplicates": 346,
+   "orderDuplicates": 8,
+   "faithfulUndefined": 96
+  },
+  "recorded": {
+   "defaultGoal": 179,
+   "defaultOrder": 6,
+   "coarseGoal": 249,
+   "coarseOrder": 9
+  },
+  "shares": {
+   "faithfulGoal": 0.08453457121915466,
+   "faithfulOrder": 0.0019545565599804545,
+   "defaultGoal": 0.04373320302956267,
+   "coarseGoal": 0.060835572929391644,
+   "defaultOrder": 0.0014659174199853407,
+   "falseDrops": 0.04912875121006777,
+   "missedDrops": 0.034482758620689655
+  },
+  "reconstructionMatches": 157
+ },
+ "proverAndor": {
+  "units": 200,
+  "audited": 157,
+  "errors": 0,
+  "abandoned": 2,
+  "repeats": {
+   "expansions": 4501,
+   "repeats": 1100,
+   "undefined": 96
+  },
+  "repeatShare": 0.24439013552543878,
+  "merges": {
+   "arrivals": 13891,
+   "merged": 2658,
+   "falseMerges": 218,
+   "new": 11233,
+   "missedMerges": 3322,
+   "undefined": 70,
+   "entangled": 166
+  },
+  "falseMergeShare": 0.08201655379984951,
+  "missedMergeShare": 0.2957357785097481,
+  "reconstructionMatches": 157
+ },
+ "proverAndorRenamed": {
+  "units": 200,
+  "audited": 157,
+  "errors": 0,
+  "abandoned": 0,
+  "repeats": {
+   "expansions": 4162,
+   "repeats": 142,
+   "undefined": 97
+  },
+  "repeatShare": 0.03411821239788563
+ },
+ "menuWhole": {
+  "units": 300,
+  "audited": 201,
+  "errors": 0,
+  "abandoned": 10,
+  "totals": {
+   "expansions": 2616,
+   "children": 9251,
+   "dropped": 5280,
+   "falseDrops": 304,
+   "kept": 3971,
+   "missedDrops": 642,
+   "undefined": 119,
+   "goalDuplicates": 727,
+   "orderDuplicates": 145,
+   "faithfulUndefined": 42
+  },
+  "recorded": {
+   "defaultGoal": 426,
+   "defaultOrder": 147,
+   "coarseGoal": 720,
+   "coarseOrder": 146
+  },
+  "shares": {
+   "faithfulGoal": 0.2779051987767584,
+   "faithfulOrder": 0.05542813455657492,
+   "defaultGoal": 0.1628440366972477,
+   "coarseGoal": 0.27522935779816515,
+   "defaultOrder": 0.05619266055045872,
+   "falseDrops": 0.05757575757575758,
+   "missedDrops": 0.16167212289095945
+  },
+  "reconstructionMatches": 201
+ },
+ "C10": {
+  "compared": 932,
+  "differing": 103,
+  "differences": [
+   {
+    "unit": [
+     "prover",
+     "Mathlib.AlgebraicGeometry.SpreadingOut",
+     "AlgebraicGeometry.Scheme.exists_le_and_germ_injective",
+     "wholeRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     2
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.AlgebraicGeometry.SpreadingOut",
+     "AlgebraicGeometry.Scheme.exists_le_and_germ_injective",
+     "andorRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     5
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+     "MeasureTheory.integrableOn_Iio_iff_integrableAtFilter_atBot_nhdsWithin",
+     "andorRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Geometry.Euclidean.Volume.Measure",
+     "Isometry.euclideanHausdorffMeasure_image",
+     "andor"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Geometry.Euclidean.Volume.Measure",
+     "Isometry.euclideanHausdorffMeasure_image",
+     "wholeRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     17
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Geometry.Euclidean.Volume.Measure",
+     "Isometry.euclideanHausdorffMeasure_image",
+     "andorRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Combinatorics.SimpleGraph.Basic",
+     "SimpleGraph.edge_other_incident_set",
+     "whole"
+    ],
+    "now": null,
+    "before": [
+     true,
+     13
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Combinatorics.SimpleGraph.Basic",
+     "SimpleGraph.edge_other_incident_set",
+     "andorRenamed"
+    ],
+    "now": null,
+    "before": [
+     true,
+     12
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
+     "Real.binEntropy_eq_zero",
+     "whole"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
+     "Real.binEntropy_eq_zero",
+     "andor"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.MeasureTheory.Integral.Lebesgue.Markov",
+     "MeasureTheory.meas_le_lintegral\u2080",
+     "andorRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+     "ValueDistribution.proximity_add_top_le",
+     "whole"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+     "ValueDistribution.proximity_add_top_le",
+     "andor"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+     "ValueDistribution.proximity_add_top_le",
+     "andorRenamed"
+    ],
+    "now": [
+     false,
+     3
+    ],
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.CStarAlgebra.Unitary.Span",
+     "CStarAlgebra.span_unitary",
+     "andor"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.CStarAlgebra.Unitary.Span",
+     "CStarAlgebra.span_unitary",
+     "wholeRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     16
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Analysis.CStarAlgebra.Unitary.Span",
+     "CStarAlgebra.span_unitary",
+     "andorRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     16
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.CategoryTheory.Abelian.Pseudoelements",
+     "CategoryTheory.Abelian.Pseudoelement.epi_of_pseudo_surjective",
+     "whole"
+    ],
+    "now": null,
+    "before": [
+     false,
+     48
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis",
+     "AlgebraicIndependent.matroid_spanning_iff_of_subsingleton",
+     "andor"
+    ],
+    "now": null,
+    "before": [
+     false,
+     2
+    ]
+   },
+   {
+    "unit": [
+     "prover",
+     "Mathlib.Algebra.Module.SpanRank",
+     "Submodule.spanFinrank_map_le_of_fg",
+     "wholeRenamed"
+    ],
+    "now": null,
+    "before": [
+     false,
+     14
+    ]
+   }
+  ],
+  "holds": false
+ },
+ "C11": {
+  "reconstructable": 674,
+  "matching": 674,
+  "holds": true
+ },
+ "C12": {
+  "states": 63861,
+  "undefined": 1554,
+  "holds": false
+ },
+ "hypotheses": {
+  "H59": {
+   "supported": true
+  },
+  "H60": {
+   "supported": true
+  },
+  "H61": {
+   "supported": true
+  },
+  "H62": {
+   "supported": false
+  },
+  "H63": {
+   "supported": false
+  }
+ },
+ "drops": {
+  "dropped": 12191,
+  "falseDrops": 662
+ },
+ "auditedUnits": 831,
+ "resultsSha256": "72ed4d7ab059e49d2fa8b7be34ca882b469f5f4f11aa4fcb89aa4d7bd18653cd",
+ "logsSha256": "532518adc446153e1bea50a1bdafa034c95958e2461ea9501275ce6b08034d31"
+}
