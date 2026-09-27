@@ -109,6 +109,14 @@ transfer: in a resource logic the graph quotients a factorial, in Lean the
 goal stack has already absorbed it, and the dependencies it has not absorbed
 are the ones the graph would wrongly cut.
 
+A step-level prover (BFS-Prover-V2-7B, `search-v0.5` to `v0.7`) makes the
+searches run deep, and the answer stands. With its draws shared between the
+searches, the search over goals proves 41 theorems against 39. Most of the
+goal sharing it meets is between goals alike up to the names of their
+hypotheses; identifying goals and states up to renaming lets both searches
+find their proofs about a fifth sooner and prove 43 and 42: what renaming
+removes, a search over states removes as well as a search over goals does.
+
 The proposal's third layer, telling good proofs from mediocre ones, was
 tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the
 community accepted as better is shorter in 210 of 238 pairs, and an
@@ -125,9 +133,9 @@ graphs).
 
 What would extend this is not more of the same:
 
-- a proposer strong enough that searches run deep (here every proof was
-  found within a dozen expansions, and the searches that ran longer found
-  nothing);
+- the step-level prover at the budgets such provers run at (here 48
+  expansions), to see whether the fifth of the budget that renaming saves
+  turns into proofs;
 - the redundancy this design explicitly does not touch: different tactic
   paths to the same goal, and different proof terms of one proposition;
 - for the third layer, quantities outside the graph (lemmas used, term size,

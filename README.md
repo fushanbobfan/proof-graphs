@@ -32,8 +32,10 @@ pays and order duplicates all but vanish; the goal search first led by 10
 theorems to 8, but with the prover's draws shared between the two searches the
 lead disappears on the same tasks, and over 169 theorems the two prove 41 and
 39. Most of the goal sharing such a search meets is between goals alike up to
-the names of their hypotheses, which a goal search keyed on printed goals
-cannot merge. A goal search that treats goals as
+the names of their hypotheses; identifying goals and states up to those names
+lets both searches find their proofs about a fifth sooner and prove a few more
+(43 and 42), but the search over goals still does no better than the search
+over states. A goal search that treats goals as
 independent also loses proofs whose goals share an existential witness
 (HyperTree Proof Search and Aesop handle such goals explicitly; ours
 deliberately does not). Mathlib's
@@ -65,6 +67,11 @@ scripts/step_prover.py            a step-level Lean prover as a proposer
 scripts/run_search_prover.py      both searches with that proposer
 scripts/common_draws.py           the proposer's draws shared by two searches
 scripts/run_search_paired.py      both searches with shared draws
+scripts/renaming.py               the step that renames one goal into another
+scripts/search_renaming.py        both searches up to renaming
+scripts/run_search_renaming.py    the four searches, seeded with v0.6's draws
+scripts/test_renaming.py          the renaming step on printed goals
+scripts/check_renaming_repl.py    the renaming searches in a Mathlib REPL
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
@@ -86,6 +93,7 @@ experiments/search-v0.3/          every candidate theorem
 experiments/search-v0.4/          goal identity, and no one-shot provers
 experiments/search-v0.5/          a step-level prover as the proposer
 experiments/search-v0.6/          the same, with shared draws
+experiments/search-v0.7/          goals and states up to renaming
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
 experiments/holdout-v0.1/         the second slice
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
