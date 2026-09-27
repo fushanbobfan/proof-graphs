@@ -73,6 +73,7 @@ scripts/run_search_renaming.py    the four searches, seeded with v0.6's draws
 scripts/test_renaming.py          the renaming step on printed goals
 scripts/check_renaming_repl.py    the renaming searches in a Mathlib REPL
 scripts/audit_goal_keys.py        the text keys audited on the logged goals
+scripts/goal_identity.py          goal identity from Lean's expressions
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
