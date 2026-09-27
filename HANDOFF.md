@@ -39,6 +39,8 @@ GitHub.
 | Every ordering of 41 small proofs' graphs replays as a Lean script | `experiments/orderings-replay-v0.1` | `python scripts/run_orderings_replay.py --check-committed` |
 | A second, disjoint Mathlib slice grows the same way; its 6-to-10-step median is 8, below the first slice's threshold of 10 | `experiments/holdout-v0.1` | `python scripts/run_holdout.py --check-committed` |
 | A blind reconstruction of 30 graphs found one extractor defect, since corrected | `experiments/extraction-audit-v0.1` | `python scripts/run_extraction_audit.py --check-committed` |
+| Identified by Lean's expressions instead of text, goal sharing is 27.2% of the step-prover search's expansions against 26.2% by the coarse key, and order duplicates stay at 0.1%; item by item, 8.7% of printed-goal merges and 5.6% of drops join goals whose expressions differ | `experiments/keys-v0.1` | `python scripts/run_key_replay.py --check-committed` |
+| A second blind reconstruction, of 40 proofs drawn for the constructs the step derivation handles by special rules, agrees on every graph | `experiments/extraction-audit-v0.2` | `python scripts/run_extraction_audit_v2.py --check-committed` |
 | 7,285 step-dependency graphs, corrected derivation | `datasets/proof-graphs-v0.2.jsonl.gz` | `python scripts/run_recount.py --check-committed` |
 | Every derived graph satisfies the structural invariants below | all three extractions | `python scripts/audit_graphs.py` |
 
@@ -88,23 +90,27 @@ In order of what an independent pass would most likely catch:
    model agents rebuild 30 random graphs blind, found one systematic defect
    (closings of `simpa ... using ...` and similar tactics lost), and
    `recount-v0.1` corrects it (`scripts/count_linearizations_v2.py`; all 30
-   then agree). A person's reconstruction of a subsample is still the
-   strongest check. Constructs worth a look: `first`/`try`/`repeat`
-   (Lean keeps the info nodes of failed alternatives), `<;>`, `calc`, `conv`,
-   `case`/`next`, `rcases`/`obtain` patterns, `induction ... with`,
-   `simpa ... using (by ...)`.
+   then agree). `extraction-audit-v0.2` had four more agents rebuild 40
+   graphs drawn for the constructs the derivation handles by rule (`<;>`,
+   `calc`, `conv`, `case`/`next`, patterns, `induction ... with`, nested
+   `by`); all agree. Its family patterns matched identifiers, so no sampled
+   proof uses `first`/`try`/`repeat` (Lean keeps the info nodes of failed
+   alternatives): those remain unaudited. A person's reconstruction is still
+   the strongest check; `experiments/extraction-audit-v0.2/human-kit/` has
+   the worksheet, and `--compare-hand` scores it without revealing the
+   derived graphs.
 2. **Goal identity in the search harness** (`scripts/search_harness.py`).
    Goals are compared as pretty-printed text, with case tags and
    metavariable numbers erased. Two goals that print alike but differ
    internally would be merged (for instance `R ?m.1 ?m.1` and
    `R ?m.1 ?m.2`), the coarse key's text substitution can capture a bound
    variable named `h0`, and the entanglement check compares printed carried
-   goals. `experiments/goal-key-audit` (not registered) finds neither
-   collision in the step-prover searches, whose goal texts were logged; the
-   menu searches logged none. An independent implementation keyed on Lean
-   expressions, with capture-avoiding renaming and metavariable identities,
-   or on goal types up to definitional equality, would test both duplicate
-   fractions.
+   goals. `experiments/keys-v0.1` re-keyed the finished searches by Lean
+   expressions (`scripts/goal_identity.py`: hypotheses by position, bound
+   variables by index, metavariables renumbered): the coarse key's shares
+   hold within a point, but 8.7% of printed-goal merges and 5.6% of drops
+   join goals whose expressions differ. Identity up to definitional
+   equality remains untested.
 3. **Options.** The slice and both search experiments elaborated under
    Lean's default options, not Mathlib's (`autoImplicit false`,
    `maxSynthPendingDepth 3`); golf inserts Mathlib's. For the slice this is

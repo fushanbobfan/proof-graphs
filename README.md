@@ -35,7 +35,9 @@ lead disappears on the same tasks, and over 169 theorems the two prove 41 and
 the names of their hypotheses; identifying goals and states up to those names
 lets both searches find their proofs about a fifth sooner and prove a few more
 (43 and 42), but the search over goals still does no better than the search
-over states. A goal search that treats goals as
+over states. Identified by Lean's expressions instead of text, the sharing
+measures hold in aggregate, though item by item about one text
+identification in fifteen joins goals whose expressions differ. A goal search that treats goals as
 independent also loses proofs whose goals share an existential witness
 (HyperTree Proof Search and Aesop handle such goals explicitly; ours
 deliberately does not). Mathlib's
@@ -90,6 +92,10 @@ scripts/run_recount.py            every extraction under the corrected rule
 scripts/export_graphs.py          the dataset of step-dependency graphs
 scripts/audit_graphs.py           structural invariants of every derived graph
 scripts/check_slice_options.py    the slice's graphs under Mathlib's options
+scripts/goal_identity.py          goal identity from Lean's expressions
+scripts/recording_repl.py         a REPL session that logs a search for re-keying
+scripts/run_key_replay.py         finished searches re-keyed by expressions
+scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
@@ -107,6 +113,8 @@ experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
 experiments/golf-structure-v0.1/  depth, width, branching
 experiments/golf-v0.2/            the same tests on an earlier window
 experiments/extraction-audit-v0.1/  the blind reconstruction
+experiments/extraction-audit-v0.2/  the same on hard constructs, with a kit for people
+experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
 experiments/recount-v0.1/         the corrected counts
 datasets/proof-graphs-v0.2.jsonl.gz  7,285 step-dependency graphs (corrected derivation)
 datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivation
