@@ -206,7 +206,16 @@ def run_all(workers: int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     if RESULTS.exists():
         rows = [json.loads(l) for l in RESULTS.read_text(encoding="utf-8").splitlines() if l.strip()]
     draws_log = read_draws()
-    ok = {(r["replicate"], r["declaration"], r["search"]) for r in rows if not r.get("error")}
+    latest: dict[tuple[int, str, str], dict[str, Any]] = {}
+    attempts: dict[tuple[int, str, str], int] = {}
+    for r in rows:
+        key = (r["replicate"], r["declaration"], r["search"])
+        latest[key] = r
+        attempts[key] = attempts.get(key, 0) + 1
+    # Amendment 1: a search not constructed for a reason other than a missing declaration range, or abandoned by a
+    # REPL timeout, is an infrastructure failure; its unit runs once more on resume, like a unit that raised.
+    ok = {key for key, r in latest.items() if not r.get("error")
+          and (attempts[key] > 1 or not (r.get("abandoned") or (r.get("constructed") is False and not r.get("reason"))))}
     done = {(r, t["declaration"]) for r, t in units() if all((r, t["declaration"], s) in ok for s in SEARCHES)}
     draws_log = [e for e in draws_log if (e["replicate"], e["declaration"]) in done]
     seeds = keys_replay.recorded_draws()
