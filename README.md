@@ -72,6 +72,7 @@ scripts/search_renaming.py        both searches up to renaming
 scripts/run_search_renaming.py    the four searches, seeded with v0.6's draws
 scripts/test_renaming.py          the renaming step on printed goals
 scripts/check_renaming_repl.py    the renaming searches in a Mathlib REPL
+scripts/audit_goal_keys.py        the text keys audited on the logged goals
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
@@ -94,6 +95,7 @@ experiments/search-v0.4/          goal identity, and no one-shot provers
 experiments/search-v0.5/          a step-level prover as the proposer
 experiments/search-v0.6/          the same, with shared draws
 experiments/search-v0.7/          goals and states up to renaming
+experiments/goal-key-audit/       the keys' collisions, measured (not registered)
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
 experiments/holdout-v0.1/         the second slice
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)

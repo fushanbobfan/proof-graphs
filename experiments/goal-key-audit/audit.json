@@ -1,0 +1,90 @@
+{
+ "note": "not registered: an audit of the text keys on the logged goals of search-v0.6 and v0.7, made after a review of 2026-09-26; no registered result changes",
+ "wholeState": {
+  "search-v0.6/whole": {
+   "units": 169,
+   "expansions": 4751,
+   "unrecovered": 0,
+   "coarseDigestMismatches": 0,
+   "firstGoalsWithMetavariable": 109,
+   "goalDuplicatesWithMetavariable": 1,
+   "goalDuplicates": {
+    "recorded": {
+     "default": 233,
+     "coarse": 1241
+    },
+    "recomputed": {
+     "default": 233,
+     "coarse": 1241,
+     "safeCoarse": 1241
+    }
+   },
+   "shares": {
+    "recordedDefault": 0.049042,
+    "recordedCoarse": 0.261208,
+    "safeCoarse": 0.261208
+   }
+  },
+  "search-v0.7/whole": {
+   "units": 168,
+   "expansions": 4703,
+   "unrecovered": 0,
+   "coarseDigestMismatches": 0,
+   "firstGoalsWithMetavariable": 109,
+   "goalDuplicatesWithMetavariable": 1,
+   "goalDuplicates": {
+    "recorded": {
+     "default": 231,
+     "coarse": 1231
+    },
+    "recomputed": {
+     "default": 231,
+     "coarse": 1231,
+     "safeCoarse": 1231
+    }
+   },
+   "shares": {
+    "recordedDefault": 0.049118,
+    "recordedCoarse": 0.261748,
+    "safeCoarse": 0.261748
+   }
+  },
+  "search-v0.7/wholeRenamed": {
+   "units": 169,
+   "expansions": 4358,
+   "unrecovered": 0,
+   "coarseDigestMismatches": 0,
+   "firstGoalsWithMetavariable": 119,
+   "goalDuplicatesWithMetavariable": 0,
+   "goalDuplicates": {
+    "recorded": {
+     "default": 184,
+     "coarse": 256
+    },
+    "recomputed": {
+     "default": 184,
+     "coarse": 256,
+     "safeCoarse": 256
+    }
+   },
+   "shares": {
+    "recordedDefault": 0.042221,
+    "recordedCoarse": 0.058743,
+    "safeCoarse": 0.058743
+   }
+  }
+ },
+ "loggedGoals": {
+  "tasks": 169,
+  "defaultKeys": 7451,
+  "defaultKeysWithMetavariable": 200,
+  "defaultKeysWithMetavariableAndSeveralLoggedGoals": 1,
+  "defaultKeysWithSeveralPatterns": 0,
+  "coarseClassesMergingSeveralDefaultKeys": 707,
+  "coarseClassesSplitBySafeKey": 0,
+  "examples": {
+   "pattern": [],
+   "capture": []
+  }
+ }
+}

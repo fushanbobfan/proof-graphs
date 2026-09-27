@@ -96,9 +96,15 @@ In order of what an independent pass would most likely catch:
 2. **Goal identity in the search harness** (`scripts/search_harness.py`).
    Goals are compared as pretty-printed text, with case tags and
    metavariable numbers erased. Two goals that print alike but differ
-   internally would be merged, and the entanglement check compares printed
-   carried goals. An independent implementation keyed on goal types up to
-   definitional equality would test both duplicate fractions.
+   internally would be merged (for instance `R ?m.1 ?m.1` and
+   `R ?m.1 ?m.2`), the coarse key's text substitution can capture a bound
+   variable named `h0`, and the entanglement check compares printed carried
+   goals. `experiments/goal-key-audit` (not registered) finds neither
+   collision in the step-prover searches, whose goal texts were logged; the
+   menu searches logged none. An independent implementation keyed on Lean
+   expressions, with capture-avoiding renaming and metavariable identities,
+   or on goal types up to definitional equality, would test both duplicate
+   fractions.
 3. **Options.** The slice and both search experiments elaborated under
    Lean's default options, not Mathlib's (`autoImplicit false`,
    `maxSynthPendingDepth 3`); golf inserts Mathlib's. For the slice this is
@@ -112,10 +118,14 @@ In order of what an independent pass would most likely catch:
    declaration ranges would test the pair set. The length adjustment behind
    "it is length" is exploratory (slice medians per step count); a
    registered, length-matched test is the natural follow-up.
-5. **Small samples.** The searches ran on 40 and 20 theorems with a weak
-   proposer and breadth-first search. The deterministic menu arm reproduced
-   bit for bit across runs (search-v0.2, check C1, 40/40); the model arm
-   samples at temperature 0.8 and will not.
+5. **Samples and seeds.** The first searches ran on 40 and 20 theorems with a
+   weak proposer; search-v0.3 ran the menu on all 1,171 statable theorems of
+   the slice, and search-v0.5 to v0.7 the step prover on 169 theorems of the
+   second slice at one sampling setting, with one set of draws shared across
+   the searches. The deterministic menu arm reproduces bit for bit
+   (search-v0.2, check C1, 40/40), and search-v0.7 replayed search-v0.6 from
+   its recorded draws; a second set of draws, paired intervals across seeds,
+   and a larger held-out sample have not been run.
 6. **ProofNet-IR's formal claims** are kernel-checked: `lake build`, the
    `--trust=0` recheck, and `python scripts/audit_axioms.py` in that
    repository, all in its CI. The one open theorem target, a linear

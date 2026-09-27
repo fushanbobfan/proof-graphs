@@ -133,6 +133,8 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the goal-key audit
+        run: python scripts/audit_goal_keys.py --check
       - name: Check the committed holdout slice
         run: |
           if test -f experiments/holdout-v0.1/summary.json; then
