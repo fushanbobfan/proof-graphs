@@ -1,0 +1,322 @@
+[
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7CommitmentEdgeTargetAvoidance",
+  "declaration": "ProofNetIR.SequentialFigure7.tensorReferencePath",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7CommitmentEdgeTargetAvoidance.lean",
+  "byLine": 298,
+  "family": "try-first-repeat"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.CuspFreeTraversal.append",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 5986,
+  "family": "try-first-repeat"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7Rules",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyEmptyStep.output_unique",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7Rules.lean",
+  "byLine": 3405,
+  "family": "try-first-repeat"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.EdgeWalk.CyclicImmediateReverseNormalization.survives_or_reverse_mem",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 1932,
+  "family": "try-first-repeat"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.EdgeWalk.reverse",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 1162,
+  "family": "try-first-repeat"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Combinatorics.SimpleGraph.Walk.Maps",
+  "declaration": "SimpleGraph.Walk.reverse_map",
+  "source": ".lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Walk/Maps.lean",
+  "byLine": 93,
+  "family": "several-goals"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialUnification",
+  "declaration": "ProofNetIR.SequentialUnification.sum_sourceMultiplicity_eq_axiomCount",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialUnification.lean",
+  "byLine": 253,
+  "family": "several-goals"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7MarkedTargetRawReturnFirstDescent",
+  "declaration": "ProofNetIR.SequentialFigure7.connectivePremiseMembership",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7MarkedTargetRawReturnFirstDescent.lean",
+  "byLine": 33,
+  "family": "several-goals"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7CommitmentIntervalParGuardReentryMarkedTargetContinuationExit",
+  "declaration": "ProofNetIR.SequentialFigure7.connectivePremiseMembership",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7CommitmentIntervalParGuardReentryMarkedTargetContinuationExit.lean",
+  "byLine": 88,
+  "family": "several-goals"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.Finsupp.Defs",
+  "declaration": "Finsupp.embDomain_apply",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Finsupp/Defs.lean",
+  "byLine": 429,
+  "family": "several-goals"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyPayloadInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadGapInvariant.queueParReservationInvariant",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyPayloadInvariant.lean",
+  "byLine": 463,
+  "family": "calc"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Geometry.Manifold.VectorBundle.Tensoriality",
+  "declaration": "TensorialAt.zero",
+  "source": ".lake/packages/mathlib/Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean",
+  "byLine": 104,
+  "family": "calc"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ContinuationCreditPreservation",
+  "declaration": "ProofNetIR.SequentialFigure7.WaitStep.continuationCredit_of_rawMateSelected",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ContinuationCreditPreservation.lean",
+  "byLine": 387,
+  "family": "calc"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.TerminalTensor.tensorPlacement_inverse_conclusion",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 13459,
+  "family": "calc"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyPayload",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.realizesSigma",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyPayload.lean",
+  "byLine": 979,
+  "family": "calc"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+  "declaration": "smul_ball",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Module/Ball/Pointwise.lean",
+  "byLine": 81,
+  "family": "conv"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.AddConstMap.Basic",
+  "declaration": "AddConstMapClass.map_sub_nsmul",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/AddConstMap/Basic.lean",
+  "byLine": 168,
+  "family": "conv"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Analytic.IteratedFDeriv",
+  "declaration": "AnalyticOn.iteratedFDerivWithin_comp_perm",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Analytic/IteratedFDeriv.lean",
+  "byLine": 237,
+  "family": "conv"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.Nat.Digits.Lemmas",
+  "declaration": "Nat.ofDigits_modEq'",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Nat/Digits/Lemmas.lean",
+  "byLine": 241,
+  "family": "conv"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.QPF.Univariate.Basic",
+  "declaration": "QPF.Cofix.dest_corec",
+  "source": ".lake/packages/mathlib/Mathlib/Data/QPF/Univariate/Basic.lean",
+  "byLine": 369,
+  "family": "conv"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyOne",
+  "declaration": "ProofNetIR.SequentialFigure7.waitingParProducer?_eq_some",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyOne.lean",
+  "byLine": 100,
+  "family": "case-next"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.GradedMonoid",
+  "declaration": "SetLike.prod_mem_graded",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/GradedMonoid.lean",
+  "byLine": 679,
+  "family": "case-next"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7Rules",
+  "declaration": "ProofNetIR.SequentialFigure7.exists_prepare?_eq_some_of_ok",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7Rules.lean",
+  "byLine": 402,
+  "family": "case-next"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialRoute",
+  "declaration": "ProofNetIR.SequentialUnification.SourceLeftChain.reachable_of_head_last",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialRoute.lean",
+  "byLine": 153,
+  "family": "case-next"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.ModelTheory.Semantics",
+  "declaration": "FirstOrder.Language.BoundedFormula.realize_foldr_imp",
+  "source": ".lake/packages/mathlib/Mathlib/ModelTheory/Semantics.lean",
+  "byLine": 293,
+  "family": "case-next"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentEscapeTemporal",
+  "declaration": "ProofNetIR.SequentialFigure7.tensorSibling_not_owned",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ActiveTopDebtParentEscapeTemporal.lean",
+  "byLine": 546,
+  "family": "patterns"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.retainedIndex_injective_of_kept",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 206,
+  "family": "patterns"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.restrictTo?_linksWellFormed",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 11300,
+  "family": "patterns"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.FullyCancellingDependencyCycleAllReflexive.flippedTaggedForwardParCuspState_exists",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 39647,
+  "family": "patterns"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7PriorityEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.forward?_success_iff_enabled",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7PriorityEnabled.lean",
+  "byLine": 250,
+  "family": "patterns"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.DerivationTree",
+  "declaration": "ProofNetIR.CutFreeDerivation.reorder?_exists_of_map_eq_some",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/DerivationTree.lean",
+  "byLine": 477,
+  "family": "alternatives"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7MarkedTargetRawReturnSiblingExitOpen",
+  "declaration": "ProofNetIR.SequentialFigure7.MarkedConclusionChain.terminalComparable",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7MarkedTargetRawReturnSiblingExitOpen.lean",
+  "byLine": 99,
+  "family": "alternatives"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.ExecutableSequentialization",
+  "declaration": "ProofNetIR.Certificate.list_mapM_eq_some_map_of_forall",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/ExecutableSequentialization.lean",
+  "byLine": 94,
+  "family": "alternatives"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.LinearAlgebra.ExteriorAlgebra.Grading",
+  "declaration": "ExteriorAlgebra.ιMulti_span",
+  "source": ".lake/packages/mathlib/Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean",
+  "byLine": 87,
+  "family": "alternatives"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.runUnificationWorklist_preserves_assigned",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 13508,
+  "family": "alternatives"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.exists_norm_eq_mul_self",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 516,
+  "family": "nested-by"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyEmptyStep.map_sum_set_balance",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerInvariant.lean",
+  "byLine": 5683,
+  "family": "nested-by"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.lipschitzWith_im",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 1204,
+  "family": "nested-by"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.AcyclicDecision",
+  "declaration": "ProofNetIR.Certificate.referenceSwitchingGraph_connected_eq_true_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/AcyclicDecision.lean",
+  "byLine": 510,
+  "family": "nested-by"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7CommitmentSpine",
+  "declaration": "ProofNetIR.SequentialFigure7.CanonicalTagHistory.unify_before_sigma_eq_after_append_active",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7CommitmentSpine.lean",
+  "byLine": 136,
+  "family": "nested-by"
+ }
+]

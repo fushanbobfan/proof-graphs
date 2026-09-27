@@ -1,0 +1,41 @@
+{
+ "developmentChecksBeforeRegistration": "none on the sample; the sampling was run once to write sample.json, and the derivation was not run on it beyond counting steps for eligibility",
+ "experiment": "extraction-audit-v0.2",
+ "humanKit": "human-kit/: the instructions, a worksheet with each proof's source, and a comparison mode (--compare-hand) for reconstructions by a person; not part of this registration's decision",
+ "hypotheses": {
+  "H67": "no disagreement is adjudicated as an extractor error"
+ },
+ "implementationSha256": {
+  "base": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "counter": "1b31cff799255d58719ebb0c16480385a1924adf90b26b0e4f1e39ee8c5264d0",
+  "runner": "bad0ed2ef0071554cc1aa4ab4ec83560709ca725cce8ebbd6fe79eea56ca1c51"
+ },
+ "instructionsSha256": "553d2e154d56476e3270157fd9a2f4600386d61098e0c2d3b1f65f73c7ffdee0",
+ "otherBackend": "a cross-check with LeanTree (Kripner et al. 2025) was considered: it pins Lean v4.27.0 and its own REPL fork, against this project's v4.32.0, so it would need a port or a second corpus at the older version; not done here",
+ "protocol": [
+  "reconstructors receive instructions.md and their part of sample.json; the same instructions serve the human kit",
+  "the model reconstructors are separate language-model agent instances with Lean language-server access, each given ten proofs; they may read any source file and display Lean's goals, and must not open the repository's extractions, results, datasets, audit files, or scripts",
+  "reconstructions.json is committed before --compare first runs",
+  "--compare matches steps by source line as extraction-audit-v0.1 does and compares edges with the corrected derivation's",
+  "every disagreement is adjudicated with its evidence into: extractor error; reconstruction error; definition gap"
+ ],
+ "question": "does the corrected step derivation agree with independent reconstructions on proofs that use the constructs it handles by special rules or that hide goals",
+ "registeredLocalDate": "2026-09-27 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sample": {
+  "count": 40,
+  "families": {
+   "alternatives": "\\b(induction|cases|match)\\b[^\\n]*\\bwith\\b|(^|\\n)[ \\t]*\\|",
+   "calc": "\\bcalc\\b",
+   "case-next": "(^|\\n)[ \\t·]*(case|next)\\b",
+   "conv": "\\bconv(_lhs|_rhs)?\\b",
+   "nested-by": "\\bby\\b",
+   "patterns": "\\b(rcases|obtain|rintro)\\b",
+   "several-goals": "<;>|\\b(all_goals|any_goals)\\b",
+   "try-first-repeat": "\\b(try|first|repeat'?)\\b"
+  },
+  "libraryExtractionSha256": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff",
+  "rule": "seed 20260927; for each of the families in order, 5 proofs drawn uniformly without replacement among those not yet drawn whose text (from the root `by` to the last node's line, comments removed) matches the family's pattern; proofs with one root `by` block, a name that is not generated, 2 to 20 steps under count_linearizations_v2, from either corpus of step 1, not in extraction-audit-v0.1's sample; pool in (corpus, module, line, declaration) order",
+  "sliceExtractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b"
+ }
+}
