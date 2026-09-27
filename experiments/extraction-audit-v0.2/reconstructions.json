@@ -1,0 +1,3341 @@
+{
+ "reconstructors": "four separate language-model agent instances with Lean language-server access, ten proofs each in sample order (parts 0 to 3); each read instructions.md and its part of sample.json only, as the protocol states",
+ "proofs": [
+  {
+   "part": 0,
+   "module": "ProofNetIR.SequentialFigure7CommitmentEdgeTargetAvoidance",
+   "declaration": "ProofNetIR.SequentialFigure7.tensorReferencePath",
+   "steps": [
+    {
+     "line": 299,
+     "tactic": "have wellFormed : certificate.LinkWellFormed (.tensor left right conclusion) := structural.2.2.2.2.1 _ membership"
+    },
+    {
+     "line": 301,
+     "tactic": "have edges := UnificationMarking.referenceSwitchingGraph_tensorEdges certificate membership"
+    },
+    {
+     "line": 303,
+     "tactic": "let leftEdge : Edge := { first := left, second := conclusion }"
+    },
+    {
+     "line": 304,
+     "tactic": "let rightEdge : Edge := { first := right, second := conclusion }"
+    },
+    {
+     "line": 305,
+     "tactic": "rcases List.getElem?_of_mem (by simpa [leftEdge] using edges.1) with ⟨leftIndex, leftLookup⟩"
+    },
+    {
+     "line": 305,
+     "tactic": "simpa [leftEdge] using edges.1"
+    },
+    {
+     "line": 307,
+     "tactic": "rcases List.getElem?_of_mem (by simpa [rightEdge] using edges.2) with ⟨rightIndex, rightLookup⟩"
+    },
+    {
+     "line": 307,
+     "tactic": "simpa [rightEdge] using edges.2"
+    },
+    {
+     "line": 309,
+     "tactic": "let leftDirected : certificate.referenceSwitchingGraph.DirectedEdge := { ... forward := true }"
+    },
+    {
+     "line": 314,
+     "tactic": "let rightDirected : certificate.referenceSwitchingGraph.DirectedEdge := { ... forward := false }"
+    },
+    {
+     "line": 319,
+     "tactic": "let path : certificate.referenceSwitchingGraph.EdgeSimplePath := { ... walk := by ..., verticesNodup := by ... }"
+    },
+    {
+     "line": 324,
+     "tactic": "simpa [leftDirected, rightDirected, leftEdge, rightEdge, Graph.DirectedEdge.source, Graph.DirectedEdge.target] using Graph.EdgeWalk.step (...) rightDirected rfl rfl"
+    },
+    {
+     "line": 333,
+     "tactic": "simp [Graph.EdgeWalk.visitedVertices, leftDirected, rightDirected, leftEdge, rightEdge, Graph.DirectedEdge.target, wellFormed.2.1]"
+    },
+    {
+     "line": 335,
+     "tactic": "exact ⟨wellFormed.1, fun same ↦ wellFormed.2.2.1 same.symm⟩"
+    },
+    {
+     "line": 336,
+     "tactic": "refine ⟨path, rfl, rfl, ?_⟩"
+    },
+    {
+     "line": 337,
+     "tactic": "simp [path, Graph.EdgeSimplePath.vertices, Graph.EdgeWalk.visitedVertices, leftDirected, rightDirected, leftEdge, rightEdge, Graph.DirectedEdge.target]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     10,
+     14
+    ],
+    [
+     14,
+     15
+    ]
+   ],
+   "notes": "Node model used for all 10 proofs: the actual Lean 4.32 TacticInfo nodes, checked against the toolchain sources (Init/Tactics.lean, Elab/Tactic/*). A term have/let expands to refine_lift = focus (refine ...; rotate_right); its internal refine is the one step on the have/let line. The nested by-goals inside the two rcases (Term.withSynthesize runs them inside rcases) and inside the let path fields walk and verticesNodup (run inside the let's refine) have no producer and originate in the enclosing rcases / let step. Inside the rcases by-blocks the goal is `?m.40 ∈ ?m.41`. simp probably leaves it unchanged, so the simpa node consumes it through the correction; if simp changed it, simpa's internal [simpa ... using] node would be the step instead, on the same line and with the same count. The simpa at 324 does change the goal: its internal node consumes the walk goal and originates the simplified goal, which nothing consumes (no edge). simp at 333 leaves `¬left = right ∧ ¬conclusion = right` for exact. No try/first/repeat occurs here (the family tag probably comes from the field name `first`), so nothing is dropped."
+  },
+  {
+   "part": 1,
+   "module": "ProofNetIR.Sequentialization",
+   "declaration": "ProofNetIR.Certificate.CuspFreeTraversal.append",
+   "steps": [
+    {
+     "line": 5987,
+     "tactic": "induction first with"
+    },
+    {
+     "line": 5988,
+     "tactic": "exact False.elim (firstNonempty rfl)"
+    },
+    {
+     "line": 5990,
+     "tactic": "cases tail with"
+    },
+    {
+     "line": 5992,
+     "tactic": "cases second with"
+    },
+    {
+     "line": 5993,
+     "tactic": "exact False.elim (secondNonempty rfl)"
+    },
+    {
+     "line": 5995,
+     "tactic": "exact ⟨by simpa using boundary, secondFree⟩"
+    },
+    {
+     "line": 5995,
+     "tactic": "simpa using boundary"
+    },
+    {
+     "line": 5997,
+     "tactic": "have tailNonempty : next :: rest ≠ [] := by simp"
+    },
+    {
+     "line": 5997,
+     "tactic": "simp"
+    },
+    {
+     "line": 5998,
+     "tactic": "have tailBoundary : ¬certificate.Cusp ((next :: rest).getLast tailNonempty) (second.head secondNonempty) := by"
+    },
+    {
+     "line": 6001,
+     "tactic": "simpa using boundary"
+    },
+    {
+     "line": 6002,
+     "tactic": "exact ⟨firstFree.1, ih firstFree.2 tailNonempty tailBoundary⟩"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     9,
+     11
+    ]
+   ],
+   "notes": "No try, first or repeat tactic occurs in this proof (the only 'first' is the name of the list being inducted on), so no step is dropped as non-live; the family tag looks like a keyword false positive. Each 'induction ... with' / 'cases ... with' is one step: in Lean 4.32 the node for the header ('induction first with') holds the goal before the alternatives and no goal after, so it consumes that goal, and the case goals (produced by no node, first mentioned by the '| alt =>' nodes) originate there; the '| alt =>' nodes are containers. The goal of the nested 'by simpa using boundary' inside 'exact <...>' originates in that exact (edge 5->6). 'have x : T := by tac' expands in Lean 4.32 to 'refine (have x : T := ?body; ?_)' followed by 'case body => tac', so the have step originates both the body goal (consumed by simp / simpa) and the continuation goal (consumed by the next tactic); 'case body' is a container. Each simpa is one step (its internal 'simpa ... using' info node either leaves the goal unchanged, and then the simpa node consumes the goal by the correction, or is itself the node that consumes it; one step on the simpa line either way). Same-line pairs are listed in run order (the exact before its nested simpa, each have before its body's tactic). No other doubts."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.SequentialFigure7Rules",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyEmptyStep.output_unique",
+   "steps": [
+    {
+     "line": 3406,
+     "tactic": "have invariantEquation : left.before_invariant = right.before_invariant := Subsingleton.elim _ _"
+    },
+    {
+     "line": 3409,
+     "tactic": "cases invariantEquation"
+    },
+    {
+     "line": 3410,
+     "tactic": "have leftExecutable : unifyEmpty? certificate before left.before_invariant = some first := (unifyEmpty?_some_iff left.before_invariant).mpr ⟨left⟩"
+    },
+    {
+     "line": 3413,
+     "tactic": "have rightExecutable : unifyEmpty? certificate before left.before_invariant = some second := (unifyEmpty?_some_iff left.before_invariant).mpr ⟨right⟩"
+    },
+    {
+     "line": 3416,
+     "tactic": "exact Option.some.inj (leftExecutable.symm.trans rightExecutable)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "notes": "Conventions for all entries: steps are derived from Lean v4.32 info-tree nodes. I modelled the nodes from the core elaborator sources in the elan v4.32.0 toolchain (Init/Tactics.lean, Lean/Elab/Tactic/*.lean) and checked goals with lean_goal at line and column positions. I did not read the repository's extractor. A macro-internal node takes its line from the call site. A `have`/`let` step is the inner `refine` node of its expansion. This proof is a straight chain. Each `have ... := term` uses the general refine_lift expansion: it consumes the current goal and originates the continuation. `cases invariantEquation` has an fvar target, no `h :` and no `with`, so it is a single node. It turns the goal into the `case refl` goal without the hypothesis (checked). Doubt: the family label is try-first-repeat, but no try/first/repeat occurs in the source or in any expansion used here (refine_lift -> focus/refine/rotate_right; cases; exact). The label looks like a lexical hit on the variable name `first`. Nothing is dropped."
+  },
+  {
+   "part": 3,
+   "module": "ProofNetIR.Graph",
+   "declaration": "ProofNetIR.Graph.EdgeWalk.CyclicImmediateReverseNormalization.survives_or_reverse_mem",
+   "steps": [
+    {
+     "line": 1933,
+     "tactic": "induction normalization with"
+    },
+    {
+     "line": 1935,
+     "tactic": "exact internal.survives_or_reverse_mem directed membership"
+    },
+    {
+     "line": 1938,
+     "tactic": "rcases internal.survives_or_reverse_mem directed membership with survived | paired"
+    },
+    {
+     "line": 1940,
+     "tactic": "simp at survived"
+    },
+    {
+     "line": 1941,
+     "tactic": "rcases survived with atFirst | inMiddle | atLast"
+    },
+    {
+     "line": 1942,
+     "tactic": "subst directed"
+    },
+    {
+     "line": 1943,
+     "tactic": "exact .inr (internal.membership_subset first.reverse (by simp [closingReverse]))"
+    },
+    {
+     "line": 1945,
+     "tactic": "simp [closingReverse]"
+    },
+    {
+     "line": 1946,
+     "tactic": "rcases induction inMiddle with survived | pairedInMiddle"
+    },
+    {
+     "line": 1947,
+     "tactic": "exact .inl survived"
+    },
+    {
+     "line": 1948,
+     "tactic": "exact .inr (internal.membership_subset directed.reverse (by simp [pairedInMiddle]))"
+    },
+    {
+     "line": 1950,
+     "tactic": "simp [pairedInMiddle]"
+    },
+    {
+     "line": 1951,
+     "tactic": "subst directed"
+    },
+    {
+     "line": 1952,
+     "tactic": "exact .inr (internal.membership_subset last.reverse (by simp [closingReverse]))"
+    },
+    {
+     "line": 1954,
+     "tactic": "simp [closingReverse]"
+    },
+    {
+     "line": 1955,
+     "tactic": "exact .inr paired"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     4,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     2,
+     15
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. The family label 'try-first-repeat' matches only the identifier `first`: the proof runs no try/first/repeat, so every step is live. induction ... with: the alternative goals (finish, closing) are produced by no node; they originate in the induction node (Lean's inner `induction normalization with` info node, which holds the statement goal and encloses the alternative nodes), hence edges 0->1 and 0->2. Bullets are containers. `simp at survived` replaces the goal (the hypothesis becomes a 3-way disjunction) and rcases then yields 3 goals. Each `exact .inr (... (by simp [...]))` consumes its bullet goal and is the origin of its nested by-goal (the deepest enclosing node that holds a goal); the nested simp steps are listed at the line of the `simp` token (1945, 1950, 1954). No real doubts."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.Graph",
+   "declaration": "ProofNetIR.Graph.EdgeWalk.reverse",
+   "steps": [
+    {
+     "line": 1163,
+     "tactic": "induction walk with"
+    },
+    {
+     "line": 1164,
+     "tactic": "exact .refl _"
+    },
+    {
+     "line": 1166,
+     "tactic": "have first : graph.EdgeWalk stepFinish [directed.reverse] stepStart := by"
+    },
+    {
+     "line": 1168,
+     "tactic": "apply EdgeWalk.step (.refl stepFinish) directed.reverse"
+    },
+    {
+     "line": 1169,
+     "tactic": "DirectedEdge.reverse_source (rule 1 of rw [DirectedEdge.reverse_source, finishes])"
+    },
+    {
+     "line": 1169,
+     "tactic": "finishes (rule 2 of rw [DirectedEdge.reverse_source, finishes])"
+    },
+    {
+     "line": 1169,
+     "tactic": "rfl (rw's closing with_reducible rfl, closes stepFinish = stepFinish)"
+    },
+    {
+     "line": 1170,
+     "tactic": "DirectedEdge.reverse_target (rule 1 of rw [DirectedEdge.reverse_target, starts])"
+    },
+    {
+     "line": 1170,
+     "tactic": "starts (rule 2 of rw [DirectedEdge.reverse_target, starts])"
+    },
+    {
+     "line": 1170,
+     "tactic": "rfl (rw's closing with_reducible rfl, closes stepStart = stepStart)"
+    },
+    {
+     "line": 1171,
+     "tactic": "have combined := first.trans ih"
+    },
+    {
+     "line": 1172,
+     "tactic": "simpa [reverseTraversal] using combined"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     2,
+     10
+    ],
+    [
+     10,
+     11
+    ]
+   ],
+   "notes": "Main doubt is rw granularity. In the info tree each rewrite rule is its own node (withRWRulesSeq), consuming the current goal and originating the rewritten one. rw's closing `try (with_reducible rfl)` closes the goal left after the last rule (the goal is displayed), so the successful rfl macro alternative (eq_refl or apply_rfl) is a step at the rw position. Failed macro alternatives are restored away and add nothing. If rw is instead taken as one step, the graph has 8 steps [induction, exact, have first, apply, rw 1169, rw 1170, have combined, simpa] and edges [[0,1],[0,2],[2,3],[3,4],[3,5],[2,6],[6,7]]. `induction walk with`: the step is the `induction ... with` info node (mkInitialTacticInfoForInduction), which consumes the statement goal and originates the refl and step case goals. The alternatives are containers. have ... := by in 4.32 expands to `focus; refine (have first : T := ?body; ?_); case body => ...`, so one step originates the body goal (consumed by apply) and the continuation (consumed by have combined). The · bullets are containers: their · info node hides the other goal, which is not consumed. The simpa internal node consumes the goal because simp changes it; the simplified goal is left unconsumed."
+  },
+  {
+   "part": 1,
+   "module": "Mathlib.Combinatorics.SimpleGraph.Walk.Maps",
+   "declaration": "SimpleGraph.Walk.reverse_map",
+   "steps": [
+    {
+     "line": 93,
+     "tactic": "induction p"
+    },
+    {
+     "line": 93,
+     "tactic": "simp [map_append, *]"
+    },
+    {
+     "line": 93,
+     "tactic": "simp [map_append, *]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "notes": "'induction p <;> simp [...]' expands to 'focus (induction p; with_annotate_state <;> skip; all_goals simp [...])'. induction without 'with' leaves the goals 'nil' and 'cons' in its own goals-after, so it originates both; all_goals runs simp once per goal (step 1 on 'nil', step 2 on 'cons', in that run order), and each run closes its goal. focus, with_annotate_state/skip and all_goals are containers. No doubts."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.SequentialUnification",
+   "declaration": "ProofNetIR.SequentialUnification.sum_sourceMultiplicity_eq_axiomCount",
+   "steps": [
+    {
+     "line": 254,
+     "tactic": "induction links with (header node `induction links with`)"
+    },
+    {
+     "line": 256,
+     "tactic": "simp"
+    },
+    {
+     "line": 258,
+     "tactic": "have headWellFormed := allWellFormed head (by simp)"
+    },
+    {
+     "line": 258,
+     "tactic": "simp (nested `by simp` in the have term)"
+    },
+    {
+     "line": 259,
+     "tactic": "have tailWellFormed : ∀ link ∈ tail, certificate.LinkWellFormed link := by"
+    },
+    {
+     "line": 261,
+     "tactic": "intro link (first binder node of `intro link membership`)"
+    },
+    {
+     "line": 261,
+     "tactic": "membership (last binder node of `intro link membership`)"
+    },
+    {
+     "line": 262,
+     "tactic": "exact allWellFormed link (by simp [membership])"
+    },
+    {
+     "line": 262,
+     "tactic": "simp [membership] (nested `by`)"
+    },
+    {
+     "line": 263,
+     "tactic": "rw rule List.map_cons"
+    },
+    {
+     "line": 263,
+     "tactic": "rw rule List.sum_cons"
+    },
+    {
+     "line": 264,
+     "tactic": "rw rule sourceMultiplicity_eq_axiomIndicator_of_atom headWellFormed formulaLookup"
+    },
+    {
+     "line": 266,
+     "tactic": "rw rule induction tailWellFormed"
+    },
+    {
+     "line": 267,
+     "tactic": "by_cases accepted : head.containsAxiomEndpoint vertex = true"
+    },
+    {
+     "line": 269,
+     "tactic": "simp [accepted, Nat.add_comm] (on case pos, via <;>)"
+    },
+    {
+     "line": 269,
+     "tactic": "simp [accepted, Nat.add_comm] (on case neg, via <;>)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     4,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     13,
+     15
+    ]
+   ],
+   "notes": "(a) induction: the step is the `induction links with` header node (mkInitialTacticInfoForInduction). It records the statement goal before and nothing after, so it consumes that goal. It originates the nil/cons goals, which are first mentioned in the alternative nodes. The whole-tactic node is a container. lean_goal at line 254 shows the ungeneralized goal. (b) The first `have` (no type, general expansion) runs the nested `(by simp)` inside its refine node, so it originates both the continuation and the nested goal `head ∈ head :: tail`. The `exact` on line 262 is handled the same way. (c) `have tailWellFormed : T := by` uses the v4.32 special macro (focus; refine (have ... := ?body; ?_); case body => ...). Its refine node produces both ?body and the continuation. (d) `intro link membership` has one info node per binder in v4.32 evalIntro. Following 'produces through its last child', these are two chained steps; lean_goal at column 14 shows the intermediate goal. Doubt: a tactic-level reading would merge steps 5-6. (e) `rw [4 rules]`: withRWRulesSeq opens one TacticInfo node per rule, and each rule consumes the previous goal and originates the next. This gives 4 steps, at the lines of the rules' first tokens; lean_goal shows the intermediate states. The trailing `try (with_reducible rfl)` fails, so it adds no step. Doubt: a tactic-level reading would merge steps 9-12. (f) `by_cases`: its inner refine node originates pos and neg. `<;>` expands to focus/all_goals, so simp is one node per goal, both on line 269, pos first."
+  },
+  {
+   "part": 3,
+   "module": "ProofNetIR.SequentialFigure7MarkedTargetRawReturnFirstDescent",
+   "declaration": "ProofNetIR.SequentialFigure7.connectivePremiseMembership",
+   "steps": [
+    {
+     "line": 34,
+     "tactic": "rcases consumer with ⟨linkIndex, kind, storedLeft, storedRight, conclusion, side, consumerEq, linkEq, wellFormed, premiseEq⟩"
+    },
+    {
+     "line": 37,
+     "tactic": "subst vertex"
+    },
+    {
+     "line": 38,
+     "tactic": "cases kind"
+    },
+    {
+     "line": 38,
+     "tactic": "cases side (run on goal par)"
+    },
+    {
+     "line": 38,
+     "tactic": "cases side (run on goal tensor)"
+    },
+    {
+     "line": 39,
+     "tactic": "simp [ConnectiveBelow.submittedLink, SequentialConnectiveKind.asLink, Link.premises, TensorPremiseSide.premise] (on par.storedLeft)"
+    },
+    {
+     "line": 39,
+     "tactic": "simp [ConnectiveBelow.submittedLink, SequentialConnectiveKind.asLink, Link.premises, TensorPremiseSide.premise] (on par.storedRight)"
+    },
+    {
+     "line": 39,
+     "tactic": "simp [ConnectiveBelow.submittedLink, SequentialConnectiveKind.asLink, Link.premises, TensorPremiseSide.premise] (on tensor.storedLeft)"
+    },
+    {
+     "line": 39,
+     "tactic": "simp [ConnectiveBelow.submittedLink, SequentialConnectiveKind.asLink, Link.premises, TensorPremiseSide.premise] (on tensor.storedRight)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. `cases kind <;> cases side <;> simp [...]` parses as `(cases kind <;> cases side) <;> simp [...]`; each `<;>` expands to `focus (t; with_annotate_state <;> skip; all_goals s)`, whose focus, with_annotate_state and all_goals nodes are containers. `cases kind` gives [par, tensor]; `cases side` runs once per goal (steps 3 and 4), giving par.storedLeft, par.storedRight, tensor.storedLeft, tensor.storedRight (order confirmed by Lean); `simp` (its token is on line 39) runs once per goal in that order (steps 5-8). rcases on the structure yields one goal; `subst vertex` (premiseEq : vertex = side.premise ...) replaces it. No doubts."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.SequentialFigure7CommitmentIntervalParGuardReentryMarkedTargetContinuationExit",
+   "declaration": "ProofNetIR.SequentialFigure7.connectivePremiseMembership",
+   "steps": [
+    {
+     "line": 89,
+     "tactic": "rcases consumer with ⟨linkIndex, kind, storedLeft, storedRight, conclusion, side, consumerEq, linkEq, wellFormed, premiseEq⟩"
+    },
+    {
+     "line": 92,
+     "tactic": "subst vertex"
+    },
+    {
+     "line": 93,
+     "tactic": "cases kind"
+    },
+    {
+     "line": 93,
+     "tactic": "cases side (on case par)"
+    },
+    {
+     "line": 93,
+     "tactic": "cases side (on case tensor)"
+    },
+    {
+     "line": 94,
+     "tactic": "simp [ConnectiveBelow.submittedLink, SequentialConnectiveKind.asLink, Link.premises, TensorPremiseSide.premise] (on par.storedLeft)"
+    },
+    {
+     "line": 94,
+     "tactic": "simp [...] (on par.storedRight)"
+    },
+    {
+     "line": 94,
+     "tactic": "simp [...] (on tensor.storedLeft)"
+    },
+    {
+     "line": 94,
+     "tactic": "simp [...] (on tensor.storedRight)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "notes": "`cases kind <;> cases side <;> simp` parses as ((cases kind <;> cases side) <;> simp). Each <;> expands to focus (t; with_annotate_state tk skip; all_goals s); those nodes are containers, and s is one node per goal. SequentialConnectiveKind lists par before tensor, so cases kind yields [par, tensor] (the goal display after line 93 confirms par.storedLeft, par.storedRight, tensor.storedLeft, tensor.storedRight). I assumed each simp closes its goal: it is the last tactic and the file has no errors."
+  },
+  {
+   "part": 1,
+   "module": "Mathlib.Data.Finsupp.Defs",
+   "declaration": "Finsupp.embDomain_apply",
+   "steps": [
+    {
+     "line": 430,
+     "tactic": "simp only [embDomain, coe_mk]"
+    },
+    {
+     "line": 432,
+     "tactic": "split_ifs"
+    },
+    {
+     "line": 432,
+     "tactic": "grind"
+    },
+    {
+     "line": 432,
+     "tactic": "grind"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "notes": "split_ifs splits once, on '∃ a, f a = b' (the match on Multiset.find? on the left is not an if), leaving 'case pos' and 'case neg'; the <;> runs grind once per goal (step 2 on pos, step 3 on neg). Mathlib's split_ifs internally evaluates 'by_cases h : ∃ a, f a = b' (its refine node consumes the simp-only goal and produces the two unreduced branches), then simplifies each branch with no info node, so the reduced branches first appear in split_ifs's own goals-after: split_ifs originates them but consumes nothing itself, and by the merge rule it and its internal refine are one step (consumes the simp-only goal, originates both branch goals). The unreduced branches have no consumer. Doubt: without that merge, line 432 would carry an extra step (the internal by_cases/refine) and split_ifs itself would consume nothing, which would make it and both grinds non-live."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.SequentialFigure7UnifyPayloadInvariant",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadGapInvariant.queueParReservationInvariant",
+   "steps": [
+    {
+     "line": 464,
+     "tactic": "have alignment := Certificate.queuePar?_reservationAlignment invariant.core_carriers_aligned invariant.core_counter_aligned step.queue_eq"
+    },
+    {
+     "line": 466,
+     "tactic": "exact { stack_wellShaped := ..., realizesSigma := { ... }, ... }"
+    },
+    {
+     "line": 472,
+     "tactic": "rw rule step.exact.2.2.1 (in horizon_eq := by)"
+    },
+    {
+     "line": 473,
+     "tactic": "exact invariant.realizesSigma.horizon_eq"
+    },
+    {
+     "line": 475,
+     "tactic": "intro age (first binder node of `intro age ageBound`)"
+    },
+    {
+     "line": 475,
+     "tactic": "ageBound (last binder node of `intro age ageBound`)"
+    },
+    {
+     "line": 476,
+     "tactic": "have oldBound : age < state.stack.nextAge := by"
+    },
+    {
+     "line": 476,
+     "tactic": "simpa using ageBound"
+    },
+    {
+     "line": 477,
+     "tactic": "calc"
+    },
+    {
+     "line": 482,
+     "tactic": "unfold UnificationState.representative"
+    },
+    {
+     "line": 483,
+     "tactic": "rw rule step.exact.2.2.1"
+    },
+    {
+     "line": 483,
+     "tactic": "rfl (rw's closing `try (with_reducible rfl)`)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ]
+   ],
+   "notes": "(a) `exact { ... }` originates the goals of both nested `by` blocks (horizon_eq at 471 and representative_eq_boundary at 474). Tactic.elabTerm synthesizes them inside the exact node, which is the deepest enclosing node that holds a goal. (b) The rw at 472 is one rule node; its rfl fails, and the exact at 473 closes the goal. (c) `intro age ageBound`: two binder nodes, as in the other entries; the binder is implicit `{age}`, and lean_goal shows the intermediate goal. (d) `have oldBound : ... := by simpa ...` uses the special `:= by` expansion. The have step originates both ?body (consumed by simpa) and the continuation (consumed by calc). For simpa ... using, the internal [simpa ... using] node is either the consumer or leaves the goal unchanged; either way it is one step. (e) calc: the goal of step `_ = ... := by` originates in the outer calc node. The calc's inner `steps` info node records no goal, because closeMainGoalUsing pops the main goal first, so it cannot be the origin. The first calc step is a term and has no goal. (f) The rw at 483 leaves `some x = some x` (seen with lean_goal at `]`), and rw's trailing `with_reducible rfl` closes it. That rfl node is a separate step at the rw line. Doubt: a tactic-level reading would merge steps 10-11 and 4-5."
+  },
+  {
+   "part": 3,
+   "module": "Mathlib.Geometry.Manifold.VectorBundle.Tensoriality",
+   "declaration": "TensorialAt.zero",
+   "steps": [
+    {
+     "line": 105,
+     "tactic": "calc"
+    },
+    {
+     "line": 106,
+     "tactic": "simp (by simp proving calc step Φ 0 = Φ ((0 : M → 𝕜) • (0 : Π x, V x)))"
+    },
+    {
+     "line": 108,
+     "tactic": "simp (by simp proving calc step _ = 0)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. Tactic-mode calc (Lean v4.32 evalCalc): the outer calc node consumes the statement goal. The goals of the two `by simp` step proofs are produced by no node; calc's inner info node on the calc steps holds no goal (closeMainGoalUsing pops the main goal first and no other goal exists), so the deepest enclosing node holding some goal is the calc node, which originates both (edges 0->1, 0->2). The middle step is a term proof (hΦ.smul ...) that runs no tactic (checked: no autoParam arguments), so it gives no step. No doubts."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.SequentialFigure7ContinuationCreditPreservation",
+   "declaration": "ProofNetIR.SequentialFigure7.WaitStep.continuationCredit_of_rawMateSelected",
+   "steps": [
+    {
+     "line": 388,
+     "tactic": "let opposite := connectiveBelowAtMateEq consumer structural selected"
+    },
+    {
+     "line": 390,
+     "tactic": "have sameConclusion : consumer.conclusion = step.consumer.conclusion := by"
+    },
+    {
+     "line": 392,
+     "tactic": "calc consumer.conclusion = opposite.conclusion := ... _ = step.consumer.conclusion := ..."
+    },
+    {
+     "line": 398,
+     "tactic": "apply ContinuationCredit.futureConclusion consumer step.destination.boundary"
+    },
+    {
+     "line": 400,
+     "tactic": "sameConclusion (the single rule of rw [sameConclusion])"
+    },
+    {
+     "line": 401,
+     "tactic": "rcases step.destination.exact with ⟨payload, _beforeCell, afterCell, _marks, _nextAge, _sigma, _ready, _core, _tags⟩"
+    },
+    {
+     "line": 404,
+     "tactic": "exact FutureWorkAt.waiting afterCell (by simp)"
+    },
+    {
+     "line": 404,
+     "tactic": "simp"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "notes": "The calc tactic (Elab/Tactic/Calc.lean) runs closeMainGoalUsing, which pops the goal before its internal `steps` info node, so that node holds no goals (the display inside the steps shows none). Both calc steps are term proofs, so no calc-step goal is ever mentioned, and calc is one step consuming the have body goal. The have ... := by is one step (the internal refine) originating the body goal and the continuation, which apply consumes. rw [sameConclusion] has one rule node, the step. Its closing `with_reducible rfl` fails on FutureWorkAt; the kept failed nodes change no goal, so there is no rfl step and nothing is dropped. The nested `by simp` goal (`step.consumer.conclusion ∈ step.consumer.conclusion :: payload`) originates in the exact. apply leaves exactly one goal."
+  },
+  {
+   "part": 1,
+   "module": "ProofNetIR.Sequentialization",
+   "declaration": "ProofNetIR.Certificate.TerminalTensor.tensorPlacement_inverse_conclusion",
+   "steps": [
+    {
+     "line": 13460,
+     "tactic": "let placement := TerminalTensor.tensorPlacement structural terminal"
+    },
+    {
+     "line": 13461,
+     "tactic": "have forward := TerminalTensor.tensorPlacement_forward_last structural terminal"
+    },
+    {
+     "line": 13462,
+     "tactic": "calc"
+    },
+    {
+     "line": 13467,
+     "tactic": "exact congrArg placement.inverse forward.symm"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "notes": "let and have (term value, no by) are one step each: their inner refine (from refine_lift) consumes the goal and originates the continuation goal. calc consumes the main goal. The goal of the first calc step's 'by' block is produced by no node and originates in the calc node: calc pops the main goal before elaborating its steps, so its inner info node over the steps holds no goal and the calc node is the deepest enclosing node holding a goal. The second calc step is a term ('placement.inverse_forward _') and gives no step. No doubts."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.SequentialFigure7UnifyPayload",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.realizesSigma",
+   "steps": [
+    {
+     "line": 980,
+     "tactic": "have tensorRealizes := step.tensor_realizesSigma"
+    },
+    {
+     "line": 981,
+     "tactic": "have marksEquation := step.activationFold.marks_eq"
+    },
+    {
+     "line": 982,
+     "tactic": "have parentsEquation := step.activationFold.parents_eq"
+    },
+    {
+     "line": 983,
+     "tactic": "exact { marks_eq := by ..., horizon_eq := by ..., representative_eq_boundary := by ... }"
+    },
+    {
+     "line": 985,
+     "tactic": "rw rule marksEquation"
+    },
+    {
+     "line": 986,
+     "tactic": "exact tensorRealizes.marks_eq"
+    },
+    {
+     "line": 988,
+     "tactic": "rw rule parentsEquation"
+    },
+    {
+     "line": 989,
+     "tactic": "exact tensorRealizes.horizon_eq"
+    },
+    {
+     "line": 991,
+     "tactic": "intro age (first binder node of `intro age ageBound`)"
+    },
+    {
+     "line": 991,
+     "tactic": "ageBound (last binder node of `intro age ageBound`)"
+    },
+    {
+     "line": 992,
+     "tactic": "calc"
+    },
+    {
+     "line": 997,
+     "tactic": "unfold UnificationState.representative"
+    },
+    {
+     "line": 998,
+     "tactic": "rw rule parentsEquation"
+    },
+    {
+     "line": 998,
+     "tactic": "rfl (rw's closing `try (with_reducible rfl)`)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ]
+   ],
+   "notes": "(a) `exact { ... }` originates the goals of the three nested `by` blocks (984, 987, 990), which are elaborated inside the exact node. (b) The rws at 985 and 988 are single rule nodes; their rfl fails (checked), so no rfl step. (c) `intro age ageBound`: two binder nodes. (d) calc: the goal of the second calc step (the nested `by` at 996) originates in the outer calc node. The inner `steps` node records no goal, because the main goal was already popped. (e) At 998 the rewrite makes both sides identical, and rw's trailing `with_reducible rfl` closes the goal (lean_goal: no goals at line end). This counts as a separate rfl step at the rw line. Doubt: a tactic-level reading would merge steps 12-13 and 8-9."
+  },
+  {
+   "part": 3,
+   "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+   "declaration": "smul_ball",
+   "steps": [
+    {
+     "line": 82,
+     "tactic": "ext y"
+    },
+    {
+     "line": 83,
+     "tactic": "rw [mem_smul_set_iff_inv_smul_mem₀ hc]"
+    },
+    {
+     "line": 84,
+     "tactic": "conv_lhs => rw [← inv_smul_smul₀ hc x] (its conv node: conv => lhs; (rw [...]))"
+    },
+    {
+     "line": 84,
+     "tactic": "lhs (conv tactic inserted by the conv_lhs macro)"
+    },
+    {
+     "line": 84,
+     "tactic": "rw [← inv_smul_smul₀ hc x] (conv-mode rewrite rule)"
+    },
+    {
+     "line": 85,
+     "tactic": "simp [← div_eq_inv_mul, div_lt_iff₀ (norm_pos_iff.2 hc), mul_comm _ r, dist_smul₀]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. `ext y`: one node. `rw [...]`: one rewrite-rule node; the rw macro's trailing `try (with_reducible rfl)` fails and leaves the goal unchanged, so it gives no step. `conv_lhs => cs` is a Mathlib macro for `conv => lhs; (cs)`. The conv node (step 2) consumes the main goal and originates both the new main goal (consumed by simp: edge 2->5) and the conv goal `| lhs = ?rhs`, which conv creates internally and first mentions in its inner `conv =>` node, so no node produces it (edge 2->3). Step 3 is the conv tactic `lhs` inserted by the macro: it has no source text, and its synthesized syntax carries the position of conv_lhs (line 84); it replaces the conv goal by the conv goal on the left-hand side, which the conv-mode rewrite rule (step 4) consumes. The goal produced by step 4 is closed by the refl inside conv (not a node), so it has no consumer; conv's own trailing `try with_reducible rfl` on the main goal fails and gives no step. Doubt: the macro-inserted `lhs` counts as a step under the definition, since it consumes and produces a goal; if synthesized nodes were meant to be skipped, drop step 3 and replace edges [2,3],[3,4] by [2,4] (5 steps)."
+  },
+  {
+   "part": 0,
+   "module": "Mathlib.Algebra.AddConstMap.Basic",
+   "declaration": "AddConstMapClass.map_sub_nsmul",
+   "steps": [
+    {
+     "line": 169,
+     "tactic": "conv => rhs; (rw [...]) (the conv node that conv_rhs expands to)"
+    },
+    {
+     "line": 169,
+     "tactic": "rhs (conv, from the conv_rhs expansion)"
+    },
+    {
+     "line": 169,
+     "tactic": "← sub_add_cancel x (n • a) (conv rw rule 1)"
+    },
+    {
+     "line": 169,
+     "tactic": "map_add_nsmul (conv rw rule 2)"
+    },
+    {
+     "line": 169,
+     "tactic": "add_sub_cancel_right (conv rw rule 3)"
+    },
+    {
+     "line": 169,
+     "tactic": "rfl (conv's closing try with_reducible rfl on f (x - n • a) = f (x - n • a))"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     0,
+     5
+    ]
+   ],
+   "notes": "Mathlib's conv_rhs => s expands to `conv => rhs; (s)`, and the conv-mode rw expands to rewrite (no rfl). evalConv/convTarget make a fresh conv goal `| f (x - n • a) = f x - n • b`, first mentioned by the internal [conv =>] info node. After the code, replaceTargetEq makes the main goal `f (x - n • a) = f (x - n • a)`, first mentioned by conv's `try with_reducible rfl`. Neither has a producer; both originate in the conv node (step 0), which also consumes the statement goal. rhs consumes the first conv goal and originates `| f x - n • b`. Each rule consumes one conv goal and originates the next; the displays at the rule columns confirm the goals `| f (x - n • a) + n • b - n • b` and `| f (x - n • a)`. The last conv goal is closed by convert's refl loop outside any node, so nothing consumes it. conv_rhs, the user's conv rw and its rewrite node are containers. The conv internals (conv, rhs, rfl) and rule granularity are the doubt. If conv internals and rw rules are not nodes of their own, the graph is 2 steps (conv_rhs, rw) with edge [[0,1]]."
+  },
+  {
+   "part": 1,
+   "module": "Mathlib.Analysis.Analytic.IteratedFDeriv",
+   "declaration": "AnalyticOn.iteratedFDerivWithin_comp_perm",
+   "steps": [
+    {
+     "line": 238,
+     "tactic": "rcases h x hx with ⟨p, r, hp⟩"
+    },
+    {
+     "line": 239,
+     "tactic": "rw [...] rule 1: hp.iteratedFDerivWithin_eq_sum h hs hx"
+    },
+    {
+     "line": 239,
+     "tactic": "rw [...] rule 2: hp.iteratedFDerivWithin_eq_sum h hs hx"
+    },
+    {
+     "line": 240,
+     "tactic": "conv_rhs => ... (its conv node)"
+    },
+    {
+     "line": 240,
+     "tactic": "rhs (inserted by the conv_rhs macro)"
+    },
+    {
+     "line": 240,
+     "tactic": "rw [← Equiv.sum_comp (Equiv.mulLeft σ)] (conv mode)"
+    },
+    {
+     "line": 241,
+     "tactic": "simp only [coe_mulLeft, Perm.coe_mul, Function.comp_apply]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     3,
+     6
+    ]
+   ],
+   "notes": "Definition applied literally to the Lean 4.32 info tree. (a) rw records one info node per rewrite rule (Lean displays the goal between the two rules: left side rewritten, right side not yet), so each rule consumes the previous goal and originates the next: two chained steps on line 239; the 'try (with_reducible rfl)' that rw appends fails and gives no step. (b) 'conv_rhs => cs' expands to 'conv => rhs; (cs)'. The conv node consumes the main goal and originates both the rewritten main goal and the conv goal '| lhs = rhs' (produced by no node, first mentioned by conv's inner node, which is a container). 'rhs' consumes that conv goal and originates '| ∑ σ, (p n) fun i ↦ v (σ i)'. The conv-mode rewrite rule consumes it and originates '| ∑ i, ...', which conv closes by refl without an info node, so that goal has no consumer. simp only consumes the conv node's rewritten main goal (edge 3->6). Doubt: the written statement 'one node per tactic invocation' does not cover rw's per-rule nodes or the 'rhs' that conv_rhs inserts. At tactic granularity (one step per source tactic) the graph is 5 steps [rcases 238, rw 239, conv_rhs 240, rw 240, simp only 241] with edges [0,1],[1,2],[2,3],[2,4]."
+  },
+  {
+   "part": 2,
+   "module": "Mathlib.Data.Nat.Digits.Lemmas",
+   "declaration": "Nat.ofDigits_modEq'",
+   "steps": [
+    {
+     "line": 242,
+     "tactic": "induction L with (header node `induction L with`)"
+    },
+    {
+     "line": 243,
+     "tactic": "rfl"
+    },
+    {
+     "line": 245,
+     "tactic": "dsimp [ofDigits]"
+    },
+    {
+     "line": 246,
+     "tactic": "dsimp [Nat.ModEq] at *"
+    },
+    {
+     "line": 247,
+     "tactic": "conv_lhs => rw [Nat.add_mod, Nat.mul_mod, h, ih] (the `conv => lhs; (...)` elaborator node)"
+    },
+    {
+     "line": 247,
+     "tactic": "lhs (conv tactic inserted by conv_lhs)"
+    },
+    {
+     "line": 247,
+     "tactic": "conv rw rule Nat.add_mod"
+    },
+    {
+     "line": 247,
+     "tactic": "conv rw rule Nat.mul_mod"
+    },
+    {
+     "line": 247,
+     "tactic": "conv rw rule h"
+    },
+    {
+     "line": 247,
+     "tactic": "conv rw rule ih"
+    },
+    {
+     "line": 248,
+     "tactic": "conv_rhs => rw [Nat.add_mod, Nat.mul_mod] (the `conv => rhs; (...)` elaborator node)"
+    },
+    {
+     "line": 248,
+     "tactic": "rhs (conv tactic inserted by conv_rhs)"
+    },
+    {
+     "line": 248,
+     "tactic": "conv rw rule Nat.add_mod"
+    },
+    {
+     "line": 248,
+     "tactic": "conv rw rule Nat.mul_mod"
+    },
+    {
+     "line": 248,
+     "tactic": "rfl (conv's closing `try with_reducible rfl`)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     4,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     10,
+     14
+    ]
+   ],
+   "notes": "(a) induction: one header-node step, as in the other entries. (b) Mathlib expands `conv_lhs => seq` to `conv => lhs; (seq)`. The conv elaborator node consumes the main goal. It originates the conv goal `| lhs = ?rhs`, which is first mentioned in its inner [conv =>] info node, and it produces the new main goal left by replaceTargetEq, because the trailing `try with_reducible rfl` fails here. lean_goal at line 248 shows that goal still open. The macro-inserted `lhs` then turns the conv goal into `| (d + b * ofDigits b L) % k`, and each conv rewrite rule has its own node. lean_goal at columns 17 and 34 shows the intermediate conv goals. The last conv goal is closed by convert's Meta-level refl, which is not a node, so nothing consumes it. (c) conv_rhs has the same shape, and its trailing `try with_reducible rfl` closes the new main goal, whose two sides are identical. That goal is first mentioned in the try node inside the conv node, so it originates at the conv node, and the rfl node consumes it (step 14, line of conv_rhs). Doubts: the macro-inserted lhs/rhs and the per-rule nodes are steps under the node-level definition; a tactic-level reading would collapse steps 4-9 and 10-14, possibly keeping a separate rfl. The conv and macro containers (conv_lhs macro node, inner [conv =>] node, `;` token node, paren, conv rw/rewrite nodes, the failed rfl attempt) are not steps."
+  },
+  {
+   "part": 3,
+   "module": "Mathlib.Data.QPF.Univariate.Basic",
+   "declaration": "QPF.Cofix.dest_corec",
+   "steps": [
+    {
+     "line": 370,
+     "tactic": "conv =>"
+    },
+    {
+     "line": 371,
+     "tactic": "lhs"
+    },
+    {
+     "line": 372,
+     "tactic": "rw [Cofix.dest, Cofix.corec] (conv mode), rule Cofix.dest"
+    },
+    {
+     "line": 372,
+     "tactic": "rw [Cofix.dest, Cofix.corec] (conv mode), rule Cofix.corec"
+    },
+    {
+     "line": 373,
+     "tactic": "dsimp"
+    },
+    {
+     "line": 374,
+     "tactic": "rw [corecF_eq, abs_map, abs_repr, ← comp_map], rule corecF_eq"
+    },
+    {
+     "line": 374,
+     "tactic": "rw [corecF_eq, abs_map, abs_repr, ← comp_map], rule abs_map"
+    },
+    {
+     "line": 374,
+     "tactic": "rw [corecF_eq, abs_map, abs_repr, ← comp_map], rule abs_repr"
+    },
+    {
+     "line": 374,
+     "tactic": "rw [corecF_eq, abs_map, abs_repr, ← comp_map], rule ← comp_map"
+    },
+    {
+     "line": 374,
+     "tactic": "rfl"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "notes": "Goals checked with lean_goal, including the state after every rewrite rule; no diagnostics. The conv node consumes the statement goal and originates the conv goal (created inside conv, produced by no node; edge 0->1 to `lhs`) and the post-conv main goal (edge 0->4 to dsimp). Lean's rewrite (withRWRulesSeq) makes one info node per rule, and each rule replaces the goal by a new one (checked: every rule changes the goal), so by the definition each rule is its own step, chained to the next: conv-mode `rw [Cofix.dest, Cofix.corec]` gives steps 2-3 and `rw [corecF_eq, abs_map, abs_repr, ← comp_map]` gives steps 5-8. The rw macro's trailing `try (with_reducible rfl)` fails without changing the goal (the explicit rfl is still needed): no step. `rfl` (step 9) closes the goal; its successful macro alternative is a child node on the same line, so it is one step. The conv goal produced by the last conv rule is closed by conv's internal refl, which is not a node, so it has no consumer; conv's own final `try with_reducible rfl` fails: no step. Doubt: if one multi-rule rw is meant to be one step, merge steps 2-3 and steps 5-8 (6 steps, edges [[0,1],[1,2],[0,3],[3,4],[4,5]])."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.SequentialFigure7UnifyOne",
+   "declaration": "ProofNetIR.SequentialFigure7.waitingParProducer?_eq_some",
+   "steps": [
+    {
+     "line": 101,
+     "tactic": "rcases producer with ⟨producerIndex, producerLeft, producerRight, producerSource, producerLink, producerWellFormed⟩"
+    },
+    {
+     "line": 104,
+     "tactic": "unfold waitingParProducer?"
+    },
+    {
+     "line": 105,
+     "tactic": "split"
+    },
+    {
+     "line": 106,
+     "tactic": "next linkIndex left right actualConclusion sourceEquation =>"
+    },
+    {
+     "line": 107,
+     "tactic": "have singletonEquation : ({ linkIndex := linkIndex, link := .par left right actualConclusion } : SequentialUnification.SourceIncidence) = { linkIndex := producerIndex, link := .par producerLeft producerRight conclusion } := by"
+    },
+    {
+     "line": 115,
+     "tactic": "exact List.singleton_inj.mp (Option.some.inj (sourceEquation.symm.trans producerSource))"
+    },
+    {
+     "line": 117,
+     "tactic": "have indexEquation : linkIndex = producerIndex := congrArg SequentialUnification.SourceIncidence.linkIndex singletonEquation"
+    },
+    {
+     "line": 120,
+     "tactic": "have linkValueEquation : (.par left right actualConclusion : Link) = .par producerLeft producerRight conclusion := congrArg SequentialUnification.SourceIncidence.link singletonEquation"
+    },
+    {
+     "line": 125,
+     "tactic": "injection linkValueEquation with leftEquation rightEquation conclusionEquation"
+    },
+    {
+     "line": 126,
+     "tactic": "subst linkIndex"
+    },
+    {
+     "line": 127,
+     "tactic": "subst left"
+    },
+    {
+     "line": 128,
+     "tactic": "subst right"
+    },
+    {
+     "line": 129,
+     "tactic": "subst actualConclusion"
+    },
+    {
+     "line": 130,
+     "tactic": "simp [producerLink, (certificate.linkLocallyWellFormed_iff (.par producerLeft producerRight conclusion)).mpr producerWellFormed]"
+    },
+    {
+     "line": 134,
+     "tactic": "next sourceEquation =>"
+    },
+    {
+     "line": 135,
+     "tactic": "exact False.elim (sourceEquation producerIndex producerLeft producerRight conclusion producerSource)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     2,
+     14
+    ],
+    [
+     14,
+     15
+    ]
+   ],
+   "notes": "split yields h_1 and h_2, whose new hypotheses are inaccessible. `next xs =>` expands to `case _ xs =>`, and renameInaccessibles with at least one name creates a fresh goal, first mentioned by case's inner [case =>] info node. So each next (its internal case node, on the next line) consumes the split goal and originates the renamed goal: a step, not a container. The next macro node is the container. The have ... := by is one step originating the body goal (consumed by the exact at 115) and the continuation. injection, the four substs and unfold each replace the goal (confirmed by the displays)."
+  },
+  {
+   "part": 1,
+   "module": "Mathlib.Algebra.GradedMonoid",
+   "declaration": "SetLike.prod_mem_graded",
+   "steps": [
+    {
+     "line": 681,
+     "tactic": "induction F using Finset.induction_on"
+    },
+    {
+     "line": 682,
+     "tactic": "simp [GradedOne.one_mem]"
+    },
+    {
+     "line": 683,
+     "tactic": "case insert j F' hF2 h3 =>"
+    },
+    {
+     "line": 684,
+     "tactic": "rw [...] rule 1: Finset.prod_insert hF2"
+    },
+    {
+     "line": 684,
+     "tactic": "rw [...] rule 2: Finset.sum_insert hF2"
+    },
+    {
+     "line": 685,
+     "tactic": "apply SetLike.mul_mem_graded (by grind)"
+    },
+    {
+     "line": 685,
+     "tactic": "grind"
+    },
+    {
+     "line": 686,
+     "tactic": "grind"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "notes": "classical wraps the rest of the block and does not change the goal: container. induction without 'with' originates the 'empty' and 'insert' goals. Both '·' are containers. 'case insert j F' hF2 h3 =>' renames inaccessible hypotheses, which creates a new goal (produced by no node, first mentioned by the case's inner node), so the case node is a step: it consumes the insert goal and originates the renamed goal. rw with two rules gives two chained steps (Lean displays the goal after the first rule); its rfl attempt fails. apply consumes the rewritten goal and originates the remaining goal '∏ x ∈ F', g x ∈ A (∑ x ∈ F', i x)' (closed by the grind on line 686) and, by the nested-by rule, the goal 'g j ∈ A (i j)' of '(by grind)' (the grind on line 685, which runs after apply's unification, so it is listed after apply). Doubt: at tactic granularity (rw as one step) this is 7 steps [induction 681, simp 682, case 683, rw 684, apply 685, grind 685, grind 686] with edges [0,1],[0,2],[2,3],[3,4],[4,5],[4,6]."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.SequentialFigure7Rules",
+   "declaration": "ProofNetIR.SequentialFigure7.exists_prepare?_eq_some_of_ok",
+   "steps": [
+    {
+     "line": 403,
+     "tactic": "let prepared : PreparedStep before := { stackResult coreMarked stack_eq := stackEquation core_mark_eq := coreEquation }"
+    },
+    {
+     "line": 408,
+     "tactic": "refine ⟨prepared, ?_⟩"
+    },
+    {
+     "line": 409,
+     "tactic": "unfold prepare?"
+    },
+    {
+     "line": 410,
+     "tactic": "split"
+    },
+    {
+     "line": 411,
+     "tactic": "next stackError stackFailure =>"
+    },
+    {
+     "line": 412,
+     "tactic": "rw [stackEquation] at stackFailure"
+    },
+    {
+     "line": 413,
+     "tactic": "simp at stackFailure"
+    },
+    {
+     "line": 414,
+     "tactic": "next actualStack stackSuccess =>"
+    },
+    {
+     "line": 415,
+     "tactic": "have actualStackEq : actualStack = stackResult := Except.ok.inj (stackSuccess.symm.trans stackEquation)"
+    },
+    {
+     "line": 417,
+     "tactic": "subst actualStack"
+    },
+    {
+     "line": 418,
+     "tactic": "split"
+    },
+    {
+     "line": 419,
+     "tactic": "next coreError coreFailure =>"
+    },
+    {
+     "line": 420,
+     "tactic": "rw [coreEquation] at coreFailure"
+    },
+    {
+     "line": 421,
+     "tactic": "simp at coreFailure"
+    },
+    {
+     "line": 422,
+     "tactic": "next actualCore coreSuccess =>"
+    },
+    {
+     "line": 423,
+     "tactic": "have actualCoreEq : actualCore = coreMarked := Except.ok.inj (coreSuccess.symm.trans coreEquation)"
+    },
+    {
+     "line": 425,
+     "tactic": "subst actualCore"
+    },
+    {
+     "line": 426,
+     "tactic": "congr 2"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     10,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ]
+   ],
+   "notes": "`next x y =>` expands to `case _ x y =>`. renameInaccessibles creates a new goal, with the inaccessible `a✝`/`heq✝` renamed. So the case node consumes the split goal and originates the renamed goal, which is first mentioned in its inner [case =>] node. This is the definition's `case tag x y =>` clause. The `next` macro node and the inner node are containers. Doubt: statement 3 lists `next` among focusing containers. I read 'without new names' as covering `next` as well, and all four `next`s here name hypotheses. If `next` were a pure container, steps 4, 7, 11 and 14 would disappear and each split would link directly to the first tactic of the branch. Each `rw ... at h` is one rule node, and its trailing rfl fails on `none = some prepared`. `let` uses the refine_lift expansion and is one step. `split` produces h_1 and h_2 directly (checked). `simp at h` closes the goal from a contradictory hypothesis."
+  },
+  {
+   "part": 3,
+   "module": "ProofNetIR.SequentialRoute",
+   "declaration": "ProofNetIR.SequentialUnification.SourceLeftChain.reachable_of_head_last",
+   "steps": [
+    {
+     "line": 154,
+     "tactic": "induction chain generalizing source target with"
+    },
+    {
+     "line": 156,
+     "tactic": "simp only [List.head?_cons, Option.some.injEq] at head"
+    },
+    {
+     "line": 157,
+     "tactic": "simp only [List.getLast?_singleton, Option.some.injEq] at last"
+    },
+    {
+     "line": 158,
+     "tactic": "subst source"
+    },
+    {
+     "line": 159,
+     "tactic": "subst target"
+    },
+    {
+     "line": 160,
+     "tactic": "exact .refl vertex"
+    },
+    {
+     "line": 162,
+     "tactic": "simp only [List.head?_cons, Option.some.injEq] at head"
+    },
+    {
+     "line": 163,
+     "tactic": "subst source"
+    },
+    {
+     "line": 164,
+     "tactic": "have restHead : (next :: tail).head? = some next := by"
+    },
+    {
+     "line": 165,
+     "tactic": "simp"
+    },
+    {
+     "line": 166,
+     "tactic": "have restLast : (next :: tail).getLast? = some target := by"
+    },
+    {
+     "line": 167,
+     "tactic": "simpa [List.getLast?_cons_of_ne_nil (by simp : next :: tail ≠ [])] using last"
+    },
+    {
+     "line": 169,
+     "tactic": "exact .step step (induction restHead restLast)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     0,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     10,
+     12
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. The alternative goals of induction ... with originate in the induction node (edges 0->1, 0->6). In Lean v4.32, `have x : T := by tac` expands to `focus; refine no_implicit_lambda% (have x : T := ?body; ?_); case body => tac`; the refine node consumes the goal and produces both ?body and the continuation, so each such have is one step that originates its body goal (edge to the first body tactic) and its continuation (edge to the next tactic). DEFINITION GAP at line 167, decided literally. The simp phase of this simpa makes no progress on its goal (checked with lean_multi_attempt, which does not write the file: `simp [List.getLast?_cons_of_ne_nil (by simp : next :: tail ≠ [])]` reports 'simp made no progress'). So simpa's internal `simpa ... using` node leaves the goal as it was, and by the correction the outer simpa node consumes the goal (step 11, edge 10->11). The simp-lemma argument `(by simp : next :: tail ≠ [])` is elaborated in mkSimpContext before that internal node is created, and its info tree is then re-nested under the internal node. Its goal is therefore produced by no node and originates in the internal node, the deepest enclosing node that holds a goal (the have-body goal). That internal node consumes nothing. The goal it held is consumed by its ancestor (the outer simpa), not by a descendant, so the merge rule does not apply. It is thus a step that consumes nothing and is not live, and the nested `simp` consumes a goal produced by a non-live step, so it is not live either: both are dropped. Alternatives the audit may intend: (C) 'one tactic is one step' (merge the internal node into the simpa step) adds step {line 167, 'simp (nested by in the simp list)'} as index 12, moves exact to index 13, with edges [[0,1],[1,2],[2,3],[3,4],[4,5],[0,6],[6,7],[7,8],[8,9],[8,10],[10,11],[11,12],[10,13]] (14 steps, 13 edges). (B) If every nested by counts as a root node for liveness, the nested simp is kept but has no incoming edge (14 steps, 12 edges). The family label 'case-next' matches only the identifier `next`: no case/next tactic occurs."
+  },
+  {
+   "part": 0,
+   "module": "Mathlib.ModelTheory.Semantics",
+   "declaration": "FirstOrder.Language.BoundedFormula.realize_foldr_imp",
+   "steps": [
+    {
+     "line": 294,
+     "tactic": "intro v (first binder node of intro v xs)"
+    },
+    {
+     "line": 294,
+     "tactic": "xs (second binder node of intro v xs)"
+    },
+    {
+     "line": 295,
+     "tactic": "induction l"
+    },
+    {
+     "line": 296,
+     "tactic": "simp"
+    },
+    {
+     "line": 297,
+     "tactic": "next f' _ _ =>"
+    },
+    {
+     "line": 297,
+     "tactic": "by_cases f'.Realize v xs"
+    },
+    {
+     "line": 297,
+     "tactic": "simp [*] (on case pos)"
+    },
+    {
+     "line": 297,
+     "tactic": "simp [*] (on case neg)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "notes": "intro v xs: in 4.32 evalIntro wraps each binder in its own info node ([intro v], then [xs]). The first originates `∀ xs, ...` (shown at column 9), the last originates the final goal (the 'produces through its last child' case), and the intro node is a container. So it is two steps. As one step the graph would be 7 steps with edges [[0,1],[1,2],[1,3],[3,4],[4,5],[4,6]]. induction l without `with` itself produces nil and cons. `next => simp` has no names, so case keeps the same goal and is a container; simp consumes nil. `next f' _ _` renames head✝ to f', making a new goal, so its case node is a step. by_cases expands to `open Classical in refine if h : _ then ?pos else ?neg`; that refine is the step originating pos and neg. simp [*] runs once per goal through <;>."
+  },
+  {
+   "part": 1,
+   "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentEscapeTemporal",
+   "declaration": "ProofNetIR.SequentialFigure7.tensorSibling_not_owned",
+   "steps": [
+    {
+     "line": 547,
+     "tactic": "have linkMembership : Link.tensor left right conclusion ∈ certificate.links := List.mem_of_getElem? linkLookup"
+    },
+    {
+     "line": 549,
+     "tactic": "have premiseCases : premise = left ∨ premise = right := by"
+    },
+    {
+     "line": 550,
+     "tactic": "simpa [Link.premises] using premiseMembership"
+    },
+    {
+     "line": 551,
+     "tactic": "rcases premiseCases with premiseEq | premiseEq"
+    },
+    {
+     "line": 552,
+     "tactic": "subst premise"
+    },
+    {
+     "line": 553,
+     "tactic": "refine ⟨right, Or.inl ⟨rfl, rfl⟩, ?_⟩"
+    },
+    {
+     "line": 554,
+     "tactic": "intro rightOwned"
+    },
+    {
+     "line": 555,
+     "tactic": "rcases occurrence.referencePath_within_owned premiseOwned rightOwned with ⟨path, pathStarts, pathFinishes, pathWithin⟩"
+    },
+    {
+     "line": 557,
+     "tactic": "apply referenceAcyclic_no_tensorBypass structural acyclic linkMembership path pathStarts pathFinishes"
+    },
+    {
+     "line": 559,
+     "tactic": "intro conclusionInPath"
+    },
+    {
+     "line": 560,
+     "tactic": "exact conclusionNotOwned (pathWithin conclusion conclusionInPath)"
+    },
+    {
+     "line": 561,
+     "tactic": "subst premise"
+    },
+    {
+     "line": 562,
+     "tactic": "refine ⟨left, Or.inr ⟨rfl, rfl⟩, ?_⟩"
+    },
+    {
+     "line": 563,
+     "tactic": "intro leftOwned"
+    },
+    {
+     "line": 564,
+     "tactic": "rcases occurrence.referencePath_within_owned leftOwned premiseOwned with ⟨path, pathStarts, pathFinishes, pathWithin⟩"
+    },
+    {
+     "line": 566,
+     "tactic": "apply referenceAcyclic_no_tensorBypass structural acyclic linkMembership path pathStarts pathFinishes"
+    },
+    {
+     "line": 568,
+     "tactic": "intro conclusionInPath"
+    },
+    {
+     "line": 569,
+     "tactic": "exact conclusionNotOwned (pathWithin conclusion conclusionInPath)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     3,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ]
+   ],
+   "notes": "The have with a term value is one step. The 'have ... := by' on line 549 is one step originating the body goal (consumed by the simpa on line 550) and the continuation goal (consumed by rcases). rcases with 'premiseEq | premiseEq' originates the inl and inr goals; both '·' are containers. Each branch is a chain subst -> refine (one '?_' goal) -> intro -> rcases (one goal) -> apply (one remaining goal '¬conclusion ∈ path.vertices') -> intro -> exact. Single-binder intros are one step each. No doubts."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.Graph",
+   "declaration": "ProofNetIR.Graph.retainedIndex_injective_of_kept",
+   "steps": [
+    {
+     "line": 207,
+     "tactic": "rcases Nat.lt_trichotomy first second with less | equal | greater"
+    },
+    {
+     "line": 208,
+     "tactic": "have strict := retainedIndex_lt_of_lt_of_kept less firstKept"
+    },
+    {
+     "line": 209,
+     "tactic": "omega"
+    },
+    {
+     "line": 210,
+     "tactic": "exact equal"
+    },
+    {
+     "line": 211,
+     "tactic": "have strict := retainedIndex_lt_of_lt_of_kept greater secondKept"
+    },
+    {
+     "line": 212,
+     "tactic": "omega"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "notes": "rcases produces the three goals inl, inr.inl and inr.inr directly, all in one node (checked). The bullets are containers. Each bullet's `·` token node only hides the later goals, which are present before later nodes, so it consumes nothing. No doubts."
+  },
+  {
+   "part": 3,
+   "module": "ProofNetIR.Sequentialization",
+   "declaration": "ProofNetIR.Certificate.restrictTo?_linksWellFormed",
+   "steps": [
+    {
+     "line": 11301,
+     "tactic": "intro link (first binder of intro link membership)"
+    },
+    {
+     "line": 11301,
+     "tactic": "membership (second binder of intro link membership)"
+    },
+    {
+     "line": 11302,
+     "tactic": "rw [certificate.restrictTo?_links certificateEquation] at membership"
+    },
+    {
+     "line": 11303,
+     "tactic": "rcases List.mem_filterMap.mp membership with ⟨original, originalMembership, linkEquation⟩"
+    },
+    {
+     "line": 11305,
+     "tactic": "exact (linksWellFormed original originalMembership).restrictTo verticesInBounds boundaryContained certificateEquation linkEquation"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. In Lean v4.32, `intro link membership` makes one child info node per binder (the first spans `intro link`, the second `membership`); lean_goal at `membership` shows the intermediate goal `link ∈ restricted.links → restricted.LinkWellFormed link`. The first child consumes the statement goal and originates that intermediate goal; the last child consumes it and originates the final goal (the multi-binder intro 'produces through its last child'). The intro therefore gives two steps on line 11301 with edge 0->1. Doubt: if a multi-binder intro is meant to be a single step, merge steps 0 and 1 (4 steps, edges [[0,1],[1,2],[2,3]]). `rw [...] at membership`: one rule node replacing the goal; the trailing `try (with_reducible rfl)` fails on `restricted.LinkWellFormed link`: no step. rcases yields one goal; exact closes it."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.Certificate.FullyCancellingDependencyCycleAllReflexive.flippedTaggedForwardParCuspState_exists",
+   "steps": [
+    {
+     "line": 39648,
+     "tactic": "rcases allReflexive.flippedParObstruction_exists correct positive closed with ⟨flippedSegments, segmentCount, flattenedNonempty, closedWalk, _cyclicReduced, cuspFree, closingCuspFree, indexedFlipped, allForwardKept, obstruction⟩"
+    },
+    {
+     "line": 39654,
+     "tactic": "have schedulerProvenance : ∀ directed, directed ∈ flippedSegments.flatten → ∃ step segment, ... := by"
+    },
+    {
+     "line": 39665,
+     "tactic": "intro directed (first binder node of intro directed membership)"
+    },
+    {
+     "line": 39665,
+     "tactic": "membership (second binder node of intro directed membership)"
+    },
+    {
+     "line": 39666,
+     "tactic": "exact flippedSchedulerSegment_of_mem_flatten segmentCount indexedFlipped membership"
+    },
+    {
+     "line": 39669,
+     "tactic": "have schedulerLocated : SchedulerLocatedParObstruction certificate chainAt count flippedSegments flippedSegments.flatten := obstruction.schedulerLocated schedulerProvenance prefixInjective"
+    },
+    {
+     "line": 39675,
+     "tactic": "have initialState : SchedulerCyclicParState certificate chainAt count flippedSegments flippedSegments.flatten := ⟨...⟩"
+    },
+    {
+     "line": 39682,
+     "tactic": "have initialTagged := initialState.taggedInitial"
+    },
+    {
+     "line": 39683,
+     "tactic": "rcases schedulerTaggedCyclicParState_forward_exists_traced segmentCount indexedFlipped correct prefixInjective initialTagged with ⟨terminal, terminalExact, forwardTrace⟩"
+    },
+    {
+     "line": 39687,
+     "tactic": "exact ⟨flippedSegments, segmentCount, indexedFlipped, terminal, terminalExact, forwardTrace⟩"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "notes": "Each rcases pattern gives one goal. The have ... := by is one step originating the body goal and the continuation. intro directed membership is two per-binder steps; as one step the graph is 9 steps with edges [[0,1],[1,2],[2,3],[1,4],[4,5],[5,6],[6,7],[7,8]]. Term haves are one step each (internal refine). No nested by, no dropped steps."
+  },
+  {
+   "part": 1,
+   "module": "ProofNetIR.SequentialFigure7PriorityEnabled",
+   "declaration": "ProofNetIR.SequentialFigure7.forward?_success_iff_enabled",
+   "steps": [
+    {
+     "line": 251,
+     "tactic": "constructor"
+    },
+    {
+     "line": 252,
+     "tactic": "rintro ⟨after, equation⟩"
+    },
+    {
+     "line": 253,
+     "tactic": "rcases (forward?_some_iff invariant.toReservationInvariant).mp equation with ⟨step⟩"
+    },
+    {
+     "line": 256,
+     "tactic": "exact step.enabled"
+    },
+    {
+     "line": 257,
+     "tactic": "exact forward?_exists_of_enabled invariant"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     0,
+     4
+    ]
+   ],
+   "notes": "constructor originates the mp and mpr goals; both '·' are containers. On mp: rintro (one goal), rcases with pattern '⟨step⟩' (one goal), exact. On mpr: exact. The rcases step's line is 253, where its first token is; its pattern is on line 255. No doubts."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.DerivationTree",
+   "declaration": "ProofNetIR.CutFreeDerivation.reorder?_exists_of_map_eq_some",
+   "steps": [
+    {
+     "line": 478,
+     "tactic": "rw [reorder?_eq_reorderCandidate?] at accepted ⊢"
+    },
+    {
+     "line": 479,
+     "tactic": "rw [reorderCandidate?_map] at accepted"
+    },
+    {
+     "line": 480,
+     "tactic": "cases candidate : reorderCandidate? values order with ... (whole-tactic node; generalizes the target)"
+    },
+    {
+     "line": 480,
+     "tactic": "cases candidate : reorderCandidate? values order with (header node)"
+    },
+    {
+     "line": 481,
+     "tactic": "simp [candidate] at accepted"
+    },
+    {
+     "line": 483,
+     "tactic": "simp [candidate] at accepted"
+    },
+    {
+     "line": 484,
+     "tactic": "subst mapped"
+    },
+    {
+     "line": 485,
+     "tactic": "exact ⟨reordered, rfl, rfl⟩"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "notes": "(a) Both rws have one rule each (one node each), and the rfl after them fails on the ∃ goal. (b) `cases candidate : e with`: elabElimTargets first generalizes e (MVarId.generalize via liftMetaTacticAux). This replaces the goal before the `cases ... with` header node records its goals-before; lean_goal at 480 already shows `x✝` and `candidate` in context. So the whole-tactic cases node consumes the goal left by the rw and originates the generalized goal, which is first mentioned in the header node. The header node consumes that goal and originates the none/some goals. These are two steps on line 480, with the outer node first. The merge rule does not apply, because the outer node consumes a goal itself. Doubt: a tactic-level reading would merge steps 2-3. (c) In the none branch, `simp ... at accepted` closes the goal; in the some branch it rewrites `accepted`."
+  },
+  {
+   "part": 3,
+   "module": "ProofNetIR.SequentialFigure7MarkedTargetRawReturnSiblingExitOpen",
+   "declaration": "ProofNetIR.SequentialFigure7.MarkedConclusionChain.terminalComparable",
+   "steps": [
+    {
+     "line": 100,
+     "tactic": "induction firstChain generalizing second with"
+    },
+    {
+     "line": 101,
+     "tactic": "exact Or.inl secondChain"
+    },
+    {
+     "line": 104,
+     "tactic": "cases secondChain with"
+    },
+    {
+     "line": 106,
+     "tactic": "exact Or.inr (.step firstConsumer firstMarked firstNotGlobal firstTail)"
+    },
+    {
+     "line": 109,
+     "tactic": "have conclusionEq : firstConsumer.conclusion = secondConsumer.conclusion := connectiveBelowConclusionEq firstConsumer secondConsumer"
+    },
+    {
+     "line": 112,
+     "tactic": "have secondTail' : MarkedConclusionChain certificate state firstConsumer.conclusion second := by"
+    },
+    {
+     "line": 115,
+     "tactic": "rw [conclusionEq]"
+    },
+    {
+     "line": 116,
+     "tactic": "exact secondTail"
+    },
+    {
+     "line": 117,
+     "tactic": "exact induction secondTail'"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. The alternative goals of `induction ... with` originate in the induction node (edges 0->1, 0->2), and those of `cases secondChain with` in the cases node (edges 2->3, 2->4). `have conclusionEq : ... := term` expands through refine_lift; its refine node consumes the step.step goal and originates the continuation: one step. `have secondTail' : ... := by` (the v4.32 have-by expansion, refine with ?body and ?_) is one step that originates the body goal (-> rw, edge 5->6) and the continuation (-> exact induction secondTail', edge 5->8). `rw [conclusionEq]`: one rule node; its trailing `try (with_reducible rfl)` fails: no step. No try/first/repeat runs; the family label 'alternatives' refers to the with-alternatives. No doubts beyond the conventions stated in the other entries."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.ExecutableSequentialization",
+   "declaration": "ProofNetIR.Certificate.list_mapM_eq_some_map_of_forall",
+   "steps": [
+    {
+     "line": 95,
+     "tactic": "induction values with"
+    },
+    {
+     "line": 96,
+     "tactic": "rfl"
+    },
+    {
+     "line": 98,
+     "tactic": "have headDefined := defined head (by simp)"
+    },
+    {
+     "line": 98,
+     "tactic": "simp"
+    },
+    {
+     "line": 99,
+     "tactic": "have tailDefined : ∀ value ∈ tail, function value = some (result value) := by"
+    },
+    {
+     "line": 101,
+     "tactic": "intro value (first binder node of intro value membership)"
+    },
+    {
+     "line": 101,
+     "tactic": "membership (second binder node of intro value membership)"
+    },
+    {
+     "line": 102,
+     "tactic": "exact defined value (by simp [membership])"
+    },
+    {
+     "line": 102,
+     "tactic": "simp [membership]"
+    },
+    {
+     "line": 103,
+     "tactic": "simp [headDefined, ih tailDefined]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     4,
+     9
+    ]
+   ],
+   "notes": "`induction values with` (defined is generalized automatically): its with-node is the step, origin of nil and cons, and the alternatives are containers. rfl is a macro with several alternatives. Failed ones are restored away (restoreInfo := true), and the one that succeeds (probably eq_refl) is the single step on line 96. The nested `by simp` in the term have is run inside the have's internal refine, which originates it (`head ∈ head :: tail`). The one in exact originates in the exact (`value ∈ head :: tail`). intro value membership is two per-binder steps; as one step the graph is 9 steps with edges [[0,1],[0,2],[2,3],[2,4],[4,5],[5,6],[6,7],[4,8]]."
+  },
+  {
+   "part": 1,
+   "module": "Mathlib.LinearAlgebra.ExteriorAlgebra.Grading",
+   "declaration": "ExteriorAlgebra.ιMulti_span",
+   "steps": [
+    {
+     "line": 88,
+     "tactic": "rw [Submodule.eq_top_iff']"
+    },
+    {
+     "line": 89,
+     "tactic": "intro x"
+    },
+    {
+     "line": 90,
+     "tactic": "induction x using DirectSum.Decomposition.inductionOn fun i => ⋀[R]^i M with"
+    },
+    {
+     "line": 91,
+     "tactic": "exact Submodule.zero_mem _"
+    },
+    {
+     "line": 92,
+     "tactic": "exact Submodule.add_mem _ hm hm'"
+    },
+    {
+     "line": 94,
+     "tactic": "let ⟨m, hm⟩ := hm"
+    },
+    {
+     "line": 95,
+     "tactic": "apply Set.mem_of_mem_of_subset hm"
+    },
+    {
+     "line": 96,
+     "tactic": "rw [← ιMulti_span_fixedDegree]"
+    },
+    {
+     "line": 97,
+     "tactic": "refine Submodule.span_mono fun _ hx ↦ ?_"
+    },
+    {
+     "line": 98,
+     "tactic": "obtain ⟨y, rfl⟩ := hx"
+    },
+    {
+     "line": 99,
+     "tactic": "exact ⟨⟨_, y⟩, rfl⟩"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ]
+   ],
+   "notes": "Both rw have a single rule (the rule node is the step) and their trailing rfl attempts fail. 'induction ... using ... with' is one step (its header node) consuming the goal left by 'intro x' and originating the three case goals zero, add and homogeneous (produced by no node; Lean 4.32 runs the alternatives in source order); the '| alt =>' nodes are containers. 'let ⟨m, hm⟩ := hm' is the let tactic (a refine of a match with one '?_'): one step, one goal. apply leaves one goal (the subset), refine one '?_' goal, obtain one goal. No doubts."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.Certificate.runUnificationWorklist_preserves_assigned",
+   "steps": [
+    {
+     "line": 13509,
+     "tactic": "induction fuel generalizing state with (header node)"
+    },
+    {
+     "line": 13511,
+     "tactic": "simpa [runUnificationWorklist] using marked"
+    },
+    {
+     "line": 13513,
+     "tactic": "cases popEquation : popWorklist? state with ... (whole-tactic node; generalizes the target)"
+    },
+    {
+     "line": 13513,
+     "tactic": "cases popEquation : popWorklist? state with (header node)"
+    },
+    {
+     "line": 13515,
+     "tactic": "simpa [runUnificationWorklist, popEquation] using marked"
+    },
+    {
+     "line": 13517,
+     "tactic": "rcases result with ⟨index, popped⟩"
+    },
+    {
+     "line": 13518,
+     "tactic": "have poppedCore : popped.core = state.core := popWorklist?_success_core popEquation"
+    },
+    {
+     "line": 13520,
+     "tactic": "have poppedMarked : popped.core.assignedToken? vertex ≠ none := by"
+    },
+    {
+     "line": 13522,
+     "tactic": "simpa [poppedCore] using marked"
+    },
+    {
+     "line": 13523,
+     "tactic": "have poppedInvariant : WorklistCoreInvariant certificate popped := by"
+    },
+    {
+     "line": 13525,
+     "tactic": "unfold WorklistCoreInvariant at invariant ⊢"
+    },
+    {
+     "line": 13526,
+     "tactic": "simpa [poppedCore] using invariant"
+    },
+    {
+     "line": 13527,
+     "tactic": "have processedMarked : (...).core.assignedToken? vertex ≠ none := processWorklistLink_preserves_assigned structural poppedInvariant.1 poppedMarked"
+    },
+    {
+     "line": 13532,
+     "tactic": "have processedInvariant : WorklistCoreInvariant certificate (...) := processWorklistLink_coreInvariant structural poppedInvariant"
+    },
+    {
+     "line": 13538,
+     "tactic": "simpa [runUnificationWorklist, popEquation] using induction (state := ...) processedInvariant processedMarked"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ]
+   ],
+   "notes": "(a) `induction fuel generalizing state with` is one header-node step. generalizeVars reverts state/invariant/marked only after the header node records its goals-before (lean_goal at 13509 shows the original goal). (b) `cases popEquation : popWorklist? state with` is two steps on 13513, for the same reason as in reorder?_exists_of_map_eq_some: the `h :` generalization replaces the goal before the header node records it (lean_goal shows `x✝`/`popEquation` already present). Doubt: a tactic-level reading would merge steps 2-3. (c) simpa ... using: the internal [simpa ... using] node transforms the goal into its simplified form (seen at 13538). Nothing consumes that simplified goal afterwards, so each simpa is one step. (d) Both `have ... : T := by` use the special expansion, whose refine node originates ?body and the continuation. (e) `rcases result with ⟨index, popped⟩` is a single node."
+  },
+  {
+   "part": 3,
+   "module": "Mathlib.Analysis.RCLike.Basic",
+   "declaration": "RCLike.exists_norm_eq_mul_self",
+   "steps": [
+    {
+     "line": 517,
+     "tactic": "obtain rfl | hx := eq_or_ne x 0"
+    },
+    {
+     "line": 518,
+     "tactic": "exact ⟨1, by simp⟩"
+    },
+    {
+     "line": 518,
+     "tactic": "simp (nested by in exact ⟨1, by simp⟩)"
+    },
+    {
+     "line": 519,
+     "tactic": "exact ⟨‖x‖ / x, by simp [norm_ne_zero_iff.2, hx]⟩"
+    },
+    {
+     "line": 519,
+     "tactic": "simp [norm_ne_zero_iff.2, hx] (nested by)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. `obtain rfl | hx := eq_or_ne x 0` is one rcases node that produces the goals inl (x replaced by 0) and inr (hx : x ≠ 0). Bullets are containers. Each `exact ⟨..., by simp ...⟩` consumes its bullet goal and is the origin of its nested by-goal (the deepest enclosing node that holds a goal), which the nested simp consumes; the nested simp runs after its exact starts, on the same line. No doubts."
+  },
+  {
+   "part": 0,
+   "module": "ProofNetIR.SequentialSchedulerInvariant",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyEmptyStep.map_sum_set_balance",
+   "steps": [
+    {
+     "line": 5684,
+     "tactic": "induction values generalizing index with"
+    },
+    {
+     "line": 5685,
+     "tactic": "simp at lookup"
+    },
+    {
+     "line": 5687,
+     "tactic": "cases index with"
+    },
+    {
+     "line": 5689,
+     "tactic": "have headEq : head = oldValue := by"
+    },
+    {
+     "line": 5689,
+     "tactic": "simpa using lookup"
+    },
+    {
+     "line": 5690,
+     "tactic": "subst head"
+    },
+    {
+     "line": 5691,
+     "tactic": "simp"
+    },
+    {
+     "line": 5692,
+     "tactic": "omega"
+    },
+    {
+     "line": 5694,
+     "tactic": "simp only [List.getElem?_cons_succ] at lookup"
+    },
+    {
+     "line": 5695,
+     "tactic": "simp only [List.set, List.map_cons, List.sum_cons]"
+    },
+    {
+     "line": 5696,
+     "tactic": "have inner := induction lookup"
+    },
+    {
+     "line": 5697,
+     "tactic": "omega"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     2,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ]
+   ],
+   "notes": "Both `induction ... with` and `cases index with` act through their with-nodes, which consume the goal and originate the case goals. The alternatives are containers. simp at lookup closes nil (lookup becomes False). have headEq := by simpa using lookup (4.32 turns it into refine ?body + case body) is one step originating the body `head = oldValue` and the continuation (consumed by subst). simp probably leaves `head = oldValue` unchanged, so the simpa node consumes it through the correction; otherwise its internal node would be the step, on the same line and with the same count. simp at 5691 leaves a goal, which omega closes."
+  },
+  {
+   "part": 1,
+   "module": "Mathlib.Analysis.RCLike.Basic",
+   "declaration": "RCLike.lipschitzWith_im",
+   "steps": [
+    {
+     "line": 1205,
+     "tactic": "intro x (first binder of intro x y)"
+    },
+    {
+     "line": 1205,
+     "tactic": "y (second binder of intro x y)"
+    },
+    {
+     "line": 1206,
+     "tactic": "simp only [ENNReal.coe_one, one_mul, edist_eq_enorm_sub]"
+    },
+    {
+     "line": 1207,
+     "tactic": "calc ‖im x - im y‖ₑ ..."
+    },
+    {
+     "line": 1208,
+     "tactic": "rw [map_sub im x y] (its rewrite-rule node)"
+    },
+    {
+     "line": 1208,
+     "tactic": "with_reducible rfl (appended by that rw)"
+    },
+    {
+     "line": 1209,
+     "tactic": "rw [enorm_le_iff_norm_le] (its rewrite-rule node)"
+    },
+    {
+     "line": 1209,
+     "tactic": "exact norm_im_le_norm (x - y)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "notes": "Definition applied literally to the Lean 4.32 info tree. intro x y records one child node per binder (Lean displays the goal after 'x', '∀ (y : K), ...'), so it is two steps: 'intro x' consumes the statement goal and the 'y' child consumes the intermediate goal and originates the goal simp only consumes (the definition's 'multi-binder intro produces through its last child'). calc consumes the simp-only goal and originates the goals of both 'by' steps (calc pops the main goal first, so its inner node over the steps holds no goal). Line 1208: the rewrite-rule node turns '‖im x - im y‖ₑ = ‖im (x - y)‖ₑ' into '‖im x - im y‖ₑ = ‖im x - im y‖ₑ' (Lean displays this at the ']'), and the 'with_reducible rfl' that rw appends closes it, so two steps, rule first, the rfl node carrying rw's source position. Line 1209: rule step, then exact; that rw's rfl attempt fails. Doubt: the written statement 'one node per tactic invocation' does not cover per-binder intro nodes, per-rule rw nodes or rw's internal rfl. At tactic granularity this is 6 steps [intro x y 1205, simp only 1206, calc 1207, rw 1208, rw 1209, exact 1209] with edges [0,1],[1,2],[2,3],[2,4],[4,5]."
+  },
+  {
+   "part": 2,
+   "module": "ProofNetIR.AcyclicDecision",
+   "declaration": "ProofNetIR.Certificate.referenceSwitchingGraph_connected_eq_true_iff",
+   "steps": [
+    {
+     "line": 511,
+     "tactic": "apply certificate.referenceSwitchingGraph.connected_iff_connected"
+    },
+    {
+     "line": 512,
+     "tactic": "have aligned : certificate.fullGraph.edges.length = certificate.referenceSwitchingMask.length := by"
+    },
+    {
+     "line": 515,
+     "tactic": "change (linkFullEdges certificate.links).length = certificate.referenceSwitchingMask.length"
+    },
+    {
+     "line": 517,
+     "tactic": "exact certificate.referenceFullSwitchingSelection.mask_length.symm"
+    },
+    {
+     "line": 518,
+     "tactic": "simpa [referenceSwitchingGraph] using structural.fullGraph_bounded.retainEdges aligned"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "notes": "apply leaves a single goal (`referenceSwitchingGraph.Bounded`). The have is the v4.32 special `have x : T := by tacs` expansion: focus; refine (have ... := ?body; ?_); case body => with_annotate_state by (tacs). Its refine node produces both ?body, consumed by `change`, and the continuation, consumed by simpa. `change` is a step because the target changes syntactically, so replaceTargetDefEq makes a new goal (checked). The simpa internal node transforms the goal, and it is one step. No doubts beyond the general node-level conventions."
+  },
+  {
+   "part": 3,
+   "module": "ProofNetIR.SequentialFigure7CommitmentSpine",
+   "declaration": "ProofNetIR.SequentialFigure7.CanonicalTagHistory.unify_before_sigma_eq_after_append_active",
+   "steps": [
+    {
+     "line": 137,
+     "tactic": "have middleSigma : step.prepared.after.stack.sigma = step.mergeStep.sigmaPrefix ++ [step.previousBoundary, step.mergeStep.activeBoundary] := by"
+    },
+    {
+     "line": 141,
+     "tactic": "simpa [PreparedStep.after] using step.mergeStep.sigma_eq"
+    },
+    {
+     "line": 142,
+     "tactic": "have beforeSigma : before.stack.sigma = step.mergeStep.sigmaPrefix ++ [step.previousBoundary, step.mergeStep.activeBoundary] := (prepared_sigma_eq_before step.prepared).symm.trans middleSigma"
+    },
+    {
+     "line": 147,
+     "tactic": "have outputStack : after.stack = step.stackAfter := congrArg (fun state : ReservationState ↦ state.stack) step.output_eq"
+    },
+    {
+     "line": 149,
+     "tactic": "have afterSigma : after.stack.sigma = step.mergeStep.sigmaPrefix ++ [step.previousBoundary] := by"
+    },
+    {
+     "line": 152,
+     "tactic": "calc"
+    },
+    {
+     "line": 157,
+     "tactic": "simpa using congrArg (fun stack : SequentialStackState ↦ stack.sigma) step.mergeStep.after_eq"
+    },
+    {
+     "line": 160,
+     "tactic": "rw [beforeSigma, afterSigma], rule beforeSigma"
+    },
+    {
+     "line": 160,
+     "tactic": "rw [beforeSigma, afterSigma], rule afterSigma"
+    },
+    {
+     "line": 161,
+     "tactic": "simp [List.append_assoc]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "notes": "Goals checked with lean_goal; no diagnostics. `have middleSigma` and `have afterSigma` (`: T := by ...`) use the v4.32 have-by expansion (refine with ?body and ?_, then `case body`): each have step originates its body goal and its continuation. `have beforeSigma` and `have outputStack` (`: T := term`) expand through refine_lift: one step each, consuming the previous continuation and originating the next. In afterSigma's body the calc node consumes the body goal. The goal of the step proof `by simpa ...` (line 156) is produced by no node and originates in the calc node, because calc's inner calc-steps node holds no goal (edge 5->6). Each simpa is one step whether or not its simp phase changes the goal (neither has a nested by). `rw [beforeSigma, afterSigma]`: one info node per rule, and both replace the goal, so there are two chained steps on line 160. The trailing `try (with_reducible rfl)` fails: sigmaPrefix ++ [a, b] and sigmaPrefix ++ [a] ++ [b] are not reducibly defeq, and simp still runs afterwards. So no step, and simp consumes the goal from the second rule. Doubt: if one multi-rule rw is meant to be one step, merge steps 7-8 (9 steps, edges [[0,1],[0,2],[2,3],[3,4],[4,5],[5,6],[4,7],[7,8]])."
+  }
+ ]
+}
