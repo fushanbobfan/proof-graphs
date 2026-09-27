@@ -1,0 +1,20 @@
+{
+ "note": "not registered: H40 of golf-v0.2 with pairs clustered by commit, after a review of 2026-09-26",
+ "pairs": 198,
+ "golfedHigher": 137,
+ "commits": 58,
+ "largestCommitPairs": 19,
+ "largestFiveCommitsPairs": 77,
+ "commitVotes": {
+  "higher": 37,
+  "lower": 9,
+  "tied": 12,
+  "signTestHigher": 2.0280180663689862e-05
+ },
+ "shareHigher": 0.691919,
+ "shareInterval95": [
+  0.611842,
+  0.77
+ ],
+ "medianAdjustedDifference": 0.064953
+}

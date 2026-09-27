@@ -80,4 +80,9 @@ golfed text is still verbatim at v4.32.0, and these commits are three releases
 older, so 231 of the 1,329 changed declarations were dropped as changed since
 the golf, against 76 of 416 in golf-v0.1: this sample is filtered toward
 declarations nobody touched for longer. The adjustment uses one reference
-slice, and the pairs of one commit are not independent.
+slice, and the pairs of one commit are not independent. Clustered by commit
+after a review, outside the registration (`scripts/golf_clusters.py`,
+`clusters.json`), the branching result holds: the 198 pairs come from 58
+commits, the largest contributing 19; counting each commit once, 37 favour
+the golfed proof and 9 its predecessor (one-sided p = 2e-5), and resampling
+commits puts the share of pairs at 61 to 77 percent.
