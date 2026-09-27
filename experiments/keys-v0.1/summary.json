@@ -3,419 +3,155 @@
  "preregistrationSha256": "2671c137941c70a2dac8c774f4426f4e31924c110a949727ebc2de88b385c2e0",
  "proverWhole": {
   "units": 200,
-  "audited": 159,
+  "audited": 168,
   "errors": 0,
-  "abandoned": 2,
+  "abandoned": 1,
   "totals": {
-   "expansions": 4472,
-   "children": 12568,
-   "dropped": 2779,
-   "falseDrops": 155,
-   "kept": 9789,
-   "missedDrops": 2660,
+   "expansions": 4703,
+   "children": 13282,
+   "dropped": 2905,
+   "falseDrops": 170,
+   "kept": 10377,
+   "missedDrops": 2804,
    "undefined": 43,
-   "goalDuplicates": 1217,
-   "orderDuplicates": 4,
+   "goalDuplicates": 1277,
+   "orderDuplicates": 7,
    "faithfulUndefined": 96
   },
   "recorded": {
-   "defaultGoal": 223,
-   "defaultOrder": 4,
-   "coarseGoal": 1173,
-   "coarseOrder": 5
+   "defaultGoal": 231,
+   "defaultOrder": 5,
+   "coarseGoal": 1231,
+   "coarseOrder": 8
   },
   "shares": {
-   "faithfulGoal": 0.27213774597495527,
-   "faithfulOrder": 0.0008944543828264759,
-   "defaultGoal": 0.04986583184257603,
-   "coarseGoal": 0.262298747763864,
-   "defaultOrder": 0.0008944543828264759,
-   "falseDrops": 0.05577545879812882,
-   "missedDrops": 0.2717335785064869
+   "faithfulGoal": 0.27152881139698065,
+   "faithfulOrder": 0.001488411652136934,
+   "defaultGoal": 0.049117584520518814,
+   "coarseGoal": 0.2617478205400808,
+   "defaultOrder": 0.00106315118009781,
+   "falseDrops": 0.058519793459552494,
+   "missedDrops": 0.2702129709935434
   },
-  "reconstructionMatches": 159
+  "reconstructionMatches": 168
  },
  "proverWholeRenamed": {
   "units": 200,
-  "audited": 157,
+  "audited": 169,
   "errors": 0,
-  "abandoned": 2,
+  "abandoned": 1,
   "totals": {
-   "expansions": 4093,
-   "children": 11991,
-   "dropped": 4132,
-   "falseDrops": 203,
-   "kept": 7859,
-   "missedDrops": 271,
+   "expansions": 4358,
+   "children": 12612,
+   "dropped": 4335,
+   "falseDrops": 214,
+   "kept": 8277,
+   "missedDrops": 287,
    "undefined": 95,
-   "goalDuplicates": 346,
+   "goalDuplicates": 359,
    "orderDuplicates": 8,
    "faithfulUndefined": 96
   },
   "recorded": {
-   "defaultGoal": 179,
+   "defaultGoal": 184,
    "defaultOrder": 6,
-   "coarseGoal": 249,
+   "coarseGoal": 256,
    "coarseOrder": 9
   },
   "shares": {
-   "faithfulGoal": 0.08453457121915466,
-   "faithfulOrder": 0.0019545565599804545,
-   "defaultGoal": 0.04373320302956267,
-   "coarseGoal": 0.060835572929391644,
-   "defaultOrder": 0.0014659174199853407,
-   "falseDrops": 0.04912875121006777,
-   "missedDrops": 0.034482758620689655
+   "faithfulGoal": 0.08237723726480037,
+   "faithfulOrder": 0.0018357044515832951,
+   "defaultGoal": 0.04222120238641579,
+   "coarseGoal": 0.058742542450665444,
+   "defaultOrder": 0.0013767783386874712,
+   "falseDrops": 0.04936562860438293,
+   "missedDrops": 0.03467439893681285
   },
-  "reconstructionMatches": 157
+  "reconstructionMatches": 169
  },
  "proverAndor": {
   "units": 200,
-  "audited": 157,
+  "audited": 168,
   "errors": 0,
   "abandoned": 2,
   "repeats": {
-   "expansions": 4501,
-   "repeats": 1100,
+   "expansions": 4855,
+   "repeats": 1151,
    "undefined": 96
   },
-  "repeatShare": 0.24439013552543878,
+  "repeatShare": 0.23707518022657054,
   "merges": {
-   "arrivals": 13891,
-   "merged": 2658,
-   "falseMerges": 218,
-   "new": 11233,
-   "missedMerges": 3322,
+   "arrivals": 14765,
+   "merged": 2809,
+   "falseMerges": 244,
+   "new": 11956,
+   "missedMerges": 3425,
    "undefined": 70,
-   "entangled": 166
+   "entangled": 200
   },
-  "falseMergeShare": 0.08201655379984951,
-  "missedMergeShare": 0.2957357785097481,
-  "reconstructionMatches": 157
+  "falseMergeShare": 0.08686365254538982,
+  "missedMergeShare": 0.2864670458347273,
+  "reconstructionMatches": 168
  },
  "proverAndorRenamed": {
   "units": 200,
-  "audited": 157,
+  "audited": 169,
   "errors": 0,
   "abandoned": 0,
   "repeats": {
-   "expansions": 4162,
-   "repeats": 142,
-   "undefined": 97
+   "expansions": 4512,
+   "repeats": 150,
+   "undefined": 96
   },
-  "repeatShare": 0.03411821239788563
+  "repeatShare": 0.03324468085106383
  },
  "menuWhole": {
   "units": 300,
-  "audited": 201,
+  "audited": 258,
   "errors": 0,
-  "abandoned": 10,
+  "abandoned": 0,
   "totals": {
-   "expansions": 2616,
-   "children": 9251,
-   "dropped": 5280,
-   "falseDrops": 304,
-   "kept": 3971,
-   "missedDrops": 642,
-   "undefined": 119,
-   "goalDuplicates": 727,
-   "orderDuplicates": 145,
-   "faithfulUndefined": 42
+   "expansions": 3417,
+   "children": 12221,
+   "dropped": 7009,
+   "falseDrops": 410,
+   "kept": 5212,
+   "missedDrops": 928,
+   "undefined": 118,
+   "goalDuplicates": 974,
+   "orderDuplicates": 178,
+   "faithfulUndefined": 43
   },
   "recorded": {
-   "defaultGoal": 426,
-   "defaultOrder": 147,
-   "coarseGoal": 720,
-   "coarseOrder": 146
+   "defaultGoal": 543,
+   "defaultOrder": 181,
+   "coarseGoal": 956,
+   "coarseOrder": 179
   },
   "shares": {
-   "faithfulGoal": 0.2779051987767584,
-   "faithfulOrder": 0.05542813455657492,
-   "defaultGoal": 0.1628440366972477,
-   "coarseGoal": 0.27522935779816515,
-   "defaultOrder": 0.05619266055045872,
-   "falseDrops": 0.05757575757575758,
-   "missedDrops": 0.16167212289095945
+   "faithfulGoal": 0.28504536142815334,
+   "faithfulOrder": 0.0520924787825578,
+   "defaultGoal": 0.15891132572431957,
+   "coarseGoal": 0.27977758267486097,
+   "defaultOrder": 0.05297044190810653,
+   "falseDrops": 0.058496219146811246,
+   "missedDrops": 0.1780506523407521
   },
-  "reconstructionMatches": 201
+  "reconstructionMatches": 258
  },
  "C10": {
   "compared": 932,
-  "differing": 103,
-  "differences": [
-   {
-    "unit": [
-     "prover",
-     "Mathlib.AlgebraicGeometry.SpreadingOut",
-     "AlgebraicGeometry.Scheme.exists_le_and_germ_injective",
-     "wholeRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     2
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.AlgebraicGeometry.SpreadingOut",
-     "AlgebraicGeometry.Scheme.exists_le_and_germ_injective",
-     "andorRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     5
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.MeasureTheory.Function.LocallyIntegrable",
-     "MeasureTheory.integrableOn_Iio_iff_integrableAtFilter_atBot_nhdsWithin",
-     "andorRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Geometry.Euclidean.Volume.Measure",
-     "Isometry.euclideanHausdorffMeasure_image",
-     "andor"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Geometry.Euclidean.Volume.Measure",
-     "Isometry.euclideanHausdorffMeasure_image",
-     "wholeRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     17
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Geometry.Euclidean.Volume.Measure",
-     "Isometry.euclideanHausdorffMeasure_image",
-     "andorRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Combinatorics.SimpleGraph.Basic",
-     "SimpleGraph.edge_other_incident_set",
-     "whole"
-    ],
-    "now": null,
-    "before": [
-     true,
-     13
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Combinatorics.SimpleGraph.Basic",
-     "SimpleGraph.edge_other_incident_set",
-     "andorRenamed"
-    ],
-    "now": null,
-    "before": [
-     true,
-     12
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
-     "Real.binEntropy_eq_zero",
-     "whole"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
-     "Real.binEntropy_eq_zero",
-     "andor"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.MeasureTheory.Integral.Lebesgue.Markov",
-     "MeasureTheory.meas_le_lintegral\u2080",
-     "andorRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
-     "ValueDistribution.proximity_add_top_le",
-     "whole"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
-     "ValueDistribution.proximity_add_top_le",
-     "andor"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
-     "ValueDistribution.proximity_add_top_le",
-     "andorRenamed"
-    ],
-    "now": [
-     false,
-     3
-    ],
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.CStarAlgebra.Unitary.Span",
-     "CStarAlgebra.span_unitary",
-     "andor"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.CStarAlgebra.Unitary.Span",
-     "CStarAlgebra.span_unitary",
-     "wholeRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     16
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Analysis.CStarAlgebra.Unitary.Span",
-     "CStarAlgebra.span_unitary",
-     "andorRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     16
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.CategoryTheory.Abelian.Pseudoelements",
-     "CategoryTheory.Abelian.Pseudoelement.epi_of_pseudo_surjective",
-     "whole"
-    ],
-    "now": null,
-    "before": [
-     false,
-     48
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis",
-     "AlgebraicIndependent.matroid_spanning_iff_of_subsingleton",
-     "andor"
-    ],
-    "now": null,
-    "before": [
-     false,
-     2
-    ]
-   },
-   {
-    "unit": [
-     "prover",
-     "Mathlib.Algebra.Module.SpanRank",
-     "Submodule.spanFinrank_map_le_of_fg",
-     "wholeRenamed"
-    ],
-    "now": null,
-    "before": [
-     false,
-     14
-    ]
-   }
-  ],
-  "holds": false
+  "differing": 0,
+  "differences": [],
+  "holds": true
  },
  "C11": {
-  "reconstructable": 674,
-  "matching": 674,
+  "reconstructable": 763,
+  "matching": 763,
   "holds": true
  },
  "C12": {
-  "states": 63861,
+  "states": 70129,
   "undefined": 1554,
   "holds": false
  },
@@ -437,10 +173,10 @@
   }
  },
  "drops": {
-  "dropped": 12191,
-  "falseDrops": 662
+  "dropped": 14249,
+  "falseDrops": 794
  },
- "auditedUnits": 831,
- "resultsSha256": "72ed4d7ab059e49d2fa8b7be34ca882b469f5f4f11aa4fcb89aa4d7bd18653cd",
- "logsSha256": "532518adc446153e1bea50a1bdafa034c95958e2461ea9501275ce6b08034d31"
+ "auditedUnits": 932,
+ "resultsSha256": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",
+ "logsSha256": "b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603"
 }
