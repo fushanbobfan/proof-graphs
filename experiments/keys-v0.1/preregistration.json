@@ -1,0 +1,56 @@
+{
+ "checks": {
+  "C10": "every replayed unit reaches its recorded outcome (proved or not, at the same expansion)",
+  "C11": "on every unit, the duplicate decisions recomputed from the log reproduce the search's recorded counts (whole-state: drops per expansion; AND-OR: the expanded goals)",
+  "C12": "at most 1% of the recorded states fail to export"
+ },
+ "developmentChecksBeforeRegistration": [
+  "scripts/check_goal_identity.py: 8 cases in a Mathlib REPL, the review's two counterexamples among them",
+  "--develop 2 --budget 8: the four search functions with the menu on two theorems of the first slice outside both corpora (Submodule.sup_eq_sup_smul_of_le_smul_of_le_jacobson and wittPolynomial_vars, drawn with seed 11): every state of the 8 units exported (27 to 45 per unit), and the drops and merges recomputed from the logs matched the searches' own counts",
+  "the draw replay of one search-v0.7 renaming search (MvPolynomial.mk_eq_eval₂, whole-state) with a plain REPL, computing no faithful key: from the merged draws (7,731 sets) it reached its recorded outcome (proved at expansion 14) without a new draw"
+ ],
+ "experiment": "keys-v0.1",
+ "hypotheses": {
+  "H59": "search-v0.7's whole-state search: the faithful goal-duplicate share is within 2 points of the coarse key's",
+  "H60": "search-v0.4's keys arm: the faithful goal-duplicate share is within 2 points of the coarse key's",
+  "H61": "search-v0.7's whole-state search: the faithful order-duplicate share is below 1%",
+  "H62": "search-v0.7's printed-goal AND-OR search: fewer than 1% of its merges join goals whose faithful keys differ",
+  "H63": "the whole-state searches (search-v0.7's two and search-v0.4's keys arm): fewer than 1% of the states they drop as duplicates have a faithful key different from the state they duplicate"
+ },
+ "identity": "goal_identity.py: each goal's instantiated context and target exported by a run_tac block and serialized structurally, hypotheses by position, bound variables by de Bruijn index, every implicit argument and universe written, metavariables numbered by first occurrence with the goals' own first; a state's faithful key is its goals' joint serialization in order",
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "recorder": "c993a008c8246ac135e92c755a8a7177045b9d368f458834e70b7b45bb8788f6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "15d21a3d5428b16afd1df0ace072f8556cf4c23b3120de590376d307d27622b3",
+  "searchRenaming": "6372491b801b6b00aaffafd255558b93981599cac1c55031b1f7b2ea2b42afbf"
+ },
+ "measures": {
+  "drops": "child states a whole-state search dropped as duplicates under its text key (printed for search_keys, coarse for search_renaming), recomputed from the log; false drops are those whose faithful state key differs from that of the state they duplicate",
+  "faithfulGoal/faithfulOrder": "a whole-state search's goal- and order-duplicate shares with the faithful goal key in place of the text key, over the same expansions",
+  "merges": "the printed-goal AND-OR search's arrivals merged into an existing goal, recomputed; false merges are those whose faithful goal key differs from the goal's; missed merges are new goals whose faithful key an existing goal has",
+  "missedDrops": "child states kept whose faithful state key equals that of a state kept earlier",
+  "repeats": "AND-OR expansions of a goal whose faithful key an earlier expansion had"
+ },
+ "question": "how do the searches' text keys compare with goal identity taken from Lean's expressions, on the searches that produced the program's duplicate shares",
+ "recording": "recording_repl.py: the searches run unchanged in a REPL session that logs each expanded state and each successful tactic, and exports every state reached",
+ "registeredLocalDate": "2026-09-26 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier experiment, including the outcomes the replays repeat and the text-key shares they re-key; the goal-key audit of the logged goals; no faithful key had been computed on a corpus task",
+ "units": {
+  "count": 1100,
+  "menu": "search-v0.4's keys arm: the menu's whole-state search at 24 expansions on its 300 tasks",
+  "prover": "search-v0.7's four searches on its 200 tasks, replayed from its recorded draws (search-v0.6's and its own new ones); a search that needs another draw raises",
+  "sources": {
+   "searchV04Results": "1ac8aef721bb1028eac9114ace4592b73713bf3cbf32d06a50a0b8f84b3d4e92",
+   "searchV04Tasks": "f05245d923c27fb104858afcf4062e82dc2f1970a7bf014193bd6d9d1f2c0212",
+   "searchV06Draws": "f86a6e35346e930f0d51a5848aa5c7dadd5d554e6ef69f0e9801300190f09f9b",
+   "searchV07Draws": "95b54cb7bf0ba1154ee27e06318cacc15ee39be4ea2e312d9c65850d46690e3e",
+   "searchV07Results": "c72eaaf750fc91269a32e4bc294cac30ee1c0087eb902ab47769febb90a2cf71"
+  }
+ }
+}
