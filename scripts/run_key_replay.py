@@ -322,6 +322,16 @@ def run_all(workers: int) -> list[dict[str, Any]]:
         rows = [json.loads(l) for l in RESULTS.read_text(encoding="utf-8").splitlines() if l.strip()]
     logs = read_logs()
     done = {tuple(r["unit"]) for r in rows if not r.get("error")}
+    # Amendment 1: a unit whose first replay differed from the recorded outcome (C10) replays once more, and its
+    # new row and log replace the first.
+    recorded = recorded_outcomes()
+    attempts: dict[tuple[str, ...], int] = {}
+    for r in rows:
+        attempts[tuple(r["unit"])] = attempts.get(tuple(r["unit"]), 0) + 1
+    latest_rows = {tuple(r["unit"]): r for r in rows}
+    done -= {key for key, r in latest_rows.items() if attempts[key] == 1 and not r.get("error")
+             and not (recorded.get(key) is None and r.get("outcome") is None)
+             and recorded.get(key) != r.get("outcome")}
     sets = recorded_draws()
     lock = threading.Lock()
     prover.MODEL_LOG = None

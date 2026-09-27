@@ -1,0 +1,17 @@
+{
+ "amendment": 1,
+ "date": "2026-09-27 America/Los_Angeles",
+ "scope": "execution only: the units, the replay, the audit, the analysis, the hypotheses, and the checks are unchanged",
+ "observation": "The first run used ten workers while search-v0.8 ran eight Lean REPL workers and a local model server on the same machine. The Windows commit limit ran out: at 01:55 local time 8.0 GB of commit was free with 34.6 GB of physical memory free, eighteen REPL processes held 4.4 to 6.9 GB of private memory each and the model server 12 GB, and in that period a Python process failed to allocate a 4.4 MB read and a Lean build of another project stopped with 'INTERNAL PANIC: out of memory'. C10 counted 103 of 932 replays as differing from their recorded outcomes: 89 replays were not constructed although the original searches had been, 12 were abandoned by a REPL timeout during setup, and 2 finished with a different expansion count. Search-v0.8 shows the same failures in the same period, in some searches of a unit but not in others.",
+ "change": "run_key_replay.run_all treats every unit that C10 counted as differing in the first run as unfinished once: a resume replays it again, and its new row and log replace the first. The rerun uses three workers beside search-v0.8's eight, with more than 30 GB of commit free at its start. Every other row is kept as it is.",
+ "firstRun": {
+  "committed": "the first run's results.jsonl, logs.jsonl.gz, summary.json, and report.md are committed unchanged before this amendment",
+  "hypotheses": {"H59": true, "H60": true, "H61": true, "H62": false, "H63": false},
+  "C10": {"compared": 932, "differing": 103, "notConstructedNow": 89, "abandonedNow": 12, "differentOutcome": 2},
+  "C11": {"reconstructable": 674, "matching": 674},
+  "C12": {"states": 63861, "exported": 62307, "note": "1,554 export failures in 20 rows, 1,390 of them in the eight units of MvPolynomial.coeff_add_pow and MvPolynomial.pow_idealOfVars, where no state exported"}
+ },
+ "resultsSeenBeforeAmendment": "the whole first-run summary: the report, the hypothesis decisions, and the checks above were read before this amendment was written; it is made because of the failure mechanism, it reruns every differing unit whatever its outcome, and both runs are reported",
+ "implementationSha256BeforeAmendment": {"runner": "15d21a3d5428b16afd1df0ace072f8556cf4c23b3120de590376d307d27622b3"},
+ "implementationSha256AfterAmendment": {"runner": "c438ec76c447a7c831feb3131226e167d1210a64875a4c06c8031c75937d07ac"}
+}
