@@ -93,6 +93,13 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed audit of the constructs the derivation handles by rule
+        run: |
+          if test -f experiments/extraction-audit-v0.2/results.jsonl; then
+            python scripts/run_extraction_audit_v2.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
       - name: Check the committed goal-identity search experiment
         run: |
           if test -f experiments/search-v0.4/summary.json; then

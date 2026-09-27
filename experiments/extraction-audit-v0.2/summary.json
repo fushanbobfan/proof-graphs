@@ -1,0 +1,56 @@
+{
+ "experiment": "extraction-audit-v0.2",
+ "preregistrationSha256": "5d646e70f7d9c8df18447aa0ab8a88eca342a6d688d2860e1927fb6277aaa26a",
+ "proofs": 40,
+ "agree": 40,
+ "stepsAgree": 40,
+ "countsAgree": 40,
+ "byFamily": {
+  "try-first-repeat": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "several-goals": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "calc": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "conv": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "case-next": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "patterns": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "alternatives": {
+   "proofs": 5,
+   "agree": 5
+  },
+  "nested-by": {
+   "proofs": 5,
+   "agree": 5
+  }
+ },
+ "disagreements": 0,
+ "categories": {
+  "extractor error": 0,
+  "reconstruction error": 0,
+  "definition gap": 0
+ },
+ "unadjudicated": 0,
+ "hypotheses": {
+  "H67": {
+   "supported": true
+  }
+ },
+ "reconstructionsSha256": "d42b6f6001b1fdb21dd98fc7272ac0caf32c1c15268f2323984f4cc66ad557c7",
+ "resultsSha256": "d22a6264826c3721eaa8617a17d3fd9f1c9093b1d64bf8a38cf6a017044ecb92"
+}
