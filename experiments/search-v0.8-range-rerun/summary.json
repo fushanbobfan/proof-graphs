@@ -1,0 +1,167 @@
+{
+ "experiment": "search-v0.8-range-rerun",
+ "registered": false,
+ "rerunUnits": [
+  [
+   0,
+   "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover"
+  ],
+  [
+   0,
+   "AlgebraicGeometry.spread_out_unique_of_isGermInjective"
+  ],
+  [
+   0,
+   "CategoryTheory.MorphismProperty.inverseImage_equivalence_inverse_eq_map_functor"
+  ],
+  [
+   0,
+   "Ideal.exists_spanRank_eq_and_height_eq"
+  ],
+  [
+   0,
+   "PointedCone.DualFG.dual_of_fg"
+  ],
+  [
+   0,
+   "Real.qaryEntropy_pos"
+  ],
+  [
+   0,
+   "SimpleGraph.edge_other_incident_set"
+  ],
+  [
+   1,
+   "HomologicalComplex.Hom.comm"
+  ],
+  [
+   1,
+   "Ideal.finrank_quotient_eq_sum"
+  ],
+  [
+   1,
+   "PNat.dvd_iff"
+  ],
+  [
+   1,
+   "ProbabilityTheory.binomial_real_singleton"
+  ]
+ ],
+ "failingAgain": [],
+ "stated": {
+  "registered": 158,
+  "withRerun": 169
+ },
+ "pooled": {
+  "registered": {
+   "whole": 116,
+   "goals": 121,
+   "groups": 122
+  },
+  "withRerun": {
+   "whole": 123,
+   "goals": 128,
+   "groups": 129
+  }
+ },
+ "pairs": {
+  "H64": {
+   "first": "groups",
+   "second": "goals",
+   "tasksFirstMore": 1,
+   "tasksSecondMore": 0,
+   "signTestFirstMore": 0.5,
+   "meanRateDifference": 0.001972,
+   "interval95": [
+    0.0,
+    0.006667
+   ],
+   "perReplicate": {
+    "0": {
+     "firstOnly": 0,
+     "secondOnly": 0
+    },
+    "1": {
+     "firstOnly": 0,
+     "secondOnly": 0
+    },
+    "2": {
+     "firstOnly": 1,
+     "secondOnly": 0
+    }
+   }
+  },
+  "H65": {
+   "first": "groups",
+   "second": "whole",
+   "tasksFirstMore": 7,
+   "tasksSecondMore": 1,
+   "signTestFirstMore": 0.03515625,
+   "meanRateDifference": 0.011834,
+   "interval95": [
+    0.003788,
+    0.021195
+   ],
+   "perReplicate": {
+    "0": {
+     "firstOnly": 2,
+     "secondOnly": 0
+    },
+    "1": {
+     "firstOnly": 2,
+     "secondOnly": 0
+    },
+    "2": {
+     "firstOnly": 3,
+     "secondOnly": 1
+    }
+   }
+  },
+  "H66": {
+   "first": "goals",
+   "second": "whole",
+   "tasksFirstMore": 7,
+   "tasksSecondMore": 2,
+   "signTestFirstMore": 0.08984375,
+   "meanRateDifference": 0.009862,
+   "interval95": [
+    0.0,
+    0.019868
+   ],
+   "perReplicate": {
+    "0": {
+     "firstOnly": 2,
+     "secondOnly": 0
+    },
+    "1": {
+     "firstOnly": 2,
+     "secondOnly": 0
+    },
+    "2": {
+     "firstOnly": 3,
+     "secondOnly": 2
+    }
+   }
+  }
+ },
+ "holm": {
+  "H64": {
+   "p": 0.5,
+   "adjusted": 0.5,
+   "rejected": false
+  },
+  "H65": {
+   "p": 0.03515625,
+   "adjusted": 0.10546875,
+   "rejected": false
+  },
+  "H66": {
+   "p": 0.08984375,
+   "adjusted": 0.1796875,
+   "rejected": false
+  }
+ },
+ "registeredResultsSha256": "de36640fa6b5a06734998c75aed26a51490d93ab660180fb50b8befadda361a6",
+ "rowsSha256": "a91c5fe9f2bfe0b68f3eb8b315726bbccdd4fb902737f4f12aa75d8e9b575441",
+ "drawsSha256": "d6fbfa4467341a5395db3fef170f7a13a0407ae9726e60dd2fe5c049ed5dcf90"
+}
