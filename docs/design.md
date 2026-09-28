@@ -122,9 +122,10 @@ metavariables together in groups, splitting a state only where its goals
 share none, as HyperTree Proof Search does. It made 1,210 groups of several
 goals, one of its proofs passed through one, and it proves 122 of 474
 task-sets against 121 for goals and 116 for whole states, no pair
-significant after Holm's adjustment; it does draw fewer new candidates and
-finish sooner. Coupled goals are real in these searches but decide almost
-no proof.
+significant after Holm's adjustment. Coupled goals arise in a quarter of
+these searches but decide almost no proof. The recorded costs do not
+compare the designs, since the searches of a task shared draws in a
+rotating order.
 
 The proposal's third layer, telling good proofs from mediocre ones, was
 tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the

@@ -88,14 +88,18 @@ For groups against whole states, the registered interval of the mean per-task di
 1.3 points [0.4, 2.4] by resampling modules, excludes zero; the decision rule is the sign test under Holm's
 procedure, and by that rule H65 does not hold.
 
-Coupling rarely mattered. The goal search discarded 689 entangled candidates and the group search made 1,210
-groups of several goals, but one proof passed through such a group; the group search discarded 28 candidates
+Coupling rarely mattered. The goal search discarded 689 entangled candidates, and the group search made 1,210
+groups of several goals (of its 42,590 groups, in 133 of its 500 searches), but one proof passed through such
+a group; the group search discarded 28 candidates
 that changed a goal outside their group. The whole-state search found four proofs with a goal's later draw.
 
-What differed was cost. The three searches spent about the same expansions (13,115 for whole states, 13,560
-for goals, 13,464 for groups), but the group search drew fewer new sets (3,406, against 4,169 and 4,780) and
-generated fewer completion tokens (0.87 million, against 1.04 and 1.19 million), and its median search took
-16 seconds, against 24 for goals and 35 for whole states.
+The recorded costs do not compare the searches. Within a unit the three searches share draws and run in a
+cyclic order, so a search that runs after one expanding the same goals reuses its draws. The group search
+followed the goal search, which expands nearly the same goals, in two thirds of the units, and drew almost
+nothing new there. That is why its totals are lowest: 3,406 new sets against 4,169 for goals and 4,780 for
+whole states, and a median search of 16 seconds against 24 and 35. Where a search ran first in its unit and
+could reuse nothing, it drew 2,989 new sets (whole states), 3,017 (goals) or 3,273 (groups), with median
+searches of 126, 109 and 186 seconds; these come from different thirds of the units.
 
 C13 holds: no goal has two new draws for one occurrence among the 12,415 new draws. C14 holds: all 1,500
 searches that set up exported through the defined tactic.

@@ -40,10 +40,10 @@ measures hold in aggregate, though item by item about one text
 identification in fifteen joins goals whose expressions differ. A goal search that treats goals as
 independent also loses proofs whose goals share an existential witness.
 Kept together in the groups their shared metavariables make, as HyperTree
-Proof Search splits states, such goals are common but decide almost no
-proof: over three sets of draws the group search proves 122 of 474
-task-sets against 121 for goals and 116 for whole states, no pair
-significant, though it draws and generates less. Mathlib's
+Proof Search splits states, such goals arise in a quarter of the searches
+and decide one proof: over three sets of draws the group search proves 122
+of 474 task-sets against 121 for goals and 116 for whole states, no pair
+significant after Holm's adjustment. Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
 this program proposed as a quality measure, separates the two proofs on one
