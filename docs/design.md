@@ -116,6 +116,15 @@ goal sharing it meets is between goals alike up to the names of their
 hypotheses; identifying goals and states up to renaming lets both searches
 find their proofs about a fifth sooner and prove 43 and 42: what renaming
 removes, a search over states removes as well as a search over goals does.
+With goals identified by Lean's expressions and the draws repeated three
+times (`search-v0.8`), a third search keeps the goals that share
+metavariables together in groups, splitting a state only where its goals
+share none, as HyperTree Proof Search does. It made 1,210 groups of several
+goals, one of its proofs passed through one, and it proves 122 of 474
+task-sets against 121 for goals and 116 for whole states, no pair
+significant after Holm's adjustment; it does draw fewer new candidates and
+finish sooner. Coupled goals are real in these searches but decide almost
+no proof.
 
 The proposal's third layer, telling good proofs from mediocre ones, was
 tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the

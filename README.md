@@ -38,9 +38,12 @@ lets both searches find their proofs about a fifth sooner and prove a few more
 over states. Identified by Lean's expressions instead of text, the sharing
 measures hold in aggregate, though item by item about one text
 identification in fifteen joins goals whose expressions differ. A goal search that treats goals as
-independent also loses proofs whose goals share an existential witness
-(HyperTree Proof Search and Aesop handle such goals explicitly; ours
-deliberately does not). Mathlib's
+independent also loses proofs whose goals share an existential witness.
+Kept together in the groups their shared metavariables make, as HyperTree
+Proof Search splits states, such goals are common but decide almost no
+proof: over three sets of draws the group search proves 122 of 474
+task-sets against 121 for goals and 116 for whole states, no pair
+significant, though it draws and generates less. Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
 this program proposed as a quality measure, separates the two proofs on one
@@ -80,6 +83,7 @@ scripts/recording_repl.py         a REPL session that records what a search does
 scripts/run_key_replay.py         finished searches re-keyed by Lean expressions
 scripts/search_faithful.py        searches over states, goals, and coupled goal groups
 scripts/run_search_coupled.py     the three, over three sets of draws
+scripts/explore_range_rerun_v08.py  its eleven setup failures rerun (not registered)
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
@@ -106,6 +110,8 @@ experiments/search-v0.4/          goal identity, and no one-shot provers
 experiments/search-v0.5/          a step-level prover as the proposer
 experiments/search-v0.6/          the same, with shared draws
 experiments/search-v0.7/          goals and states up to renaming
+experiments/search-v0.8/          states, goals, and coupled goal groups
+experiments/search-v0.8-range-rerun/  its eleven setup failures rerun (not registered)
 experiments/goal-key-audit/       the keys' collisions, measured (not registered)
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
 experiments/holdout-v0.1/         the second slice
