@@ -99,6 +99,7 @@ scripts/check_slice_options.py    the slice's graphs under Mathlib's options
 scripts/goal_identity.py          goal identity from Lean's expressions
 scripts/recording_repl.py         a REPL session that logs a search for re-keying
 scripts/run_key_replay.py         finished searches re-keyed by expressions
+scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
@@ -121,6 +122,7 @@ experiments/golf-v0.2/            the same tests on an earlier window
 experiments/extraction-audit-v0.1/  the blind reconstruction
 experiments/extraction-audit-v0.2/  the same on hard constructs, with a kit for people
 experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
+experiments/keys-v0.1-conflations/  what the text keys conflate (not registered)
 experiments/recount-v0.1/         the corrected counts
 datasets/proof-graphs-v0.2.jsonl.gz  7,285 step-dependency graphs (corrected derivation)
 datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivation

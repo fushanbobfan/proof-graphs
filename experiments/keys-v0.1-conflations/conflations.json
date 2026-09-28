@@ -1,0 +1,2876 @@
+{
+ "registered": false,
+ "units": [
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "found": 33,
+   "recorded": 33
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "found": 16,
+   "recorded": 16
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "found": 15,
+   "recorded": 15
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "found": 13,
+   "recorded": 13
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "found": 13,
+   "recorded": 13
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "found": 12,
+   "recorded": 12
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "found": 16,
+   "recorded": 16
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "found": 16,
+   "recorded": 16
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "found": 10,
+   "recorded": 10
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "found": 9,
+   "recorded": 9
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "found": 9,
+   "recorded": 9
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "found": 8,
+   "recorded": 8
+  }
+ ],
+ "counts": {
+  "merges": {
+   "hypothesis reference": 33,
+   "instance path": 26,
+   "lambda": 15,
+   "universe level": 25,
+   "proof term": 2,
+   "other": 1
+  },
+  "drops": {
+   "proof term": 2,
+   "instance path": 46,
+   "other": 4,
+   "universe level": 8,
+   "lambda": 8
+  }
+ },
+ "items": [
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 231,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 231,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 191,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h16 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h16 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 195,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h16 ) - > ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h16 ) - > ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 191,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h16 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h16 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 241,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 191,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h16 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h16 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 251,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 251,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 260,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 204,
+    "context": "( ( PolishSpace. { u_3 } h2 )",
+    "first": "h16 ) | - ( ( ( Eq. { u_3 + 1",
+    "second": "h11 ) | - ( ( ( Eq. { u_3 + 1"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 251,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 248,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 192,
+    "context": "( ( PolishSpace. { u_3 } h2 )",
+    "first": "h11 ) | - ( ( ( Eq. { u_3 + 1",
+    "second": "h16 ) | - ( ( ( Eq. { u_3 + 1"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 280,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 280,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 211,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h18 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h18 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 215,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h18 ) - > ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h18 ) - > ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 211,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h18 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h18 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 270,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 270,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 261,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 261,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 194,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h16 ) ( Set. { u_3 } h2 ) ( ( (",
+    "second": "h11 ) ( Set. { u_3 } h2 ) ( ( ("
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 194,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h16 ) ( TopologicalSpace. { u_3 } h2 ) : = h12",
+    "second": "h11 ) ( TopologicalSpace. { u_3 } h2 ) : = h12"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 194,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h16 ) | - ( ( ( Eq. { u_3 + 1",
+    "second": "h11 ) | - ( ( ( Eq. { u_3 + 1"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 194,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h16 ) | - ( ( ( Eq. { u_3 + 1",
+    "second": "h11 ) | - ( ( ( Eq. { u_3 + 1"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 306,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 250,
+    "context": "( ( PolishSpace. { u_3 } h2 )",
+    "first": "h16 ) | - ( ( ( Eq. { u_3 + 1",
+    "second": "h12 ) | - ( ( ( Eq. { u_3 + 1"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 258,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) ( ( borel. { u_3 } h2 ) h12",
+    "second": "h12 ) ) ( ( borel. { u_3 } h2 ) h11"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 240,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h19 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h19 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 240,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h19 ) | - ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h19 ) | - ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+    "MeasureTheory.borel_eq_borel_of_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 225,
+    "context": "( ( borel. { u_3 } h2 )",
+    "first": "h11 ) ) h18 ) - > ( ( ( MeasurableSet. {",
+    "second": "h12 ) ) h18 ) - > ( ( ( MeasurableSet. {"
+   },
+   "category": "hypothesis reference"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }",
+    "second": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2579,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2579,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2579,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2778,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }",
+    "second": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }",
+    "second": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2283,
+    "context": "instHAdd. { u_1 } h0 ) ( (",
+    "first": "AddCommMagma.toAdd. { u_1 } h0 ) ( ( AddCommSemigroup.toAddCommMagma. { u_1 }",
+    "second": "AddZero.toAdd. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2760,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }",
+    "second": "MulZeroClass.toZero. { u_1 } h0 ) ( ( instMulZeroClassOfSemiring. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2636,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }",
+    "second": "MulZeroClass.toZero. { u_1 } h0 ) ( ( instMulZeroClassOfSemiring. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }",
+    "second": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2370,
+    "context": "instHMul. { u_1 } h0 ) ( (",
+    "first": "CommMagma.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocCommSemiring.toCommMagma. { u_1 }",
+    "second": "Distrib.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocSemiring.toDistrib. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2681,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2614,
+    "context": "instHMul. { u_1 } h0 ) ( (",
+    "first": "Distrib.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocSemiring.toDistrib. { u_1 }",
+    "second": "CommMagma.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocCommSemiring.toCommMagma. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }",
+    "second": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2357,
+    "context": "instHMul. { u_1 } h0 ) ( (",
+    "first": "Distrib.toMul. { u_1 } h0 ) ( ( instDistribOfSemiring. { u_1 }",
+    "second": "CommMagma.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocCommSemiring.toCommMagma. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2350,
+    "context": "Neg.neg. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toNeg. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "NegZeroClass.toNeg. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 403,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 403,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 403,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 360,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ValueDistribution.proximity. { u_1"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 378,
+    "context": "{ } ) h12 ) ) ( (",
+    "first": "fun Real. { } = > Real.instLE. { } ) h12 )",
+    "second": "Preorder.toLE. { 0 } ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( Preorder.toLE. { 0 } ( ("
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( Preorder.toLE. { 0 } ( ("
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( Preorder.toLE. { 0 } ( ("
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 486,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ValueDistribution.proximity. { u_1"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 486,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ValueDistribution.proximity. { u_1"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 360,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ( ( HAdd.hAdd."
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1010,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( Subtype. {"
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1865,
+    "context": "| - ( ( ( Eq. { max",
+    "first": "( u_1 + 1 ) ( u_2 + 1 ) } (",
+    "second": "1 ( u_1 + 1 ) ( u_2 + 1 ) }"
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 13230,
+    "context": ") ) ) ) ) ) ( (",
+    "first": "NegZeroClass.toZero. { max u_1 u_2 } ( ( ( ( ( Algebra.H1Cotangent.",
+    "second": "AddZero.toZero. { max u_1 u_2 } ( ( ( ( ( Algebra.H1Cotangent."
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 241171,
+    "context": ") ) ( ( ( ( Subtype.mk. {",
+    "first": "( max u_1 u_2 ) + 1 } ( ( ( (",
+    "second": "max ( u_1 + 1 ) ( u_2 + 1 ) }"
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1057,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1057,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 240767,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 240767,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 545,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 545,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 704,
+    "context": "- ( ( ( Eq. { max (",
+    "first": "u_1 + 1 ) ( u_2 + 1 ) } ( (",
+    "second": "u_2 + 1 ) ( u_1 + 1 ) } ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 636,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial.",
+    "second": "max ( u_1 + 1 ) ( u_2 + 1 ) }"
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 535,
+    "context": ") h6 ) ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 535,
+    "context": ") h6 ) ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 535,
+    "context": ") h6 ) ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 535,
+    "context": ") h6 ) ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 541,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 545,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 541,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 541,
+    "context": "Not. { } ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( MvPolynomial."
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.MvPolynomial.Ideal",
+    "MonomialOrder.span_leadingTerm_eq_span_monomial₀",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 486,
+    "context": "- ( ( ( Eq. { max (",
+    "first": "u_2 + 1 ) ( u_1 + 1 ) } ( (",
+    "second": "u_1 + 1 ) ( u_2 + 1 ) } ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 3394,
+    "context": ") ) ( ( ( ( ( (",
+    "first": "( ( ( ( ( ( ( ( Submodule.liftQ._proof_3. { u_2 ,",
+    "second": "Eq.ndrec. { 0 , max ( u_2 + 1 ) ( u_4"
+   },
+   "category": "proof term"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2699,
+    "context": ") h8 ) ) ) ( ( (",
+    "first": "OrderBot.toBot. { u_2 } ( ( ( ( ( Submodule. { u_1",
+    "second": "( ( Submodule.instBot. { u_1 , u_2 } h0 ) ( ("
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2859,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1096,
+    "context": "u_2 , u_2 } h1 ) ( (",
+    "first": "AddSubgroup. { u_2 } h1 ) ( ( AddCommGroup.toAddGroup. { u_2 }",
+    "second": "( ( ( Submodule. { u_1 , u_2 } h0 ) h1"
+   },
+   "category": "other"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1686,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1693,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 3035,
+    "context": ") h8 ) ) ( ( ( (",
+    "first": "AddSubgroup.normal_of_isAddCommutative. { u_2 } h1 ) ( ( AddCommGroup.toAddGroup. { u_2 }",
+    "second": "( ( Submodule.liftQ._proof_2. { u_2 , u_1 } h0 ) h1 )"
+   },
+   "category": "proof term"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 1686,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2552,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2859,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 2859,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "andor"
+   ],
+   "kind": "merges",
+   "difference": {
+    "at": 4138,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 3394,
+    "context": ") ) ( ( ( ( ( (",
+    "first": "( ( ( ( ( ( ( ( Submodule.liftQ._proof_3. { u_2 ,",
+    "second": "Eq.ndrec. { 0 , max ( u_2 + 1 ) ( u_4"
+   },
+   "category": "proof term"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2859,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1096,
+    "context": "u_2 , u_2 } h1 ) ( (",
+    "first": "AddSubgroup. { u_2 } h1 ) ( ( AddCommGroup.toAddGroup. { u_2 }",
+    "second": "( ( ( Submodule. { u_1 , u_2 } h0 ) h1"
+   },
+   "category": "other"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1686,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1693,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 3035,
+    "context": ") h8 ) ) ( ( ( (",
+    "first": "AddSubgroup.normal_of_isAddCommutative. { u_2 } h1 ) ( ( AddCommGroup.toAddGroup. { u_2 }",
+    "second": "( ( Submodule.liftQ._proof_2. { u_2 , u_1 } h0 ) h1 )"
+   },
+   "category": "proof term"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1686,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }",
+    "second": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1686,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }",
+    "second": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1686,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }",
+    "second": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2552,
+    "context": "Zero.toOfNat0. { u_4 } h12 ) ( (",
+    "first": "AddZero.toZero. { u_4 } h12 ) ( ( AddZeroClass.toAddZero. { u_4 }",
+    "second": "NegZeroClass.toZero. { u_4 } h12 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_4 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2859,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2859,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 4138,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,",
+    "second": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2858,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )",
+    "second": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2858,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )",
+    "second": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.LinearAlgebra.Quotient.Basic",
+    "Submodule.ker_liftQ_eq_bot",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2858,
+    "context": "h7 ) ) h8 ) ) ( (",
+    "first": "( ( ( ( Submodule.Quotient.instZeroQuotient. { u_1 , u_2 } h0 )",
+    "second": "AddZero.toZero. { u_2 } ( ( ( ( HasQuotient.Quotient. { u_2 ,"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }",
+    "second": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2579,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2579,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2579,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2778,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }",
+    "second": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }",
+    "second": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2283,
+    "context": "instHAdd. { u_1 } h0 ) ( (",
+    "first": "AddCommMagma.toAdd. { u_1 } h0 ) ( ( AddCommSemigroup.toAddCommMagma. { u_1 }",
+    "second": "AddZero.toAdd. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2760,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }",
+    "second": "MulZeroClass.toZero. { u_1 } h0 ) ( ( instMulZeroClassOfSemiring. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }",
+    "second": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2370,
+    "context": "instHMul. { u_1 } h0 ) ( (",
+    "first": "CommMagma.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocCommSemiring.toCommMagma. { u_1 }",
+    "second": "Distrib.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocSemiring.toDistrib. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2681,
+    "context": "Zero.toOfNat0. { u_1 } h0 ) ( (",
+    "first": "AddZero.toZero. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }",
+    "second": "NegZeroClass.toZero. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2614,
+    "context": "instHMul. { u_1 } h0 ) ( (",
+    "first": "Distrib.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocSemiring.toDistrib. { u_1 }",
+    "second": "CommMagma.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocCommSemiring.toCommMagma. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2291,
+    "context": "SubNegMonoid.toSub. { u_1 } h0 ) ( (",
+    "first": "AddGroup.toSubNegMonoid. { u_1 } h0 ) ( ( AddGroupWithOne.toAddGroup. { u_1 }",
+    "second": "SubtractionMonoid.toSubNegMonoid. { u_1 } h0 ) ( ( SubtractionCommMonoid.toSubtractionMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2357,
+    "context": "instHMul. { u_1 } h0 ) ( (",
+    "first": "Distrib.toMul. { u_1 } h0 ) ( ( instDistribOfSemiring. { u_1 }",
+    "second": "CommMagma.toMul. { u_1 } h0 ) ( ( NonUnitalNonAssocCommSemiring.toCommMagma. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2350,
+    "context": "Neg.neg. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toNeg. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "NegZeroClass.toNeg. { u_1 } h0 ) ( ( SubNegZeroMonoid.toNegZeroClass. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+    "Polynomial.eq_neg_mul_add_of_roots_quadratic_eq_pair",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2283,
+    "context": "instHAdd. { u_1 } h0 ) ( (",
+    "first": "AddCommMagma.toAdd. { u_1 } h0 ) ( ( AddCommSemigroup.toAddCommMagma. { u_1 }",
+    "second": "AddZero.toAdd. { u_1 } h0 ) ( ( AddZeroClass.toAddZero. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2008,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2008,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2008,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1557,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1557,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1557,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1557,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1931,
+    "context": "AddMonoid.toAddZeroClass. { u_1 } h0 ) ( (",
+    "first": "SubNegMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddGroup.toSubNegMonoid. { u_1 }",
+    "second": "AddCommMonoid.toAddMonoid. { u_1 } h0 ) ( ( AddCommGroup.toAddCommMonoid. { u_1 }"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2219,
+    "context": "0 } Real. { } ) ( (",
+    "first": "InvOneClass.toInv. { 0 } Real. { } ) ( ( DivInvOneMonoid.toInvOneClass. {",
+    "second": "DivInvMonoid.toInv. { 0 } Real. { } ) Real.instDivInvMonoid. { } )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Normed.Affine.MazurUlam",
+    "IsometryEquiv.map_midpoint",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 2219,
+    "context": "0 } Real. { } ) ( (",
+    "first": "InvOneClass.toInv. { 0 } Real. { } ) ( ( DivInvOneMonoid.toInvOneClass. {",
+    "second": "DivInvMonoid.toInv. { 0 } Real. { } ) Real.instDivInvMonoid. { } )"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 247,
+    "context": "( PNat.val. { } h0 ) ) (",
+    "first": "PNat.val. { } h2 ) ) ) PNat. { } PNat. {",
+    "second": "( ( Subtype.val. { 1 } Nat. { } ) ( fun"
+   },
+   "category": "other"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 247,
+    "context": "( PNat.val. { } h0 ) ) (",
+    "first": "PNat.val. { } h2 ) ) ) PNat. { } PNat. {",
+    "second": "( ( Subtype.val. { 1 } Nat. { } ) ( fun"
+   },
+   "category": "other"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 73,
+    "context": "0 } PNat. { } ) ( (",
+    "first": "Semigroup.toMul. { 0 } PNat. { } ) ( ( Monoid.toSemigroup. {",
+    "second": "CommMagma.toMul. { 0 } PNat. { } ) ( ( CommSemigroup.toCommMagma. {"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 73,
+    "context": "0 } PNat. { } ) ( (",
+    "first": "Semigroup.toMul. { 0 } PNat. { } ) ( ( Monoid.toSemigroup. {",
+    "second": "CommMagma.toMul. { 0 } PNat. { } ) ( ( CommSemigroup.toCommMagma. {"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 234,
+    "context": "instHMul. { 0 } Nat. { } )",
+    "first": "instMulNat. { } ) ) ( PNat.val. { } h0 ) )",
+    "second": "( ( Semigroup.toMul. { 0 } Nat. { } ) Nat.instSemigroup. {"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 234,
+    "context": "instHMul. { 0 } Nat. { } )",
+    "first": "instMulNat. { } ) ) ( PNat.val. { } h0 ) )",
+    "second": "( ( Semigroup.toMul. { 0 } Nat. { } ) Nat.instSemigroup. {"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 234,
+    "context": "instHMul. { 0 } Nat. { } )",
+    "first": "instMulNat. { } ) ) ( PNat.val. { } h0 ) )",
+    "second": "( ( Semigroup.toMul. { 0 } Nat. { } ) Nat.instSemigroup. {"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 168,
+    "context": "0 } PNat. { } ) ( (",
+    "first": "Semigroup.toMul. { 0 } PNat. { } ) ( ( Monoid.toSemigroup. {",
+    "second": "CommMagma.toMul. { 0 } PNat. { } ) ( ( CommSemigroup.toCommMagma. {"
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Data.PNat.Basic",
+    "PNat.dvd_iff",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 247,
+    "context": "( PNat.val. { } h0 ) ) (",
+    "first": "( ( Subtype.val. { 1 } Nat. { } ) ( fun",
+    "second": "PNat.val. { } h2 ) ) ) PNat. { } PNat. {"
+   },
+   "category": "other"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1010,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( Subtype. {"
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1865,
+    "context": "| - ( ( ( Eq. { max",
+    "first": "( u_1 + 1 ) ( u_2 + 1 ) } (",
+    "second": "1 ( u_1 + 1 ) ( u_2 + 1 ) }"
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 13230,
+    "context": ") ) ) ) ) ) ( (",
+    "first": "NegZeroClass.toZero. { max u_1 u_2 } ( ( ( ( ( Algebra.H1Cotangent.",
+    "second": "AddZero.toZero. { max u_1 u_2 } ( ( ( ( ( Algebra.H1Cotangent."
+   },
+   "category": "instance path"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.RingTheory.Smooth.Field",
+    "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 1864,
+    "context": ") | - ( ( ( Eq. {",
+    "first": "max ( u_1 + 1 ) ( u_2 + 1 ) }",
+    "second": "( max u_1 u_2 ) + 1 } ( ( ( ("
+   },
+   "category": "universe level"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( fun Real. { } = >"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 360,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ValueDistribution.proximity. { u_1"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 361,
+    "context": "( ( ( ( LE.le. { 0 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( Preorder.toLE. { 0 } ( ("
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 486,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ValueDistribution.proximity. { u_1"
+   },
+   "category": "lambda"
+  },
+  {
+   "unit": [
+    "prover",
+    "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+    "ValueDistribution.proximity_add_top_le",
+    "whole"
+   ],
+   "kind": "drops",
+   "difference": {
+    "at": 486,
+    "context": "- ( ( ( Eq. { 1 }",
+    "first": "( ( fun Real. { } = > Real. { } )",
+    "second": "Real. { } ) ( ( ( ( ( ValueDistribution.proximity. { u_1"
+   },
+   "category": "lambda"
+  }
+ ]
+}
