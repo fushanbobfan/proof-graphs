@@ -68,6 +68,6 @@ unavailable; coarse-key matches are not used as a proxy.
 
     python -B -m unittest discover -s scripts -p "test_*.py"
     python -B scripts/audit_key_denominators.py --check
-    python -B scripts/check_identity_v2_repl.py --built-checkout PATH
+    python -B scripts/check_identity_v2_repl.py
 
-The last needs a checkout whose Mathlib is built; it exports 20 checkpoints and checks 16 relations.
+The last needs Mathlib built; it exports 20 checkpoints and checks 16 relations.

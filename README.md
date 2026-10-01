@@ -79,6 +79,11 @@ scripts/test_renaming.py          the renaming step on printed goals
 scripts/check_renaming_repl.py    the renaming searches in a Mathlib REPL
 scripts/audit_goal_keys.py        the text keys audited on the logged goals
 scripts/goal_identity.py          goal identity from Lean's expressions
+scripts/goal_identity_typed.py    the same on typed expression trees, states up to goal order
+scripts/test_goal_identity_typed.py the typed identity on synthetic trees
+scripts/check_identity_v2_repl.py the typed identity on adversarial goals in a Mathlib REPL
+scripts/audit_key_denominators.py keys-v0.1's shares on matched support (not registered)
+scripts/test_audit_key_denominators.py the audit's denominators on synthetic logs
 scripts/recording_repl.py         a REPL session that records what a search does
 scripts/run_key_replay.py         finished searches re-keyed by Lean expressions
 scripts/search_faithful.py        searches over states, goals, and coupled goal groups
@@ -123,6 +128,7 @@ experiments/extraction-audit-v0.1/  the blind reconstruction
 experiments/extraction-audit-v0.2/  the same on hard constructs, with a kit for people
 experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
 experiments/keys-v0.1-conflations/  what the text keys conflate (not registered)
+experiments/keys-v0.1-matched-support/  its shares on matched support (not registered)
 experiments/recount-v0.1/         the corrected counts
 datasets/proof-graphs-v0.2.jsonl.gz  7,285 step-dependency graphs (corrected derivation)
 datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivation

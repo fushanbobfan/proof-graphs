@@ -135,6 +135,12 @@ jobs:
           python scripts/check_renaming_repl.py
           python scripts/check_goal_identity.py
           python scripts/check_faithful_repl.py
+      - name: Test the typed goal identity, in Python and in Lean, and audit keys-v0.1's denominators
+        run: |
+          python scripts/test_goal_identity_typed.py
+          python scripts/check_identity_v2_repl.py
+          python scripts/test_audit_key_denominators.py
+          python scripts/audit_key_denominators.py --check
       - name: Check the committed renaming search
         run: |
           if test -f experiments/search-v0.7/summary.json; then

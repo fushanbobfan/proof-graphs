@@ -1,23 +1,26 @@
 #!/usr/bin/env python3
 """goal_identity_typed's exporter on fixtures/identity_v2.lean, in a full-Mathlib REPL.
 
-  python scripts/check_identity_v2_repl.py --built-checkout PATH
+  python scripts/check_identity_v2_repl.py
 
-The REPL runs in a checkout whose Mathlib is built (`--built-checkout`, whose `scripts/lean_repl.py` starts it);
-the module under test and the fixture come from this checkout. Each example's tactics before its `skip -- ID`
-checkpoint are replayed in tactic mode, the goals at the checkpoint are exported, and the key relations the
-fixture states are checked. Prints one line per checkpoint and per relation; exits non-zero on any failure.
+Each example's tactics before its `skip -- ID` checkpoint are replayed in tactic mode, the goals at the
+checkpoint are exported, and the key relations the fixture states are checked. Prints one line per checkpoint
+and per relation; exits non-zero on any failure.
 """
 
 from __future__ import annotations
 
-import argparse
 import json
 import re
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import goal_identity_typed as gi  # noqa: E402
+from lean_repl import LeanRepl  # noqa: E402
+from run_linearizations import find_lake  # noqa: E402
+
 FIXTURE = HERE.parent / "fixtures" / "identity_v2.lean"
 CHECKPOINT = re.compile(r"^\s*skip -- (\w+)")
 
@@ -43,15 +46,6 @@ def examples(text: str) -> list[tuple[str, str, list[str]]]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--built-checkout", required=True, type=Path)
-    args = parser.parse_args()
-    sys.path.insert(0, str(HERE))
-    sys.path.insert(0, str(args.built_checkout / "scripts"))  # lean_repl and find_lake from the built checkout
-    import goal_identity_typed as gi  # noqa: E402
-    from lean_repl import LeanRepl  # noqa: E402
-    from run_linearizations import find_lake  # noqa: E402
-
     repl = LeanRepl(find_lake())
     exports: dict[str, list] = {}
     failures = 0
