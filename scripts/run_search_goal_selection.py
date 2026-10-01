@@ -38,6 +38,31 @@ SAMPLE_SEED = 20260930
 SAMPLE_SIZE = 200
 SEARCH_SECONDS = 7200
 MAX_ABANDONMENTS = 2
+ALPHA = 0.05
+BOOTSTRAP_SEED = 20261001
+BOOTSTRAP_RESAMPLES = 10000
+EXPORT_FAILURE_CEILING = 0.03
+COUPLING = EXPERIMENT / "coupling.json"
+HYPOTHESES = {
+    "H78": "At equal expansions first proves more theorems than any: among tasks completed in both arms, theorems "
+           "proved by first only outnumber those proved by any only (one-sided exact sign test).",
+    "H79": "Every theorem proved by any or by anyMultiset and not by first owes it to coupling: replayed step by "
+           "step, its found proof acts at least once on a goal other than the first that shares a metavariable "
+           "with another open goal. A replay that fails to verify or close, or whose coupling is unknown at every "
+           "such step, counts against. With no such theorem H79 is untested.",
+    "H80": "anyMultiset proves more theorems than any (one-sided exact sign test on the tasks completed in both).",
+    "H81": "The share of expansions that are typed order duplicates is larger in any than in first: any's share "
+           "minus first's, pooled over the tasks completed in both arms, bootstrapped over those tasks "
+           f"({BOOTSTRAP_RESAMPLES:,} resamples, seed {BOOTSTRAP_SEED}); one-sided p is the number of resamples "
+           f"with a difference at most zero, plus one, over {BOOTSTRAP_RESAMPLES + 1:,}.",
+    "family": f"H78, H80 and H81 are decided at {ALPHA} after Holm's adjustment; H79 has no p-value.",
+}
+CHECKS = {
+    "C1": "All 200 firstText sample units reproduce search-v0.3's menu whole-state search: posing, proof found, "
+          "and all expansion records.",
+    "C2": "anyMultiset expands no state whose unordered typed key was already expanded under another ordered key.",
+    "C3": f"Typed exports fail on at most {EXPORT_FAILURE_CEILING:.0%} of the exports the typed arms attempt.",
+}
 BUDGET = 24
 STEP_BUDGET = BUDGET * len(harness.MENU)
 IMPLEMENTATIONS = {name: ROOT / "scripts" / file for name, file in {
@@ -244,7 +269,56 @@ def fraction(numerator: int, denominator: int) -> float | None:
     return numerator / denominator if denominator else None
 
 
-def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: list[str]) -> dict[str, Any]:
+def holm(pvalues: dict[str, float | None], alpha: float = ALPHA) -> dict[str, bool]:
+    """Holm's step-down decisions; a missing p-value (no discordant tasks) is never rejected."""
+    order = sorted(pvalues, key=lambda name: (2.0 if pvalues[name] is None else pvalues[name], name))
+    decisions = dict.fromkeys(pvalues, False)
+    for rank, name in enumerate(order):
+        p = pvalues[name]
+        if p is None or p > alpha / (len(order) - rank):
+            break
+        decisions[name] = True
+    return decisions
+
+
+def pooled_difference(cells: list[tuple[int, int, int, int]]) -> float:
+    """any's pooled typed order-duplicate share minus first's; cells are per task
+    (first duplicates, first support, any duplicates, any support), each support positive."""
+    first_duplicates, first_support, any_duplicates, any_support = map(sum, zip(*cells))
+    return any_duplicates / any_support - first_duplicates / first_support
+
+
+def order_redundancy(cells: list[tuple[int, int, int, int]]) -> dict[str, Any]:
+    """H81: the pooled difference, a percentile interval and a one-sided p-value from a bootstrap over tasks."""
+    if not cells:
+        return {"tasks": 0, "difference": None, "interval": None, "p": None}
+    rng = random.Random(BOOTSTRAP_SEED)
+    draws = sorted(pooled_difference(rng.choices(cells, k=len(cells))) for _ in range(BOOTSTRAP_RESAMPLES))
+    return {"tasks": len(cells), "difference": pooled_difference(cells),
+            "interval": [draws[int(0.025 * BOOTSTRAP_RESAMPLES)], draws[int(0.975 * BOOTSTRAP_RESAMPLES) - 1]],
+            "p": (sum(d <= 0 for d in draws) + 1) / (BOOTSTRAP_RESAMPLES + 1)}
+
+
+def coupling_decision(free_only: list[dict[str, Any]], probes: list[dict[str, Any]] | None) -> dict[str, Any]:
+    """H79 from the committed replays of the free-choice-only proofs."""
+    if not free_only:
+        return {"status": "untested", "cases": []}
+    if probes is None:
+        return {"status": "pending", "cases": []}
+    replays = {unit_key(p): p for p in probes}
+    cases = []
+    for proof in free_only:
+        replay = replays.get(unit_key(proof), {})
+        probe = replay.get("probe") or {}
+        shown = bool(replay.get("verified")) and bool(probe.get("closed")) and \
+            any(step["position"] > 1 and step["chosenCoupled"] is True for step in probe.get("steps", []))
+        cases.append({"module": proof["module"], "declaration": proof["declaration"], "arm": proof["arm"],
+                      "coupledChoice": shown})
+    return {"status": "holds" if all(c["coupledChoice"] for c in cases) else "fails", "cases": cases}
+
+
+def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: list[str],
+              probes: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     keys = {task_key(task) for task in tasks}
     rows = [r for r in latest_rows(rows) if task_key(r) in keys and r["arm"] in arms]
     by_unit = {unit_key(r): r for r in rows}
@@ -284,7 +358,9 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
                 if arm != "firstText" else None,
             "coupledMultiGoalStates": coupled, "exportedMultiGoalStates": len(multi),
             "coupledFraction": fraction(coupled, len(multi)),
-            "exportFailures": sum(r["result"].get("exportFailures", 0) for r in ran)}
+            "exportFailures": sum(r["result"].get("exportFailures", 0) for r in ran),
+            "exportAttempts": sum(r["result"].get("exportAttempts", 0) for r in ran)}
+    paired_keys = {}
     for a, b in PAIRS:
         if a not in arms or b not in arms:
             continue
@@ -292,6 +368,7 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
                   if all("result" in by_unit.get((*key, arm), {}) and
                          not by_unit[(*key, arm)].get("abandoned") and
                          not by_unit[(*key, arm)].get("error") for arm in (a, b))]
+        paired_keys[(a, b)] = paired
         comparison = {"pairedCompleted": len(paired)}
         for measure in ("equalExpansions", "equalSteps"):
             def proved(key: tuple[str, str], arm: str) -> bool:
@@ -312,6 +389,35 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
                                                "arm": row["arm"], "proof": row["result"]["proof"],
                                                "stepsAtProof": row["result"]["stepsAtProof"]})
     out["freeChoiceOnlyProofs"].sort(key=unit_key)
+    if all(arm in arms for arm in ("first", "any", "anyMultiset")):
+        cells = []
+        for key in paired_keys[("first", "any")]:
+            cell: list[int] = []
+            for arm in ("first", "any"):
+                typed = [e for e in by_unit[(*key, arm)]["result"]["expansions"]
+                         if e.get("orderDuplicateTyped") is not None]
+                cell += [sum(bool(e["orderDuplicateTyped"]) for e in typed), len(typed)]
+            if cell[1] and cell[3]:
+                cells.append((cell[0], cell[1], cell[2], cell[3]))
+        redundancy = order_redundancy(cells)
+        choice = out["pairs"]["first:any"]["equalExpansions"]
+        quotient = out["pairs"]["any:anyMultiset"]["equalExpansions"]
+        holds = holm({"H78": choice["pAGreater"], "H80": quotient["pBGreater"], "H81": redundancy["p"]})
+        out["hypotheses"] = {
+            "H78": {"firstOnly": choice["aOnly"], "anyOnly": choice["bOnly"], "p": choice["pAGreater"],
+                    "holds": holds["H78"]},
+            "H79": coupling_decision(out["freeChoiceOnlyProofs"], probes),
+            "H80": {"anyOnly": quotient["aOnly"], "anyMultisetOnly": quotient["bOnly"], "p": quotient["pBGreater"],
+                    "holds": holds["H80"]},
+            "H81": redundancy | {"holds": holds["H81"]}}
+        typed_arms = [out["arms"][arm] for arm in ("first", "any", "anyMultiset")]
+        failures = sum(arm["exportFailures"] for arm in typed_arms)
+        attempts = sum(arm["exportAttempts"] for arm in typed_arms)
+        duplicates = out["arms"]["anyMultiset"]["typedOrderDuplicates"]
+        out["checks"] = {
+            "C2": {"typedOrderDuplicates": duplicates, "holds": duplicates == 0},
+            "C3": {"exportFailures": failures, "exportAttempts": attempts, "share": fraction(failures, attempts),
+                   "holds": attempts > 0 and failures <= EXPORT_FAILURE_CEILING * attempts}}
     return out
 
 
@@ -327,9 +433,19 @@ def report(summary: dict[str, Any]) -> str:
               "Distinct typed multisets are summed within searches, whose task environments differ.",
               "Pairwise comparisons use tasks with completed results in both arms.",
               "At equal steps every arm's proof must close within 624 candidate applications.",
-              "Wall-clock stops remain paired; abandoned units are excluded and become final after two abandonments.",
-              "", "## Measures and paired comparisons", "", "```json",
-              json.dumps({"arms": summary["arms"], "pairs": summary["pairs"], "C1": summary.get("C1")}, indent=1),
+              "Wall-clock stops remain paired; abandoned units are excluded and become final after two abandonments."]
+    hypotheses = summary.get("hypotheses")
+    if hypotheses:
+        lines += ["", "## Decisions", "", "| Item | Result |", "| --- | --- |"]
+        for name in ("H78", "H80", "H81"):
+            lines.append(f"| {name} | {'holds' if hypotheses[name]['holds'] else 'fails'}, p = {hypotheses[name]['p']} |")
+        lines.append(f"| H79 | {hypotheses['H79']['status']} |")
+        checks = ({"C1": summary["C1"]} if summary.get("C1") else {}) | summary.get("checks", {})
+        for name, check in checks.items():
+            lines.append(f"| {name} | {'holds' if check.get('holds') else 'fails'} |")
+    lines += ["", "## Measures and paired comparisons", "", "```json",
+              json.dumps({"arms": summary["arms"], "pairs": summary["pairs"], "hypotheses": hypotheses,
+                          "checks": summary.get("checks"), "C1": summary.get("C1")}, indent=1),
               "```", "", "## Free-choice-only proofs", ""]
     for proof in summary["freeChoiceOnlyProofs"]:
         lines += [f"### {proof['declaration']} ({proof['arm']})", "", "```lean", *proof["proof"], "```", ""]
@@ -355,14 +471,21 @@ def registration_payload(tasks: list[dict[str, Any]]) -> dict[str, Any]:
             "execution": {"units": "fresh REPL in the task's module", "maxAbandonments": MAX_ABANDONMENTS,
                           "retry": "REPL timeout retried on next run; second abandonment final and excluded from pairs",
                           "wallClock": "checked before expansions and goal positions; completed without proof, retained in pairs; partial expansions marked interrupted"},
-            "hypotheses": {"primary": "TO BE WRITTEN", "coupling": "TO BE WRITTEN"},
-            "checks": {"C1": "all 200 firstText sample units reproduce search-v0.3 menu/whole: posing, proof found, and all expansion records"},
+            "hypotheses": HYPOTHESES,
+            "checks": CHECKS,
+            "secondary": {"equalSteps": f"the same comparisons with a proof counted only within {STEP_BUDGET} "
+                                        "candidate applications, the most the first-goal search can spend",
+                          "identity": "firstText against first on the sample",
+                          "coupledShare": "share of exported multi-goal expanded states with a coupled group, per arm",
+                          "diagnostic": "constructed coupled and independent tasks, registered separately as "
+                                        "goal-selection-diagnostic-v0.1"},
             "analyses": {"pairs": "completed paired tasks; both one-sided exact sign tails, at equal expansions and steps",
                          "contrasts": {"firstText:first": "identity, on the registered sample", "first:any": "goal choice",
                                        "any:anyMultiset": "goal order quotient", "first:anyMultiset": "goal choice and order quotient"},
                          "typedSupport": "fractions divide by observations with known typed keys or coupling",
                          "distinctTypedMultisets": "sum of distinct keys within each task search",
-                         "coupling": "replay every free-choice-only proof and report the chosen position and typed groups"},
+                         "coupling": "replay every free-choice-only proof and report the chosen position and typed "
+                                     "groups; committed as coupling.json, from which H79 is decided"},
             "implementationSha256": {name: sha256_file(path) for name, path in IMPLEMENTATIONS.items()},
             "resultsAbsentAtRegistration": True, "registeredLocalDate": time.strftime("%Y-%m-%d") + " America/Los_Angeles"}
 
@@ -390,8 +513,12 @@ def validate_registration() -> list[dict[str, Any]]:
 
 def artifact_summary(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: list[str]) -> dict[str, Any]:
     sample = baseline_sample(tasks, read_json(PREREG)["baselineSample"]["seed"])
-    return summarize(rows, tasks, arms) | {"C1": replication(rows, sample),
+    probes = read_json(COUPLING) if COUPLING.exists() else None
+    check = replication(rows, sample)
+    check["holds"] = check["compared"] == check["matched"] == SAMPLE_SIZE and check["sampleMatches"]
+    return summarize(rows, tasks, arms, probes) | {"C1": check,
         "resultsSha256": sha256_file(RESULTS), "preregistrationSha256": sha256_file(PREREG),
+        "couplingSha256": sha256_file(COUPLING) if COUPLING.exists() else None,
         "amendmentsSha256": {p.name: sha256_file(p) for p in sorted(EXPERIMENT.glob("amendment-*.json"))}}
 
 
@@ -606,24 +733,24 @@ def main() -> int:
         return 0
     rows = read_rows(RESULTS)
     summary = read_json(SUMMARY)
-    recomputed = artifact_summary(rows, tasks, list(summary["arms"]))
-    if summary != recomputed or REPORT.read_text(encoding="utf-8") != report(recomputed):
-        raise SystemExit("committed summary or report does not follow from results")
-    if summary["C1"]["mismatches"] or summary["C1"]["compared"] != SAMPLE_SIZE or not summary["C1"]["sampleMatches"]:
-        raise SystemExit("firstText sample is incomplete or differs from search-v0.3")
     if args.coupling:
-        output = outside_output(args.output_dir)
         by_task = {task_key(t): t for t in tasks}
         probes = []
         for proof in summary["freeChoiceOnlyProofs"]:
             row = run_unit(by_task[task_key(proof)], proof["arm"], probe=proof["proof"])
             probes.append(row)
-            write_json(output / "coupling.json", probes)
             print(json.dumps(row, ensure_ascii=False), flush=True)
-        if not probes:
-            write_json(output / "coupling.json", [])
-        return 0 if all(r.get("verified") and r.get("probe", {}).get("closed") for r in probes) else 1
-    print(f"goal-selection-check-ok: units={len(rows)} first={summary['C1']['matched']}/{summary['C1']['compared']}")
+        write_json(COUPLING, probes)
+        summary = artifact_summary(rows, tasks, list(summary["arms"]))
+        write_json(SUMMARY, summary)
+        write_lf(REPORT, report(summary))
+        print(json.dumps({"H79": summary.get("hypotheses", {}).get("H79")}, ensure_ascii=False))
+        return 0
+    recomputed = artifact_summary(rows, tasks, list(summary["arms"]))
+    if summary != recomputed or REPORT.read_text(encoding="utf-8") != report(recomputed):
+        raise SystemExit("committed summary or report does not follow from results")
+    print(f"goal-selection-check-ok: units={len(rows)} C1={summary['C1']['matched']}/{summary['C1']['compared']}"
+          f" holds={summary['C1']['holds']}")
     return 0
 
 

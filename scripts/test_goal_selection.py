@@ -150,6 +150,12 @@ class SearchTests(unittest.TestCase):
         self.assertEqual(repl.export_calls, [0, 1])
         self.assertEqual([e["exportFailures"] for e in result["expansions"]], [2, 0])
 
+    def test_export_attempts_count_cache_misses_only(self):
+        repl = FakeRepl({(0, "a"): (["B"], 1), (1, "a"): (["B"], 1)})
+        result = self.run_search(repl, budget=3, identify="multiset")
+        self.assertEqual(repl.export_calls, [0, 1])
+        self.assertEqual(result["exportAttempts"], 2)
+
     def test_wrong_export_goal_count_is_a_failure(self):
         repl = FakeRepl(exports={0: []})
         result = self.run_search(repl, budget=1)
@@ -541,13 +547,80 @@ class SummaryTests(unittest.TestCase):
             self.assertEqual(wrong["matched"], 1)
             self.assertFalse(wrong["sampleMatches"])
 
-    def test_registration_placeholders_and_source_population(self):
+    def test_registration_states_the_hypotheses_and_checks(self):
         tasks = runner.read_json(runner.SOURCE / "tasks.json")
         payload = runner.registration_payload(tasks)
         self.assertEqual(len(tasks), 1347)
         self.assertEqual(payload["proposer"], harness.MENU)
         self.assertEqual(payload["budget"], {"expansions": 24, "secondarySteps": 624, "typedSearchSeconds": 7200})
-        self.assertTrue(all(v == "TO BE WRITTEN" for v in payload["hypotheses"].values()))
+        self.assertEqual(set(payload["hypotheses"]), {"H78", "H79", "H80", "H81", "family"})
+        self.assertEqual(set(payload["checks"]), {"C1", "C2", "C3"})
+        self.assertNotIn("TO BE WRITTEN", json.dumps(payload))
+
+    def test_holm_steps_down_and_never_rejects_a_missing_p(self):
+        self.assertEqual(runner.holm({"a": 0.01, "b": 0.04, "c": 0.03}), {"a": True, "b": False, "c": False})
+        self.assertEqual(runner.holm({"a": 0.01, "b": 0.02}), {"a": True, "b": True})
+        self.assertEqual(runner.holm({"a": None, "b": 0.001}), {"a": False, "b": True})
+        self.assertEqual(runner.holm({"a": None}), {"a": False})
+
+    def test_order_redundancy_bootstrap_is_deterministic_and_one_sided(self):
+        more = [(0, 10, 3, 10), (1, 10, 4, 10)] * 10
+        result = runner.order_redundancy(more)
+        self.assertEqual(result, runner.order_redundancy(more))
+        self.assertAlmostEqual(result["difference"], 0.3)
+        self.assertEqual(result["p"], 1 / (runner.BOOTSTRAP_RESAMPLES + 1))
+        self.assertLessEqual(result["interval"][0], result["difference"])
+        self.assertGreaterEqual(result["interval"][1], result["difference"])
+        fewer = runner.order_redundancy([(3, 10, 0, 10)] * 5)
+        self.assertEqual(fewer["p"], 1)
+        self.assertEqual(runner.order_redundancy([]), {"tasks": 0, "difference": None, "interval": None, "p": None})
+
+    def test_coupling_decision_fails_closed(self):
+        proof = {"module": "M", "declaration": "a", "arm": "any", "proof": ["pick_goal 2", "rfl"]}
+        coupled = {"module": "M", "declaration": "a", "arm": "any", "verified": True,
+                   "probe": {"closed": True, "steps": [{"position": 2, "chosenCoupled": True}]}}
+        self.assertEqual(runner.coupling_decision([], None)["status"], "untested")
+        self.assertEqual(runner.coupling_decision([proof], None)["status"], "pending")
+        self.assertEqual(runner.coupling_decision([proof], [coupled])["status"], "holds")
+        unknown = coupled | {"probe": {"closed": True, "steps": [{"position": 2, "chosenCoupled": None}]}}
+        first_only = coupled | {"probe": {"closed": True, "steps": [{"position": 1, "chosenCoupled": True}]}}
+        for replay in (unknown, first_only, coupled | {"verified": False}, coupled | {"probe": {"closed": False}}):
+            self.assertEqual(runner.coupling_decision([proof], [replay])["status"], "fails")
+        self.assertEqual(runner.coupling_decision([proof], [])["status"], "fails")
+
+    def test_summary_decides_hypotheses_and_checks(self):
+        def typed(duplicates, total):
+            return [{"goals": 2, "valid": 1, "exactDuplicates": 0, "multisetDuplicates": 0, "orderDuplicate": False,
+                     "orderDuplicateTyped": i < duplicates, "coupled": False} for i in range(total)]
+
+        def unit(name, arm, proof, expansions, failures=0, attempts=10):
+            built = row(name, arm, proof, expansions=expansions)
+            built["result"] |= {"exportFailures": failures, "exportAttempts": attempts}
+            return built
+
+        tasks = [{"module": "M", "declaration": n} for n in "abcdefg"]
+        rows = []
+        for n in "abcdefg":
+            rows += [unit(n, "first", ["x"], typed(0, 4)), unit(n, "any", None, typed(2, 4)),
+                     unit(n, "anyMultiset", None, typed(0, 4))]
+        summary = runner.summarize(rows, tasks, ["first", "any", "anyMultiset"])
+        h = summary["hypotheses"]
+        self.assertEqual((h["H78"]["firstOnly"], h["H78"]["anyOnly"]), (7, 0))
+        self.assertEqual(h["H78"]["p"], 1 / 2 ** 7)
+        self.assertTrue(h["H78"]["holds"])
+        self.assertIsNone(h["H80"]["p"])
+        self.assertFalse(h["H80"]["holds"])
+        self.assertAlmostEqual(h["H81"]["difference"], 0.5)
+        self.assertTrue(h["H81"]["holds"])
+        self.assertEqual(h["H79"]["status"], "untested")
+        self.assertTrue(summary["checks"]["C2"]["holds"])
+        self.assertEqual(summary["checks"]["C3"], {"exportFailures": 0, "exportAttempts": 210, "share": 0.0,
+                                                   "holds": True})
+        rows[2] = unit("a", "anyMultiset", None, typed(1, 4), failures=10)
+        summary = runner.summarize(rows, tasks, ["first", "any", "anyMultiset"])
+        self.assertFalse(summary["checks"]["C2"]["holds"])
+        self.assertFalse(summary["checks"]["C3"]["holds"])
+        self.assertIn("| H78 | holds", runner.report(summary))
 
     def test_development_theorems_exclude_the_entire_slice(self):
         names = runner.development_names(10)

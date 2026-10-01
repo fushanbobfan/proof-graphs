@@ -75,9 +75,11 @@ class Exports:
         self.exporter = exporter
         self.cache: dict[int, list[dict[str, Any]] | None] = {}
         self.failures = 0
+        self.attempts = 0
 
     def get(self, proof_state: int, count: int) -> list[dict[str, Any]] | None:
         if proof_state not in self.cache:
+            self.attempts += 1
             goals = self.exporter(self.repl, proof_state)
             if goals is None or len(goals) != count:
                 goals = None
@@ -246,7 +248,8 @@ def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str]
             "orderDuplicates": sum(bool(e["orderDuplicate"]) for e in expansions),
             "goalDuplicates": sum(bool(e["goalDuplicate"]) for e in expansions),
             "uniqueFirstGoals": len(measures.firsts), "steps": steps, "stepsAtProof": steps_at_proof,
-            "exportFailures": exports.failures, "distinctTypedMultisets": len(measures.typed), "stopped": stopped}
+            "exportFailures": exports.failures, "exportAttempts": exports.attempts,
+            "distinctTypedMultisets": len(measures.typed), "stopped": stopped}
 
 
 def coupling_probe(repl: LeanRepl, proof_state: int, proof: list[str]) -> dict[str, Any]:
