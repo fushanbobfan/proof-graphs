@@ -1,0 +1,177 @@
+{
+ "experiment": "goal-selection-diagnostic-v0.1",
+ "question": "on constructed tasks whose goals are coupled, or independent, by design, does free goal choice prove what first-goal search cannot, and only through coupling",
+ "tasks": [
+  {
+   "declaration": "square_sixteen",
+   "statement": "∃ n : ℕ, n ^ 2 = 16 ∧ n = 4",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "affine_seven",
+   "statement": "∃ n : ℕ, 2 * n + 1 = 7 ∧ n = 3",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "mod_five",
+   "statement": "∃ n : ℕ, n % 5 = 2 ∧ n = 7",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "triple_twelve",
+   "statement": "∃ n : ℕ, n * 3 = 12 ∧ n = 4",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "truncated_sub",
+   "statement": "∃ n : ℕ, n - 2 = 5 ∧ n = 7",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "sub_from_ten",
+   "statement": "∃ n : ℕ, 10 - n = 4 ∧ n = 6",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "half_eight",
+   "statement": "∃ n : ℕ, n / 2 = 4 ∧ n = 8",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "cube_eight",
+   "statement": "∃ n : ℕ, n * n * n = 8 ∧ n = 2",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "pair_sum",
+   "statement": "∃ a b : ℕ, a + b = 5 ∧ a = 2 ∧ b = 3",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "pair_product",
+   "statement": "∃ a b : ℕ, a * b = 12 ∧ a = 3 ∧ b = 4",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_, ?_, ?_⟩"
+   ],
+   "kind": "coupled"
+  },
+  {
+   "declaration": "two_facts",
+   "statement": "2 * 3 = 6 ∧ 5 + 5 = 10",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "order_facts",
+   "statement": "(3 : ℕ) < 4 ∧ (7 : ℕ) ≠ 8",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "divisibility",
+   "statement": "(2 : ℕ) ∣ 4 ∧ 9 % 2 = 1",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "three_facts",
+   "statement": "10 - 3 = 7 ∧ 2 ^ 3 = 8 ∧ 1 + 1 = 2",
+   "prefix": [
+    "refine ⟨?_, ?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "true_and_sum",
+   "statement": "True ∧ (4 : ℕ) = 2 + 2",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "quotient_square",
+   "statement": "(6 : ℕ) / 2 = 3 ∧ 7 * 7 = 49",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "forall_first",
+   "statement": "(∀ n : ℕ, n + 0 = n) ∧ 3 * 3 = 9",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  },
+  {
+   "declaration": "comm_first",
+   "statement": "(∀ a b : ℕ, a + b = b + a) ∧ 2 ^ 2 = 4",
+   "prefix": [
+    "refine ⟨?_, ?_⟩"
+   ],
+   "kind": "independent"
+  }
+ ],
+ "arms": "the four arms of goal-selection-v0.1 (run_search_goal_selection.search): budget 24 expansions, the typed arms also limited to 7200 s of search",
+ "environment": "a fresh full-Mathlib REPL per unit; the statement posed as an example, the prefix applied, then the search; proofs verified from the statement with the prefix; found proofs of the typed arms replayed for coupling",
+ "predictions": {
+  "D1": "No coupled task is proved by first or by firstText.",
+  "D2": "Every coupled task is proved by any and by anyMultiset.",
+  "D3": "Every proof of a coupled task found by any or anyMultiset acts, at some step, on a goal other than the first that shares a metavariable with another open goal (coupling replay of the found proof).",
+  "D4": "Every independent task that some arm proves is proved by first."
+ },
+ "development": "four other constructed tasks (two coupled, two independent) were run during development; none is reused here",
+ "implementationSha256": {
+  "diagnostic": "5b5cc9003fdce49853257e09f2a5cbf04969fafd87aecd311e0c95dae235d46a",
+  "selection": "b1c4eb06a0944240a3f6ba8bf742baef6a07a3516756c83caf6db88b44a1a9d7",
+  "runner": "65d3c27777a699fa8b7f1eada38a4d263067b100fdf6002b0129a61b23c47889",
+  "identity": "08c3cbbd84cd44ce2e84749e191ddfe153bd3cc3ebf5a9b64d94e9b93f26e28d",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "deepRunner": "cb73a2ecd68bf83bba8ac8611f2ddb261f9012581536522b9355dce7c9dbd218",
+  "linearizationsRunner": "cd7cc1125c94b0af5da05d3d20a77153f88ebac553cb59273506f6b18ef7b41d",
+  "v1Runner": "fea3c23a5dbbe366daa65a5881881524b4ad0f1ff29110f7cce812180e52ac49",
+  "legacyIdentity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "textKeys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "sliceRunner": "22a04cc3c83730f2d26bfad6158a1ab8d36c6c0fc4fece88cf129cca761a4896"
+ },
+ "resultsAbsentAtRegistration": true,
+ "registeredLocalDate": "2026-10-01 America/Los_Angeles"
+}

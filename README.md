@@ -84,6 +84,11 @@ scripts/test_goal_identity_typed.py the typed identity on synthetic trees
 scripts/check_identity_v2_repl.py the typed identity on adversarial goals in a Mathlib REPL
 scripts/audit_key_denominators.py keys-v0.1's shares on matched support (not registered)
 scripts/test_audit_key_denominators.py the audit's denominators on synthetic logs
+scripts/search_goal_selection.py  whole-state search acting on any open goal
+scripts/run_search_goal_selection.py first goal against free goal choice
+scripts/test_goal_selection.py    the search and its decisions on a fake REPL
+scripts/run_goal_selection_diagnostic.py the same on constructed coupled and independent tasks
+scripts/test_goal_selection_diagnostic.py the diagnostic's decisions on synthetic rows
 scripts/recording_repl.py         a REPL session that records what a search does
 scripts/run_key_replay.py         finished searches re-keyed by Lean expressions
 scripts/search_faithful.py        searches over states, goals, and coupled goal groups
@@ -129,6 +134,8 @@ experiments/extraction-audit-v0.2/  the same on hard constructs, with a kit for 
 experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
 experiments/keys-v0.1-conflations/  what the text keys conflate (not registered)
 experiments/keys-v0.1-matched-support/  its shares on matched support (not registered)
+experiments/goal-selection-v0.1/  first goal against free goal choice, and the order quotient
+experiments/goal-selection-diagnostic-v0.1/  the same on constructed tasks
 experiments/recount-v0.1/         the corrected counts
 datasets/proof-graphs-v0.2.jsonl.gz  7,285 step-dependency graphs (corrected derivation)
 datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivation
