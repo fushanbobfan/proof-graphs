@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
-import itertools
 import json
 import math
+import random
 import subprocess
 import time
 from pathlib import Path
@@ -32,7 +32,12 @@ RESULTS = EXPERIMENT / "results.jsonl"
 SUMMARY = EXPERIMENT / "summary.json"
 REPORT = EXPERIMENT / "report.md"
 SOURCE = ROOT / "experiments" / "search-v0.3"
-ARMS = ("first", "any", "anyMultiset")
+ARMS = ("firstText", "first", "any", "anyMultiset")
+PAIRS = (("firstText", "first"), ("first", "any"), ("any", "anyMultiset"), ("first", "anyMultiset"))
+SAMPLE_SEED = 20260930
+SAMPLE_SIZE = 200
+SEARCH_SECONDS = 7200
+MAX_ABANDONMENTS = 2
 BUDGET = 24
 STEP_BUDGET = BUDGET * len(harness.MENU)
 IMPLEMENTATIONS = {name: ROOT / "scripts" / file for name, file in {
@@ -79,15 +84,49 @@ def unit_key(row: dict[str, Any]) -> tuple[str, str, str]:
 
 
 def latest_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return list({unit_key(row): row for row in rows}.values())
+    latest = {}
+    counts: dict[tuple[str, str, str], int] = {}
+    for row in rows:
+        key = unit_key(row)
+        counts[key] = max(counts.get(key, 0) + bool(row.get("abandoned")), row.get("abandonments", 0))
+        latest[key] = row | {"abandonments": counts[key]}
+    return list(latest.values())
+
+
+def baseline_sample(tasks: list[dict[str, Any]], seed: int = SAMPLE_SEED) -> list[dict[str, Any]]:
+    baseline = {task_key(r): r for r in read_rows(SOURCE / "results.jsonl")
+                if r["arm"] == "menu" and r["search"] == "whole"}
+    proved = sorted(task_key(t) for t in tasks if baseline.get(task_key(t), {}).get("result", {}).get("proof"))
+    others = sorted(task_key(t) for t in tasks if task_key(t) not in proved and
+                    "result" in baseline.get(task_key(t), {}))
+    if len(proved) > SAMPLE_SIZE or len(proved) + len(others) < SAMPLE_SIZE:
+        raise ValueError("baseline cannot supply the registered 200-task sample")
+    chosen = set(proved + random.Random(seed).sample(others, SAMPLE_SIZE - len(proved)))
+    return sorted((t for t in tasks if task_key(t) in chosen), key=task_key)
+
+
+def result_steps(result: dict[str, Any]) -> int:
+    if "steps" in result:
+        return result["steps"]
+    expansions = result["expansions"]
+    if not result["proof"]:
+        return sum(e["candidates"] for e in expansions)
+    return sum(e["candidates"] for e in expansions[:-1]) + harness.MENU.index(result["proof"][-1]) + 1
+
+
+def proof_steps(result: dict[str, Any]) -> int | None:
+    return result.get("stepsAtProof", result_steps(result) if result["proof"] else None)
 
 
 def search(repl: Any, arm: str, proof_state: int, goals: list[str], verifier: Any,
            budget: int = BUDGET) -> dict[str, Any]:
-    if arm == "first":
-        return selection.first_search(repl, proof_state, goals, harness.menu_proposer, budget, verifier)
+    if arm == "firstText":
+        return harness.whole_state_search(repl, proof_state, goals, harness.menu_proposer, budget, verifier)
+    if arm not in ARMS:
+        raise ValueError(f"unknown arm: {arm}")
     return selection.any_goal_search(repl, proof_state, goals, harness.menu_proposer, budget, verifier,
-                                     identify="multiset" if arm == "anyMultiset" else "ordered")
+                                     identify="multiset" if arm == "anyMultiset" else "ordered",
+                                     positions="first" if arm == "first" else "all", time_limit=SEARCH_SECONDS)
 
 
 def run_unit(task: dict[str, Any], arm: str, budget: int = BUDGET,
@@ -100,7 +139,7 @@ def run_unit(task: dict[str, Any], arm: str, budget: int = BUDGET,
     try:
         repl = selection.ClosingRepl(find_lake(), imports=None)
         path = ROOT / ".lake" / "packages" / "mathlib" / (task["module"].replace(".", "/") + ".lean")
-        session_type = harness.ModuleSession if arm == "first" else selection.ExportingSession
+        session_type = harness.ModuleSession if arm == "firstText" else selection.ExportingSession
         session = session_type(repl, task["module"], path, [(task["declaration"], task["line"])])
         for _, made in session.tasks_in_order():
             if made is None:
@@ -110,10 +149,13 @@ def run_unit(task: dict[str, Any], arm: str, budget: int = BUDGET,
             if probe is not None:
                 return head | {"constructed": True, "verified": verifier(probe),
                                "probe": selection.coupling_probe(repl, made.proof_state, probe)}
+            setup_seconds = round(time.monotonic() - started, 1)
             result = search(repl, arm, made.proof_state, [made.goal], verifier, budget)
+            if repl.restarts:
+                raise ReplTimeout("search restarted the task environment")
             return head | {"constructed": True, "result": result,
                            "fastExport": getattr(repl, "typed_fast_export", False),
-                           "setupSeconds": round(time.monotonic() - started - result["seconds"], 1)}
+                           "setupSeconds": setup_seconds}
         return head | {"constructed": False, "reason": "declaration range not found"}
     except ReplTimeout:
         return head | {"constructed": constructed, "abandoned": "repl timeout",
@@ -128,7 +170,8 @@ def run_development_unit(task: dict[str, Any], arm: str) -> dict[str, Any]:
             "kind": task.get("kind", "theorem"), "prefix": task.get("prefix", [])}
     repl = selection.ClosingRepl(find_lake())
     try:
-        repl.env = selection.define_exporter(repl, repl.env)
+        if arm != "firstText":
+            repl.env = selection.define_exporter(repl, repl.env)
         if "statement" in task:
             header = f"example : {task['statement']} := by"
             response = repl.command(header + "\n  sorry")
@@ -150,8 +193,11 @@ def run_development_unit(task: dict[str, Any], arm: str) -> dict[str, Any]:
             goals, proof_state = result
         verifier = lambda script: harness.verify_script(repl, made, head["prefix"] + script)
         result = search(repl, arm, proof_state, goals, verifier)
-        probe = selection.coupling_probe(repl, proof_state, result["proof"]) if result["proof"] else None
-        root_export = selection.export(repl, proof_state)
+        if repl.restarts:
+            raise ReplTimeout("search restarted the task environment")
+        probe = selection.coupling_probe(repl, proof_state, result["proof"]) \
+            if arm != "firstText" and result["proof"] else None
+        root_export = selection.export(repl, proof_state) if arm != "firstText" else None
         return head | {"constructed": True, "rootGoals": goals,
                        "rootGroups": gi.groups(root_export) if root_export is not None else None,
                        "fastExport": getattr(repl, "typed_fast_export", False), "result": result, "probe": probe}
@@ -167,13 +213,13 @@ def sign_test(wins: int, losses: int) -> float | None:
     return sum(math.comb(n, i) for i in range(wins, n + 1)) / 2 ** n if n else None
 
 
-def replication(rows: list[dict[str, Any]]) -> dict[str, Any]:
+def replication(rows: list[dict[str, Any]], sample: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     old = {task_key(r): r for r in read_rows(SOURCE / "results.jsonl")
            if r["arm"] == "menu" and r["search"] == "whole"}
     compared = matched = 0
     mismatches = []
     for row in latest_rows(rows):
-        if row["arm"] != "first" or task_key(row) not in old:
+        if row["arm"] != "firstText" or task_key(row) not in old:
             continue
         committed = old[task_key(row)]
         compared += 1
@@ -187,7 +233,11 @@ def replication(rows: list[dict[str, Any]]) -> dict[str, Any]:
             matched += 1
         else:
             mismatches.append({"module": row["module"], "declaration": row["declaration"]})
-    return {"compared": compared, "matched": matched, "mismatches": mismatches}
+    result = {"compared": compared, "matched": matched, "mismatches": mismatches}
+    if sample is not None:
+        result["sampleMatches"] = {task_key(r) for r in latest_rows(rows) if r["arm"] == "firstText"} == \
+            {task_key(t) for t in sample}
+    return result
 
 
 def fraction(numerator: int, denominator: int) -> float | None:
@@ -199,7 +249,8 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
     rows = [r for r in latest_rows(rows) if task_key(r) in keys and r["arm"] in arms]
     by_unit = {unit_key(r): r for r in rows}
     out: dict[str, Any] = {"experiment": "goal-selection-v0.1", "tasks": len(tasks),
-                           "budget": BUDGET, "stepBudget": STEP_BUDGET, "arms": {}, "pairs": {},
+                           "budget": BUDGET, "typedSearchSeconds": SEARCH_SECONDS,
+                           "stepBudget": STEP_BUDGET, "arms": {}, "pairs": {},
                            "freeChoiceOnlyProofs": []}
     for arm in arms:
         units = [r for r in rows if r["arm"] == arm]
@@ -209,35 +260,45 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
         multi = [e for e in expansions if e["goals"] > 1 and e.get("coupled") is not None]
         valid = sum(e["valid"] for e in expansions)
         exact = sum(e["exactDuplicates"] for e in expansions)
-        multiset = sum(e["multisetDuplicates"] for e in expansions)
+        multiset_support = [e for e in expansions if "multisetDuplicates" in e]
+        multiset = sum(e["multisetDuplicates"] for e in multiset_support)
         order = sum(bool(e["orderDuplicate"]) for e in expansions)
         typed_order = sum(bool(e["orderDuplicateTyped"]) for e in typed)
         coupled = sum(bool(e["coupled"]) for e in multi)
         out["arms"][arm] = {
             "tasksPosed": sum(bool(r.get("constructed")) for r in units), "completed": len(ran),
-            "missing": len(tasks) - len(units), "errors": sum(bool(r.get("error")) for r in units),
+            "missing": (SAMPLE_SIZE if arm == "firstText" else len(tasks)) - len(units),
+            "errors": sum(bool(r.get("error")) for r in units),
             "abandoned": sum(bool(r.get("abandoned")) for r in units),
+            "finalAbandoned": sum(bool(r.get("abandoned")) and r["abandonments"] >= MAX_ABANDONMENTS for r in units),
+            "wallClockStops": sum(r["result"].get("stopped") == "wall-clock" for r in ran),
             "proved": sum(bool(r["result"]["proof"]) for r in ran), "expansions": len(expansions),
-            "steps": sum(r["result"]["steps"] for r in ran), "validChildren": valid,
+            "steps": sum(result_steps(r["result"]) for r in ran), "validChildren": valid,
             "orderDuplicates": order, "orderFraction": fraction(order, len(expansions)),
             "typedOrderDuplicates": typed_order, "typedOrderSupport": len(typed),
             "typedOrderFraction": fraction(typed_order, len(typed)),
             "exactDuplicates": exact, "exactFraction": fraction(exact, valid),
-            "multisetDuplicates": multiset, "multisetFraction": fraction(multiset, valid),
-            "distinctTypedMultisets": sum(r["result"]["distinctTypedMultisets"] for r in ran),
+            "multisetDuplicates": multiset if multiset_support else None,
+            "multisetFraction": fraction(multiset, sum(e["valid"] for e in multiset_support)),
+            "distinctTypedMultisets": sum(r["result"].get("distinctTypedMultisets", 0) for r in ran)
+                if arm != "firstText" else None,
             "coupledMultiGoalStates": coupled, "exportedMultiGoalStates": len(multi),
             "coupledFraction": fraction(coupled, len(multi)),
-            "exportFailures": sum(r["result"]["exportFailures"] for r in ran)}
-    for a, b in itertools.combinations(arms, 2):
+            "exportFailures": sum(r["result"].get("exportFailures", 0) for r in ran)}
+    for a, b in PAIRS:
+        if a not in arms or b not in arms:
+            continue
         paired = [key for key in sorted(keys)
-                  if "result" in by_unit.get((*key, a), {}) and "result" in by_unit.get((*key, b), {})]
+                  if all("result" in by_unit.get((*key, arm), {}) and
+                         not by_unit[(*key, arm)].get("abandoned") and
+                         not by_unit[(*key, arm)].get("error") for arm in (a, b))]
         comparison = {"pairedCompleted": len(paired)}
         for measure in ("equalExpansions", "equalSteps"):
             def proved(key: tuple[str, str], arm: str) -> bool:
                 result = by_unit[(*key, arm)]["result"]
-                return bool(result["proof"]) and (measure == "equalExpansions" or arm == "first" or
-                                                  (result["stepsAtProof"] is not None and
-                                                   result["stepsAtProof"] <= STEP_BUDGET))
+                return bool(result["proof"]) and (measure == "equalExpansions" or
+                                                  (proof_steps(result) is not None and
+                                                   proof_steps(result) <= STEP_BUDGET))
             a_only = sum(proved(key, a) and not proved(key, b) for key in paired)
             b_only = sum(proved(key, b) and not proved(key, a) for key in paired)
             comparison[measure] = {"aOnly": a_only, "bOnly": b_only,
@@ -245,7 +306,7 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
         out["pairs"][f"{a}:{b}"] = comparison
     for row in rows:
         baseline = by_unit.get((*task_key(row), "first"), {}).get("result")
-        if row["arm"] != "first" and row.get("result", {}).get("proof") and baseline is not None \
+        if row["arm"] in ("any", "anyMultiset") and row.get("result", {}).get("proof") and baseline is not None \
                 and not baseline["proof"]:
             out["freeChoiceOnlyProofs"].append({"module": row["module"], "declaration": row["declaration"],
                                                "arm": row["arm"], "proof": row["result"]["proof"],
@@ -255,7 +316,8 @@ def summarize(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: lis
 
 
 def report(summary: dict[str, Any]) -> str:
-    lines = ["# Goal-selection search v0.1", "", f"Candidate tasks: {summary['tasks']}; budget: {BUDGET} expansions.",
+    lines = ["# Goal-selection search v0.1", "",
+             f"Candidate tasks: {summary['tasks']}; budget: {BUDGET} expansions, or {SEARCH_SECONDS} search seconds in typed arms.",
              "", "| Arm | Posed | Completed | Proved | Expansions | Steps | Text order fraction | Typed order fraction |",
              "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for arm, entry in summary["arms"].items():
@@ -264,7 +326,8 @@ def report(summary: dict[str, Any]) -> str:
     lines += ["", "Typed fractions use exported support; unknown keys do not count as nonduplicates.",
               "Distinct typed multisets are summed within searches, whose task environments differ.",
               "Pairwise comparisons use tasks with completed results in both arms.",
-              "At equal steps a free-choice proof must close within 624 candidate applications.",
+              "At equal steps every arm's proof must close within 624 candidate applications.",
+              "Wall-clock stops remain paired; abandoned units are excluded and become final after two abandonments.",
               "", "## Measures and paired comparisons", "", "```json",
               json.dumps({"arms": summary["arms"], "pairs": summary["pairs"], "C1": summary.get("C1")}, indent=1),
               "```", "", "## Free-choice-only proofs", ""]
@@ -279,15 +342,24 @@ def registration_payload(tasks: list[dict[str, Any]]) -> dict[str, Any]:
             "tasks": {"source": "search-v0.3/tasks.json", "count": len(tasks), "previouslyPosed": 1171,
                       "sourceSha256": sha256_file(SOURCE / "tasks.json"),
                       "baselineResultsSha256": sha256_file(SOURCE / "results.jsonl")},
-            "arms": {"first": "search_harness.whole_state_search, unchanged, with passive measurements",
-                     "any": "whole-state breadth-first; positions in order, then menu order; ordered text identity",
+            "arms": {"firstText": "unchanged search_harness.whole_state_search and ModuleSession; no exports or observers; C1 sample only",
+                     "first": "whole-state breadth-first; first position only; joint typed ordered state key; all candidates",
+                     "any": "whole-state breadth-first; all positions in order, then menu order; joint typed ordered state key; all candidates",
                      "anyMultiset": "the same search, deduplicated by joint typed unordered state key"},
-            "proposer": list(harness.MENU), "budget": {"expansions": BUDGET, "secondarySteps": STEP_BUDGET},
-            "identity": "goal_identity_typed; failed exports and None unordered keys never merge",
-            "execution": "each unit in a fresh REPL in its module; resumable; failed units retried",
+            "baselineSample": {"size": SAMPLE_SIZE, "seed": SAMPLE_SEED,
+                               "selection": "all menu/whole proved tasks, plus Random(seed).sample of sorted remaining posed tasks",
+                               "tasks": [list(task_key(t)) for t in baseline_sample(tasks)]},
+            "proposer": list(harness.MENU),
+            "budget": {"expansions": BUDGET, "secondarySteps": STEP_BUDGET, "typedSearchSeconds": SEARCH_SECONDS},
+            "identity": "goal_identity_typed; export root and every valid child; failed exports and None keys never merge",
+            "execution": {"units": "fresh REPL in the task's module", "maxAbandonments": MAX_ABANDONMENTS,
+                          "retry": "REPL timeout retried on next run; second abandonment final and excluded from pairs",
+                          "wallClock": "checked before expansions and goal positions; completed without proof, retained in pairs; partial expansions marked interrupted"},
             "hypotheses": {"primary": "TO BE WRITTEN", "coupling": "TO BE WRITTEN"},
-            "checks": {"C1": "every first unit reproduces search-v0.3 menu/whole: posing, proof found, and all expansion records"},
+            "checks": {"C1": "all 200 firstText sample units reproduce search-v0.3 menu/whole: posing, proof found, and all expansion records"},
             "analyses": {"pairs": "completed paired tasks; both one-sided exact sign tails, at equal expansions and steps",
+                         "contrasts": {"firstText:first": "identity, on the registered sample", "first:any": "goal choice",
+                                       "any:anyMultiset": "goal order quotient", "first:anyMultiset": "goal choice and order quotient"},
                          "typedSupport": "fractions divide by observations with known typed keys or coupling",
                          "distinctTypedMultisets": "sum of distinct keys within each task search",
                          "coupling": "replay every free-choice-only proof and report the chosen position and typed groups"},
@@ -311,19 +383,28 @@ def validate_registration() -> list[dict[str, Any]]:
     tasks = read_json(TASKS)
     if tasks != read_json(SOURCE / "tasks.json"):
         raise SystemExit("task list differs from search-v0.3")
+    if prereg["baselineSample"]["tasks"] != [list(task_key(t)) for t in baseline_sample(tasks, prereg["baselineSample"]["seed"])]:
+        raise SystemExit("registered baseline sample differs from its selection rule")
     return tasks
 
 
 def artifact_summary(rows: list[dict[str, Any]], tasks: list[dict[str, Any]], arms: list[str]) -> dict[str, Any]:
-    return summarize(rows, tasks, arms) | {"C1": replication(rows),
+    sample = baseline_sample(tasks, read_json(PREREG)["baselineSample"]["seed"])
+    return summarize(rows, tasks, arms) | {"C1": replication(rows, sample),
         "resultsSha256": sha256_file(RESULTS), "preregistrationSha256": sha256_file(PREREG),
         "amendmentsSha256": {p.name: sha256_file(p) for p in sorted(EXPERIMENT.glob("amendment-*.json"))}}
 
 
-def run_all(tasks: list[dict[str, Any]], arms: list[str], workers: int) -> list[dict[str, Any]]:
+def run_all(tasks: list[dict[str, Any]], arms: list[str], workers: int,
+            sample: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     rows = read_rows(RESULTS) if RESULTS.exists() else []
-    done = {unit_key(r) for r in latest_rows(rows) if not r.get("error") and not r.get("abandoned")}
-    units = [(task, arm) for task in tasks for arm in arms if (*task_key(task), arm) not in done]
+    previous = {unit_key(r): r for r in latest_rows(rows)}
+    done = {key for key, r in previous.items() if
+            (not r.get("error") and not r.get("abandoned")) or r["abandonments"] >= MAX_ABANDONMENTS}
+    sampled = {task_key(t) for t in (sample if sample is not None else baseline_sample(tasks))} \
+        if "firstText" in arms else set()
+    units = [(task, arm) for task in tasks for arm in arms if (*task_key(task), arm) not in done and
+             (arm != "firstText" or task_key(task) in sampled)]
 
     def guarded(task: dict[str, Any], arm: str) -> dict[str, Any]:
         try:
@@ -336,6 +417,7 @@ def run_all(tasks: list[dict[str, Any]], arms: list[str], workers: int) -> list[
         futures = [pool.submit(guarded, task, arm) for task, arm in units]
         for future in concurrent.futures.as_completed(futures):
             row = future.result()
+            row["abandonments"] = previous.get(unit_key(row), {}).get("abandonments", 0) + bool(row.get("abandoned"))
             rows.append(row)
             with RESULTS.open("a", encoding="utf-8", newline="\n") as handle:
                 handle.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
@@ -348,9 +430,10 @@ def run_all(tasks: list[dict[str, Any]], arms: list[str], workers: int) -> list[
 def print_row(row: dict[str, Any]) -> None:
     result = row.get("result") or {}
     print(json.dumps({"task": row["declaration"], "arm": row["arm"], "constructed": row.get("constructed"),
-                      "expansions": len(result.get("expansions", [])), "steps": result.get("steps"),
-                      "stepsAtProof": result.get("stepsAtProof"), "proof": result.get("proof"),
-                      "exportFailures": result.get("exportFailures"), "error": row.get("error"),
+                      "seconds": result.get("seconds", row.get("seconds")), "setupSeconds": row.get("setupSeconds"),
+                      "expansions": len(result.get("expansions", [])), "steps": result_steps(result) if result else None,
+                      "stepsAtProof": proof_steps(result) if result else None, "proof": result.get("proof"),
+                      "exportFailures": result.get("exportFailures", 0), "stopped": result.get("stopped"), "error": row.get("error"),
                       "abandoned": row.get("abandoned")}, ensure_ascii=False), flush=True)
 
 
@@ -368,6 +451,12 @@ def self_test(output: Path) -> int:
     repl = selection.ClosingRepl(find_lake())
     checks = {}
     try:
+        response = repl.command("example : True := by\n  sorry")
+        made = response["sorries"][0]
+        task = harness.Task("self_test_text", [], "example : True := by", made["goal"])
+        result = search(repl, "firstText", made["proofState"], [made["goal"]],
+                        lambda script: harness.verify_script(repl, task, script), budget=4)
+        checks["firstText"] = result["proof"] is not None
         repl.env = selection.define_exporter(repl, repl.env)
         checks["fastExporterDefined"] = bool(getattr(repl, "typed_fast_export", False))
         response = repl.command("example : 2 + 2 = 4 ∧ 3 * 3 = 9 := by\n  sorry")
@@ -376,7 +465,7 @@ def self_test(output: Path) -> int:
         plain = gi.export(repl, proof_state)
         checks["namedEqualsPlain"] = named is not None and named == plain
         checks["independentGroups"] = named is not None and gi.groups(named) == [[0], [1]]
-        for arm in ARMS:
+        for arm in ARMS[1:]:
             header = "example : 2 + 2 = 4 ∧ 3 * 3 = 9 := by"
             made = repl.command(header + "\n  sorry")["sorries"][0]
             goals, state = repl.tactic(int(made["proofState"]), "refine ⟨?_, ?_⟩")
@@ -420,12 +509,39 @@ def develop(output: Path, count: int) -> int:
     return 0 if completed else 1
 
 
+def holdout_tasks() -> list[dict[str, Any]]:
+    source = ROOT / "experiments" / "holdout-v0.1"
+    selected = {task_key(r) for r in read_rows(source / "searches.jsonl") if r["search"] == "whole" and
+                any(e["goals"] >= 3 for e in r.get("result", {}).get("expansions", []))}
+    return sorted((t for t in read_json(source / "tasks.json") if task_key(t) in selected), key=task_key)
+
+
+def develop_holdout(output: Path, count: int) -> int:
+    tasks = holdout_tasks()
+    if not 1 <= count <= len(tasks):
+        raise SystemExit(f"dev-holdout must be between 1 and {len(tasks)}")
+    rows = []
+    for task in tasks[:count]:
+        for arm in ARMS:
+            row = run_unit(task, arm)
+            rows.append(row)
+            print_row(row)
+            write_lf(output / "holdout-results.jsonl", "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
+    completed = all("result" in row for row in rows)
+    write_json(output / "holdout-summary.json", {"eligibleTasks": len(tasks), "tasks": count,
+                                                "units": len(rows), "completed": completed})
+    print(json.dumps({"dev-holdout": {"eligibleTasks": len(tasks), "tasks": count,
+                                      "units": len(rows), "completed": completed}}), flush=True)
+    return 0 if completed else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     for name in ("self-test", "dev", "register", "run", "check-committed", "coupling"):
         mode.add_argument("--" + name, action="store_true")
     mode.add_argument("--smoke-first", type=int, metavar="N")
+    mode.add_argument("--dev-holdout", type=int, metavar="N")
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--arms", nargs="+", default=list(ARMS), help="space- or comma-separated arms")
     parser.add_argument("--output-dir", type=Path)
@@ -433,15 +549,17 @@ def main() -> int:
     args = parser.parse_args()
     arms = [a for value in args.arms for a in value.split(",") if a]
     if not arms or len(set(arms)) != len(arms) or any(a not in ARMS for a in arms):
-        parser.error("arms must be distinct members of first, any, anyMultiset")
+        parser.error("arms must be distinct members of firstText, first, any, anyMultiset")
     if args.workers < 1 or not 0 <= args.dev_count <= 10:
         parser.error("workers must be positive and dev-count must be between 0 and 10")
-    if (args.self_test or args.dev or args.smoke_first is not None or args.coupling) and args.workers != 1:
+    if (args.self_test or args.dev or args.smoke_first is not None or args.dev_holdout is not None or args.coupling) and args.workers != 1:
         parser.error("smoke, development, and coupling modes require --workers 1")
     if args.self_test:
         return self_test(outside_output(args.output_dir))
     if args.dev:
         return develop(outside_output(args.output_dir), args.dev_count)
+    if args.dev_holdout is not None:
+        return develop_holdout(outside_output(args.output_dir), args.dev_holdout)
     if args.smoke_first is not None:
         if not 1 <= args.smoke_first <= 5:
             parser.error("smoke-first must be between 1 and 5")
@@ -451,7 +569,7 @@ def main() -> int:
         tasks = [t for t in read_json(SOURCE / "tasks.json") if task_key(t) in committed][:args.smoke_first]
         rows = []
         for task in tasks:
-            row = run_unit(task, "first")
+            row = run_unit(task, "firstText")
             rows.append(row)
             print_row(row)
             write_lf(output / "first-results.jsonl", "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
@@ -477,7 +595,8 @@ def main() -> int:
         clean = subprocess.check_output(["git", "status", "--porcelain", "--", relative], cwd=ROOT, text=True).strip()
         if not commit or not published or clean:
             raise SystemExit("commit and push registration before running (checked against local remote-tracking refs)")
-        rows = run_all(tasks, arms, args.workers)
+        prereg = read_json(PREREG)
+        rows = run_all(tasks, arms, args.workers, baseline_sample(tasks, prereg["baselineSample"]["seed"]))
         write_lf(RESULTS, "".join(json.dumps(r, separators=(",", ":"), ensure_ascii=False) + "\n" for r in rows))
         present = [a for a in ARMS if any(r["arm"] == a for r in rows)]
         summary = artifact_summary(rows, tasks, present)
@@ -490,8 +609,8 @@ def main() -> int:
     recomputed = artifact_summary(rows, tasks, list(summary["arms"]))
     if summary != recomputed or REPORT.read_text(encoding="utf-8") != report(recomputed):
         raise SystemExit("committed summary or report does not follow from results")
-    if summary["C1"]["mismatches"]:
-        raise SystemExit("first arm differs from search-v0.3")
+    if summary["C1"]["mismatches"] or summary["C1"]["compared"] != SAMPLE_SIZE or not summary["C1"]["sampleMatches"]:
+        raise SystemExit("firstText sample is incomplete or differs from search-v0.3")
     if args.coupling:
         output = outside_output(args.output_dir)
         by_task = {task_key(t): t for t in tasks}

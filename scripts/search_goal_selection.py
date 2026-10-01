@@ -10,7 +10,6 @@ from collections import deque
 from typing import Any, Callable
 
 import goal_identity_typed as gi
-import search_harness as harness
 from lean_repl import LeanRepl, ReplTimeout
 from search_faithful import harness_step
 from search_harness import ModuleSession, State
@@ -105,8 +104,9 @@ class Measures:
             coupled = any(len(g) > 1 for g in gi.groups(goals))
             if key is not None:
                 ordered = gi.ordered_state_key(goals)
-                typed_order = key in self.typed and ordered not in self.typed[key]
-                self.typed.setdefault(key, set()).add(ordered)
+                if ordered is not None:
+                    typed_order = key in self.typed and ordered not in self.typed[key]
+                    self.typed.setdefault(key, set()).add(ordered)
         return {"orderDuplicate": order, "goalDuplicate": first,
                 "orderDuplicateTyped": typed_order, "coupled": coupled, "typedMultiset": key}
 
@@ -130,11 +130,18 @@ def script_of(states: list[State], child: State) -> list[str]:
 def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
                     proposer: Callable[[State], list[str]], budget: int,
                     verifier: Callable[[list[str]], bool] | None = None,
-                    identify: str = "ordered", export: Callable = export) -> dict[str, Any]:
-    if identify not in ("ordered", "multiset"):
-        raise ValueError("identify must be ordered or multiset")
+                    identify: str = "ordered", export: Callable = export,
+                    positions: str = "all", time_limit: float = 7200,
+                    clock: Callable[[], float] = time.monotonic) -> dict[str, Any]:
+    if identify not in ("text", "ordered", "multiset"):
+        raise ValueError("identify must be text, ordered or multiset")
+    if positions not in ("all", "first"):
+        raise ValueError("positions must be all or first")
     if budget < 0:
         raise ValueError("budget must be nonnegative")
+    if time_limit < 0:
+        raise ValueError("time_limit must be nonnegative")
+    started = clock()
     states = [State(0, root_proof_state, root_goals, None, None, 0)]
     frontier = deque([0] if root_goals else [])
     exports = Exports(repl, export)
@@ -142,22 +149,36 @@ def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str]
     measures.generated_text.add(states[0].multiset_key)
     seen_exact = {states[0].ordered_key}
     seen_typed: set[str] = set()
+    key_of = gi.ordered_state_key if identify == "ordered" else gi.unordered_state_key
+    if identify != "text":
+        root_export = exports.get(root_proof_state, len(root_goals))
+        root_key = key_of(root_export) if root_export is not None else None
+        if root_key is not None:
+            seen_typed.add(root_key)
     expansions = []
     proof = None
     steps = rejected = 0
     steps_at_proof = None
-    started = time.monotonic()
+    stopped = None
+    reported_failures = 0
     while frontier and len(expansions) < budget and proof is None:
+        if clock() - started >= time_limit:
+            stopped = "wall-clock"
+            break
         state = states[frontier.popleft()]
-        failures_before = exports.failures
+        failures_before = reported_failures
         exported = exports.get(state.proof_state, len(state.goals))
         measured = measures.expanded(state, exported)
-        if identify == "multiset" and measured["typedMultiset"] is not None:
-            seen_typed.add(measured["typedMultiset"])
         candidates = proposer(state)
         valid = exact_duplicates = multiset_duplicates = typed_duplicates = tried = 0
-        positions = {str(i): 0 for i in range(1, len(state.goals) + 1)}
-        for position in range(1, len(state.goals) + 1):
+        position_counts = {}
+        interrupted = False
+        for position in range(1, (len(state.goals) if positions == "all" else 1) + 1):
+            if clock() - started >= time_limit:
+                stopped = "wall-clock"
+                interrupted = True
+                break
+            position_counts[str(position)] = 0
             picks = [f"pick_goal {position}"] if position > 1 else []
             selected = harness_step(repl, state.proof_state, picks) if picks else (state.goals, state.proof_state)
             if selected is None:
@@ -173,27 +194,31 @@ def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str]
                               "\n".join(picks + [tactic]), state.depth + 1)
                 if not goals:
                     script = script_of(states, child)
-                    if verifier is not None and not verifier(script):
+                    restarts = repl.restarts
+                    accepted = verifier is None or verifier(script)
+                    if repl.restarts != restarts:
+                        raise ReplTimeout("verification restarted the task environment")
+                    if not accepted:
                         rejected += 1
                         continue
                 valid += 1
-                positions[str(position)] += 1
+                position_counts[str(position)] += 1
                 multiset_duplicates += measures.generated(child)
                 exact_duplicate = child.ordered_key in seen_exact
                 exact_duplicates += exact_duplicate
                 seen_exact.add(child.ordered_key)
                 child_key = None
-                if identify == "multiset":
+                if identify != "text":
                     child_export = exports.get(proof_state, len(goals))
                     if child_export is not None:
-                        child_key = gi.unordered_state_key(child_export)
+                        child_key = key_of(child_export)
                 if not goals:
                     states.append(child)
                     state.children.append(child.id)
                     proof = script
                     steps_at_proof = steps
                     break
-                if identify == "ordered":
+                if identify == "text":
                     duplicate = exact_duplicate
                 else:
                     duplicate = child_key is not None and child_key in seen_typed
@@ -210,56 +235,18 @@ def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str]
         expansions.append({"state": state.id, "depth": state.depth, "goals": len(state.goals),
                            "candidates": len(candidates), "valid": valid, "exactDuplicates": exact_duplicates,
                            "steps": tried, "multisetDuplicates": multiset_duplicates,
-                           "typedDuplicates": typed_duplicates, "positions": positions,
-                           "exportFailures": exports.failures - failures_before} | measured)
+                           "typedDuplicates": typed_duplicates, "positions": position_counts,
+                           "exportFailures": exports.failures - failures_before} | measured |
+                          ({"interrupted": True} if interrupted else {}))
+        reported_failures = exports.failures
+        if stopped is not None:
+            break
     return {"expansions": expansions, "states": len(states), "proof": proof, "timeouts": 0,
-            "rejected": rejected, "seconds": round(time.monotonic() - started, 1), "restarts": repl.restarts,
+            "rejected": rejected, "seconds": round(clock() - started, 1), "restarts": repl.restarts,
             "orderDuplicates": sum(bool(e["orderDuplicate"]) for e in expansions),
             "goalDuplicates": sum(bool(e["goalDuplicate"]) for e in expansions),
             "uniqueFirstGoals": len(measures.firsts), "steps": steps, "stepsAtProof": steps_at_proof,
-            "exportFailures": exports.failures, "distinctTypedMultisets": len(measures.typed)}
-
-
-def first_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str],
-                 proposer: Callable, budget: int, verifier: Callable | None = None,
-                 export: Callable = export) -> dict[str, Any]:
-    """Observe the unchanged first-goal search, without changing its frontier or decisions."""
-    exports = Exports(repl, export)
-    measures = Measures()
-    measures.generated_text.add(State(0, root_proof_state, root_goals, None, None, 0).multiset_key)
-    observations: list[dict[str, Any]] = []
-
-    def propose(state: State) -> list[str]:
-        before = exports.failures
-        measured = measures.expanded(state, exports.get(state.proof_state, len(state.goals)))
-        observations.append(measured | {"steps": 0, "multisetDuplicates": 0,
-                                        "exportFailures": exports.failures - before})
-        return proposer(state)
-
-    class ObservedRepl:
-        def __getattr__(self, name: str) -> Any:
-            return getattr(repl, name)
-
-        def tactic(self, proof_state: int, tactic: str) -> Any:
-            observation = observations[-1]
-            observation["steps"] += 1
-            result = repl.tactic(proof_state, tactic)
-            if result is not None and result[0]:
-                observation["multisetDuplicates"] += measures.generated(
-                    State(0, result[1], result[0], None, None, 0))
-            return result
-
-    result = harness.whole_state_search(ObservedRepl(), root_proof_state, root_goals,
-                                        propose, budget, verifier)
-    for expansion, observation in zip(result["expansions"], observations):
-        expansion.update(observation)
-        expansion["positions"] = {"1": expansion["valid"]}
-        expansion["typedDuplicates"] = 0
-    result["steps"] = sum(e["steps"] for e in result["expansions"])
-    result["stepsAtProof"] = result["steps"] if result["proof"] is not None else None
-    result["exportFailures"] = exports.failures
-    result["distinctTypedMultisets"] = len(measures.typed)
-    return result
+            "exportFailures": exports.failures, "distinctTypedMultisets": len(measures.typed), "stopped": stopped}
 
 
 def coupling_probe(repl: LeanRepl, proof_state: int, proof: list[str]) -> dict[str, Any]:
