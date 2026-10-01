@@ -1,0 +1,865 @@
+{
+ "experiment": "goal-selection-diagnostic-v0.1",
+ "tasks": [
+  {
+   "declaration": "square_sixteen",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "affine_seven",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 12,
+     "steps": 781,
+     "stepsAtProof": 781,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "mod_five",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "triple_twelve",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "truncated_sub",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "sub_from_ten",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "half_eight",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "cube_eight",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 10,
+     "steps": 625,
+     "stepsAtProof": 625,
+     "proof": [
+      "pick_goal 3",
+      "rfl",
+      "simp"
+     ],
+     "coupledChoice": true
+    }
+   }
+  },
+  {
+   "declaration": "pair_sum",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 2860,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "anyMultiset": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 2756,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    }
+   }
+  },
+  {
+   "declaration": "pair_product",
+   "kind": "coupled",
+   "arms": {
+    "firstText": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 624,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "any": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 2860,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    },
+    "anyMultiset": {
+     "proved": false,
+     "expansions": 24,
+     "steps": 2756,
+     "stepsAtProof": null,
+     "proof": null,
+     "coupledChoice": null
+    }
+   }
+  },
+  {
+   "declaration": "two_facts",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "order_facts",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "divisibility",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "three_facts",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 5,
+     "steps": 105,
+     "stepsAtProof": 105,
+     "proof": [
+      "simp",
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 5,
+     "steps": 105,
+     "stepsAtProof": 105,
+     "proof": [
+      "simp",
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "simp",
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 11,
+     "steps": 703,
+     "stepsAtProof": 703,
+     "proof": [
+      "simp",
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "true_and_sum",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "quotient_square",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "forall_first",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "simp",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  },
+  {
+   "declaration": "comm_first",
+   "kind": "independent",
+   "arms": {
+    "firstText": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "omega",
+      "simp"
+     ],
+     "coupledChoice": null
+    },
+    "first": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 27,
+     "stepsAtProof": 27,
+     "proof": [
+      "omega",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "any": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "omega",
+      "simp"
+     ],
+     "coupledChoice": false
+    },
+    "anyMultiset": {
+     "proved": true,
+     "expansions": 2,
+     "steps": 53,
+     "stepsAtProof": 53,
+     "proof": [
+      "omega",
+      "simp"
+     ],
+     "coupledChoice": false
+    }
+   }
+  }
+ ],
+ "complete": true,
+ "units": 72,
+ "errors": 0,
+ "abandoned": 0,
+ "predictions": {
+  "D1": "holds",
+  "D2": "fails",
+  "D3": "holds",
+  "D4": "holds"
+ },
+ "resultsSha256": "d9c5e95aa861c448bbf277121bb97631c2783dc8680842516baf822762e19272",
+ "preregistrationSha256": "5126e227942d8a5870ab0c68d0a174fa14a9c536ad194be4904162d5d96c0ef0"
+}
