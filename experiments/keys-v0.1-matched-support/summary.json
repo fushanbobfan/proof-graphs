@@ -1,0 +1,146 @@
+{
+ "analysis": "keys-v0.1-matched-support",
+ "expressionKeyVersion": 1,
+ "sourceSha256": {
+  "logs.jsonl.gz": "70de16d1f5003a562a79a8a65d45226d5b199f851d429c9a73318d2c26d9590c",
+  "results.jsonl": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",
+  "summary.json": "41ab8f41b527b10026b9580ea900b4cb59ac497e314bafd8b41a697b1b4e5444"
+ },
+ "sourceHashChecks": {
+  "logs.jsonl.gz": {
+   "expected": "b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603",
+   "actual": "70de16d1f5003a562a79a8a65d45226d5b199f851d429c9a73318d2c26d9590c",
+   "matches": false
+  },
+  "results.jsonl": {
+   "expected": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",
+   "actual": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",
+   "matches": true
+  }
+ },
+ "scope": "Observed expansions in logged units; histories reset for each unit. Unlogged units' expansions and decisions are unknown, not zero.",
+ "limitations": [
+  "Only v1 key digests are recorded; instantiated expression trees needed to recompute v2 keys and corrected unordered state identity are absent.",
+  "Renamed AND-OR merge decisions, alias-to-node mappings, accepted renaming targets, and goal text for rebuilding renaming_step/agrees are absent. Its false-merge counts and share cannot be recovered; coarse-key equality alone is not an accepted merge."
+ ],
+ "arms": {
+  "proverWhole": {
+   "units": 200,
+   "loggedUnits": 168,
+   "unloggedUnits": 32,
+   "goalDuplicates": {
+    "total": 4703,
+    "evaluable": 4607,
+    "missing": 96,
+    "expressionDuplicates": 1277,
+    "coarseDuplicates": 1192,
+    "expressionShare": 0.277186889515954,
+    "coarseShare": 0.25873670501410895
+   },
+   "falseDrops": {
+    "total": 2905,
+    "evaluable": 2862,
+    "missing": 43,
+    "false": 170,
+    "status": "evaluable",
+    "share": 0.0593990216631726
+   }
+  },
+  "proverWholeRenamed": {
+   "units": 200,
+   "loggedUnits": 169,
+   "unloggedUnits": 31,
+   "goalDuplicates": {
+    "total": 4358,
+    "evaluable": 4262,
+    "missing": 96,
+    "expressionDuplicates": 359,
+    "coarseDuplicates": 247,
+    "expressionShare": 0.08423275457531676,
+    "coarseShare": 0.05795401220084467
+   },
+   "falseDrops": {
+    "total": 4335,
+    "evaluable": 4240,
+    "missing": 95,
+    "false": 214,
+    "status": "evaluable",
+    "share": 0.05047169811320755
+   }
+  },
+  "proverAndor": {
+   "units": 200,
+   "loggedUnits": 168,
+   "unloggedUnits": 32,
+   "goalDuplicates": {
+    "total": 4855,
+    "evaluable": 4759,
+    "missing": 96,
+    "expressionDuplicates": 1151,
+    "coarseDuplicates": 1073,
+    "expressionShare": 0.24185753309518807,
+    "coarseShare": 0.22546753519646984
+   },
+   "falseMerges": {
+    "total": 2809,
+    "evaluable": 2739,
+    "missing": 70,
+    "false": 244,
+    "status": "evaluable",
+    "share": 0.08908360715589632
+   }
+  },
+  "proverAndorRenamed": {
+   "units": 200,
+   "loggedUnits": 169,
+   "unloggedUnits": 31,
+   "goalDuplicates": {
+    "total": 4512,
+    "evaluable": 4416,
+    "missing": 96,
+    "expressionDuplicates": 150,
+    "coarseDuplicates": 37,
+    "expressionShare": 0.033967391304347824,
+    "coarseShare": 0.008378623188405798
+   },
+   "falseMerges": {
+    "status": "unavailable",
+    "total": null,
+    "evaluable": null,
+    "missing": null,
+    "false": null,
+    "share": null,
+    "reason": "Renamed AND-OR merge decisions, alias-to-node mappings, accepted renaming targets, and goal text for rebuilding renaming_step/agrees are absent. Its false-merge counts and share cannot be recovered; coarse-key equality alone is not an accepted merge."
+   }
+  },
+  "menuWhole": {
+   "units": 300,
+   "loggedUnits": 258,
+   "unloggedUnits": 42,
+   "goalDuplicates": {
+    "total": 3417,
+    "evaluable": 3374,
+    "missing": 43,
+    "expressionDuplicates": 974,
+    "coarseDuplicates": 946,
+    "expressionShare": 0.2886781268524007,
+    "coarseShare": 0.2803793716656787
+   },
+   "falseDrops": {
+    "total": 7009,
+    "evaluable": 6891,
+    "missing": 118,
+    "false": 410,
+    "status": "evaluable",
+    "share": 0.05949789580612393
+   }
+  }
+ },
+ "falseDropsPooled": {
+  "total": 14249,
+  "evaluable": 13993,
+  "missing": 256,
+  "false": 794,
+  "share": 0.05674265704280712
+ }
+}
