@@ -2,15 +2,15 @@
  "analysis": "keys-v0.1-matched-support",
  "expressionKeyVersion": 1,
  "sourceSha256": {
-  "logs.jsonl.gz": "70de16d1f5003a562a79a8a65d45226d5b199f851d429c9a73318d2c26d9590c",
+  "logs.jsonl.gz": "b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603",
   "results.jsonl": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",
   "summary.json": "41ab8f41b527b10026b9580ea900b4cb59ac497e314bafd8b41a697b1b4e5444"
  },
  "sourceHashChecks": {
   "logs.jsonl.gz": {
    "expected": "b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603",
-   "actual": "70de16d1f5003a562a79a8a65d45226d5b199f851d429c9a73318d2c26d9590c",
-   "matches": false
+   "actual": "b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603",
+   "matches": true
   },
   "results.jsonl": {
    "expected": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",

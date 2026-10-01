@@ -137,11 +137,17 @@ def _committed(path: str) -> bytes:
     return subprocess.check_output(["git", "show", f"HEAD:{path}"], cwd=ROOT)
 
 
+def content_sha256(name: str, data: bytes) -> str:
+    """The repository's content hash (`run_linearizations.sha256_file`): a `.gz` file hashed decompressed, CRLF as LF."""
+    raw = gzip.decompress(data) if name.endswith(".gz") else data
+    return hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
+
+
 def source_hash_checks(data: dict[str, bytes], old: dict[str, Any]) -> dict[str, Any]:
     """Report stale digest metadata without substituting another blob or discarding usable log records."""
     checks = {}
     for filename, hash_field in (("logs.jsonl.gz", "logsSha256"), ("results.jsonl", "resultsSha256")):
-        actual = hashlib.sha256(data[filename]).hexdigest()
+        actual = content_sha256(filename, data[filename])
         checks[filename] = {"expected": old[hash_field], "actual": actual, "matches": actual == old[hash_field]}
     return checks
 
@@ -159,7 +165,7 @@ def summarize() -> dict[str, Any]:
         raise ValueError("logged units differ from audited result units")
     out: dict[str, Any] = {
         "analysis": "keys-v0.1-matched-support", "expressionKeyVersion": 1,
-        "sourceSha256": {name: hashlib.sha256(value).hexdigest() for name, value in data.items()},
+        "sourceSha256": {name: content_sha256(name, value) for name, value in data.items()},
         "sourceHashChecks": hash_checks,
         "scope": "Observed expansions in logged units; histories reset for each unit. Unlogged units' "
                  "expansions and decisions are unknown, not zero.",

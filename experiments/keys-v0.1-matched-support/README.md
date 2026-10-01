@@ -34,7 +34,7 @@ Source SHA-256 digests are in summary.json; they cover logs.jsonl.gz, results.js
 
 ## Source integrity
 
-- logs.jsonl.gz: SHA-256 mismatch. Source summary records `b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603`; the committed blob is `70de16d1f5003a562a79a8a65d45226d5b199f851d429c9a73318d2c26d9590c`. This audit uses the committed blob and verifies gzip decoding, unit coverage, and per-unit decision counts. The digest discrepancy's cause cannot be established from these three artifacts.
+- logs.jsonl.gz: SHA-256 matches the source summary.
 - results.jsonl: SHA-256 matches the source summary.
 
 ```text

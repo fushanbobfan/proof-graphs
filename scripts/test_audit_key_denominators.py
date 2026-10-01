@@ -24,14 +24,23 @@ def state(expression: list[str] | None, coarse: list[str], default: list[str] | 
 
 class Denominators(unittest.TestCase):
     def test_source_hash_mismatch_is_reported(self) -> None:
+        import gzip
         import hashlib
-        data = {"logs.jsonl.gz": b"logs", "results.jsonl": b"results"}
+        data = {"logs.jsonl.gz": gzip.compress(b"logs"), "results.jsonl": b"results"}
         old = {"logsSha256": "stale", "resultsSha256": hashlib.sha256(b"results").hexdigest()}
         checks = source_hash_checks(data, old)
         self.assertFalse(checks["logs.jsonl.gz"]["matches"])
         self.assertEqual(checks["logs.jsonl.gz"]["expected"], "stale")
         self.assertEqual(checks["logs.jsonl.gz"]["actual"], hashlib.sha256(b"logs").hexdigest())
         self.assertTrue(checks["results.jsonl"]["matches"])
+
+    def test_gzip_hash_is_of_the_content_like_the_repository(self) -> None:
+        import gzip
+        import hashlib
+        content = b"line\r\nline\n"
+        data = {"logs.jsonl.gz": gzip.compress(content, mtime=1), "results.jsonl": b"results"}
+        old = {"logsSha256": hashlib.sha256(b"line\nline\n").hexdigest(), "resultsSha256": "x"}
+        self.assertTrue(source_hash_checks(data, old)["logs.jsonl.gz"]["matches"])
 
     def test_matched_support_excludes_missing_from_both_histories(self) -> None:
         log = {"events": [["x", i] for i in range(4)], "expansions": [{} for _ in range(4)],
