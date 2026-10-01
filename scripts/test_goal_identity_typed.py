@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import itertools
 import json
+import random
 import sys
 import unittest
 from pathlib import Path
@@ -159,9 +160,43 @@ class TypedIdentity(unittest.TestCase):
                 self.assertEqual(gi.unordered_state_key(list(permutation)), key)
         for size in (5, 6, 7):
             self.assertEqual(gi.unordered_state_key(goals[:size]), gi.unordered_state_key(goals[:size][::-1]))
-        self.assertIsNone(gi.unordered_state_key(goals + [goal("8", const("H"))]))
-        self.assertIsNone(gi.unordered_state_key(goals, max_goals=6))
+        eight = goals + [goal("8", const("H"))]
+        self.assertIsNotNone(gi.unordered_state_key(eight))
+        self.assertEqual(gi.unordered_state_key(eight), gi.unordered_state_key(eight[::-1]))
+        alike = [goal(str(i), app(const("P"), mvar(f"w{i}"))) for i in range(8)]
+        self.assertIsNotNone(gi.unordered_state_key(alike[:7]))
+        self.assertIsNone(gi.unordered_state_key(alike))
+        self.assertIsNone(gi.unordered_state_key(alike[:7], max_orders=720))
         self.assertEqual(gi.unordered_state_key([]), gi.ordered_state_key([]))
+
+    def test_tie_restricted_orders_agree_with_all_orders(self) -> None:
+        def every_order(goals: list[dict]) -> str:
+            return min(gi._serialization(list(order)) for order in itertools.permutations(goals))
+
+        def rename(value: object, suffix: str) -> object:
+            if isinstance(value, dict):
+                out = {key: rename(item, suffix) for key, item in value.items()}
+                if value.get("kind") in ("mvar", "lmvar"):
+                    out["id"] = value["id"] + suffix
+                return out
+            if isinstance(value, list):
+                return [rename(item, suffix) for item in value]
+            return value
+
+        rng = random.Random(20260930)
+        states = []
+        for index in range(80):
+            names = [f"g{i}" for i in range(rng.randint(1, 5))]
+            state = [goal(name, app(const(rng.choice("PQ")), rng.choice(
+                [mvar(rng.choice(names + ["w0", "w1"])), const("T", [lmvar(rng.choice("uv"))])]))) for name in names]
+            moved = [{**rename(g, f"'{index}"), "id": g["id"] + f"'{index}"} for g in state]
+            rng.shuffle(moved)
+            states += [state, moved]
+        fast = [gi.unordered_state_key(state) for state in states]
+        slow = [every_order(state) for state in states]
+        for a, b in itertools.combinations(range(len(states)), 2):
+            self.assertEqual(fast[a] == fast[b], slow[a] == slow[b], (states[a], states[b]))
+        self.assertTrue(all(fast[i] == fast[i + 1] for i in range(0, len(states), 2)))
 
     def test_transitive_coupling_in_contexts_and_targets(self) -> None:
         goals = [goal("a", mvar("b")), goal("b", const("True"), [hyp(mvar("third"))]),

@@ -14,29 +14,47 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+import math
 from typing import Any
 
 from lean_repl import LeanRepl, ReplTimeout
 
 HEARTBEATS = 400000
 KEY_TACTIC = r"""run_tac do
-  let rec nameJson : Lean.Name → Lean.Json
-    | .anonymous => Lean.Json.arr #[]
-    | .str p s => Lean.Json.arr #[nameJson p, Lean.Json.str s]
-    | .num p n => Lean.Json.arr #[nameJson p, Lean.toJson n]
-  let nameId := fun n => (nameJson n).compress
-  let node := fun k fields => Lean.Json.mkObj (("kind", Lean.Json.str k) :: fields)
+  let q : String → String := fun s => (Lean.Json.str s).compress
+  let nameId : Lean.Name → String := fun n =>
+    (Lean.Json.arr (n.components.toArray.map fun
+      | .str _ s => Lean.Json.str s
+      | .num _ k => Lean.toJson k
+      | .anonymous => Lean.Json.null)).compress
   let bic : Lean.BinderInfo → String := fun
     | .default => "explicit" | .implicit => "implicit"
     | .strictImplicit => "strict_implicit" | .instImplicit => "instance"
-  let rec level : Lean.Level → Lean.Json
-    | .zero => node "zero" []
-    | .succ l => node "succ" [("of", level l)]
-    | .max a b => node "max" [("left", level a), ("right", level b)]
-    | .imax a b => node "imax" [("left", level a), ("right", level b)]
-    | .param n => node "param" [("name", Lean.Json.str (nameId n))]
-    | .mvar m => node "lmvar" [("id", Lean.Json.str (nameId m.name))]
-  let mut goals : Array Lean.Json := #[]
+  let level : Lean.Level → String := fun l0 => Id.run do
+    let mut out : Array String := #[]
+    let mut stack : List (Sum Lean.Level String) := [Sum.inl l0]
+    repeat
+      match stack with
+      | [] => break
+      | item :: rest =>
+        stack := rest
+        match item with
+        | .inr s => out := out.push s
+        | .inl l =>
+          match l with
+          | .zero => out := out.push "{\"kind\":\"zero\"}"
+          | .succ a =>
+            stack := Sum.inr "{\"kind\":\"succ\",\"of\":" :: Sum.inl a :: Sum.inr "}" :: stack
+          | .max a b =>
+            stack := Sum.inr "{\"kind\":\"max\",\"left\":" :: Sum.inl a :: Sum.inr ",\"right\":" :: Sum.inl b
+              :: Sum.inr "}" :: stack
+          | .imax a b =>
+            stack := Sum.inr "{\"kind\":\"imax\",\"left\":" :: Sum.inl a :: Sum.inr ",\"right\":" :: Sum.inl b
+              :: Sum.inr "}" :: stack
+          | .param n => out := out.push ("{\"kind\":\"param\",\"name\":" ++ q (nameId n) ++ "}")
+          | .mvar m => out := out.push ("{\"kind\":\"lmvar\",\"id\":" ++ q (nameId m.name) ++ "}")
+    return String.join out.toList
+  let mut goals : Array String := #[]
   for g in (← Lean.Elab.Tactic.getGoals) do
     let decl ← g.getDecl
     let mut pos : Std.HashMap Lean.FVarId Nat := {}
@@ -46,39 +64,59 @@ KEY_TACTIC = r"""run_tac do
         pos := pos.insert d.fvarId ldecls.size
         ldecls := ldecls.push d
     let posF := pos
-    let rec ser : Lean.Expr → Lean.Json
-      | .bvar i => node "bvar" [("index", Lean.toJson i)]
-      | .fvar f => match posF.get? f with
-        | some p => node "fvar" [("position", Lean.toJson p)]
-        | none => node "external_fvar" [("id", Lean.Json.str (nameId f.name))]
-      | .mvar m => node "mvar" [("id", Lean.Json.str (nameId m.name))]
-      | .sort l => node "sort" [("level", level l)]
-      | .const n ls => node "const" [("name", Lean.Json.str (nameId n)),
-          ("levels", Lean.toJson (ls.map level))]
-      | .app f a => node "app" [("function", ser f), ("argument", ser a)]
-      | .lam _ t b bi => node "lambda" [("binder_info", Lean.Json.str (bic bi)),
-          ("type", ser t), ("body", ser b)]
-      | .forallE _ t b bi => node "pi" [("binder_info", Lean.Json.str (bic bi)),
-          ("type", ser t), ("body", ser b)]
-      | .letE _ t v b _ => node "let" [("type", ser t), ("value", ser v), ("body", ser b)]
-      | .lit (.natVal n) => node "nat" [("value", Lean.Json.str (toString n))]
-      | .lit (.strVal s) => node "string" [("value", Lean.Json.str s)]
-      | .mdata _ e => ser e
-      | .proj n i e => node "projection" [("name", Lean.Json.str (nameId n)),
-          ("index", Lean.toJson i), ("expression", ser e)]
-    let hyps ← g.withContext do
-      ldecls.mapM fun d => do
-        let t ← Lean.instantiateMVars d.type
-        let v ← match d.value? with
-          | some e => do pure (ser (← Lean.instantiateMVars e))
-          | none => pure Lean.Json.null
-        pure (Lean.Json.mkObj [("type", ser t), ("value", v),
-          ("binder_info", Lean.Json.str (bic d.binderInfo)),
-          ("implementation_detail", Lean.toJson d.isImplementationDetail)])
-    let target ← g.withContext do pure (ser (← Lean.instantiateMVars decl.type))
-    goals := goals.push (Lean.Json.mkObj [("id", Lean.Json.str (nameId g.name)),
-      ("hyps", Lean.toJson hyps), ("target", target)])
-  Lean.logInfo (Lean.Json.arr goals).compress"""
+    let ser : Lean.Expr → String := fun e0 => Id.run do
+      let mut out : Array String := #[]
+      let mut stack : List (Sum Lean.Expr String) := [Sum.inl e0]
+      repeat
+        match stack with
+        | [] => break
+        | item :: rest =>
+          stack := rest
+          match item with
+          | .inr s => out := out.push s
+          | .inl e =>
+            match e with
+            | .bvar i => out := out.push ("{\"kind\":\"bvar\",\"index\":" ++ toString i ++ "}")
+            | .fvar f =>
+              match posF.get? f with
+              | some p => out := out.push ("{\"kind\":\"fvar\",\"position\":" ++ toString p ++ "}")
+              | none => out := out.push ("{\"kind\":\"external_fvar\",\"id\":" ++ q (nameId f.name) ++ "}")
+            | .mvar m => out := out.push ("{\"kind\":\"mvar\",\"id\":" ++ q (nameId m.name) ++ "}")
+            | .sort l => out := out.push ("{\"kind\":\"sort\",\"level\":" ++ level l ++ "}")
+            | .const n ls =>
+              out := out.push ("{\"kind\":\"const\",\"name\":" ++ q (nameId n) ++ ",\"levels\":["
+                ++ ",".intercalate (ls.map level) ++ "]}")
+            | .app f a =>
+              stack := Sum.inr "{\"kind\":\"app\",\"function\":" :: Sum.inl f :: Sum.inr ",\"argument\":"
+                :: Sum.inl a :: Sum.inr "}" :: stack
+            | .lam _ t b bi =>
+              stack := Sum.inr ("{\"kind\":\"lambda\",\"binder_info\":" ++ q (bic bi) ++ ",\"type\":")
+                :: Sum.inl t :: Sum.inr ",\"body\":" :: Sum.inl b :: Sum.inr "}" :: stack
+            | .forallE _ t b bi =>
+              stack := Sum.inr ("{\"kind\":\"pi\",\"binder_info\":" ++ q (bic bi) ++ ",\"type\":")
+                :: Sum.inl t :: Sum.inr ",\"body\":" :: Sum.inl b :: Sum.inr "}" :: stack
+            | .letE _ t v b _ =>
+              stack := Sum.inr "{\"kind\":\"let\",\"type\":" :: Sum.inl t :: Sum.inr ",\"value\":" :: Sum.inl v
+                :: Sum.inr ",\"body\":" :: Sum.inl b :: Sum.inr "}" :: stack
+            | .lit (.natVal n) => out := out.push ("{\"kind\":\"nat\",\"value\":" ++ q (toString n) ++ "}")
+            | .lit (.strVal s) => out := out.push ("{\"kind\":\"string\",\"value\":" ++ q s ++ "}")
+            | .mdata _ x => stack := Sum.inl x :: stack
+            | .proj n i x =>
+              stack := Sum.inr ("{\"kind\":\"projection\",\"name\":" ++ q (nameId n) ++ ",\"index\":"
+                ++ toString i ++ ",\"expression\":") :: Sum.inl x :: Sum.inr "}" :: stack
+      return String.join out.toList
+    let mut hyps : Array String := #[]
+    for d in ldecls do
+      let t := ser (← Lean.instantiateMVars d.type)
+      let v ← match d.value? with
+        | some e => pure (ser (← Lean.instantiateMVars e))
+        | none => pure "null"
+      hyps := hyps.push ("{\"type\":" ++ t ++ ",\"value\":" ++ v ++ ",\"binder_info\":" ++ q (bic d.binderInfo)
+        ++ ",\"implementation_detail\":" ++ (if d.isImplementationDetail then "true" else "false") ++ "}")
+    let target := ser (← Lean.instantiateMVars decl.type)
+    goals := goals.push ("{\"id\":" ++ q (nameId g.name) ++ ",\"hyps\":[" ++ ",".intercalate hyps.toList
+      ++ "],\"target\":" ++ target ++ "}")
+  Lean.logInfo ("[" ++ ",".intercalate goals.toList ++ "]")"""
 
 BINDERS = {"explicit", "implicit", "strict_implicit", "instance"}
 EXPR_FIELDS = {
@@ -194,14 +232,23 @@ def ordered_state_key(goals: list[dict[str, Any]]) -> str:
     return _digest(_serialization(goals))
 
 
-def unordered_state_key(goals: list[dict[str, Any]], max_goals: int = 7) -> str | None:
-    """Minimum jointly renamed serialization over permutations; None above the factorial-work bound.
+def unordered_state_key(goals: list[dict[str, Any]], max_orders: int = 5040) -> str | None:
+    """Minimum jointly renamed serialization over the goal orders sorted by each goal's own key.
 
-    Callers must treat None as unequal to everything, including another None: it is not a merge key.
+    A goal's own key (goal_key) is unchanged by joint renaming and by reordering, so only goals with equal
+    own keys need to be permuted: two states get equal keys exactly when one is a reordering and a joint
+    renaming of the other. None when those ties admit more than max_orders orders (7! by default, so every
+    state of up to seven goals has a key). Callers must treat None as unequal to everything, including
+    another None: it is not a merge key.
     """
-    if len(goals) > max_goals:
+    tied: dict[str, list[dict[str, Any]]] = {}
+    for goal in goals:
+        tied.setdefault(goal_key(goal), []).append(goal)
+    classes = [tied[key] for key in sorted(tied)]
+    if math.prod(math.factorial(len(members)) for members in classes) > max_orders:
         return None
-    return _digest(min(_serialization(list(order)) for order in itertools.permutations(goals)))
+    orders = itertools.product(*(itertools.permutations(members) for members in classes))
+    return _digest(min(_serialization([goal for part in order for goal in part]) for order in orders))
 
 
 def goal_key(goal: dict[str, Any]) -> str:

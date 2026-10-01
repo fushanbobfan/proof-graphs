@@ -1,9 +1,9 @@
 import Mathlib
 
 /-
-Adversarial checkpoints for scripts/goal_identity_typed.py. Define KEY_TACTIC once as a tactic in
-the REPL environment, and replace a checkpoint's `skip` with that tactic to capture its goal list.
-Compare goal_key for single checkpoints, and unordered_state_key for the multi-goal checkpoints.
+Adversarial checkpoints for scripts/goal_identity_typed.py. scripts/check_identity_v2_repl.py replays
+each example up to its `skip -- ID` checkpoint, exports the goal list there, and checks the relations
+below: goal_key for single checkpoints, unordered_state_key for the multi-goal checkpoints.
 Expected equalities refer to syntax after instantiation, not to definitional equality.
 -/
 
