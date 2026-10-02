@@ -111,6 +111,7 @@ scripts/recording_repl.py         a REPL session that logs a search for re-keyin
 scripts/run_key_replay.py         finished searches re-keyed by expressions
 scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
+scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests
 fixtures/Fixtures.lean            hand-checkable proofs
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
@@ -131,6 +132,7 @@ experiments/golf-structure-v0.1/  depth, width, branching
 experiments/golf-v0.2/            the same tests on an earlier window
 experiments/extraction-audit-v0.1/  the blind reconstruction
 experiments/extraction-audit-v0.2/  the same on hard constructs, with a kit for people
+experiments/extraction-audit-v0.3/  the same on long proofs and non-forest graphs
 experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
 experiments/keys-v0.1-conflations/  what the text keys conflate (not registered)
 experiments/keys-v0.1-matched-support/  its shares on matched support (not registered)

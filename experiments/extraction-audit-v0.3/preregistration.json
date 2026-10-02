@@ -1,0 +1,56 @@
+{
+ "developmentChecksBeforeRegistration": "none on the sample; the sampling was run once to write sample.json, and the derivation was run on the pool only to decide eligibility, step counts, and forests",
+ "experiment": "extraction-audit-v0.3",
+ "humanKit": "human-kit/: the instructions, a worksheet with every proof whole, and a comparison mode (--compare-hand) for reconstructions by a person; not part of this registration's decision",
+ "hypotheses": {
+  "H82": "no disagreement is adjudicated as an extractor error"
+ },
+ "implementationSha256": {
+  "base": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "counter": "1b31cff799255d58719ebb0c16480385a1924adf90b26b0e4f1e39ee8c5264d0",
+  "runner": "38d80c0573363dae4716c512e671a45437fc48431aa8b2f1752ff9e8fe1583c9",
+  "v1": "36f4b46f2776cc69d201099cd6c716f9c8e590fbe4ce26b5c5502fb1e0f51657",
+  "v2": "bad0ed2ef0071554cc1aa4ab4ec83560709ca725cce8ebbd6fe79eea56ca1c51"
+ },
+ "instructionsSha256": "e5f06447e945dd601816dcb19263beac64e661414713366cf21186c1ab024f6a",
+ "protocol": [
+  "reconstructors receive instructions.md and their proofs' locations (module, declaration, source file, line of the root `by`), not the strata; the same instructions serve the human kit",
+  "the model reconstructors are separate language-model agent instances with Lean language-server access, the sample dealt among them in sample order; they may read any source file and display Lean's goals, and must not open the repository's extractions, results, datasets, audit files, or scripts",
+  "reconstructions.json is committed before --compare first runs",
+  "--compare matches steps by source line and order within the line, as extraction-audit-v0.1 does, and compares edges with the corrected derivation's",
+  "every disagreement is adjudicated with its evidence into: extractor error; reconstruction error; definition gap"
+ ],
+ "question": "does the corrected step derivation agree with independent reconstructions on long proofs and on graphs that are not forests, which the earlier samples left out",
+ "registeredLocalDate": "2026-10-01 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sample": {
+  "byStratum": {
+   "21-50": 8,
+   "51-150": 6,
+   "non-forest": 14
+  },
+  "count": 28,
+  "extractionSha256": {
+   "holdout-slice": "a46a0d312c528dcdff8d455909d1b2aaf8a8beed28335c935ea96984d14f4c49",
+   "mathlib-slice": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b",
+   "proofnet-ir": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff"
+  },
+  "longStrata": {
+   "21-50": {
+    "count": 8,
+    "steps": [
+     21,
+     50
+    ]
+   },
+   "51-150": {
+    "count": 6,
+    "steps": [
+     51,
+     150
+    ]
+   }
+  },
+  "rule": "seed 20261002; every eligible proof whose graph under count_linearizations_v2 is not a forest; then, for each long stratum in order, proofs drawn uniformly without replacement among the eligible forests of that length; eligible: one root `by` block, a name that is not generated, 2 to 150 steps under count_linearizations_v2, from the library, the first slice, or holdout-v0.1's slice, not in extraction-audit-v0.1's or v0.2's sample; pool in (corpus, module, line, declaration) order"
+ }
+}

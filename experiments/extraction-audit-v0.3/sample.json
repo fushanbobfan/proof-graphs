@@ -1,0 +1,226 @@
+[
+ {
+  "corpus": "holdout-slice",
+  "module": "Mathlib.Data.Nat.Init",
+  "declaration": "Nat.leRec_succ'",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Nat/Init.lean",
+  "byLine": 174,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "holdout-slice",
+  "module": "Mathlib.Data.Nat.Init",
+  "declaration": "Nat.decreasingInduction_succ_left",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Nat/Init.lean",
+  "byLine": 312,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "holdout-slice",
+  "module": "Mathlib.LinearAlgebra.Quotient.Basic",
+  "declaration": "Submodule.mapQ_pow",
+  "source": ".lake/packages/mathlib/Mathlib/LinearAlgebra/Quotient/Basic.lean",
+  "byLine": 210,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "holdout-slice",
+  "module": "Mathlib.LinearAlgebra.Quotient.Basic",
+  "declaration": "Submodule.Quotient.equiv_trans",
+  "source": ".lake/packages/mathlib/Mathlib/LinearAlgebra/Quotient/Basic.lean",
+  "byLine": 351,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "holdout-slice",
+  "module": "Mathlib.LinearAlgebra.TensorPower.Basic",
+  "declaration": "TensorPower.gradedMonoid_eq_of_cast",
+  "source": ".lake/packages/mathlib/Mathlib/LinearAlgebra/TensorPower/Basic.lean",
+  "byLine": 125,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.FieldTheory.Finite.Basic",
+  "declaration": "ZMod.fieldRange_castHom_eq_bot",
+  "source": ".lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean",
+  "byLine": 584,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Probability.Kernel.IonescuTulcea.PartialTraj",
+  "declaration": "ProbabilityTheory.Kernel.partialTraj_eq_prod",
+  "source": ".lake/packages/mathlib/Mathlib/Probability/Kernel/IonescuTulcea/PartialTraj.lean",
+  "byLine": 211,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyPayloadInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.payloadMemWaitingMiddle",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyPayloadInvariant.lean",
+  "byLine": 1863,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerBridge",
+  "declaration": "ProofNetIR.UnificationState.markReadyRaw?_abstractable",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerBridge.lean",
+  "byLine": 188,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerBridge",
+  "declaration": "ProofNetIR.UnificationState.markReadyRaw?_componentsFormulaConsistent",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerBridge.lean",
+  "byLine": 229,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerBridge",
+  "declaration": "ProofNetIR.Certificate.reserveAxiomAt?_abstractable",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerBridge.lean",
+  "byLine": 395,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerBridge",
+  "declaration": "ProofNetIR.Certificate.reserveAxiomAt?_componentsFormulaConsistent",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerBridge.lean",
+  "byLine": 427,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyOneStep.waitingConclusion_mem_waiting_middle",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerInvariant.lean",
+  "byLine": 6546,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.UnificationState.ObservationEquivalent.abstractable",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 718,
+  "stratum": "non-forest"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.MeasureTheory.PiSystem",
+  "declaration": "mem_generatePiSystem_iUnion_elim",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/PiSystem.lean",
+  "byLine": 285,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.firePar?_success_conclusion_frontier",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 4856,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.FieldTheory.Finite.Basic",
+  "declaration": "FiniteField.sum_pow_units",
+  "source": ".lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean",
+  "byLine": 295,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyOneStep.producedPremisesMarked",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerInvariant.lean",
+  "byLine": 7432,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7EqualBoundaryCommitmentTargetAvoidance",
+  "declaration": "ProofNetIR.SequentialFigure7.CanonicalTagHistory.sameRepresentative_conclusionTouch_decomposition",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7EqualBoundaryCommitmentTargetAvoidance.lean",
+  "byLine": 247,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7NewRegion",
+  "declaration": "ProofNetIR.SequentialFigure7.FreshSourceLeftRoute.source_is_axiom_of_axiom_endpoint",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7NewRegion.lean",
+  "byLine": 213,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.processWorklistLink_core_componentsFormulaConsistent",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 12088,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ContinuationCredit",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.createdConclusionFutureWorkAt",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ContinuationCredit.lean",
+  "byLine": 303,
+  "stratum": "21-50"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.RegionClosure.class_of_empty_active",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 2276,
+  "stratum": "51-150"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.canonicalWorklistRun_waitingPar_has_dependency",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 20443,
+  "stratum": "51-150"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerInvariant",
+  "declaration": "ProofNetIR.SequentialSchedulerBridge.InitialReservationStep.readyBucketFrontierExact",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerInvariant.lean",
+  "byLine": 678,
+  "stratum": "51-150"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyOne",
+  "declaration": "ProofNetIR.SequentialFigure7.unifyOne?_some_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyOne.lean",
+  "byLine": 745,
+  "stratum": "51-150"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.sameThread_tensorDeadlock_false",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 13737,
+  "stratum": "51-150"
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7TerminalPartnerGeometry",
+  "declaration": "ProofNetIR.SequentialFigure7.referenceAcyclic_no_tensorBypass",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7TerminalPartnerGeometry.lean",
+  "byLine": 380,
+  "stratum": "51-150"
+ }
+]
