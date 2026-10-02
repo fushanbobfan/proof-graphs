@@ -222,6 +222,41 @@ class SearchTests(unittest.TestCase):
             self.assertEqual(search.export(repl, 0), [])
         exporter.assert_called_once_with(repl, 0, tactic=None)
 
+    def test_pick_goal_is_defined_only_where_missing(self):
+        class Session(FakeRepl):
+            import_timeout = timeout = 1
+
+            def __init__(self, check_errors, definition_errors=False):
+                super().__init__()
+                self.check_errors = list(check_errors)
+                self.definition_errors = definition_errors
+                self.requests = []
+
+            def _exchange(self, request, timeout):
+                self.requests.append(request)
+                failed = self.check_errors.pop(0) if request["cmd"] == search.PICK_CHECK else self.definition_errors
+                return {"env": request["env"] + 1, "messages": [{"severity": "error"}] if failed else []}
+
+        present = Session([False])
+        self.assertEqual(search.define_pick_goal(present, 7), 7)
+        self.assertFalse(present.pick_goal_defined)
+        self.assertEqual(len(present.requests), 1)
+        missing = Session([True, False])
+        self.assertEqual(search.define_pick_goal(missing, 7), 8)
+        self.assertTrue(missing.pick_goal_defined)
+        self.assertEqual([r["env"] for r in missing.requests], [7, 7, 8])
+        broken = Session([True], definition_errors=True)
+        self.assertEqual(search.define_pick_goal(broken, 7), 7)
+        self.assertFalse(broken.pick_goal_defined)
+
+    def test_failed_pick_skips_the_position_instead_of_stopping(self):
+        repl = FakeRepl({(0, "a"): (["C"], 1), (1, "a"): ([], 2)})
+        result = self.run_search(repl, goals=["A", "B"], budget=2)
+        self.assertEqual(result["expansions"][0]["skippedPositions"], [2])
+        self.assertEqual(result["expansions"][0]["positions"], {"1": 1})
+        self.assertNotIn("skippedPositions", result["expansions"][1])
+        self.assertEqual(result["proof"], ["a", "a"])
+
     def test_named_export_and_restart_abandons_stale_state(self):
         repl = FakeRepl()
         repl.typed_fast_export = True

@@ -17,6 +17,17 @@ from search_harness import ModuleSession, State
 EXPORT_TACTIC = "pg_export_typed_goals"
 DEFINITION = ("open Lean Elab Tactic in\nelab \"" + EXPORT_TACTIC + "\" : tactic => do"
               + gi.KEY_TACTIC.replace("run_tac do", "", 1))
+PICK_CHECK = "example : True ∧ True := by\n  constructor\n  pick_goal 2\n  trivial\n  trivial"
+# Batteries.Tactic.PermuteGoals' pick_goal, for task modules whose imports do not reach Batteries.
+PICK_DEFINITION = r"""open Lean Elab Tactic in
+elab "pick_goal " reverse:"-"? n:num : tactic => do
+  let nth := n.getNat
+  if nth = 0 then throwError "goals are 1-indexed"
+  let goals ← getGoals
+  if nth > goals.length then throwError "goal index out of bounds"
+  let (gl, g :: gr) := goals.splitAt (if reverse.isNone then nth - 1 else goals.length - nth)
+    | throwNoGoalsToBeSolved
+  setGoals (g :: (gl ++ gr))"""
 
 
 class ClosingRepl(LeanRepl):
@@ -52,12 +63,28 @@ def define_exporter(repl: LeanRepl, env: int | None) -> int | None:
     return response["env"] if ok else env
 
 
+def define_pick_goal(repl: LeanRepl, env: int | None) -> int | None:
+    """Define `pick_goal`, with Batteries' semantics, where the environment lacks it."""
+    def accepted(response: dict[str, Any]) -> bool:
+        return "env" in response and not any(m.get("severity") == "error" for m in response.get("messages", []))
+
+    repl.pick_goal_defined = False
+    if accepted(repl._exchange({"cmd": PICK_CHECK, "env": env}, repl.timeout * 4)):
+        return env
+    response = repl._exchange({"cmd": PICK_DEFINITION, "env": env}, repl.import_timeout)
+    if accepted(response) and accepted(repl._exchange({"cmd": PICK_CHECK, "env": response["env"]}, repl.timeout * 4)):
+        repl.pick_goal_defined = True
+        return response["env"]
+    return env
+
+
 class ExportingSession(ModuleSession):
-    """A module environment with the typed exporter defined once after its imports."""
+    """A module environment with the typed exporter, and `pick_goal` where missing, defined after its imports."""
 
     def __init__(self, repl: LeanRepl, *args: Any, **kwargs: Any) -> None:
         super().__init__(repl, *args, **kwargs)
         self.env = define_exporter(repl, self.env)
+        self.env = define_pick_goal(repl, self.env)
 
 
 def export(repl: LeanRepl, proof_state: int) -> list[dict[str, Any]] | None:
@@ -174,17 +201,19 @@ def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str]
         candidates = proposer(state)
         valid = exact_duplicates = multiset_duplicates = typed_duplicates = tried = 0
         position_counts = {}
+        skipped: list[int] = []
         interrupted = False
         for position in range(1, (len(state.goals) if positions == "all" else 1) + 1):
             if clock() - started >= time_limit:
                 stopped = "wall-clock"
                 interrupted = True
                 break
-            position_counts[str(position)] = 0
             picks = [f"pick_goal {position}"] if position > 1 else []
             selected = harness_step(repl, state.proof_state, picks) if picks else (state.goals, state.proof_state)
             if selected is None:
-                raise RuntimeError(f"pick_goal failed at position {position}")
+                skipped.append(position)
+                continue
+            position_counts[str(position)] = 0
             for tactic in candidates:
                 tried += 1
                 steps += 1
@@ -239,7 +268,8 @@ def any_goal_search(repl: LeanRepl, root_proof_state: int, root_goals: list[str]
                            "steps": tried, "multisetDuplicates": multiset_duplicates,
                            "typedDuplicates": typed_duplicates, "positions": position_counts,
                            "exportFailures": exports.failures - failures_before} | measured |
-                          ({"interrupted": True} if interrupted else {}))
+                          ({"interrupted": True} if interrupted else {}) |
+                          ({"skippedPositions": skipped} if skipped else {}))
         reported_failures = exports.failures
         if stopped is not None:
             break
