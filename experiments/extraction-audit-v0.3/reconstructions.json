@@ -1,0 +1,8909 @@
+{
+ "reconstructors": "six separate language-model agent instances with Lean language-server access, the sample dealt among them in sample order (parts 1 to 6, five or four proofs each); each read instructions.md and its part's proof locations only, without the strata, as the protocol states. By their reports, none ran the repository's extractor or opened its extractions, results, datasets, audit files, or scripts. Their outputs were written to one folder outside the repository, and each that finished after another reports not opening the others' files. Part 1, after finishing its reconstruction, also printed Lean's own info tree (trace.Elab.info) for copies of its five proofs outside the repository and compared node positions and goal counts with its graphs; it reports agreement and no change.",
+ "proofs": [
+  {
+   "module": "Mathlib.Data.Nat.Init",
+   "declaration": "Nat.leRec_succ'",
+   "steps": [
+    {
+     "line": 175,
+     "tactic": "leRec_succ"
+    },
+    {
+     "line": 175,
+     "tactic": "leRec_self"
+    },
+    {
+     "line": 175,
+     "tactic": "rfl"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "notes": "rw [leRec_succ, leRec_self]: one step per rewrite rule plus the rw's closing rfl. Rule leRec_succ leaves its explicit argument h1 : n <= n unassigned, so it adds a side goal ?h1 (shown as case h1) besides the rewritten main goal. leRec_self does not assign ?h1 (it is synthetic opaque; unification succeeds by proof irrelevance), so ?h1 is still open after the second rule. The closing try (with_reducible rfl) succeeds through the eq_refl alternative (tried before apply_rfl), which runs withAssignableSyntheticOpaque and assigns ?h1 while unifying le_succ_of_le ?h1 refl with the right side; so the rfl step consumes both the main goal (from leRec_self) and ?h1 (from leRec_succ): edges 1->2 and 0->2. The rfl step is the rw macro's closing try (with_reducible rfl), elaborated through its eq_refl alternative; its tactic text here is just 'rfl'.",
+   "part": 1
+  },
+  {
+   "module": "Mathlib.Data.Nat.Init",
+   "declaration": "Nat.decreasingInduction_succ_left",
+   "steps": [
+    {
+     "line": 313,
+     "tactic": "Subsingleton.elim mn (Nat.le_trans (le_succ m) smn)"
+    },
+    {
+     "line": 313,
+     "tactic": "rfl (closing try (with_reducible rfl) of the rw)"
+    },
+    {
+     "line": 314,
+     "tactic": "decreasingInduction_trans (n := m + 1) (Nat.le_succ m)"
+    },
+    {
+     "line": 315,
+     "tactic": "decreasingInduction_succ'"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     1
+    ]
+   ],
+   "notes": "One rw with three rules. Rule 2 (decreasingInduction_trans (n := m + 1) (Nat.le_succ m)) leaves its argument hnk unassigned, because the proof argument of decreasingInduction is matched up to proof irrelevance, so Lean shows a second goal 'case hnk: m + 1 <= n' after line 314; rule 3 keeps it untouched; the closing with_reducible rfl of the rw then closes the main goal and, by unifying ?hnk := smn, the hnk goal as well (goals after line 315 are empty). So the rfl step consumes two goals and depends on rule 3 (main goal) and on rule 2 (hnk). UNCERTAIN, line of the rfl step: the deepest node that consumes these goals is the macro-generated rfl alternative inside try/first/with_reducible from the rw macro; it has only a synthetic position, copied from the rw keyword on line 313, and I list it there (after rule 1, which runs first). Its nearest ancestor with a real position is the with_annotate_state node on the closing ']' (line 315), where Lean displays the rfl state. If the step is attributed to line 315 instead, the order is rule1, rule2, rule3, rfl and the edges are [0,1],[1,2],[2,3],[1,3]. The graph is the same either way. Which rfl macro alternative succeeds (eq_refl or apply_rfl) is not determined and does not matter.",
+   "part": 2
+  },
+  {
+   "module": "Mathlib.LinearAlgebra.Quotient.Basic",
+   "declaration": "Submodule.mapQ_pow",
+   "steps": [
+    {
+     "line": 211,
+     "tactic": "induction k with"
+    },
+    {
+     "line": 212,
+     "tactic": "simp [Module.End.one_eq_id]"
+    },
+    {
+     "line": 214,
+     "tactic": "simp only [Module.End.iterate_succ]"
+    },
+    {
+     "line": 215,
+     "tactic": "mapQ_comp"
+    },
+    {
+     "line": 215,
+     "tactic": "ih"
+    },
+    {
+     "line": 215,
+     "tactic": "rfl"
+    },
+    {
+     "line": 216,
+     "tactic": "exact p.le_comap_pow_of_le_comap h k"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ]
+   ],
+   "notes": "Steps are in source order; steps on one line are in run order (an enclosing node before the internal nodes it runs). Rewrite-rule steps are listed by their rule text and the closing rfl of `rw` as `rfl`; a multi-binder `intro` is listed as one `intro x` step per binder (Lean 4.32 evalIntro makes one child info node per binder, the last child producing the result). `induction k with` is one step: its inner `induction ... with` node (mkInitialTacticInfoForInduction) holds the same goal as the outer node (no target generalization; h' is reverted only after that node records its goals), so the outer node is a container; the step originates the `zero` and `succ` case goals. Column-level goals inside `rw [mapQ_comp, ih]`: after rule mapQ_comp the goals are [succ, succ.p₂, succ.hf, succ.hg]; rule ih consumes the main goal and assigns ?p₂; the closing rfl closes the main goal and assigns ?hf (so it depends on both ih and mapQ_comp); the final `exact` closes succ.hg, created by mapQ_comp. Uncertainty: the rfl step is a synthetic macro node (`with_annotate_state ] (try (with_reducible rfl))`), positioned at the `rw` keyword or at `]`; both are line 215 here.",
+   "part": 3
+  },
+  {
+   "module": "Mathlib.LinearAlgebra.Quotient.Basic",
+   "declaration": "Submodule.Quotient.equiv_trans",
+   "steps": [
+    {
+     "line": 352,
+     "tactic": "ext"
+    },
+    {
+     "line": 354,
+     "tactic": "simp only [Quotient.equiv_apply, LinearEquiv.trans_apply, LinearEquiv.coe_trans]"
+    },
+    {
+     "line": 356,
+     "tactic": "mapQ_comp"
+    },
+    {
+     "line": 356,
+     "tactic": "LinearMap.comp_apply"
+    },
+    {
+     "line": 356,
+     "tactic": "rfl"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "notes": "Steps 2-4 are the nodes of `rw [mapQ_comp, LinearMap.comp_apply]`: one per rewrite rule (named by the rule) plus its closing rfl (the `try (with_reducible rfl)` the rw macro appends, which succeeds here; the `rfl` macro alternatives that fail leave no nodes), all on line 356. Rewriting with `mapQ_comp` leaves its arguments p₂, hf, hg undetermined, so the rule-1 node opens three side goals (case p₂, case hf, case hg; Lean displays them after `mapQ_comp,`). They stay open through rule 2 and are assigned by unification when the closing rfl closes the main goal, so that rfl node consumes four goals and gets edges from both rule steps ([2,4] and [3,4]). `ext` is a single node (applies LinearEquiv.ext and introduces x✝). Uncertain: the closing-rfl node has synthetic syntax (positioned at the `rw` keyword or at the `]` token); I give it line 356, which is the same line either way.",
+   "part": 4
+  },
+  {
+   "module": "Mathlib.LinearAlgebra.TensorPower.Basic",
+   "declaration": "TensorPower.gradedMonoid_eq_of_cast",
+   "steps": [
+    {
+     "line": 126,
+     "tactic": "refine gradedMonoid_eq_of_reindex_cast h ?_"
+    },
+    {
+     "line": 127,
+     "tactic": "cast"
+    },
+    {
+     "line": 128,
+     "tactic": "← finCongr_eq_equivCast"
+    },
+    {
+     "line": 128,
+     "tactic": "← h2"
+    },
+    {
+     "line": 128,
+     "tactic": "with_reducible rfl"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "notes": "Tactic-text convention (all proofs): tactics are whitespace-normalised source text (a 'have/let/suffices ... by' keeps only its header, since its nested block contributes its own steps); a rewrite-rule step carries the rule's own text; the closing-rfl step of a rw is written 'with_reducible rfl' (the rfl the rw macro runs); a multi-binder intro gives 'intro x' for the first binder node and the bare binder name for the others. Step 1 is the single rule node of 'rw [cast] at h2' (rewriting h2 replaces the goal); its trailing 'try (with_reducible rfl)' fails on '(reindex ...) a.snd = b.snd', leaves the goal unchanged and is no step. Line 128: rewriting right-to-left with finCongr_eq_equivCast (h : n = m) : finCongr h = .cast (h ▸ rfl) matches the cast only up to proof irrelevance, so its h stays an unassigned metavariable and becomes a second goal 'a.fst = b.fst' (Lean shows two goals after the first rule and after '← h2': '(reindex .. (finCongr ?m.57)) a.snd = ...' and 'a.fst = b.fst'). The rw's closing rfl closes the main goal and assigns ?m.57, so it consumes both goals: hence the extra edge [2,4] besides [3,4]. Lean shows no goals after line 128 and reports no error, which confirms the rfl closed both. All three line-128 steps are on that line whether the closing-rfl node sits at the rw keyword or at ']'.",
+   "part": 5
+  },
+  {
+   "module": "Mathlib.FieldTheory.Finite.Basic",
+   "declaration": "ZMod.fieldRange_castHom_eq_bot",
+   "steps": [
+    {
+     "line": 585,
+     "tactic": "RingHom.fieldRange_eq_map"
+    },
+    {
+     "line": 585,
+     "tactic": "← Subfield.map_bot (K := ZMod p)"
+    },
+    {
+     "line": 585,
+     "tactic": "Subsingleton.elim ⊥"
+    },
+    {
+     "line": 585,
+     "tactic": "rfl"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "notes": "rw expands to `rewrite [..]; with_annotate_state ] (try (with_reducible rfl))`: one node per rule plus the closing rfl. Rule 2 (← Subfield.map_bot (K := ZMod p)) rewrites the target and also leaves the uninstantiated ring-hom argument as a new goal `ZMod p →+* K` (?m.26); rule 3 (Subsingleton.elim ⊥) rewrites the target and leaves a new goal `Subfield (ZMod p)` (?m.32). Goals before the closing rfl: [Subfield.map (castHom ⋯ K) ⊤ = Subfield.map ?m.26 ?m.32, ?m.32, ?m.26]; the closing rfl unifies both sides, assigning ?m.26 and ?m.32, and leaves no goals, so it consumes the rewritten target and both metavariable goals: edges 2->3 (target and ?m.32) and 1->3 (?m.26). The closing rfl's innermost info node (the successful expansion of the rfl macro, eq_refl expected) has the synthetic position of the rw macro, i.e. line 585. Rule texts are given without the trailing comma that the rule node's span includes.",
+   "part": 6
+  },
+  {
+   "module": "Mathlib.Probability.Kernel.IonescuTulcea.PartialTraj",
+   "declaration": "ProbabilityTheory.Kernel.partialTraj_eq_prod",
+   "steps": [
+    {
+     "line": 212,
+     "tactic": "obtain hba | hab := le_total b a"
+    },
+    {
+     "line": 213,
+     "tactic": "partialTraj_le hba"
+    },
+    {
+     "line": 213,
+     "tactic": "IicProdIoc_le hba"
+    },
+    {
+     "line": 213,
+     "tactic": "map_comp_right"
+    },
+    {
+     "line": 213,
+     "tactic": "← fst_eq"
+    },
+    {
+     "line": 213,
+     "tactic": "deterministic_map"
+    },
+    {
+     "line": 213,
+     "tactic": "rfl"
+    },
+    {
+     "line": 214,
+     "tactic": "fst_prod"
+    },
+    {
+     "line": 214,
+     "tactic": "id_map"
+    },
+    {
+     "line": 215,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 215,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 215,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 216,
+     "tactic": "induction b, hab using Nat.le_induction with"
+    },
+    {
+     "line": 218,
+     "tactic": "ext1 x (apply_ext_theorem)"
+    },
+    {
+     "line": 218,
+     "tactic": "ext1 x (rintro x)"
+    },
+    {
+     "line": 219,
+     "tactic": "partialTraj_self"
+    },
+    {
+     "line": 219,
+     "tactic": "id_map"
+    },
+    {
+     "line": 219,
+     "tactic": "map_apply"
+    },
+    {
+     "line": 219,
+     "tactic": "prod_apply"
+    },
+    {
+     "line": 219,
+     "tactic": "IicProdIoc_self"
+    },
+    {
+     "line": 219,
+     "tactic": "← Measure.fst"
+    },
+    {
+     "line": 219,
+     "tactic": "rfl"
+    },
+    {
+     "line": 220,
+     "tactic": "Measure.fst_prod"
+    },
+    {
+     "line": 221,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 221,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 223,
+     "tactic": "have : (IicProdIoc (X := X) k (k + 1)) ∘ (Prod.map (IicProdIoc a k) id) = ... := by"
+    },
+    {
+     "line": 226,
+     "tactic": "ext x i"
+    },
+    {
+     "line": 227,
+     "tactic": "simp only [IicProdIoc_def, MeasurableEquiv.IicProdIoc, ...]"
+    },
+    {
+     "line": 230,
+     "tactic": "split_ifs (by_cases ↑i ≤ k)"
+    },
+    {
+     "line": 230,
+     "tactic": "split_ifs (by_cases ↑i ≤ a, first branch)"
+    },
+    {
+     "line": 230,
+     "tactic": "split_ifs (by_cases ↑i ≤ a, second branch)"
+    },
+    {
+     "line": 230,
+     "tactic": "rfl"
+    },
+    {
+     "line": 230,
+     "tactic": "rfl"
+    },
+    {
+     "line": 230,
+     "tactic": "rfl"
+    },
+    {
+     "line": 231,
+     "tactic": "lia"
+    },
+    {
+     "line": 232,
+     "tactic": "← partialTraj_comp_partialTraj h k.le_succ"
+    },
+    {
+     "line": 232,
+     "tactic": "hk"
+    },
+    {
+     "line": 232,
+     "tactic": "partialTraj_succ_self"
+    },
+    {
+     "line": 232,
+     "tactic": "comp_map"
+    },
+    {
+     "line": 233,
+     "tactic": "comap_map_comm"
+    },
+    {
+     "line": 233,
+     "tactic": "comap_prod"
+    },
+    {
+     "line": 233,
+     "tactic": "id_comap"
+    },
+    {
+     "line": 233,
+     "tactic": "← id_map"
+    },
+    {
+     "line": 233,
+     "tactic": "map_prod_eq"
+    },
+    {
+     "line": 233,
+     "tactic": "← map_comp_right"
+    },
+    {
+     "line": 233,
+     "tactic": "this"
+    },
+    {
+     "line": 234,
+     "tactic": "map_comp_right"
+    },
+    {
+     "line": 234,
+     "tactic": "id_prod_eq"
+    },
+    {
+     "line": 234,
+     "tactic": "prodAssoc_prod"
+    },
+    {
+     "line": 234,
+     "tactic": "map_comp_right"
+    },
+    {
+     "line": 234,
+     "tactic": "← map_prod_map"
+    },
+    {
+     "line": 234,
+     "tactic": "map_id"
+    },
+    {
+     "line": 235,
+     "tactic": "← map_comp"
+    },
+    {
+     "line": 235,
+     "tactic": "map_apply_eq_iff_map_symm_apply_eq"
+    },
+    {
+     "line": 235,
+     "tactic": "fst_prod_comp_id_prod"
+    },
+    {
+     "line": 235,
+     "tactic": "← map_comp_right"
+    },
+    {
+     "line": 236,
+     "tactic": "← coe_IicProdIoc (h.trans k.le_succ)"
+    },
+    {
+     "line": 236,
+     "tactic": "symm_comp_self"
+    },
+    {
+     "line": 236,
+     "tactic": "map_id"
+    },
+    {
+     "line": 237,
+     "tactic": "deterministic_congr IicProdIoc_comp_restrict₂.symm"
+    },
+    {
+     "line": 237,
+     "tactic": "← deterministic_comp_deterministic"
+    },
+    {
+     "line": 238,
+     "tactic": "comp_deterministic_eq_comap"
+    },
+    {
+     "line": 238,
+     "tactic": "← comap_prod"
+    },
+    {
+     "line": 238,
+     "tactic": "← map_comp"
+    },
+    {
+     "line": 238,
+     "tactic": "← comp_map"
+    },
+    {
+     "line": 238,
+     "tactic": "← hk"
+    },
+    {
+     "line": 239,
+     "tactic": "← partialTraj_comp_partialTraj h k.le_succ"
+    },
+    {
+     "line": 239,
+     "tactic": "partialTraj_succ_self"
+    },
+    {
+     "line": 239,
+     "tactic": "map_comp"
+    },
+    {
+     "line": 239,
+     "tactic": "map_comp"
+    },
+    {
+     "line": 240,
+     "tactic": "← map_comp_right"
+    },
+    {
+     "line": 240,
+     "tactic": "← id_map"
+    },
+    {
+     "line": 240,
+     "tactic": "map_prod_eq"
+    },
+    {
+     "line": 240,
+     "tactic": "← map_comp_right"
+    },
+    {
+     "line": 241,
+     "tactic": "rfl"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    },
+    {
+     "line": 242,
+     "tactic": "fun_prop"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     12
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     10
+    ],
+    [
+     3,
+     11
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     9
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     6
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     12,
+     25
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     16,
+     24
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     22
+    ],
+    [
+     22,
+     21
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     25,
+     35
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     27,
+     28
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     28,
+     30
+    ],
+    [
+     28,
+     31
+    ],
+    [
+     28,
+     32
+    ],
+    [
+     28,
+     33
+    ],
+    [
+     28,
+     34
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     38,
+     39
+    ],
+    [
+     38,
+     94
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     39,
+     93
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     42,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     43,
+     92
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     44,
+     90
+    ],
+    [
+     44,
+     91
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     46,
+     47
+    ],
+    [
+     46,
+     48
+    ],
+    [
+     46,
+     88
+    ],
+    [
+     46,
+     89
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     48,
+     49
+    ],
+    [
+     49,
+     50
+    ],
+    [
+     49,
+     86
+    ],
+    [
+     49,
+     87
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     50,
+     53
+    ],
+    [
+     50,
+     84
+    ],
+    [
+     50,
+     85
+    ],
+    [
+     51,
+     52
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     53,
+     54
+    ],
+    [
+     54,
+     55
+    ],
+    [
+     55,
+     56
+    ],
+    [
+     55,
+     82
+    ],
+    [
+     55,
+     83
+    ],
+    [
+     56,
+     57
+    ],
+    [
+     57,
+     58
+    ],
+    [
+     58,
+     59
+    ],
+    [
+     59,
+     60
+    ],
+    [
+     60,
+     61
+    ],
+    [
+     60,
+     80
+    ],
+    [
+     60,
+     81
+    ],
+    [
+     61,
+     62
+    ],
+    [
+     62,
+     63
+    ],
+    [
+     63,
+     64
+    ],
+    [
+     64,
+     65
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     66,
+     67
+    ],
+    [
+     67,
+     68
+    ],
+    [
+     68,
+     69
+    ],
+    [
+     69,
+     70
+    ],
+    [
+     70,
+     71
+    ],
+    [
+     70,
+     78
+    ],
+    [
+     70,
+     79
+    ],
+    [
+     71,
+     72
+    ],
+    [
+     72,
+     73
+    ],
+    [
+     72,
+     77
+    ],
+    [
+     73,
+     74
+    ],
+    [
+     73,
+     75
+    ],
+    [
+     73,
+     76
+    ]
+   ],
+   "notes": "Rewrite steps are named by their rule text; steps 35-73 are the 39 nth_rw rules in order (rule N = step 34+N). Rewrite side goals: the measurability hypotheses hf/hg of the rewrite lemmas become new goals right after the main goal; implicit MeasurableSpace arguments that unification does not fix also become (data) goals and are assigned by a later rule's unification, which counts as consumption: map_comp_right's at L213 (step 3) is consumed by ← fst_eq (step 4); in the nth_rw, rule 12's by rule 14 (prodAssoc_prod), rule 15's by rule 16 (← map_prod_map), rule 16's two by rule 17 (map_id) and rule 19 (map_apply_eq_iff_map_symm_apply_eq), rule 26's by rule 27 (comp_deterministic_eq_comap), rule 27's by rule 28 (← comap_prod). Closing rfl of rw: at L213 (step 6) it closes the main goal and also assigns the still-open hf goal of id_map (step 8) that occurs in that goal (eq_refl runs withAssignableSyntheticOpaque); at L219 (step 21) it closes Kernel.id x = Kernel.id x only; the nth_rw's closing rfl fails, and `· rfl` at L241 (step 74) closes only the main goal. All 20 side goals then get one fun_prop step each (steps 75-94), in goal-list order: rule 39 hf, rule 39 hg, rule 38 hf, rule 36 hf, rule 36 hg, rule 26 hf, rule 26 hg, rule 21 hf, rule 21 hg, rule 16 hf, rule 16 hg, rule 15 hf, rule 15 hg, rule 12 hf, rule 12 hg, rule 10 hf, rule 10 hg, rule 9 hf, rule 5 hg, rule 4 hf. L215 fun_prop order: deterministic_map's hg, map_comp_right's hf, map_comp_right's hg; L221: map_apply's hf, id_map's hf. Line/order convention (uncertain): the closing rfl node of a multi-line rw carries the synthetic position of the rw keyword, so steps 6 and 21 get lines 213 and 219 and are placed after the last rule on that line, although they run after the rules on the next line (edges [8,6] and [22,21] point backwards). ext1 x expands to apply_ext_theorem <;> rintro x: two steps on L218. induction b, hab using Nat.le_induction with: one step (variable targets, no generalization) originating the base and succ goals. have : ... := by (special-case macro: refine (have := ?body; ?_) then case body =>) is one step originating both the body goal and the continuation. split_ifs at L230 calls by_cases three times (on ↑i ≤ k, then on ↑i ≤ a in each branch); each by_cases' refine node consumes a goal and makes raw pos/neg goals, which split_ifs then simp-reduces outside any child node, so the split_ifs node itself originates the reduced goals (the inputs of the two inner by_cases and the four final goals). It consumes nothing net (its first by_cases consumes the goal it held), so by the merge rule it is merged into the first by_cases step (step 28). Uncertain: a tool might keep split_ifs as its own step instead. try rfl succeeds (eq_refl) on 3 of the 4 final goals; the remaining one (¬↑i ≤ k, ↑i ≤ a) is closed by lia. Produced goals that nothing consumes (raw by_cases goals, simpa intermediates) give no edges.",
+   "part": 1
+  },
+  {
+   "module": "ProofNetIR.SequentialFigure7UnifyPayloadInvariant",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.payloadMemWaitingMiddle",
+   "steps": [
+    {
+     "line": 1864,
+     "tactic": "unfold SequentialStackState.waitingVertices"
+    },
+    {
+     "line": 1865,
+     "tactic": "apply List.mem_flatMap.mpr"
+    },
+    {
+     "line": 1866,
+     "tactic": "refine ⟨.initialized step.payload, ?_, ?_⟩"
+    },
+    {
+     "line": 1867,
+     "tactic": "apply List.mem_of_getElem?"
+    },
+    {
+     "line": 1868,
+     "tactic": "change step.prepared.stackResult.after.waiting.toList[_]? = some (WaitingCell.initialized step.payload)"
+    },
+    {
+     "line": 1870,
+     "tactic": "rw [Array.getElem?_toList]"
+    },
+    {
+     "line": 1871,
+     "tactic": "exact step.waiting_payload"
+    },
+    {
+     "line": 1872,
+     "tactic": "simpa [WaitingCell.vertices] using membership"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     7
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "notes": "apply List.mem_of_getElem? (1867) produces two goals: the lookup equation (case refine_1.e) and the index ?refine_1.i : Nat. change (1868) replaces the equation goal; the index goal passes through unchanged (still shown as case refine_1.i, unassigned). The rewrite rule Array.getElem?_toList (1870) unifies ?refine_1.i with the lemma's own index metavariable: afterwards the index goal is gone (no 'case refine_1.i' any more) and a new untagged Nat goal ?m.57 appears. So the rule step consumes both the equation goal (origin: change) and the index goal (origin: apply), and produces the new equation goal and ?m.57. exact step.waiting_payload consumes both, assigning ?m.57 (goals after are empty). Which metavariable was assigned to which is inferred from the displayed goal tags and metavariable names, not observed directly. The rw's closing rfl fails (goal stays open), so it gives no step. The simpa at 1872 is one step; its simp rewrites the target (WaitingCell.vertices unfolds), so the internal 'simpa ... using' node (same line) is the node that consumes refine_2 and produces the simplified goal, which is then closed with no further tactic node.",
+   "part": 2
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerBridge",
+   "declaration": "ProofNetIR.UnificationState.markReadyRaw?_abstractable",
+   "steps": [
+    {
+     "line": 189,
+     "tactic": "rcases markReadyRaw?_ok_iff.mp equation with ⟨step⟩"
+    },
+    {
+     "line": 190,
+     "tactic": "have vertexBound : vertex < before.marks.size := (Array.getElem?_eq_some_iff.mp step.unmarked).1"
+    },
+    {
+     "line": 192,
+     "tactic": "step.after_eq"
+    },
+    {
+     "line": 193,
+     "tactic": "refine { markArraySize := by simpa using abstractable.markArraySize, markedVertexBound := ?_, markedTokenBound := ?_, representativeBound := abstractable.representativeBound, representativeIdempotent := abstractable.representativeIdempotent }"
+    },
+    {
+     "line": 195,
+     "tactic": "simpa using abstractable.markArraySize"
+    },
+    {
+     "line": 201,
+     "tactic": "intro candidate"
+    },
+    {
+     "line": 201,
+     "tactic": "intro token"
+    },
+    {
+     "line": 201,
+     "tactic": "intro marked"
+    },
+    {
+     "line": 202,
+     "tactic": "by_cases same : vertex = candidate"
+    },
+    {
+     "line": 203,
+     "tactic": "simpa [same, abstractable.markArraySize] using (show vertex < certificate.formulas.size by rw [← abstractable.markArraySize]; exact vertexBound)"
+    },
+    {
+     "line": 205,
+     "tactic": "← abstractable.markArraySize"
+    },
+    {
+     "line": 206,
+     "tactic": "exact vertexBound"
+    },
+    {
+     "line": 207,
+     "tactic": "apply abstractable.markedVertexBound"
+    },
+    {
+     "line": 208,
+     "tactic": "unfold assignedToken? at marked ⊢"
+    },
+    {
+     "line": 209,
+     "tactic": "simpa [Array.getElem?_setIfInBounds, same] using marked"
+    },
+    {
+     "line": 210,
+     "tactic": "intro candidate"
+    },
+    {
+     "line": 210,
+     "tactic": "intro token"
+    },
+    {
+     "line": 210,
+     "tactic": "intro marked"
+    },
+    {
+     "line": 211,
+     "tactic": "by_cases same : vertex = candidate"
+    },
+    {
+     "line": 212,
+     "tactic": "subst candidate"
+    },
+    {
+     "line": 213,
+     "tactic": "unfold assignedToken? at marked"
+    },
+    {
+     "line": 214,
+     "tactic": "simp [vertexBound] at marked"
+    },
+    {
+     "line": 215,
+     "tactic": "subst token"
+    },
+    {
+     "line": 216,
+     "tactic": "exact rawAgeBound"
+    },
+    {
+     "line": 217,
+     "tactic": "apply abstractable.markedTokenBound"
+    },
+    {
+     "line": 218,
+     "tactic": "unfold assignedToken? at marked ⊢"
+    },
+    {
+     "line": 219,
+     "tactic": "simpa [Array.getElem?_setIfInBounds, same] using marked"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     8,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     3,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     18,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     24,
+     26
+    ]
+   ],
+   "notes": "Steps are in source order; steps on one line are in run order (an enclosing node before the internal nodes it runs). Rewrite-rule steps are listed by their rule text and the closing rfl of `rw` as `rfl`; a multi-binder `intro` is listed as one `intro x` step per binder (Lean 4.32 evalIntro makes one child info node per binder, the last child producing the result). `have vertexBound ... := term` is one step (the internal `refine` of `refine_lift`). The closing rfl of `rw [step.after_eq]` (192) and of the nested `rw [← abstractable.markArraySize]` (205) fails, so neither has an rfl step. `refine {...}` (193) originates refine_1, refine_2 and the goal of the nested `by simpa using abstractable.markArraySize`; at 195 simp changed that target (goal shown after `using`: before.marks.size = certificate.formulas.size), so the step is simpa's internal `simpa ... using` node, still one step on line 195. At 203 simp left the `case pos` target unchanged (checked at the column after `using`), so the simpa node itself consumes it and originates the goal of the nested `show ... by` (lines 205-206). `apply` at 207 and 217 leaves an extra metavariable goal (?m.101 : Nat and ?m.151 : Vertex, displayed as separate goals) that the `simpa ... using marked` at 209 and 219 assigns by unification; simp left the main target unchanged there (checked), so each of those simpa is one step consuming both goals (edges 12->14 and 24->26). Uncertainty: 'unchanged' rests on the pretty-printed goal after `using` being identical to the goal before; had simp produced a different but identically printed target, 209 and 219 would each split into two steps on the same line (simpa node consuming the extra goal, internal node consuming the main goal).",
+   "part": 3
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerBridge",
+   "declaration": "ProofNetIR.UnificationState.markReadyRaw?_componentsFormulaConsistent",
+   "steps": [
+    {
+     "line": 230,
+     "tactic": "have componentsEquation := (markReadyRaw?_carriers equation).2"
+    },
+    {
+     "line": 231,
+     "tactic": "intro index"
+    },
+    {
+     "line": 231,
+     "tactic": "component"
+    },
+    {
+     "line": 231,
+     "tactic": "lookup"
+    },
+    {
+     "line": 232,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 233,
+     "tactic": "componentsEquation"
+    },
+    {
+     "line": 234,
+     "tactic": "exact lookup"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "notes": "`intro index component lookup` is one node per binder (steps 1-3, the first carrying the `intro` keyword). `apply consistent` opens two goals: case a (`before.components[?index]? = some (some component)`) and case index (`Nat`), because the conclusion of `consistent` does not determine ?index. Step 5 is the single rule node of `rw [componentsEquation] at lookup` (it rewrites case a only); its appended `try (with_reducible rfl)` fails on case a, so no rfl step. `exact lookup` closes case a and assigns ?index by unification (Lean shows no goals after line 234), so it consumes both goals: edges from the rw rule [5,6] and from `apply` [4,6]. No other uncertainty.",
+   "part": 4
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerBridge",
+   "declaration": "ProofNetIR.Certificate.reserveAxiomAt?_abstractable",
+   "steps": [
+    {
+     "line": 396,
+     "tactic": "rcases certificate.reserveAxiomAt?_exact equation with ⟨left, right, component, exactLink, ready, componentLookup, frontier, marksEq, parentsEq, componentsEq, counterEq, firedEq⟩"
+    },
+    {
+     "line": 399,
+     "tactic": "have afterOrdered : after.OrderedParents := certificate.reserveAxiomAt?_orderedParents ordered equation"
+    },
+    {
+     "line": 402,
+     "tactic": "apply afterOrdered.abstractable"
+    },
+    {
+     "line": 403,
+     "tactic": "simpa [marksEq] using abstractable.markArraySize"
+    },
+    {
+     "line": 404,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 404,
+     "tactic": "token"
+    },
+    {
+     "line": 404,
+     "tactic": "marked"
+    },
+    {
+     "line": 405,
+     "tactic": "apply abstractable.markedVertexBound"
+    },
+    {
+     "line": 406,
+     "tactic": "unfold UnificationState.assignedToken? at marked ⊢"
+    },
+    {
+     "line": 407,
+     "tactic": "marksEq"
+    },
+    {
+     "line": 408,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 409,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 409,
+     "tactic": "token"
+    },
+    {
+     "line": 409,
+     "tactic": "marked"
+    },
+    {
+     "line": 410,
+     "tactic": "have beforeMarked : before.assignedToken? vertex = some token := by"
+    },
+    {
+     "line": 412,
+     "tactic": "unfold UnificationState.assignedToken? at marked ⊢"
+    },
+    {
+     "line": 413,
+     "tactic": "marksEq"
+    },
+    {
+     "line": 414,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 415,
+     "tactic": "have oldBound := abstractable.markedTokenBound beforeMarked"
+    },
+    {
+     "line": 416,
+     "tactic": "parentsEq"
+    },
+    {
+     "line": 417,
+     "tactic": "simpa using Nat.lt_succ_of_lt oldBound"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     11
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     10
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     14,
+     18
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ]
+   ],
+   "notes": "Steps 9, 16 and 19 are the single rule nodes of 'rw [marksEq] at marked' (407, 413) and 'rw [parentsEq]' (416); in all three the rw's 'try (with_reducible rfl)' fails (targets '... = some ?m', '... = some token', 'token < ...'), so no closing rfl step. The two simpa steps (403, 417) are the simpa's internal 'simpa ... using' node: Lean shows the simplified goal on 'using' ('before.marks.size = ...', 'token < before.parents.size + 1'), so that node consumes the bullet goal and originates a simplified goal that no node consumes; the outer simpa node is a container. Either reading gives one step per simpa on the same line. Extra edge [7,10]: 'apply abstractable.markedVertexBound' leaves two goals, 'before.assignedToken? vertex = some ?m' and the implicit '?m : Nat' (Lean displays both from 405 to 408; unfold and the rw rule only touch the first); 'exact marked' assigns ?m and closes both, so it consumes the ?m goal originated by step 7. The 'have beforeMarked ... := by' step (410) is the refine inside the have-by macro (focus / refine (have := ?body; ?_) / case body); it consumes the bullet goal and originates both ?body (consumed at 412) and the continuation (consumed at 415). Each 'intro vertex token marked' gives three binder steps on its line. Uncertainty: none that I expect to change the graph; the simpa-internal-node reading only matters for the dangling simplified goal.",
+   "part": 5
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerBridge",
+   "declaration": "ProofNetIR.Certificate.reserveAxiomAt?_componentsFormulaConsistent",
+   "steps": [
+    {
+     "line": 428,
+     "tactic": "rcases certificate.reserveAxiomAt?_exact equation with ⟨left, right, component, exactLink, ready, componentLookup, frontier, marksEq, parentsEq, componentsEq, counterEq, firedEq⟩"
+    },
+    {
+     "line": 431,
+     "tactic": "have componentConsistent : component.FormulaConsistent certificate := UnificationComponent.axiom?_formulaConsistent ((certificate.linkLocallyWellFormed_iff _).mp ready.1) componentLookup"
+    },
+    {
+     "line": 436,
+     "tactic": "have pushed : ({ before with components := before.components.push (some component) } : UnificationState).ComponentsFormulaConsistent certificate := consistent.push componentConsistent"
+    },
+    {
+     "line": 442,
+     "tactic": "unfold UnificationState.ComponentsFormulaConsistent at pushed ⊢"
+    },
+    {
+     "line": 443,
+     "tactic": "intro index"
+    },
+    {
+     "line": 443,
+     "tactic": "candidate"
+    },
+    {
+     "line": 443,
+     "tactic": "lookup"
+    },
+    {
+     "line": 444,
+     "tactic": "apply pushed"
+    },
+    {
+     "line": 445,
+     "tactic": "componentsEq"
+    },
+    {
+     "line": 446,
+     "tactic": "exact lookup"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     7,
+     9
+    ]
+   ],
+   "notes": "Each term-mode `have` is one step (the refine node of its refine_lift expansion, positioned at the `have`). `intro index candidate lookup` has one node per binder; in Lean 4.32 the first node spans `intro index` and the later ones only the binder name, hence the texts `candidate` and `lookup`. `apply pushed` leaves two goals: case a (the lookup premise, mentioning ?index) and case index (Nat), because the implicit `index` of `pushed` does not occur in its conclusion. `rw [componentsEq] at lookup` is one rule node (case a -> new case a); its closing `with_reducible rfl` does not close the main goal, so it contributes no step. `exact lookup` closes case a and, by unification, assigns ?index, so it consumes two goals: the one from the rw rule (edge 8->9) and case index from apply (edge 7->9).",
+   "part": 6
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerInvariant",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyOneStep.waitingConclusion_mem_waiting_middle",
+   "steps": [
+    {
+     "line": 6547,
+     "tactic": "unfold SequentialStackState.waitingVertices"
+    },
+    {
+     "line": 6548,
+     "tactic": "apply List.mem_flatMap.mpr"
+    },
+    {
+     "line": 6549,
+     "tactic": "refine ⟨.initialized [step.waitingConclusion], ?_, by simp [WaitingCell.vertices]⟩"
+    },
+    {
+     "line": 6549,
+     "tactic": "simp [WaitingCell.vertices]"
+    },
+    {
+     "line": 6551,
+     "tactic": "apply List.mem_of_getElem?"
+    },
+    {
+     "line": 6552,
+     "tactic": "change step.prepared.stackResult.after.waiting.toList[_]? = some (WaitingCell.initialized [step.waitingConclusion])"
+    },
+    {
+     "line": 6554,
+     "tactic": "Array.getElem?_toList"
+    },
+    {
+     "line": 6555,
+     "tactic": "exact step.waiting_one"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "notes": "The nested by simp inside refine has no producing node; its goal originates in the refine step (deepest enclosing node holding other goals), so refine -> simp. apply List.mem_of_getElem? leaves two goals: case e and the index case i : Nat (a data goal). change replaces only e. The rewrite rule Array.getElem?_toList unifies ?i with the lemma's own implicit index, assigning ?i and adding a new untagged Nat goal ?m.58; so the rule consumes e and i (edges from change and from apply) and produces the rewritten e and ?m.58, both consumed by exact step.waiting_one (which fixes the index). The rw's closing rfl fails (no step).",
+   "part": 1
+  },
+  {
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.UnificationState.ObservationEquivalent.abstractable",
+   "steps": [
+    {
+     "line": 719,
+     "tactic": "refine { markArraySize := by rw [← equivalent.marks] exact abstractable.markArraySize markedVertexBound := ?_ markedTokenBound := ?_ representativeBound := ?_ representativeIdempotent := ?_ }"
+    },
+    {
+     "line": 721,
+     "tactic": "rw [← equivalent.marks]"
+    },
+    {
+     "line": 722,
+     "tactic": "exact abstractable.markArraySize"
+    },
+    {
+     "line": 728,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 728,
+     "tactic": "intro token"
+    },
+    {
+     "line": 728,
+     "tactic": "intro marked"
+    },
+    {
+     "line": 729,
+     "tactic": "apply abstractable.markedVertexBound"
+    },
+    {
+     "line": 730,
+     "tactic": "unfold assignedToken? at marked ⊢"
+    },
+    {
+     "line": 731,
+     "tactic": "rw [equivalent.marks]"
+    },
+    {
+     "line": 732,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 733,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 733,
+     "tactic": "intro token"
+    },
+    {
+     "line": 733,
+     "tactic": "intro marked"
+    },
+    {
+     "line": 734,
+     "tactic": "have oldMarked : first.assignedToken? vertex = some token := by"
+    },
+    {
+     "line": 735,
+     "tactic": "unfold assignedToken? at marked ⊢"
+    },
+    {
+     "line": 736,
+     "tactic": "rw [equivalent.marks]"
+    },
+    {
+     "line": 737,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 738,
+     "tactic": "rw [← equivalent.parents]"
+    },
+    {
+     "line": 739,
+     "tactic": "exact abstractable.markedTokenBound oldMarked"
+    },
+    {
+     "line": 740,
+     "tactic": "intro token"
+    },
+    {
+     "line": 740,
+     "tactic": "intro bound"
+    },
+    {
+     "line": 741,
+     "tactic": "have oldBound : token < first.parents.size := by"
+    },
+    {
+     "line": 742,
+     "tactic": "simpa [equivalent.parents] using bound"
+    },
+    {
+     "line": 743,
+     "tactic": "simpa [representative, equivalent.parents] using abstractable.representativeBound oldBound"
+    },
+    {
+     "line": 745,
+     "tactic": "intro token"
+    },
+    {
+     "line": 745,
+     "tactic": "intro bound"
+    },
+    {
+     "line": 746,
+     "tactic": "have oldBound : token < first.parents.size := by"
+    },
+    {
+     "line": 747,
+     "tactic": "simpa [equivalent.parents] using bound"
+    },
+    {
+     "line": 748,
+     "tactic": "simpa [representative, equivalent.parents] using abstractable.representativeIdempotent oldBound"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     10
+    ],
+    [
+     0,
+     19
+    ],
+    [
+     0,
+     24
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     13,
+     17
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     21,
+     23
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     26,
+     28
+    ]
+   ],
+   "notes": "The refine step (719) produces the four ?_ goals and is also the origin of the goal of the nested 'markArraySize := by' block (that block runs inside refine's elaboration), so the rw at 721 depends on it. 'intro vertex token marked' and 'intro token bound' give one step per binder (same line, listed in binder order). apply abstractable.markedVertexBound (729) leaves the token as a separate goal ?m.23 : Nat; unfold and rw leave it untouched, and exact marked (732) closes it by unification, hence the edge from the apply step to the exact step. Each have ... := by step consumes the current goal, produces its continuation and is the origin of its nested-by goal. Every rw closing rfl attempt fails here (no step). The two-line simpa steps (743, 748) are listed at their 'simpa' line. In all four simpa steps (742, 743, 747, 748) Lean shows a rewritten target at the 'using' keyword (first.parents becomes second.parents, representative unfolds), so the internal 'simpa ... using' node (same line) is the node that consumes the goal; the simplified goal it produces is closed with no further tactic node. The 2nd and 3rd binder nodes of a multi-binder intro have only the binder name as their own syntax; I write them as 'intro <name>'.",
+   "part": 2
+  },
+  {
+   "module": "Mathlib.MeasureTheory.PiSystem",
+   "declaration": "mem_generatePiSystem_iUnion_elim",
+   "steps": [
+    {
+     "line": 287,
+     "tactic": "induction h_t with"
+    },
+    {
+     "line": 289,
+     "tactic": "rcases h_s with ⟨t', ⟨⟨b, rfl⟩, h_s_in_t'⟩⟩"
+    },
+    {
+     "line": 290,
+     "tactic": "refine ⟨{b}, fun _ => s, ?_⟩"
+    },
+    {
+     "line": 291,
+     "tactic": "simpa using h_s_in_t'"
+    },
+    {
+     "line": 293,
+     "tactic": "rcases h_t' with ⟨T_t', ⟨f_t', ⟨rfl, h_t'⟩⟩⟩"
+    },
+    {
+     "line": 294,
+     "tactic": "rcases h_s with ⟨T_s, ⟨f_s, ⟨rfl, h_s⟩⟩⟩"
+    },
+    {
+     "line": 295,
+     "tactic": "use T_s ∪ T_t', fun b : β => if b ∈ T_s then if b ∈ T_t' then f_s b ∩ f_t' b else f_s b else if b ∈ T_t' then f_t' b else (∅ : Set α)"
+    },
+    {
+     "line": 295,
+     "tactic": "refine (T_s ∪ T_t' : Finset β)"
+    },
+    {
+     "line": 295,
+     "tactic": "refine ((fun b : β => if b ∈ T_s then ... else (∅ : Set α)) : β → Set α)"
+    },
+    {
+     "line": 298,
+     "tactic": "constructor"
+    },
+    {
+     "line": 299,
+     "tactic": "ext a"
+    },
+    {
+     "line": 300,
+     "tactic": "Set.mem_inter_iff"
+    },
+    {
+     "line": 300,
+     "tactic": "Set.mem_iInter"
+    },
+    {
+     "line": 300,
+     "tactic": "Finset.mem_union"
+    },
+    {
+     "line": 301,
+     "tactic": "grind"
+    },
+    {
+     "line": 302,
+     "tactic": "intro b"
+    },
+    {
+     "line": 302,
+     "tactic": "intro h_b"
+    },
+    {
+     "line": 303,
+     "tactic": "split_ifs with hbs hbt hbt"
+    },
+    {
+     "line": 303,
+     "tactic": "by_cases hbt : b ∈ T_t'"
+    },
+    {
+     "line": 303,
+     "tactic": "by_cases hbt : b ∈ T_t'"
+    },
+    {
+     "line": 304,
+     "tactic": "refine h_pi b (f_s b) (h_s b hbs) (f_t' b) (h_t' b hbt) (Set.Nonempty.mono ?_ h_nonempty)"
+    },
+    {
+     "line": 305,
+     "tactic": "exact Set.inter_subset_inter (Set.biInter_subset_of_mem hbs) (Set.biInter_subset_of_mem hbt)"
+    },
+    {
+     "line": 306,
+     "tactic": "exact h_s b hbs"
+    },
+    {
+     "line": 307,
+     "tactic": "exact h_t' b hbt"
+    },
+    {
+     "line": 308,
+     "tactic": "Finset.mem_union"
+    },
+    {
+     "line": 309,
+     "tactic": "apply False.elim (h_b.elim hbs hbt)"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     9,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     17,
+     19
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     17,
+     22
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     17,
+     24
+    ],
+    [
+     24,
+     25
+    ]
+   ],
+   "notes": "Steps are in source order; steps on one line are in run order (an enclosing node before the internal nodes it runs). Rewrite-rule steps are listed by their rule text and the closing rfl of `rw` as `rfl`; a multi-binder `intro` is listed as one `intro x` step per binder (Lean 4.32 evalIntro makes one child info node per binder, the last child producing the result). `classical` is a container; `induction h_t with` is one step (inner node, as in an fvar-target induction) originating the `base` and `inter` goals. `use` (295) gives three steps: the use node (consumes the goal, originates `case h` and the two witness goals that Mathlib's applyTheConstructor creates inside it) and two internal `refine (arg : type)` nodes that Mathlib's useLoop runs through evalTactic on those witness goals (steps 7 and 8, tactic text reconstructed); they are synthetic nodes positioned at `use`, inferred from Mathlib/Tactic/Use.lean, and not visible in the goal display. The `try with_reducible use_discharger` attempts on `case h` all fail (failed-alternative nodes, dropped). simp_rw (300): Mathlib first runs `simp only []` (failIfUnchanged := false), which left the goal unchanged (goal at `[` equals the goal before), so it is no step; then one step per rule (the inner `simp only [rule]` node), each changing the goal (checked at column level). split_ifs (303): Mathlib runs `by_cases` through evalTactic three times (on the incoming goal, then once in each reduced branch) and simplifies the branches with reduceIfsAt outside any info node. The reduced branch goals and the four final goals therefore originate at the split_ifs node, which consumes nothing itself (its first by_cases consumes the incoming goal), so it is merged into that first by_cases (step 17, listed under the split_ifs text). Steps 18 and 19 are the by_cases on the pos branch and on the neg branch; they consume the reduced branch goals and their pos/neg outputs are replaced by reduceIfsAt and never consumed. All four bullets consume goals originated by step 17. Inferred from Mathlib/Tactic/SplitIfs.lean; the displayed final goals match. The closing rfl of `rw [Finset.mem_union] at h_b` fails (no rfl step). Uncertainties: steps 7, 8, 18, 19 are synthetic (macro/elaborator-generated) nodes whose line is that of the enclosing tactic; their order after their parent is run order; whether simp_rw's leading `simp only []` returned the identical goal rests on the printed goal.",
+   "part": 3
+  },
+  {
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.Certificate.firePar?_success_conclusion_frontier",
+   "steps": [
+    {
+     "line": 4857,
+     "tactic": "rcases firePar?_success_observation equation with ⟨outputToken, forwardEquation, observation⟩"
+    },
+    {
+     "line": 4859,
+     "tactic": "have guards := state.forwardToken?_success forwardEquation"
+    },
+    {
+     "line": 4860,
+     "tactic": "have outputRoot : state.representative outputToken = outputToken := abstractable.tokenAt?_root guards.2.1"
+    },
+    {
+     "line": 4862,
+     "tactic": "have conclusionToken : next.tokenAt? conclusion = some outputToken := firePar?_success_conclusion_tokenAt? abstractable forwardEquation equation"
+    },
+    {
+     "line": 4866,
+     "tactic": "unfold firePar? at equation"
+    },
+    {
+     "line": 4867,
+     "tactic": "forwardEquation"
+    },
+    {
+     "line": 4868,
+     "tactic": "cases componentLookup : state.componentAt? outputToken with | none => ... | some component => ..."
+    },
+    {
+     "line": 4868,
+     "tactic": "cases componentLookup : state.componentAt? outputToken with"
+    },
+    {
+     "line": 4871,
+     "tactic": "simp [componentLookup] at equation"
+    },
+    {
+     "line": 4873,
+     "tactic": "simp only [componentLookup] at equation"
+    },
+    {
+     "line": 4874,
+     "tactic": "cases leftPick : pickVertex? component.frontier left with | none => ... | some leftResult => ..."
+    },
+    {
+     "line": 4874,
+     "tactic": "cases leftPick : pickVertex? component.frontier left with"
+    },
+    {
+     "line": 4876,
+     "tactic": "simp [leftPick] at equation"
+    },
+    {
+     "line": 4878,
+     "tactic": "rcases leftResult with ⟨leftIndex, afterLeft⟩"
+    },
+    {
+     "line": 4879,
+     "tactic": "simp only [leftPick] at equation"
+    },
+    {
+     "line": 4880,
+     "tactic": "cases rightPick : pickVertex? afterLeft right with | none => ... | some rightResult => ..."
+    },
+    {
+     "line": 4880,
+     "tactic": "cases rightPick : pickVertex? afterLeft right with"
+    },
+    {
+     "line": 4882,
+     "tactic": "simp [rightPick] at equation"
+    },
+    {
+     "line": 4884,
+     "tactic": "rcases rightResult with ⟨rightIndex, context⟩"
+    },
+    {
+     "line": 4885,
+     "tactic": "simp only [rightPick] at equation"
+    },
+    {
+     "line": 4886,
+     "tactic": "injection equation with nextEquation"
+    },
+    {
+     "line": 4887,
+     "tactic": "have nextOutputRoot : next.representative outputToken = outputToken := by"
+    },
+    {
+     "line": 4889,
+     "tactic": "observation.representative_eq outputToken"
+    },
+    {
+     "line": 4890,
+     "tactic": "simpa [UnificationState.representative, UnificationState.markConclusion] using outputRoot"
+    },
+    {
+     "line": 4892,
+     "tactic": "have componentRaw : state.components[outputToken]? = some (some component) := by"
+    },
+    {
+     "line": 4895,
+     "tactic": "have rawAtRepresentative := UnificationState.componentAt?_some_raw componentLookup"
+    },
+    {
+     "line": 4898,
+     "tactic": "simpa [outputRoot] using rawAtRepresentative"
+    },
+    {
+     "line": 4899,
+     "tactic": "have outputBound : outputToken < state.components.size := (Array.getElem?_eq_some_iff.mp componentRaw).1"
+    },
+    {
+     "line": 4902,
+     "tactic": "subst next"
+    },
+    {
+     "line": 4903,
+     "tactic": "let replacement : UnificationComponent := { tree := .par leftIndex rightIndex component.tree frontier := context ++ [conclusion] }"
+    },
+    {
+     "line": 4906,
+     "tactic": "refine ⟨outputToken, replacement, conclusionToken, ?_, ?_⟩"
+    },
+    {
+     "line": 4908,
+     "tactic": "unfold UnificationState.componentAt?"
+    },
+    {
+     "line": 4909,
+     "tactic": "nextOutputRoot"
+    },
+    {
+     "line": 4910,
+     "tactic": "simp [replacement, outputBound]"
+    },
+    {
+     "line": 4911,
+     "tactic": "simp [replacement]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     21,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     24,
+     27
+    ],
+    [
+     27,
+     28
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     30,
+     31
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     30,
+     34
+    ]
+   ],
+   "notes": "Each `cases h : e with | ... => ...` (lines 4868, 4874, 4880) gives two steps on its line, listed outer first: the cases node itself, which consumes the incoming goal and originates the goal with `x✝` and theequation `h` that target generalization creates without its own node; and the inner node spanning `cases ... with`, which consumes that generalized goal (Lean shows it as the state at the `cases` keyword) and originates both alternative goals (the `| none =>` and `| some x =>` nodes are containers). Rule steps (lines 4867, 4889, 4909) are named by their rule; none of these rw's closing rfl closes its goal, so there are no rfl steps. Each `have ... := by` (4887, 4892) is one step that consumes the current goal and originates both the nested goal and the continuation goal. Each `simpa ... using` (4890, 4898) is one step: its internal `simpa ... using` node consumes the goal; the simplified goal that node displays is never consumed by another step, so it adds no edge. `let replacement` and the term-valued `have`s are one step each (the refine inside the macro). Uncertain: whether the have/let step is the outer macro node or the synthetic refine node inside it (same line and edges either way), and the step texts of multi-line tactics, which I condensed.",
+   "part": 4
+  },
+  {
+   "module": "Mathlib.FieldTheory.Finite.Basic",
+   "declaration": "FiniteField.sum_pow_units",
+   "steps": [
+    {
+     "line": 296,
+     "tactic": "let φ : Kˣ →* K :="
+    },
+    {
+     "line": 298,
+     "tactic": "simp"
+    },
+    {
+     "line": 299,
+     "tactic": "simp [mul_pow]"
+    },
+    {
+     "line": 300,
+     "tactic": "have : Decidable (φ = 1) := by"
+    },
+    {
+     "line": 300,
+     "tactic": "infer_instance"
+    },
+    {
+     "line": 301,
+     "tactic": "calc (∑ x : Kˣ, φ x) = if φ = 1 then Fintype.card Kˣ else 0 := sum_hom_units φ"
+    },
+    {
+     "line": 303,
+     "tactic": "suffices q - 1 ∣ i ↔ φ = 1 by"
+    },
+    {
+     "line": 304,
+     "tactic": "simp only [this]"
+    },
+    {
+     "line": 305,
+     "tactic": "split_ifs"
+    },
+    {
+     "line": 306,
+     "tactic": "exact Nat.cast_zero"
+    },
+    {
+     "line": 307,
+     "tactic": "Fintype.card_units"
+    },
+    {
+     "line": 307,
+     "tactic": "Nat.cast_sub"
+    },
+    {
+     "line": 307,
+     "tactic": "with_reducible rfl"
+    },
+    {
+     "line": 308,
+     "tactic": "cast_card_eq_zero"
+    },
+    {
+     "line": 308,
+     "tactic": "Nat.cast_one"
+    },
+    {
+     "line": 308,
+     "tactic": "zero_sub"
+    },
+    {
+     "line": 309,
+     "tactic": "exact Fintype.card_pos_iff.mpr ⟨0⟩"
+    },
+    {
+     "line": 310,
+     "tactic": "← forall_pow_eq_one_iff"
+    },
+    {
+     "line": 310,
+     "tactic": "DFunLike.ext_iff"
+    },
+    {
+     "line": 311,
+     "tactic": "apply forall_congr'"
+    },
+    {
+     "line": 311,
+     "tactic": "intro x"
+    },
+    {
+     "line": 311,
+     "tactic": "simp [φ, Units.ext_iff]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     17
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     13
+    ],
+    [
+     11,
+     16
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     12
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ]
+   ],
+   "notes": "Step 0 is the refine inside the 'let' macro; the two nested 'by' goals of the structure instance (map_one', map_mul') are run during that refine, so it is their origin (edges [0,1], [0,2]) besides producing the continuation. Line 300: the have-by macro's refine (step 3) originates ?body and the continuation; 'classical' is a container and the step is the 'exact inferInstance' node of infer_instance (step 4). The calc tactic pops its goal before its inner calcSteps node, which holds no goal, so the calc node itself consumes the goal and originates the nested-by goal of the second calc step. 'suffices ... by' (step 6) is the refine of 'have this := ?_; by ...': it originates ?_ (consumed at 310) and the nested-by goal (consumed at 304); the nested block (304-309) runs inside that refine, before line 310. split_ifs (step 8) runs 'by_cases' internally via evalTactic, whose refine consumes the goal and leaves two goals that split_ifs then simplifies without any info node; the split_ifs node originates the simplified 'case pos'/'case neg' goals and consumes nothing beyond its child, so by the merge rule it is one step with the internal refine (no effect on lines or edges if synthetic macro nodes are not counted). swap (pick_goal 2) only reorders goals: no step. UNCERTAIN 1 (line and order of step 12): the closing rfl of the two-line 'rw [Fintype.card_units, Nat.cast_sub, / cast_card_eq_zero, Nat.cast_one, zero_sub]' closes '-1 = -1'. Its deepest info node is the synthetic rfl expansion, whose position is the rw keyword (line 307), so I put it at 307 and, following 'same line = run order', after the two line-307 rules and before the three line-308 rules; this gives the backward-looking edge [15,12]. If the tool places that node at ']' (the with_annotate_state node, line 308), or lists steps purely in run order, the step comes after zero_sub (at line 308 or 307 respectively) and indices 12-15 become cast_card_eq_zero=12, Nat.cast_one=13, zero_sub=14, rfl=15, with edges [11,12],[12,13],[13,14],[14,15] in place of [11,13],[13,14],[14,15],[15,12]; the graph itself is the same. UNCERTAIN 2: 'show 1 ≤ q' (309) is taken as no step. The side goal from Nat.cast_sub is '@LE.le ℕ instLENat 1 (Fintype.card K)' and show elaborates the same expression, so replaceTargetDefEq keeps the same metavariable; exact (step 16) then consumes the Nat.cast_sub side goal directly (edge [11,16]). If show did create a new goal it would be a step at 309 between 11 and 16. The rw at 310 does not close its goal (types Kˣ vs K differ), so no closing rfl there.",
+   "part": 5
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerInvariant",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyOneStep.producedPremisesMarked",
+   "steps": [
+    {
+     "line": 7433,
+     "tactic": "have middleInvariant := step.prepared.schedulerInvariant invariant"
+    },
+    {
+     "line": 7434,
+     "tactic": "intro link"
+    },
+    {
+     "line": 7434,
+     "tactic": "linkMembership"
+    },
+    {
+     "line": 7435,
+     "tactic": "cases link with"
+    },
+    {
+     "line": 7436,
+     "tactic": "trivial"
+    },
+    {
+     "line": 7439,
+     "tactic": "intro producedAfter"
+    },
+    {
+     "line": 7439,
+     "tactic": "intro producedAfter"
+    },
+    {
+     "line": 7440,
+     "tactic": "rcases step.produced_after_cases invariant producedAfter with waitingEq | tensorEq | producedMiddle"
+    },
+    {
+     "line": 7440,
+     "tactic": "rcases step.produced_after_cases invariant producedAfter with waitingEq | tensorEq | producedMiddle"
+    },
+    {
+     "line": 7442,
+     "tactic": "subst conclusion"
+    },
+    {
+     "line": 7442,
+     "tactic": "subst conclusion"
+    },
+    {
+     "line": 7443,
+     "tactic": "have currentMembership : (.par step.activationStep.producer.storedLeft step.activationStep.producer.storedRight step.waitingConclusion : Link) ∈ certificate.links := List.mem_of_getElem? step.submitted_waiting_par"
+    },
+    {
+     "line": 7443,
+     "tactic": "have currentMembership : (.par step.activationStep.producer.storedLeft step.activationStep.producer.storedRight step.waitingConclusion : Link) ∈ certificate.links := List.mem_of_getElem? step.submitted_waiting_par"
+    },
+    {
+     "line": 7448,
+     "tactic": "have producerEq := UnificationState.StructurallyWellFormed.producerLink_unique invariant.structural (conclusion := step.waitingConclusion) linkMembership (by simp [Link.produces]) currentMembership (by simp [Link.produces])"
+    },
+    {
+     "line": 7448,
+     "tactic": "have producerEq := UnificationState.StructurallyWellFormed.producerLink_unique invariant.structural (conclusion := step.waitingConclusion) linkMembership (by simp [Link.produces]) currentMembership (by simp [Link.produces])"
+    },
+    {
+     "line": 7452,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7452,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7453,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7453,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7454,
+     "tactic": "cases producerEq"
+    },
+    {
+     "line": 7454,
+     "tactic": "cases producerEq"
+    },
+    {
+     "line": 7455,
+     "tactic": "exact step.waitingPremisesMarkedAfter"
+    },
+    {
+     "line": 7456,
+     "tactic": "subst conclusion"
+    },
+    {
+     "line": 7456,
+     "tactic": "subst conclusion"
+    },
+    {
+     "line": 7457,
+     "tactic": "have currentMembership : (.tensor step.consumer.storedLeft step.consumer.storedRight step.consumer.conclusion : Link) ∈ certificate.links := List.mem_of_getElem? step.submitted_tensor"
+    },
+    {
+     "line": 7457,
+     "tactic": "have currentMembership : (.tensor step.consumer.storedLeft step.consumer.storedRight step.consumer.conclusion : Link) ∈ certificate.links := List.mem_of_getElem? step.submitted_tensor"
+    },
+    {
+     "line": 7461,
+     "tactic": "have producerEq := UnificationState.StructurallyWellFormed.producerLink_unique invariant.structural (conclusion := step.consumer.conclusion) linkMembership (by simp [Link.produces]) currentMembership (by simp [Link.produces])"
+    },
+    {
+     "line": 7461,
+     "tactic": "have producerEq := UnificationState.StructurallyWellFormed.producerLink_unique invariant.structural (conclusion := step.consumer.conclusion) linkMembership (by simp [Link.produces]) currentMembership (by simp [Link.produces])"
+    },
+    {
+     "line": 7465,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7465,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7466,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7466,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 7467,
+     "tactic": "cases producerEq"
+    },
+    {
+     "line": 7467,
+     "tactic": "cases producerEq"
+    },
+    {
+     "line": 7468,
+     "tactic": "exact step.tensorPremisesMarkedAfter"
+    },
+    {
+     "line": 7469,
+     "tactic": "rcases middleInvariant.produced_premises_marked linkMembership producedMiddle with ⟨⟨leftAge, leftMarked⟩, rightAge, rightMarked⟩"
+    },
+    {
+     "line": 7469,
+     "tactic": "rcases middleInvariant.produced_premises_marked linkMembership producedMiddle with ⟨⟨leftAge, leftMarked⟩, rightAge, rightMarked⟩"
+    },
+    {
+     "line": 7472,
+     "tactic": "refine ⟨⟨leftAge, ?_⟩, rightAge, ?_⟩"
+    },
+    {
+     "line": 7472,
+     "tactic": "refine ⟨⟨leftAge, ?_⟩, rightAge, ?_⟩"
+    },
+    {
+     "line": 7473,
+     "tactic": "step.core_marks_eq"
+    },
+    {
+     "line": 7473,
+     "tactic": "step.core_marks_eq"
+    },
+    {
+     "line": 7474,
+     "tactic": "exact leftMarked"
+    },
+    {
+     "line": 7474,
+     "tactic": "exact leftMarked"
+    },
+    {
+     "line": 7475,
+     "tactic": "step.core_marks_eq"
+    },
+    {
+     "line": 7475,
+     "tactic": "step.core_marks_eq"
+    },
+    {
+     "line": 7476,
+     "tactic": "exact rightMarked"
+    },
+    {
+     "line": 7476,
+     "tactic": "exact rightMarked"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     11
+    ],
+    [
+     11,
+     13
+    ],
+    [
+     13,
+     15
+    ],
+    [
+     13,
+     17
+    ],
+    [
+     13,
+     19
+    ],
+    [
+     7,
+     22
+    ],
+    [
+     22,
+     24
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     26,
+     28
+    ],
+    [
+     26,
+     30
+    ],
+    [
+     26,
+     32
+    ],
+    [
+     7,
+     35
+    ],
+    [
+     35,
+     37
+    ],
+    [
+     37,
+     39
+    ],
+    [
+     39,
+     41
+    ],
+    [
+     37,
+     43
+    ],
+    [
+     43,
+     45
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     14,
+     16
+    ],
+    [
+     14,
+     18
+    ],
+    [
+     14,
+     20
+    ],
+    [
+     8,
+     23
+    ],
+    [
+     23,
+     25
+    ],
+    [
+     25,
+     27
+    ],
+    [
+     27,
+     29
+    ],
+    [
+     27,
+     31
+    ],
+    [
+     27,
+     33
+    ],
+    [
+     8,
+     36
+    ],
+    [
+     36,
+     38
+    ],
+    [
+     38,
+     40
+    ],
+    [
+     40,
+     42
+    ],
+    [
+     38,
+     44
+    ],
+    [
+     44,
+     46
+    ],
+    [
+     19,
+     21
+    ],
+    [
+     33,
+     34
+    ]
+   ],
+   "notes": "The alternative `| «par» left right conclusion | tensor left right conclusion =>` is split by Lean into two alternatives sharing one RHS, so lines 7439-7476 are elaborated twice, first on the par case goal and then on the tensor case goal, each run with its own info nodes and steps; steps of the two runs on the same line are listed par first, then tensor. `intro link linkMembership` has one node per binder (second node text is the binder name). The `cases link with` step is the node of the cases alternatives (inside the macro expansion of the multi-pattern alternative); it consumes the goal after `linkMembership` and originates the axiom, par and tensor case goals. `trivial` (axiom case, goal `match Link.axiom left right with ...`) is a macro whose successful expansion is expected to be `apply True.intro`; that innermost node carries the position of `trivial` (line 7436). In each `have producerEq` the two nested `(by simp [Link.produces])` goals originate at the have step and are consumed by the two simp steps on the next lines. Bullet 1: in the par run `cases producerEq` (Link.par .. = Link.par ..) leaves one goal and `exact step.waitingPremisesMarkedAfter` closes it; in the tensor run the equation is Link.tensor .. = Link.par .., cases closes the goal and `all_goals exact ..` runs on no goal, so there is no exact step. Bullet 2 is the reverse: the par-run `cases producerEq` (Link.par .. = Link.tensor ..) closes its goal, observed in the server, and only the tensor run has `exact step.tensorPremisesMarkedAfter` (line 7468). The closing rfl of `rw [step.core_marks_eq]` does not close the goal, so there is no rfl step. Multi-line tactics are listed at their first line. Uncertainty: inside the shared RHS the Lean server shows goals only for the par run, so the tensor run (steps listed second on each line from 7439 on) was reconstructed by symmetry with the par run, not observed directly.",
+   "part": 6
+  },
+  {
+   "module": "ProofNetIR.SequentialFigure7EqualBoundaryCommitmentTargetAvoidance",
+   "declaration": "ProofNetIR.SequentialFigure7.CanonicalTagHistory.sameRepresentative_conclusionTouch_decomposition",
+   "steps": [
+    {
+     "line": 248,
+     "tactic": "have mateUntouched : ¬ event.Touched guard.tensor.mate := by"
+    },
+    {
+     "line": 249,
+     "tactic": "intro mateTouched"
+    },
+    {
+     "line": 250,
+     "tactic": "apply tagHistory.not_event_touch_of_sameRepresentative correct invariant guard membership sameRepresentative mateTouched"
+    },
+    {
+     "line": 252,
+     "tactic": "exact .visited (.refl guard.tensor.mate)"
+    },
+    {
+     "line": 253,
+     "tactic": "have conclusionInTrace : guard.tensor.conclusion ∈ event.search.result.trace := by"
+    },
+    {
+     "line": 255,
+     "tactic": "rcases touched with inTrace | leftEq | rightEq"
+    },
+    {
+     "line": 256,
+     "tactic": "exact inTrace"
+    },
+    {
+     "line": 257,
+     "tactic": "exfalso"
+    },
+    {
+     "line": 258,
+     "tactic": "exact invariant.structural.axiomEndpoint_ne_connectiveConclusion ... (by simpa [Link.produces] using leftEq)"
+    },
+    {
+     "line": 261,
+     "tactic": "simpa [Link.produces] using leftEq"
+    },
+    {
+     "line": 262,
+     "tactic": "exfalso"
+    },
+    {
+     "line": 263,
+     "tactic": "exact invariant.structural.axiomEndpoint_ne_connectiveConclusion ... (by simpa [Link.produces] using rightEq)"
+    },
+    {
+     "line": 266,
+     "tactic": "simpa [Link.produces] using rightEq"
+    },
+    {
+     "line": 267,
+     "tactic": "have sideLeft : guard.tensor.side = .storedLeft := by"
+    },
+    {
+     "line": 268,
+     "tactic": "cases sideEquation : guard.tensor.side with (outer node: generalize)"
+    },
+    {
+     "line": 268,
+     "tactic": "cases sideEquation : guard.tensor.side with"
+    },
+    {
+     "line": 269,
+     "tactic": "exact rfl"
+    },
+    {
+     "line": 271,
+     "tactic": "exfalso"
+    },
+    {
+     "line": 272,
+     "tactic": "apply mateUntouched"
+    },
+    {
+     "line": 273,
+     "tactic": "have conclusionReach : SourceLeftReachable certificate event.start guard.tensor.conclusion := by"
+    },
+    {
+     "line": 276,
+     "tactic": "have region := event.touched_sourceLeftRegion touched"
+    },
+    {
+     "line": 277,
+     "tactic": "cases region with"
+    },
+    {
+     "line": 278,
+     "tactic": "exact reachable"
+    },
+    {
+     "line": 280,
+     "tactic": "rcases exactAxiom with axiomEq | axiomEq"
+    },
+    {
+     "line": 281,
+     "tactic": "exact False.elim (invariant.structural.axiomEndpoint_ne_connectiveConclusion ... (by simp [Link.produces]))"
+    },
+    {
+     "line": 285,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 286,
+     "tactic": "exact False.elim (invariant.structural.axiomEndpoint_ne_connectiveConclusion ... (by simp [Link.produces]))"
+    },
+    {
+     "line": 290,
+     "tactic": "simp [Link.produces]"
+    },
+    {
+     "line": 291,
+     "tactic": "have storedLeftReach : SourceLeftReachable certificate event.start guard.tensor.storedLeft := sourceLeftReachable_trans conclusionReach ..."
+    },
+    {
+     "line": 296,
+     "tactic": "have storedLeftTouched : event.Touched guard.tensor.storedLeft := event.sourceLeftRegion_touched invariant.structural (.visited storedLeftReach)"
+    },
+    {
+     "line": 299,
+     "tactic": "simpa [TensorBelow.mate, TensorPremiseSide.mate, sideEquation] using storedLeftTouched"
+    },
+    {
+     "line": 301,
+     "tactic": "have headIsStoredLeft : guard.head.vertex = guard.tensor.storedLeft := by"
+    },
+    {
+     "line": 303,
+     "tactic": "simpa [TensorBelow.premise, TensorPremiseSide.premise, sideLeft] using guard.tensor_valid.2.2.2"
+    },
+    {
+     "line": 305,
+     "tactic": "have reachedEndpoint : event.search.reached = event.search.result.left ∨ event.search.reached = event.search.result.right := by"
+    },
+    {
+     "line": 308,
+     "tactic": "rcases event.search.route.storedEndpoints with endpoints | endpoints"
+    },
+    {
+     "line": 309,
+     "tactic": "exact Or.inl endpoints.1"
+    },
+    {
+     "line": 310,
+     "tactic": "exact Or.inr endpoints.1"
+    },
+    {
+     "line": 311,
+     "tactic": "rcases SourceLeftChain.decompose_at_step invariant.structural ... with ⟨beforeTrace, afterTrace, decomposition⟩"
+    },
+    {
+     "line": 316,
+     "tactic": "refine ⟨sideLeft, beforeTrace, afterTrace, ?_⟩"
+    },
+    {
+     "line": 317,
+     "tactic": "simpa [headIsStoredLeft] using decomposition"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     13
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     10
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     13,
+     31
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     15,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     19,
+     28
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     21,
+     23
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     23,
+     26
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     31,
+     33
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     33,
+     37
+    ],
+    [
+     34,
+     35
+    ],
+    [
+     34,
+     36
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     38,
+     39
+    ]
+   ],
+   "notes": "have h : T := by tacs uses Lean 4.32's special-case macro (focus; refine (have h : T := ?body; ?_); case body => ...): the refine node is the have step and produces both the body goal and the continuation, so each have has an edge to the first tactic of its block and one to the next tactic after it; `case body =>` does not rename (same goal). cases sideEquation : guard.tensor.side with has two steps: the outer cases node generalizes the non-variable target (consumes the have-body goal, originates the generalized goal x✝ with sideEquation, the goal displayed at the start of L268), and the inner `cases ... with` info node consumes that goal and originates the storedLeft/storedRight alternative goals. cases region with (region is a hypothesis fvar; index generalization happens inside the inner node) is one step. exfalso is refine False.elim ?_ (one step). Nested (by simpa/simp ...) arguments of exact have no producing node; their goals originate in the enclosing exact step. simpa ... using: one step (its internal simpa..using node, merged with the outer node when the simp part changes the goal). All rcases are single nodes.",
+   "part": 1
+  },
+  {
+   "module": "ProofNetIR.SequentialFigure7NewRegion",
+   "declaration": "ProofNetIR.SequentialFigure7.FreshSourceLeftRoute.source_is_axiom_of_axiom_endpoint",
+   "steps": [
+    {
+     "line": 214,
+     "tactic": "have expectedWellFormed := structural.2.2.2.2.1 _ expectedMembership"
+    },
+    {
+     "line": 216,
+     "tactic": "rcases expectedWellFormed.axiom_endpointFormula expectedEndpoint with ⟨name, positive, expectedFormula⟩"
+    },
+    {
+     "line": 218,
+     "tactic": "have sourceWellFormed := structural.2.2.2.2.1 _ sourceMembership"
+    },
+    {
+     "line": 220,
+     "tactic": "cases sourceLinkEquation : source.link with ..."
+    },
+    {
+     "line": 220,
+     "tactic": "cases sourceLinkEquation : source.link with"
+    },
+    {
+     "line": 222,
+     "tactic": "refine ⟨sourceLeft, sourceRight, rfl, ?_⟩"
+    },
+    {
+     "line": 223,
+     "tactic": "rcases sourceOrigin with sourceAxiom | sourceProduces"
+    },
+    {
+     "line": 224,
+     "tactic": "have reversed : sourceLeft = endpoint ∨ sourceRight = endpoint := by"
+    },
+    {
+     "line": 226,
+     "tactic": "simpa [sourceLinkEquation, Link.containsAxiomEndpoint] using sourceAxiom"
+    },
+    {
+     "line": 227,
+     "tactic": "exact reversed.imp Eq.symm Eq.symm"
+    },
+    {
+     "line": 228,
+     "tactic": "simp [sourceLinkEquation, Link.produces] at sourceProduces"
+    },
+    {
+     "line": 230,
+     "tactic": "have sourceWellFormed' : certificate.LinkWellFormed (.tensor sourceLeft sourceRight sourceConclusion) := by"
+    },
+    {
+     "line": 233,
+     "tactic": "simpa [sourceLinkEquation] using sourceWellFormed"
+    },
+    {
+     "line": 234,
+     "tactic": "rcases sourceOrigin with sourceAxiom | sourceProduces"
+    },
+    {
+     "line": 235,
+     "tactic": "simp [sourceLinkEquation, Link.containsAxiomEndpoint] at sourceAxiom"
+    },
+    {
+     "line": 236,
+     "tactic": "simp [sourceLinkEquation, Link.produces] at sourceProduces"
+    },
+    {
+     "line": 237,
+     "tactic": "subst sourceConclusion"
+    },
+    {
+     "line": 238,
+     "tactic": "rcases sourceWellFormed'.tensor_conclusionFormula with ⟨leftFormula, rightFormula, sourceFormula⟩"
+    },
+    {
+     "line": 240,
+     "tactic": "have impossible := Option.some.inj (expectedFormula.symm.trans sourceFormula)"
+    },
+    {
+     "line": 242,
+     "tactic": "cases impossible"
+    },
+    {
+     "line": 244,
+     "tactic": "have sourceWellFormed' : certificate.LinkWellFormed (.par sourceLeft sourceRight sourceConclusion) := by"
+    },
+    {
+     "line": 247,
+     "tactic": "simpa [sourceLinkEquation] using sourceWellFormed"
+    },
+    {
+     "line": 248,
+     "tactic": "rcases sourceOrigin with sourceAxiom | sourceProduces"
+    },
+    {
+     "line": 249,
+     "tactic": "simp [sourceLinkEquation, Link.containsAxiomEndpoint] at sourceAxiom"
+    },
+    {
+     "line": 250,
+     "tactic": "simp [sourceLinkEquation, Link.produces] at sourceProduces"
+    },
+    {
+     "line": 251,
+     "tactic": "subst sourceConclusion"
+    },
+    {
+     "line": 252,
+     "tactic": "rcases sourceWellFormed'.par_conclusionFormula with ⟨leftFormula, rightFormula, sourceFormula⟩"
+    },
+    {
+     "line": 254,
+     "tactic": "have impossible := Option.some.inj (expectedFormula.symm.trans sourceFormula)"
+    },
+    {
+     "line": 256,
+     "tactic": "cases impossible"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     11
+    ],
+    [
+     4,
+     20
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     10
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     11,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     13,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     20,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     22,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     27,
+     28
+    ]
+   ],
+   "notes": "'cases sourceLinkEquation : source.link with' (220) gives two steps on line 220. (a) The outer cases node consumes the goal left by 'have sourceWellFormed' and is the origin of the generalized goal (x : Link, sourceLinkEquation : source.link = x), which no node produces: the h : e form generalizes before the alternatives node is opened. (b) The 'cases ... with' alternatives node (span 'cases ... with') consumes that generalized goal and is the origin of the three case goals axiom/tensor/par. The alternative headers ('| axiom ... =>' etc.) are containers, because the first tactic of each alternative consumes its case goal. Text '... with ...' marks the outer node, '... with' the alternatives node. Each have ... := by step consumes the goal, produces its continuation and is the origin of its nested-by goal; term-mode haves (214, 218, 240, 254) only transform the goal. 'cases impossible' (242, 256) has no 'with' and closes the goal (constructor mismatch), so it is a single step. In the simpa steps inside the haves (226, 233, 247) the simp part leaves the target as it was (Lean shows the unchanged goal at the 'using' keyword), so the internal 'simpa ... using' node is a container and the outer simpa node consumes the nested-by goal (the case in the correction note); one step on the simpa line either way. Outer cases node is listed before the alternatives node because it starts first; both carry the 'cases' keyword position.",
+   "part": 2
+  },
+  {
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.Certificate.processWorklistLink_core_componentsFormulaConsistent",
+   "steps": [
+    {
+     "line": 12089,
+     "tactic": "intro componentIndex"
+    },
+    {
+     "line": 12089,
+     "tactic": "intro component"
+    },
+    {
+     "line": 12089,
+     "tactic": "intro componentLookup"
+    },
+    {
+     "line": 12090,
+     "tactic": "cases linkLookup : certificate.links[index]? with"
+    },
+    {
+     "line": 12090,
+     "tactic": "cases linkLookup : certificate.links[index]? with"
+    },
+    {
+     "line": 12092,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12093,
+     "tactic": "simpa [processWorklistLink, linkLookup] using componentLookup"
+    },
+    {
+     "line": 12095,
+     "tactic": "have linkMembership : link ∈ certificate.links := List.mem_of_getElem? linkLookup"
+    },
+    {
+     "line": 12097,
+     "tactic": "have wellFormed : certificate.LinkWellFormed link := structural.2.2.2.2.1 link linkMembership"
+    },
+    {
+     "line": 12099,
+     "tactic": "cases link with"
+    },
+    {
+     "line": 12101,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12102,
+     "tactic": "simpa [processWorklistLink, linkLookup] using componentLookup"
+    },
+    {
+     "line": 12104,
+     "tactic": "cases leftLookup : state.core.tokenAt? left with"
+    },
+    {
+     "line": 12104,
+     "tactic": "cases leftLookup : state.core.tokenAt? left with"
+    },
+    {
+     "line": 12106,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12107,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup] using componentLookup"
+    },
+    {
+     "line": 12110,
+     "tactic": "cases rightLookup : state.core.tokenAt? right with"
+    },
+    {
+     "line": 12110,
+     "tactic": "cases rightLookup : state.core.tokenAt? right with"
+    },
+    {
+     "line": 12112,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12113,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup] using componentLookup"
+    },
+    {
+     "line": 12116,
+     "tactic": "by_cases same : leftToken = rightToken"
+    },
+    {
+     "line": 12117,
+     "tactic": "subst rightToken"
+    },
+    {
+     "line": 12118,
+     "tactic": "cases firing : firePar? state.core left right conclusion with"
+    },
+    {
+     "line": 12118,
+     "tactic": "cases firing : firePar? state.core left right conclusion with"
+    },
+    {
+     "line": 12121,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12122,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup, firing] using componentLookup"
+    },
+    {
+     "line": 12125,
+     "tactic": "have nextConsistent : nextCore.ComponentsFormulaConsistent certificate := firePar?_success_componentsFormulaConsistent consistent wellFormed firing"
+    },
+    {
+     "line": 12129,
+     "tactic": "apply nextConsistent"
+    },
+    {
+     "line": 12130,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup, firing] using componentLookup"
+    },
+    {
+     "line": 12132,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12133,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup, same] using componentLookup"
+    },
+    {
+     "line": 12136,
+     "tactic": "cases leftLookup : state.core.tokenAt? left with"
+    },
+    {
+     "line": 12136,
+     "tactic": "cases leftLookup : state.core.tokenAt? left with"
+    },
+    {
+     "line": 12138,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12139,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup] using componentLookup"
+    },
+    {
+     "line": 12142,
+     "tactic": "cases rightLookup : state.core.tokenAt? right with"
+    },
+    {
+     "line": 12142,
+     "tactic": "cases rightLookup : state.core.tokenAt? right with"
+    },
+    {
+     "line": 12144,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12145,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup] using componentLookup"
+    },
+    {
+     "line": 12148,
+     "tactic": "by_cases same : leftToken = rightToken"
+    },
+    {
+     "line": 12149,
+     "tactic": "subst rightToken"
+    },
+    {
+     "line": 12150,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12151,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup] using componentLookup"
+    },
+    {
+     "line": 12153,
+     "tactic": "cases firing : fireTensor? state.core left right conclusion with"
+    },
+    {
+     "line": 12153,
+     "tactic": "cases firing : fireTensor? state.core left right conclusion with"
+    },
+    {
+     "line": 12156,
+     "tactic": "apply consistent"
+    },
+    {
+     "line": 12157,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup, same, firing] using componentLookup"
+    },
+    {
+     "line": 12160,
+     "tactic": "have nextConsistent : nextCore.ComponentsFormulaConsistent certificate := fireTensor?_success_componentsFormulaConsistent consistent wellFormed firing"
+    },
+    {
+     "line": 12164,
+     "tactic": "apply nextConsistent"
+    },
+    {
+     "line": 12165,
+     "tactic": "simpa [processWorklistLink, linkLookup, leftLookup, rightLookup, same, firing] using componentLookup"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     9,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     13,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     23,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     27,
+     28
+    ],
+    [
+     20,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     9,
+     31
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     32,
+     35
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     36,
+     39
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     39,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     44,
+     47
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     48,
+     49
+    ]
+   ],
+   "notes": "Steps are in source order; steps on one line are in run order (an enclosing node before the internal nodes it runs). Rewrite-rule steps are listed by their rule text and the closing rfl of `rw` as `rfl`; a multi-binder `intro` is listed as one `intro x` step per binder (Lean 4.32 evalIntro makes one child info node per binder, the last child producing the result). Each `cases h : e with` is two steps on its line: the outer `cases` node consumes the incoming goal and originates the generalized goal (x✝ and h : e = x✝ in context; this is the goal Lean displays at the start of the cases line, i.e. the goalsBefore of the inner node), and the inner `cases ... with` node (mkInitialTacticInfoForInduction) consumes that goal and originates the alternative goals. The pairs are steps 3/4, 12/13, 16/17, 22/23, 31/32, 35/36, 43/44 (same tactic text; the first of each pair is the outer node). `cases link with` (local-variable target, no generalization) is one step (9). Every `apply consistent` / `apply nextConsistent` leaves two goals, the hypothesis goal `...a` and the index goal `...index : Nat` (displayed); the following simpa closes both, and simp left the hypothesis target unchanged at every one of the eleven simpa (checked at the column after `using`), so each simpa is one step whose only origin is the preceding apply. `have ... := term` is one step (refine_lift's refine). Uncertainty: 'unchanged' rests on the printed goal after `using`; a change invisible in printing would split an affected simpa into two same-line steps (simpa node for the index goal, its internal node for the hypothesis goal), both depending on the preceding apply.",
+   "part": 3
+  },
+  {
+   "module": "ProofNetIR.SequentialFigure7ContinuationCredit",
+   "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.createdConclusionFutureWorkAt",
+   "steps": [
+    {
+     "line": 304,
+     "tactic": "have afterStack : after.stack = step.stackAfter := congrArg ReservationState.stack step.output_eq"
+    },
+    {
+     "line": 306,
+     "tactic": "have afterSigma : after.stack.sigma = step.mergeStep.sigmaPrefix ++ [step.previousBoundary] := by"
+    },
+    {
+     "line": 309,
+     "tactic": "afterStack"
+    },
+    {
+     "line": 310,
+     "tactic": "exact step.exact.1"
+    },
+    {
+     "line": 311,
+     "tactic": "have afterReady : after.stack.ready = step.mergeStep.readyPrefix ++ [step.consumer.conclusion :: (step.payload ++ step.mergeStep.previousReady ++ step.mergeStep.activeReady)] := by"
+    },
+    {
+     "line": 316,
+     "tactic": "afterStack"
+    },
+    {
+     "line": 317,
+     "tactic": "exact step.exact.2.1"
+    },
+    {
+     "line": 318,
+     "tactic": "have prefixLengths : step.mergeStep.sigmaPrefix.length = step.mergeStep.readyPrefix.length := by"
+    },
+    {
+     "line": 321,
+     "tactic": "have middleInvariant : ReservationInvariant certificate step.prepared.after := step.prepared.reservationInvariant step.before_invariant"
+    },
+    {
+     "line": 324,
+     "tactic": "have aligned := middleInvariant.stack_wellShaped.ready_aligned"
+    },
+    {
+     "line": 325,
+     "tactic": "change step.prepared.stackResult.after.ready.length = step.prepared.stackResult.after.sigma.length at aligned"
+    },
+    {
+     "line": 328,
+     "tactic": "step.mergeStep.ready_eq"
+    },
+    {
+     "line": 328,
+     "tactic": "step.mergeStep.sigma_eq"
+    },
+    {
+     "line": 329,
+     "tactic": "simp at aligned"
+    },
+    {
+     "line": 330,
+     "tactic": "omega"
+    },
+    {
+     "line": 331,
+     "tactic": "apply FutureWorkAt.ready (position := step.mergeStep.sigmaPrefix.length) (bucket := step.consumer.conclusion :: (step.payload ++ step.mergeStep.previousReady ++ step.mergeStep.activeReady))"
+    },
+    {
+     "line": 336,
+     "tactic": "afterSigma"
+    },
+    {
+     "line": 337,
+     "tactic": "simp"
+    },
+    {
+     "line": 338,
+     "tactic": "afterReady"
+    },
+    {
+     "line": 338,
+     "tactic": "prefixLengths"
+    },
+    {
+     "line": 339,
+     "tactic": "simp"
+    },
+    {
+     "line": 340,
+     "tactic": "simp"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     7,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     15,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     15,
+     21
+    ]
+   ],
+   "notes": "Each `have ... := by` (306, 311, 318) is one step that consumes the current goal and originates the nested goal and the continuation goal; the continuation is consumed by the next top-level tactic. Rule steps (309, 316, 328 x2, 336, 338 x2) are named by their rule; no rw here closes its goal with the appended rfl, so there are no rfl steps (an `exact`, `simp` or `simp at`/`omega` follows each). `change ... at aligned` makes a new goal (Lean's `changeLocalDecl` reverts and reintroduces). `apply FutureWorkAt.ready ...` opens three goals (sigmaAt, readyAt, member), closed in the three `·` blocks, which are containers. Uncertain only in presentation: the have step may be the outer macro node or the synthetic refine inside it (same line and edges), and long tactic texts are condensed.",
+   "part": 4
+  },
+  {
+   "module": "ProofNetIR.Figure7.Closure",
+   "declaration": "ProofNetIR.SequentialFigure7.RegionClosure.class_of_empty_active",
+   "steps": [
+    {
+     "line": 2277,
+     "tactic": "by_cases inside : markClass? state.stack vertex = some age"
+    },
+    {
+     "line": 2278,
+     "tactic": "exact inside"
+    },
+    {
+     "line": 2279,
+     "tactic": "exfalso"
+    },
+    {
+     "line": 2280,
+     "tactic": "have structural := correct.1"
+    },
+    {
+     "line": 2281,
+     "tactic": "have bucketEq : bucketAt? state.stack age = some [] := bucketAt?_last invariant.stack_wellShaped.sigma_partition.strictIncreasing invariant.stack_wellShaped.ready_aligned sigmaLast readyLast"
+    },
+    {
+     "line": 2284,
+     "tactic": "have seedInside : activeInside state.stack age [] seed = true := activeInside_iff.mpr (Or.inl seedClass)"
+    },
+    {
+     "line": 2286,
+     "tactic": "have vertexOutside : activeInside state.stack age [] vertex = false := by"
+    },
+    {
+     "line": 2287,
+     "tactic": "Bool.eq_false_iff"
+    },
+    {
+     "line": 2287,
+     "tactic": "Ne"
+    },
+    {
+     "line": 2287,
+     "tactic": "activeInside_iff"
+    },
+    {
+     "line": 2288,
+     "tactic": "rintro (marked | member)"
+    },
+    {
+     "line": 2289,
+     "tactic": "exact inside marked"
+    },
+    {
+     "line": 2290,
+     "tactic": "simp at member"
+    },
+    {
+     "line": 2291,
+     "tactic": "obtain ⟨u, v, uIn, vOut, adjacent⟩ := boundary_edge_of_correct correct (activeInside state.stack age []) seedBound bound seedInside vertexOutside"
+    },
+    {
+     "line": 2294,
+     "tactic": "have uIn' : markClass? state.stack u = some age := by"
+    },
+    {
+     "line": 2295,
+     "tactic": "rcases activeInside_iff.mp uIn with marked | member"
+    },
+    {
+     "line": 2296,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 2297,
+     "tactic": "simp at member"
+    },
+    {
+     "line": 2298,
+     "tactic": "have vOut' : ¬ markClass? state.stack v = some age := by"
+    },
+    {
+     "line": 2299,
+     "tactic": "intro h"
+    },
+    {
+     "line": 2300,
+     "tactic": "have := (activeInside_iff (bucket := [])).mpr (Or.inl h)"
+    },
+    {
+     "line": 2301,
+     "tactic": "vOut"
+    },
+    {
+     "line": 2302,
+     "tactic": "exact Bool.false_ne_true this"
+    },
+    {
+     "line": 2303,
+     "tactic": "have ofRegion : ∀ {w : Vertex}, InRegion state.stack age w → markClass? state.stack w = some age := by"
+    },
+    {
+     "line": 2304,
+     "tactic": "rintro w (marked | ⟨bucket, lookup, member⟩)"
+    },
+    {
+     "line": 2305,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 2306,
+     "tactic": "bucketEq"
+    },
+    {
+     "line": 2307,
+     "tactic": "cases lookup"
+    },
+    {
+     "line": 2308,
+     "tactic": "simp at member"
+    },
+    {
+     "line": 2309,
+     "tactic": "obtain ⟨edge, edgeMember, orientation⟩ := adjacent"
+    },
+    {
+     "line": 2310,
+     "tactic": "rcases List.mem_append.mp edgeMember with fixed | selected"
+    },
+    {
+     "line": 2311,
+     "tactic": "rcases mem_fixedEdges fixed with ⟨l, r, member, rfl⟩ | ⟨l, r, c, member, edgeEq⟩"
+    },
+    {
+     "line": 2312,
+     "tactic": "have linked : AxiomLinked certificate u v := by"
+    },
+    {
+     "line": 2313,
+     "tactic": "rcases orientation with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩"
+    },
+    {
+     "line": 2314,
+     "tactic": "exact Or.inl member"
+    },
+    {
+     "line": 2315,
+     "tactic": "exact Or.inr member"
+    },
+    {
+     "line": 2316,
+     "tactic": "exact vOut' (ofRegion (closure.pairsMarked linked uIn'))"
+    },
+    {
+     "line": 2317,
+     "tactic": "have premiseCase : ∀ {premise mate : Vertex}, TensorLinked certificate premise mate c → u = premise → v = c → False := by"
+    },
+    {
+     "line": 2319,
+     "tactic": "intro premise"
+    },
+    {
+     "line": 2319,
+     "tactic": "mate"
+    },
+    {
+     "line": 2319,
+     "tactic": "linked"
+    },
+    {
+     "line": 2319,
+     "tactic": "uEq"
+    },
+    {
+     "line": 2319,
+     "tactic": "vEq"
+    },
+    {
+     "line": 2320,
+     "tactic": "subst uEq"
+    },
+    {
+     "line": 2320,
+     "tactic": "subst vEq"
+    },
+    {
+     "line": 2321,
+     "tactic": "have mateMarked := closure.tensorTop linked sigmaLast uIn'"
+    },
+    {
+     "line": 2322,
+     "tactic": "exact vOut' (ofRegion (closure.tensorFired linked uIn' mateMarked).2)"
+    },
+    {
+     "line": 2323,
+     "tactic": "have conclusionCase : ∀ {premise mate : Vertex}, TensorLinked certificate premise mate c → u = c → v = premise → False := by"
+    },
+    {
+     "line": 2325,
+     "tactic": "intro premise"
+    },
+    {
+     "line": 2325,
+     "tactic": "mate"
+    },
+    {
+     "line": 2325,
+     "tactic": "linked"
+    },
+    {
+     "line": 2325,
+     "tactic": "uEq"
+    },
+    {
+     "line": 2325,
+     "tactic": "vEq"
+    },
+    {
+     "line": 2326,
+     "tactic": "subst uEq"
+    },
+    {
+     "line": 2326,
+     "tactic": "subst vEq"
+    },
+    {
+     "line": 2327,
+     "tactic": "exact vOut' (closure.down (Or.inl linked) (Or.inl uIn')).1"
+    },
+    {
+     "line": 2328,
+     "tactic": "rcases edgeEq with rfl | rfl"
+    },
+    {
+     "line": 2329,
+     "tactic": "rcases orientation with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩"
+    },
+    {
+     "line": 2330,
+     "tactic": "exact premiseCase (Or.inl member) rfl rfl"
+    },
+    {
+     "line": 2331,
+     "tactic": "exact conclusionCase (Or.inl member) rfl rfl"
+    },
+    {
+     "line": 2332,
+     "tactic": "rcases orientation with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩"
+    },
+    {
+     "line": 2333,
+     "tactic": "exact premiseCase (Or.inr member) rfl rfl"
+    },
+    {
+     "line": 2334,
+     "tactic": "exact conclusionCase (Or.inr member) rfl rfl"
+    },
+    {
+     "line": 2335,
+     "tactic": "obtain ⟨l, r, c, member, edgeEq⟩ := mem_cutSelection selected"
+    },
+    {
+     "line": 2336,
+     "tactic": "have conclusionCase : ∀ {premise mate : Vertex}, ParLinked certificate premise mate c → u = c → v = premise → False := by"
+    },
+    {
+     "line": 2338,
+     "tactic": "intro premise"
+    },
+    {
+     "line": 2338,
+     "tactic": "mate"
+    },
+    {
+     "line": 2338,
+     "tactic": "linked"
+    },
+    {
+     "line": 2338,
+     "tactic": "uEq"
+    },
+    {
+     "line": 2338,
+     "tactic": "vEq"
+    },
+    {
+     "line": 2339,
+     "tactic": "subst uEq"
+    },
+    {
+     "line": 2339,
+     "tactic": "subst vEq"
+    },
+    {
+     "line": 2340,
+     "tactic": "exact vOut' (closure.down (Or.inr linked) (Or.inl uIn')).1"
+    },
+    {
+     "line": 2341,
+     "tactic": "unfold cutChoice at edgeEq"
+    },
+    {
+     "line": 2342,
+     "tactic": "simp only at edgeEq"
+    },
+    {
+     "line": 2343,
+     "tactic": "split at edgeEq"
+    },
+    {
+     "line": 2344,
+     "tactic": "rename_i cond"
+    },
+    {
+     "line": 2345,
+     "tactic": "Bool.and_eq_true"
+    },
+    {
+     "line": 2345,
+     "tactic": "Bool.not_eq_true'"
+    },
+    {
+     "line": 2346,
+     "tactic": "subst edgeEq"
+    },
+    {
+     "line": 2347,
+     "tactic": "rcases orientation with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩"
+    },
+    {
+     "line": 2348,
+     "tactic": "uIn"
+    },
+    {
+     "line": 2349,
+     "tactic": "exact Bool.false_ne_true cond.2.symm"
+    },
+    {
+     "line": 2350,
+     "tactic": "exact conclusionCase (Or.inr member) rfl rfl"
+    },
+    {
+     "line": 2351,
+     "tactic": "split at edgeEq"
+    },
+    {
+     "line": 2352,
+     "tactic": "rename_i cond"
+    },
+    {
+     "line": 2353,
+     "tactic": "Bool.and_eq_true"
+    },
+    {
+     "line": 2353,
+     "tactic": "Bool.not_eq_true'"
+    },
+    {
+     "line": 2354,
+     "tactic": "subst edgeEq"
+    },
+    {
+     "line": 2355,
+     "tactic": "rcases orientation with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩"
+    },
+    {
+     "line": 2356,
+     "tactic": "uIn"
+    },
+    {
+     "line": 2357,
+     "tactic": "exact Bool.false_ne_true cond.2.symm"
+    },
+    {
+     "line": 2358,
+     "tactic": "exact conclusionCase (Or.inl member) rfl rfl"
+    },
+    {
+     "line": 2359,
+     "tactic": "rename_i notFirst _"
+    },
+    {
+     "line": 2360,
+     "tactic": "subst edgeEq"
+    },
+    {
+     "line": 2361,
+     "tactic": "rcases orientation with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩"
+    },
+    {
+     "line": 2362,
+     "tactic": "have rIn : activeInside state.stack age [] r = true := by"
+    },
+    {
+     "line": 2363,
+     "tactic": "cases rIn : activeInside state.stack age [] r"
+    },
+    {
+     "line": 2364,
+     "tactic": "exact absurd (by rw [uIn, rIn]; rfl) notFirst"
+    },
+    {
+     "line": 2364,
+     "tactic": "uIn"
+    },
+    {
+     "line": 2364,
+     "tactic": "rIn"
+    },
+    {
+     "line": 2364,
+     "tactic": "rfl"
+    },
+    {
+     "line": 2365,
+     "tactic": "rfl"
+    },
+    {
+     "line": 2366,
+     "tactic": "have rClass : markClass? state.stack r = some age := by"
+    },
+    {
+     "line": 2367,
+     "tactic": "rcases activeInside_iff.mp rIn with marked | member"
+    },
+    {
+     "line": 2368,
+     "tactic": "exact marked"
+    },
+    {
+     "line": 2369,
+     "tactic": "simp at member"
+    },
+    {
+     "line": 2370,
+     "tactic": "exact vOut' (ofRegion (closure.parFired (Or.inl member) uIn' rClass))"
+    },
+    {
+     "line": 2371,
+     "tactic": "exact conclusionCase (Or.inl member) rfl rfl"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     13
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     14,
+     18
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     15,
+     17
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     18,
+     23
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     23,
+     29
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     27,
+     28
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     30,
+     31
+    ],
+    [
+     30,
+     63
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     31,
+     37
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     32,
+     36
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     33,
+     35
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     37,
+     47
+    ],
+    [
+     38,
+     39
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     42,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     47,
+     56
+    ],
+    [
+     48,
+     49
+    ],
+    [
+     49,
+     50
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     51,
+     52
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     53,
+     54
+    ],
+    [
+     54,
+     55
+    ],
+    [
+     56,
+     57
+    ],
+    [
+     56,
+     60
+    ],
+    [
+     57,
+     58
+    ],
+    [
+     57,
+     59
+    ],
+    [
+     60,
+     61
+    ],
+    [
+     60,
+     62
+    ],
+    [
+     63,
+     64
+    ],
+    [
+     64,
+     65
+    ],
+    [
+     64,
+     73
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     66,
+     67
+    ],
+    [
+     67,
+     68
+    ],
+    [
+     68,
+     69
+    ],
+    [
+     69,
+     70
+    ],
+    [
+     70,
+     71
+    ],
+    [
+     71,
+     72
+    ],
+    [
+     73,
+     74
+    ],
+    [
+     74,
+     75
+    ],
+    [
+     75,
+     76
+    ],
+    [
+     75,
+     84
+    ],
+    [
+     76,
+     77
+    ],
+    [
+     77,
+     78
+    ],
+    [
+     78,
+     79
+    ],
+    [
+     79,
+     80
+    ],
+    [
+     80,
+     81
+    ],
+    [
+     80,
+     83
+    ],
+    [
+     81,
+     82
+    ],
+    [
+     84,
+     85
+    ],
+    [
+     84,
+     93
+    ],
+    [
+     85,
+     86
+    ],
+    [
+     86,
+     87
+    ],
+    [
+     87,
+     88
+    ],
+    [
+     88,
+     89
+    ],
+    [
+     89,
+     90
+    ],
+    [
+     89,
+     92
+    ],
+    [
+     90,
+     91
+    ],
+    [
+     93,
+     94
+    ],
+    [
+     94,
+     95
+    ],
+    [
+     95,
+     96
+    ],
+    [
+     95,
+     108
+    ],
+    [
+     96,
+     97
+    ],
+    [
+     96,
+     103
+    ],
+    [
+     97,
+     98
+    ],
+    [
+     97,
+     102
+    ],
+    [
+     98,
+     99
+    ],
+    [
+     99,
+     100
+    ],
+    [
+     100,
+     101
+    ],
+    [
+     103,
+     104
+    ],
+    [
+     103,
+     107
+    ],
+    [
+     104,
+     105
+    ],
+    [
+     104,
+     106
+    ]
+   ],
+   "notes": "by_cases (2277) and exfalso (2279) are macros; the step is the inner refine (same line), which originates 'case pos'/'case neg' and the False goal. Every 'have ... := by' (2286, 2294, 2298, 2303, 2312, 2317, 2323, 2336, 2362, 2366) is the refine of the have-by macro (focus / refine (have := ?body; ?_) / case body): it consumes the current goal and originates the body goal (consumed by the first tactic of the block) and the continuation (consumed by the next tactic after the block). Term haves (2280, 2281, 2284, 2300, 2321) are the refine_lift refine. rw rules are one step each, written as the rule text (2287 x3, 2301 vOut, 2306 bucketEq, 2345 x2, 2348 uIn, 2353 x2, 2356 uIn, 2364 uIn/rIn); none of these rws closes its goal with its trailing reducible rfl (targets are '¬(... ∨ ...)', False, 'markClass? .. = some age', or '(true && !false) = true', which is not closed at reducible transparency: Lean still shows it before the explicit rfl and reports no error), so there is no closing-rfl step in this proof. Line 2364: 'exact absurd (by ...) notFirst' consumes the 'case false' goal and originates the nested-by goal '(activeInside .. l && !activeInside .. r) = true'; the nested rw rules and the explicit rfl follow it on the same line in run order; step 101 is the explicit rfl. 'cases rIn : e' has no 'with', so it is one node producing 'case false' and 'case true'. rename_i (2344, 2352, 2359) creates a new goal. Each 'intro premise mate linked uEq vEq' gives five binder steps; 'subst uEq; subst vEq' gives two steps on one line. split at edgeEq produces isTrue/isFalse (twice). rcases/obtain/rintro with rfl or alternative patterns are one step each. No step is dropped as non-live, and no goal has two parents. Uncertainty: low; the only modelling choice that could matter (macro-internal refine vs the written tactic as the step) does not change any line or edge here.",
+   "part": 5
+  },
+  {
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.Certificate.canonicalWorklistRun_waitingPar_has_dependency",
+   "steps": [
+    {
+     "line": 20444,
+     "tactic": "let final := (runUnificationWorklist certificate certificate.worklistConsumers (worklistFuel certificate.links.length) (initializeWorklist certificate started)).state"
+    },
+    {
+     "line": 20449,
+     "tactic": "change ∀ {source : Vertex}, QuiescentWaitingParAt certificate final source → ∃ target, QuiescentWaitingParDependency certificate final source target"
+    },
+    {
+     "line": 20455,
+     "tactic": "intro source"
+    },
+    {
+     "line": 20455,
+     "tactic": "waiting"
+    },
+    {
+     "line": 20456,
+     "tactic": "rcases waiting with ⟨sourceUnassigned, index, left, right, leftToken, rightToken, linkLookup, leftMarked, rightMarked, different, registered⟩"
+    },
+    {
+     "line": 20459,
+     "tactic": "have linkMembership : Link.par left right source ∈ certificate.links := List.mem_of_getElem? linkLookup"
+    },
+    {
+     "line": 20462,
+     "tactic": "rcases correct.parPremises_referencePath_avoids_conclusion linkMembership with ⟨path, pathStarts, pathFinishes, sourceAvoided⟩"
+    },
+    {
+     "line": 20465,
+     "tactic": "have coreInvariant : WorklistCoreInvariant certificate final := by"
+    },
+    {
+     "line": 20467,
+     "tactic": "simpa [final] using canonicalWorklistRun_coreInvariant correct.1 startEquation"
+    },
+    {
+     "line": 20469,
+     "tactic": "let marking := final.core.toMarking certificate coreInvariant.1"
+    },
+    {
+     "line": 20471,
+     "tactic": "rcases final.core.tokenAt?_some_witness leftMarked with ⟨leftRaw, leftRawMarked, leftRepresentative⟩"
+    },
+    {
+     "line": 20473,
+     "tactic": "rcases final.core.tokenAt?_some_witness rightMarked with ⟨rightRaw, rightRawMarked, rightRepresentative⟩"
+    },
+    {
+     "line": 20475,
+     "tactic": "have abstractLeftMarked : marking.mark left = some leftRaw := by"
+    },
+    {
+     "line": 20477,
+     "tactic": "simpa [marking] using leftRawMarked"
+    },
+    {
+     "line": 20478,
+     "tactic": "have abstractRightMarked : marking.mark right = some rightRaw := by"
+    },
+    {
+     "line": 20480,
+     "tactic": "simpa [marking] using rightRawMarked"
+    },
+    {
+     "line": 20481,
+     "tactic": "have exactComponents : marking.ThreadComponentsExact := canonicalWorklistRun_threadComponentsExact correct.1 startEquation"
+    },
+    {
+     "line": 20485,
+     "tactic": "have notSynchronized : ¬marking.sameThread leftRaw rightRaw := by"
+    },
+    {
+     "line": 20487,
+     "tactic": "simp only [marking, UnificationState.toMarking_sameThread]"
+    },
+    {
+     "line": 20488,
+     "tactic": "intro representativesEqual"
+    },
+    {
+     "line": 20489,
+     "tactic": "apply different"
+    },
+    {
+     "line": 20490,
+     "tactic": "← leftRepresentative"
+    },
+    {
+     "line": 20490,
+     "tactic": "← rightRepresentative"
+    },
+    {
+     "line": 20491,
+     "tactic": "exact representativesEqual"
+    },
+    {
+     "line": 20492,
+     "tactic": "have noActiveWalk : ¬marking.activeReferenceGraph.Walk left right := by"
+    },
+    {
+     "line": 20494,
+     "tactic": "intro walk"
+    },
+    {
+     "line": 20495,
+     "tactic": "exact notSynchronized ((exactComponents.walk_iff_sameThread marking abstractLeftMarked abstractRightMarked).mp walk)"
+    },
+    {
+     "line": 20498,
+     "tactic": "have noActivePath : ¬marking.activeReferenceGraph.Walk path.start path.finish := by"
+    },
+    {
+     "line": 20500,
+     "tactic": "intro walk"
+    },
+    {
+     "line": 20501,
+     "tactic": "apply noActiveWalk"
+    },
+    {
+     "line": 20502,
+     "tactic": "simpa [pathStarts, pathFinishes] using walk"
+    },
+    {
+     "line": 20503,
+     "tactic": "have pathStartMarked : (marking.mark path.start).isSome = true := by"
+    },
+    {
+     "line": 20505,
+     "tactic": "simp [pathStarts, abstractLeftMarked]"
+    },
+    {
+     "line": 20506,
+     "tactic": "rcases marking.referencePath_has_first_marked_to_unmarked_boundary path pathStartMarked noActivePath with ⟨before, boundary, after, traversalEquation, prefixAccepted, boundarySourceMarked, boundaryTargetUnmarked, activePrefix⟩"
+    },
+    {
+     "line": 20511,
+     "tactic": "have boundaryMembership : boundary ∈ path.traversed := by"
+    },
+    {
+     "line": 20512,
+     "tactic": "traversalEquation"
+    },
+    {
+     "line": 20513,
+     "tactic": "simp"
+    },
+    {
+     "line": 20514,
+     "tactic": "have prefixAssigned : ∀ candidate ∈ before, final.core.assignedToken? candidate.source ≠ none ∧ final.core.assignedToken? candidate.target ≠ none := by"
+    },
+    {
+     "line": 20518,
+     "tactic": "intro candidate"
+    },
+    {
+     "line": 20518,
+     "tactic": "membership"
+    },
+    {
+     "line": 20519,
+     "tactic": "rcases prefixAccepted candidate membership with ⟨sourceMarked, targetMarked⟩"
+    },
+    {
+     "line": 20521,
+     "tactic": "constructor"
+    },
+    {
+     "line": 20522,
+     "tactic": "change (final.core.assignedToken? candidate.source).isSome = true at sourceMarked"
+    },
+    {
+     "line": 20525,
+     "tactic": "intro sourceNone"
+    },
+    {
+     "line": 20526,
+     "tactic": "sourceNone"
+    },
+    {
+     "line": 20527,
+     "tactic": "contradiction"
+    },
+    {
+     "line": 20528,
+     "tactic": "change (final.core.assignedToken? candidate.target).isSome = true at targetMarked"
+    },
+    {
+     "line": 20531,
+     "tactic": "intro targetNone"
+    },
+    {
+     "line": 20532,
+     "tactic": "targetNone"
+    },
+    {
+     "line": 20533,
+     "tactic": "contradiction"
+    },
+    {
+     "line": 20534,
+     "tactic": "have firstBoundary : QuiescentWaitingParFirstBoundary certificate final path boundary := ⟨before, after, traversalEquation, prefixAssigned⟩"
+    },
+    {
+     "line": 20538,
+     "tactic": "have activeFromLeft : marking.activeReferenceGraph.Walk left boundary.source := by"
+    },
+    {
+     "line": 20540,
+     "tactic": "simpa [pathStarts] using activePrefix"
+    },
+    {
+     "line": 20541,
+     "tactic": "have boundarySourceAssigned : final.core.assignedToken? boundary.source ≠ none := by"
+    },
+    {
+     "line": 20543,
+     "tactic": "change (final.core.assignedToken? boundary.source).isSome = true at boundarySourceMarked"
+    },
+    {
+     "line": 20546,
+     "tactic": "intro sourceNone"
+    },
+    {
+     "line": 20547,
+     "tactic": "sourceNone"
+    },
+    {
+     "line": 20548,
+     "tactic": "contradiction"
+    },
+    {
+     "line": 20549,
+     "tactic": "have boundaryTargetUnassigned : final.core.assignedToken? boundary.target = none := by"
+    },
+    {
+     "line": 20551,
+     "tactic": "change (final.core.assignedToken? boundary.target).isSome = false at boundaryTargetUnmarked"
+    },
+    {
+     "line": 20554,
+     "tactic": "cases assigned : final.core.assignedToken? boundary.target with | none => rfl | some token => simp [assigned] at boundaryTargetUnmarked"
+    },
+    {
+     "line": 20554,
+     "tactic": "cases assigned : final.core.assignedToken? boundary.target with"
+    },
+    {
+     "line": 20557,
+     "tactic": "rfl"
+    },
+    {
+     "line": 20559,
+     "tactic": "simp [assigned] at boundaryTargetUnmarked"
+    },
+    {
+     "line": 20560,
+     "tactic": "rcases final.core.tokenAt?_exists_of_assigned boundarySourceAssigned with ⟨boundarySourceToken, boundarySourceLookup⟩"
+    },
+    {
+     "line": 20563,
+     "tactic": "rcases final.core.tokenAt?_some_witness boundarySourceLookup with ⟨boundarySourceRaw, boundarySourceRawMarked, boundarySourceRepresentative⟩"
+    },
+    {
+     "line": 20566,
+     "tactic": "have abstractBoundarySourceMarked : marking.mark boundary.source = some boundarySourceRaw := by"
+    },
+    {
+     "line": 20568,
+     "tactic": "simpa [marking] using boundarySourceRawMarked"
+    },
+    {
+     "line": 20569,
+     "tactic": "have sameThread : marking.sameThread leftRaw boundarySourceRaw := (exactComponents.walk_iff_sameThread marking abstractLeftMarked abstractBoundarySourceMarked).mp activeFromLeft"
+    },
+    {
+     "line": 20574,
+     "tactic": "have boundarySourceTokenEquation : boundarySourceToken = leftToken := by"
+    },
+    {
+     "line": 20576,
+     "tactic": "simp only [marking, UnificationState.toMarking_sameThread] at sameThread"
+    },
+    {
+     "line": 20578,
+     "tactic": "leftRepresentative"
+    },
+    {
+     "line": 20578,
+     "tactic": "boundarySourceRepresentative"
+    },
+    {
+     "line": 20579,
+     "tactic": "exact sameThread.symm"
+    },
+    {
+     "line": 20580,
+     "tactic": "have boundarySourceTokenLookup : final.core.tokenAt? boundary.source = some leftToken := by"
+    },
+    {
+     "line": 20582,
+     "tactic": "boundarySourceLookup"
+    },
+    {
+     "line": 20582,
+     "tactic": "boundarySourceTokenEquation"
+    },
+    {
+     "line": 20582,
+     "tactic": "rfl"
+    },
+    {
+     "line": 20583,
+     "tactic": "have boundaryTargetMembership : boundary.target ∈ path.vertices := (path.directed_endpoints_mem_vertices boundaryMembership).2"
+    },
+    {
+     "line": 20586,
+     "tactic": "have boundaryTargetNeSource : boundary.target ≠ source := by"
+    },
+    {
+     "line": 20588,
+     "tactic": "intro same"
+    },
+    {
+     "line": 20589,
+     "tactic": "exact sourceAvoided (same ▸ boundaryTargetMembership)"
+    },
+    {
+     "line": 20590,
+     "tactic": "have causal : marking.MarkingCausallyClosed := (canonicalWorklistRun_causallyThreaded correct.1 startEquation).1"
+    },
+    {
+     "line": 20594,
+     "tactic": "have axiomsMarked : ∀ {axiomIndex axiomLeft axiomRight : Nat}, certificate.links[axiomIndex]? = some (Link.axiom axiomLeft axiomRight) → (marking.mark axiomLeft).isSome = true ∧ (marking.mark axiomRight).isSome = true := by"
+    },
+    {
+     "line": 20600,
+     "tactic": "intro axiomIndex"
+    },
+    {
+     "line": 20600,
+     "tactic": "axiomLeft"
+    },
+    {
+     "line": 20600,
+     "tactic": "axiomRight"
+    },
+    {
+     "line": 20600,
+     "tactic": "axiomLookup"
+    },
+    {
+     "line": 20601,
+     "tactic": "have axiomMembership : Link.axiom axiomLeft axiomRight ∈ certificate.links := List.mem_of_getElem? axiomLookup"
+    },
+    {
+     "line": 20604,
+     "tactic": "have assigned := canonicalWorklistRun_axiom_endpoints_assigned correct.1 startEquation axiomMembership"
+    },
+    {
+     "line": 20607,
+     "tactic": "constructor"
+    },
+    {
+     "line": 20608,
+     "tactic": "change (final.core.assignedToken? axiomLeft).isSome = true"
+    },
+    {
+     "line": 20610,
+     "tactic": "cases equation : final.core.assignedToken? axiomLeft with | none => exact False.elim (assigned.1 equation) | some token => rfl"
+    },
+    {
+     "line": 20610,
+     "tactic": "cases equation : final.core.assignedToken? axiomLeft with"
+    },
+    {
+     "line": 20613,
+     "tactic": "exact False.elim (assigned.1 equation)"
+    },
+    {
+     "line": 20615,
+     "tactic": "rfl"
+    },
+    {
+     "line": 20616,
+     "tactic": "change (final.core.assignedToken? axiomRight).isSome = true"
+    },
+    {
+     "line": 20618,
+     "tactic": "cases equation : final.core.assignedToken? axiomRight with | none => exact False.elim (assigned.2 equation) | some token => rfl"
+    },
+    {
+     "line": 20618,
+     "tactic": "cases equation : final.core.assignedToken? axiomRight with"
+    },
+    {
+     "line": 20621,
+     "tactic": "exact False.elim (assigned.2 equation)"
+    },
+    {
+     "line": 20623,
+     "tactic": "rfl"
+    },
+    {
+     "line": 20624,
+     "tactic": "have boundaryExactOrigin : ExactForwardReferenceConnectiveOccurrence certificate boundary := by"
+    },
+    {
+     "line": 20626,
+     "tactic": "have origin := marking.marked_to_unmarked_referenceEdge_exact_connective_origin causal axiomsMarked boundary boundarySourceMarked boundaryTargetUnmarked"
+    },
+    {
+     "line": 20630,
+     "tactic": "simpa [ExactForwardReferenceConnectiveOccurrence] using origin"
+    },
+    {
+     "line": 20631,
+     "tactic": "have boundaryOrigin : ForwardReferenceConnectiveOccurrence certificate boundary := boundaryExactOrigin.toForward"
+    },
+    {
+     "line": 20634,
+     "tactic": "have boundaryStatus : PathFrontierSchedulerObstruction certificate final boundary := canonicalWorklistRun_forwardFrontier_status correct startEquation boundarySourceAssigned boundaryTargetUnassigned boundaryOrigin"
+    },
+    {
+     "line": 20639,
+     "tactic": "rcases canonicalWorklistRun_pathFrontier_reaches_waitingPar_with_path correct startEquation boundaryTargetUnassigned boundaryStatus with ⟨target, targetWaiting, formulaPath⟩"
+    },
+    {
+     "line": 20642,
+     "tactic": "have targetRank : certificate.formulaComplexityAt target ≤ certificate.formulaComplexityAt boundary.target := formulaPath.toFormulaPremiseReachable.complexity_le"
+    },
+    {
+     "line": 20646,
+     "tactic": "exact ⟨target, index, left, right, leftToken, rightToken, path, boundary, linkLookup, sourceUnassigned, leftMarked, rightMarked, different, registered, pathStarts, pathFinishes, sourceAvoided, boundaryMembership, firstBoundary, boundarySourceTokenLookup, boundarySourceAssigned, boundaryTargetUnassigned, boundaryTargetNeSource, boundaryExactOrigin, boundaryStatus, formulaPath, targetWaiting, targetRank⟩"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     14,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     24
+    ],
+    [
+     24,
+     27
+    ],
+    [
+     27,
+     31
+    ],
+    [
+     31,
+     33
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     34,
+     37
+    ],
+    [
+     37,
+     50
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     51,
+     53
+    ],
+    [
+     53,
+     58
+    ],
+    [
+     58,
+     64
+    ],
+    [
+     64,
+     65
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     66,
+     68
+    ],
+    [
+     68,
+     69
+    ],
+    [
+     69,
+     74
+    ],
+    [
+     74,
+     78
+    ],
+    [
+     78,
+     79
+    ],
+    [
+     79,
+     82
+    ],
+    [
+     82,
+     83
+    ],
+    [
+     83,
+     101
+    ],
+    [
+     101,
+     104
+    ],
+    [
+     104,
+     105
+    ],
+    [
+     105,
+     106
+    ],
+    [
+     106,
+     107
+    ],
+    [
+     107,
+     108
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     27,
+     28
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     34,
+     35
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     38,
+     39
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     42,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     41,
+     46
+    ],
+    [
+     46,
+     47
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     48,
+     49
+    ],
+    [
+     51,
+     52
+    ],
+    [
+     53,
+     54
+    ],
+    [
+     54,
+     55
+    ],
+    [
+     55,
+     56
+    ],
+    [
+     56,
+     57
+    ],
+    [
+     58,
+     59
+    ],
+    [
+     59,
+     60
+    ],
+    [
+     60,
+     61
+    ],
+    [
+     61,
+     62
+    ],
+    [
+     61,
+     63
+    ],
+    [
+     66,
+     67
+    ],
+    [
+     69,
+     70
+    ],
+    [
+     70,
+     71
+    ],
+    [
+     71,
+     72
+    ],
+    [
+     72,
+     73
+    ],
+    [
+     74,
+     75
+    ],
+    [
+     75,
+     76
+    ],
+    [
+     76,
+     77
+    ],
+    [
+     79,
+     80
+    ],
+    [
+     80,
+     81
+    ],
+    [
+     83,
+     84
+    ],
+    [
+     84,
+     85
+    ],
+    [
+     85,
+     86
+    ],
+    [
+     86,
+     87
+    ],
+    [
+     87,
+     88
+    ],
+    [
+     88,
+     89
+    ],
+    [
+     89,
+     90
+    ],
+    [
+     90,
+     91
+    ],
+    [
+     91,
+     92
+    ],
+    [
+     92,
+     93
+    ],
+    [
+     93,
+     94
+    ],
+    [
+     93,
+     95
+    ],
+    [
+     90,
+     96
+    ],
+    [
+     96,
+     97
+    ],
+    [
+     97,
+     98
+    ],
+    [
+     98,
+     99
+    ],
+    [
+     98,
+     100
+    ],
+    [
+     101,
+     102
+    ],
+    [
+     102,
+     103
+    ]
+   ],
+   "notes": "In Lean 4.32 `have x : T := by tacs` expands to `focus; refine no_implicit_lambda% (have x : T := ?body; ?_); case body => with_annotate_state by (tacs)`, so the refine node, positioned at the `have`, produces both the body goal and the continuation goal; the first inner tactic consumes the body goal and the next top-level tactic consumes the continuation. Term-mode `have`s and the two `let`s are one refine_lift step each. Each `simpa ... using e` is one step: its internal `simpa ... using` node consumes the goal and produces the simplified goal, which is closed inside simpa and consumed by no node (if simp leaves the target unchanged, the outer simpa node is the step instead; the edges are the same). `change` at 20449 replaces the `let final := ..; ∀ ..` target by a different expression, so it is a step; the `change ... at h` and target `change`s also create new goals. `cases h : e with` is two steps on its line: the outer cases node generalizes e (consumes the goal, originates the generalized goal shown with `x✝` and `h : e = x✝`), and the inner `cases ... with` node consumes the generalized goal and originates the none/some case goals. `rw [boundarySourceLookup, boundarySourceTokenEquation]` (20582) leaves `some leftToken = some leftToken`, which the closing rfl closes, giving a third step on that line (info node positioned at the rw); the closing rfl of the other rws (20490, 20512, and the `at h` rewrites) does not close the goal and gives no step. Multi-binder intros give one step per binder (later binder nodes span only the binder name). The `rfl` steps at 20557, 20615 and 20623 are the successful expansion of the rfl macro (eq_refl expected) at the rfl's position. Every step consumes exactly one goal, so the graph is a tree. Multi-line tactics are listed at their first line; rw rule texts omit the trailing comma of the rule node's span. Uncertainty: for each simpa, which of the two nodes is the step was not observed node by node; the line, the edges and the step count do not depend on it.",
+   "part": 6
+  },
+  {
+   "module": "ProofNetIR.SequentialSchedulerInvariant",
+   "declaration": "ProofNetIR.SequentialSchedulerBridge.InitialReservationStep.readyBucketFrontierExact",
+   "steps": [
+    {
+     "line": 679,
+     "tactic": "have route := step.route"
+    },
+    {
+     "line": 680,
+     "tactic": "rcases certificate.reserveAxiomAt?_exact step.core_eq with ⟨left, right, component, exactLink, ready, componentLookup, frontier, marksEq, parentsEq, componentsEq, counterEq, firedEq⟩"
+    },
+    {
+     "line": 683,
+     "tactic": "have submitted : Link.axiom left right = .axiom step.result.left step.result.right := Option.some.inj (exactLink.symm.trans step.result.exactLink)"
+    },
+    {
+     "line": 687,
+     "tactic": "injection submitted with leftEq rightEq"
+    },
+    {
+     "line": 688,
+     "tactic": "subst left"
+    },
+    {
+     "line": 689,
+     "tactic": "subst right"
+    },
+    {
+     "line": 690,
+     "tactic": "have stackExact := SequentialStackState.initEnqueue?_exact step.stack_eq"
+    },
+    {
+     "line": 692,
+     "tactic": "step.output_eq"
+    },
+    {
+     "line": 693,
+     "tactic": "unfold ReadyBucketFrontierExact"
+    },
+    {
+     "line": 694,
+     "tactic": "intro position"
+    },
+    {
+     "line": 694,
+     "tactic": "intro boundary"
+    },
+    {
+     "line": 694,
+     "tactic": "intro bucket"
+    },
+    {
+     "line": 694,
+     "tactic": "intro sigmaLookup"
+    },
+    {
+     "line": 694,
+     "tactic": "intro readyLookup"
+    },
+    {
+     "line": 695,
+     "tactic": "stackExact.2.2.1"
+    },
+    {
+     "line": 696,
+     "tactic": "stackExact.2.2.2.1"
+    },
+    {
+     "line": 697,
+     "tactic": "have positionBound : position < 1 := by"
+    },
+    {
+     "line": 698,
+     "tactic": "simpa using (List.getElem?_eq_some_iff.mp sigmaLookup).1"
+    },
+    {
+     "line": 699,
+     "tactic": "have positionZero : position = 0 := by omega"
+    },
+    {
+     "line": 699,
+     "tactic": "omega"
+    },
+    {
+     "line": 700,
+     "tactic": "subst position"
+    },
+    {
+     "line": 701,
+     "tactic": "simp at sigmaLookup readyLookup"
+    },
+    {
+     "line": 702,
+     "tactic": "subst boundary"
+    },
+    {
+     "line": 703,
+     "tactic": "subst bucket"
+    },
+    {
+     "line": 704,
+     "tactic": "refine ⟨component, ?_, ?_⟩"
+    },
+    {
+     "line": 705,
+     "tactic": "change step.coreAfter.components[0]? = some (some component)"
+    },
+    {
+     "line": 706,
+     "tactic": "componentsEq"
+    },
+    {
+     "line": 707,
+     "tactic": "simp [ReservationState.empty, Certificate.initialUnificationState]"
+    },
+    {
+     "line": 709,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 710,
+     "tactic": "have endpoints : (step.reached = step.result.left ∧ step.partner = step.result.right) ∨ (step.reached = step.result.right ∧ step.partner = step.result.left) := route.storedEndpoints"
+    },
+    {
+     "line": 716,
+     "tactic": "rcases endpoints with ⟨reachedEq, partnerEq⟩ | ⟨reachedEq, partnerEq⟩"
+    },
+    {
+     "line": 718,
+     "tactic": "reachedEq"
+    },
+    {
+     "line": 718,
+     "tactic": "partnerEq"
+    },
+    {
+     "line": 718,
+     "tactic": "frontier"
+    },
+    {
+     "line": 719,
+     "tactic": "constructor"
+    },
+    {
+     "line": 720,
+     "tactic": "intro membership"
+    },
+    {
+     "line": 721,
+     "tactic": "have submittedMembership : vertex = step.result.left ∨ vertex = step.result.right := by"
+    },
+    {
+     "line": 724,
+     "tactic": "simpa using membership"
+    },
+    {
+     "line": 725,
+     "tactic": "have markReady : step.coreAfter.marks[vertex]? = some none := by"
+    },
+    {
+     "line": 727,
+     "tactic": "marksEq"
+    },
+    {
+     "line": 728,
+     "tactic": "rcases submittedMembership with rfl | rfl"
+    },
+    {
+     "line": 729,
+     "tactic": "exact step.result.leftReady"
+    },
+    {
+     "line": 730,
+     "tactic": "exact step.result.rightReady"
+    },
+    {
+     "line": 731,
+     "tactic": "exact ⟨membership, markReady⟩"
+    },
+    {
+     "line": 732,
+     "tactic": "exact fun result => result.1"
+    },
+    {
+     "line": 733,
+     "tactic": "reachedEq"
+    },
+    {
+     "line": 733,
+     "tactic": "partnerEq"
+    },
+    {
+     "line": 733,
+     "tactic": "frontier"
+    },
+    {
+     "line": 734,
+     "tactic": "constructor"
+    },
+    {
+     "line": 735,
+     "tactic": "intro membership"
+    },
+    {
+     "line": 736,
+     "tactic": "have submittedMembership : vertex = step.result.left ∨ vertex = step.result.right := by"
+    },
+    {
+     "line": 739,
+     "tactic": "simpa [or_comm] using membership"
+    },
+    {
+     "line": 740,
+     "tactic": "have markReady : step.coreAfter.marks[vertex]? = some none := by"
+    },
+    {
+     "line": 742,
+     "tactic": "marksEq"
+    },
+    {
+     "line": 743,
+     "tactic": "rcases submittedMembership with rfl | rfl"
+    },
+    {
+     "line": 744,
+     "tactic": "exact step.result.leftReady"
+    },
+    {
+     "line": 745,
+     "tactic": "exact step.result.rightReady"
+    },
+    {
+     "line": 746,
+     "tactic": "exact ⟨by simpa [or_comm] using membership, markReady⟩"
+    },
+    {
+     "line": 746,
+     "tactic": "simpa [or_comm] using membership"
+    },
+    {
+     "line": 747,
+     "tactic": "intro result"
+    },
+    {
+     "line": 748,
+     "tactic": "simpa [or_comm] using result.1"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     18,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     24,
+     28
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     30,
+     31
+    ],
+    [
+     30,
+     45
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     34,
+     35
+    ],
+    [
+     34,
+     44
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     36,
+     38
+    ],
+    [
+     38,
+     39
+    ],
+    [
+     38,
+     43
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     40,
+     42
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     46,
+     47
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     48,
+     49
+    ],
+    [
+     48,
+     59
+    ],
+    [
+     49,
+     50
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     50,
+     52
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     52,
+     57
+    ],
+    [
+     53,
+     54
+    ],
+    [
+     54,
+     55
+    ],
+    [
+     54,
+     56
+    ],
+    [
+     57,
+     58
+    ],
+    [
+     59,
+     60
+    ]
+   ],
+   "notes": "intro position boundary bucket sigmaLookup readyLookup elaborates as one node per binder, each consuming the previous goal and producing the next: five chained steps on L694 (the first node's syntax is `intro position`, the others are the bare binder names). rw [..] and rw [..] at h: one step per rule; every closing rfl here fails (goals are not closable by reducible rfl; the next tactic still has the goal), so no rfl steps. have ... := by tacs (special-case macro) is one step originating the body goal and the continuation; have ... := term (no by) is one step. The nested by in `exact ⟨by simpa [or_comm] using membership, markReady⟩` has no producing node; its goal originates in that exact step (edge [57,58]; the two are listed in run order on the same line). rcases ... with rfl | rfl is a single node producing two goals. simp at sigmaLookup readyLookup is a single node.",
+   "part": 1
+  },
+  {
+   "module": "ProofNetIR.SequentialFigure7UnifyOne",
+   "declaration": "ProofNetIR.SequentialFigure7.unifyOne?_some_iff",
+   "steps": [
+    {
+     "line": 746,
+     "tactic": "constructor"
+    },
+    {
+     "line": 747,
+     "tactic": "intro equation"
+    },
+    {
+     "line": 748,
+     "tactic": "unfold unifyOne? at equation"
+    },
+    {
+     "line": 749,
+     "tactic": "cases prepareEquation : prepare? before with ..."
+    },
+    {
+     "line": 749,
+     "tactic": "cases prepareEquation : prepare? before with"
+    },
+    {
+     "line": 750,
+     "tactic": "simp [prepareEquation] at equation"
+    },
+    {
+     "line": 752,
+     "tactic": "cases consumerEquation : certificate.tensorBelow? prepared.stackResult.vertex with ..."
+    },
+    {
+     "line": 752,
+     "tactic": "cases consumerEquation : certificate.tensorBelow? prepared.stackResult.vertex with"
+    },
+    {
+     "line": 754,
+     "tactic": "simp [prepareEquation, consumerEquation] at equation"
+    },
+    {
+     "line": 756,
+     "tactic": "cases mateEquation : prepared.coreMarked.marks[consumer.mate]? with ..."
+    },
+    {
+     "line": 756,
+     "tactic": "cases mateEquation : prepared.coreMarked.marks[consumer.mate]? with"
+    },
+    {
+     "line": 759,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation] at equation"
+    },
+    {
+     "line": 762,
+     "tactic": "cases mark with"
+    },
+    {
+     "line": 764,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation] at equation"
+    },
+    {
+     "line": 767,
+     "tactic": "cases previousEquation : prepared.stackResult.after.sigma.dropLast.getLast? with ..."
+    },
+    {
+     "line": 767,
+     "tactic": "cases previousEquation : prepared.stackResult.after.sigma.dropLast.getLast? with"
+    },
+    {
+     "line": 770,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation] at equation"
+    },
+    {
+     "line": 774,
+     "tactic": "by_cases lowerEquation : previousBoundary ≤ mateRawAge"
+    },
+    {
+     "line": 776,
+     "tactic": "by_cases upperEquation : mateRawAge < prepared.stackResult.rawAge"
+    },
+    {
+     "line": 778,
+     "tactic": "cases waitingEquation : prepared.stackResult.after.waiting[previousBoundary]? with ..."
+    },
+    {
+     "line": 778,
+     "tactic": "cases waitingEquation : prepared.stackResult.after.waiting[previousBoundary]? with"
+    },
+    {
+     "line": 782,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation] at equation"
+    },
+    {
+     "line": 787,
+     "tactic": "cases cell with"
+    },
+    {
+     "line": 789,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation] at equation"
+    },
+    {
+     "line": 795,
+     "tactic": "cases payload with"
+    },
+    {
+     "line": 797,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation] at equation"
+    },
+    {
+     "line": 803,
+     "tactic": "cases tail with"
+    },
+    {
+     "line": 805,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation] at equation"
+    },
+    {
+     "line": 812,
+     "tactic": "cases tensorQueueEquation : Certificate.queueTensor? prepared.coreMarked consumer.storedLeft consumer.storedRight consumer.conclusion with ..."
+    },
+    {
+     "line": 812,
+     "tactic": "cases tensorQueueEquation : Certificate.queueTensor? prepared.coreMarked consumer.storedLeft consumer.storedRight consumer.conclusion with"
+    },
+    {
+     "line": 819,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation] at equation"
+    },
+    {
+     "line": 829,
+     "tactic": "cases activationEquation : activateWaitingPar? certificate coreTensor waitingConclusion with ..."
+    },
+    {
+     "line": 829,
+     "tactic": "cases activationEquation : activateWaitingPar? certificate coreTensor waitingConclusion with"
+    },
+    {
+     "line": 834,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation] at equation"
+    },
+    {
+     "line": 845,
+     "tactic": "cases stackEquation : prepared.stackResult.after |>.mergeTopReadyWaiting? previousBoundary consumer.conclusion with ..."
+    },
+    {
+     "line": 845,
+     "tactic": "cases stackEquation : prepared.stackResult.after |>.mergeTopReadyWaiting? previousBoundary consumer.conclusion with"
+    },
+    {
+     "line": 851,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation, stackEquation] at equation"
+    },
+    {
+     "line": 863,
+     "tactic": "cases mergedEquation : stackAfter.ready.getLast? with ..."
+    },
+    {
+     "line": 863,
+     "tactic": "cases mergedEquation : stackAfter.ready.getLast? with"
+    },
+    {
+     "line": 866,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation, stackEquation, mergedEquation] at equation"
+    },
+    {
+     "line": 879,
+     "tactic": "by_cases readyNodupEquation : merged.Nodup"
+    },
+    {
+     "line": 881,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation, stackEquation, mergedEquation, readyNodupEquation] at equation"
+    },
+    {
+     "line": 894,
+     "tactic": "subst after"
+    },
+    {
+     "line": 895,
+     "tactic": "rcases Certificate.queueTensor?_some_iff.mp tensorQueueEquation with ⟨tensorStep⟩"
+    },
+    {
+     "line": 899,
+     "tactic": "rcases activateWaitingPar?_some_iff.mp activationEquation with ⟨activationStep⟩"
+    },
+    {
+     "line": 903,
+     "tactic": "rcases SequentialStackState.mergeTopReadyWaiting?_some_iff.mp stackEquation with ⟨mergeStep⟩"
+    },
+    {
+     "line": 907,
+     "tactic": "have activeBoundaryEquation : mergeStep.activeBoundary = prepared.stackResult.rawAge := by"
+    },
+    {
+     "line": 910,
+     "tactic": "have mergeTop : prepared.stackResult.after.sigma.getLast? = some mergeStep.activeBoundary := by"
+    },
+    {
+     "line": 913,
+     "tactic": "rw [mergeStep.sigma_eq]"
+    },
+    {
+     "line": 914,
+     "tactic": "simp"
+    },
+    {
+     "line": 915,
+     "tactic": "have preparedTop : prepared.stackResult.after.sigma.getLast? = some prepared.stackResult.rawAge := by"
+    },
+    {
+     "line": 918,
+     "tactic": "rcases SequentialStackState.popReadyMark?_exact prepared.stack_eq with ⟨_, sigmaTop, _, _, _, sigmaAfter, _, _, _⟩"
+    },
+    {
+     "line": 923,
+     "tactic": "rw [sigmaAfter]"
+    },
+    {
+     "line": 924,
+     "tactic": "exact sigmaTop"
+    },
+    {
+     "line": 925,
+     "tactic": "exact Option.some.inj (mergeTop.symm.trans preparedTop)"
+    },
+    {
+     "line": 927,
+     "tactic": "have exactSigma : prepared.stackResult.after.sigma = mergeStep.sigmaPrefix ++ [previousBoundary, prepared.stackResult.rawAge] := by"
+    },
+    {
+     "line": 932,
+     "tactic": "simpa [activeBoundaryEquation] using mergeStep.sigma_eq"
+    },
+    {
+     "line": 934,
+     "tactic": "have tokenOrientation := unifyOne_tensor_tokens_eq_adjacent invariant prepared consumer consumerEquation mateRawAge previousBoundary mergeStep.sigmaPrefix exactSigma mateEquation lowerEquation upperEquation tensorStep"
+    },
+    {
+     "line": 942,
+     "tactic": "exact ⟨{ before_invariant := invariant prepared consumer mateRawAge previousBoundary waitingConclusion coreTensor coreAfter stackAfter merged tensorStep activationStep mergeStep prepare_eq := prepareEquation ... tokens_eq_adjacent := tokenOrientation output_eq := rfl }⟩"
+    },
+    {
+     "line": 969,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation, stackEquation, mergedEquation, readyNodupEquation] at equation"
+    },
+    {
+     "line": 982,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation] at equation"
+    },
+    {
+     "line": 986,
+     "tactic": "simp [prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation] at equation"
+    },
+    {
+     "line": 989,
+     "tactic": "rintro ⟨step⟩"
+    },
+    {
+     "line": 990,
+     "tactic": "rcases step with ⟨stepInvariant, prepared, consumer, mateRawAge, previousBoundary, waitingConclusion, coreTensor, coreAfter, stackAfter, merged, tensorStep, activationStep, mergeStep, prepareEquation, consumerEquation, mateEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation, stackEquation, mergedEquation, readyNodupEquation, tokenOrientation, outputEquation⟩"
+    },
+    {
+     "line": 999,
+     "tactic": "subst after"
+    },
+    {
+     "line": 1000,
+     "tactic": "have previousEquation : prepared.stackResult.after.sigma.dropLast.getLast? = some previousBoundary := by"
+    },
+    {
+     "line": 1003,
+     "tactic": "rw [mergeStep.sigma_eq]"
+    },
+    {
+     "line": 1004,
+     "tactic": "simp"
+    },
+    {
+     "line": 1005,
+     "tactic": "simp [unifyOne?, prepareEquation, consumerEquation, mateEquation, previousEquation, lowerEquation, upperEquation, waitingEquation, tensorQueueEquation, activationEquation, stackEquation, mergedEquation, readyNodupEquation]"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     62
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     15,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     17,
+     61
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     18,
+     60
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     20,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     22,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     26,
+     28
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     29,
+     31
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     32,
+     34
+    ],
+    [
+     34,
+     35
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     35,
+     37
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     38,
+     39
+    ],
+    [
+     38,
+     40
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     40,
+     59
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     42,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     46,
+     47
+    ],
+    [
+     46,
+     55
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     47,
+     50
+    ],
+    [
+     48,
+     49
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     50,
+     54
+    ],
+    [
+     51,
+     52
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     55,
+     56
+    ],
+    [
+     55,
+     57
+    ],
+    [
+     57,
+     58
+    ],
+    [
+     62,
+     63
+    ],
+    [
+     63,
+     64
+    ],
+    [
+     64,
+     65
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     65,
+     68
+    ],
+    [
+     66,
+     67
+    ]
+   ],
+   "notes": "Each 'cases h : e with' (lines 749, 752, 756, 767, 778, 812, 829, 845, 863) gives two steps on its cases line: the outer cases node (text ending 'with ...') consumes the incoming goal and is the origin of the generalized goal (x, h : e = x), which no node produces; the 'cases ... with' alternatives node (text ending 'with') consumes the generalized goal and is the origin of the case goals. 'cases mark/cell/payload/tail with' act on local variables, so nothing is generalized: the alternatives node consumes the incoming goal directly and the outer node is a container (one step each). Alternative headers '| c x =>' are containers. by_cases expands to 'open Classical in refine if h : p then ?pos else ?neg'; the generated refine (located at the by_cases line) is the step producing pos and neg. The neg branches are consumed by the bullets at 969 (readyNodupEquation), 982 (upperEquation) and 986 (lowerEquation). The simp at 881 rewrites equation to '{...} = after' and does not close the goal; every other 'simp ... at equation' closes its goal. Every rw closing rfl attempt (913, 923, 1003) fails, so there is no rfl step. Each have ... := by consumes the goal, produces its continuation and is the origin of its nested-by goal (nested haves at 910 and 915 sit inside the block of 907). The structure literal in 'exact ⟨{...}⟩' (942) gives every field explicitly, so no auto-param tactic runs inside it; its tactic text is abbreviated. In the simpa at 932 the simp part leaves the target as it was, so the outer simpa node consumes the goal (one step, same line). For each cases pair the outer node is listed before the alternatives node because it starts first; both carry the 'cases' keyword position. Lean reports no errors or warnings in this range, so every alternative is closed by its own tactics. Simp lists are copied from the source with whitespace collapsed.",
+   "part": 2
+  },
+  {
+   "module": "ProofNetIR.Unification",
+   "declaration": "ProofNetIR.Certificate.sameThread_tensorDeadlock_false",
+   "steps": [
+    {
+     "line": 13738,
+     "tactic": "have wellFormed : certificate.LinkWellFormed (.tensor left right conclusion) := correct.1.2.2.2.2.1 _ membership"
+    },
+    {
+     "line": 13742,
+     "tactic": "rcases state.tokenAt?_some_witness leftLookup with ⟨leftRaw, leftMarked, leftRepresentative⟩"
+    },
+    {
+     "line": 13744,
+     "tactic": "rcases state.tokenAt?_some_witness rightLookup with ⟨rightRaw, rightMarked, rightRepresentative⟩"
+    },
+    {
+     "line": 13746,
+     "tactic": "have sameThread : (state.toMarking certificate abstractable).sameThread leftRaw rightRaw := by"
+    },
+    {
+     "line": 13749,
+     "tactic": "simp only [UnificationState.toMarking_sameThread]"
+    },
+    {
+     "line": 13750,
+     "tactic": "exact leftRepresentative.trans rightRepresentative.symm"
+    },
+    {
+     "line": 13751,
+     "tactic": "have abstractLeftMarked : (state.toMarking certificate abstractable).mark left = some leftRaw := by"
+    },
+    {
+     "line": 13754,
+     "tactic": "simpa only [UnificationState.toMarking_mark] using leftMarked"
+    },
+    {
+     "line": 13755,
+     "tactic": "have abstractRightMarked : (state.toMarking certificate abstractable).mark right = some rightRaw := by"
+    },
+    {
+     "line": 13758,
+     "tactic": "simpa only [UnificationState.toMarking_mark] using rightMarked"
+    },
+    {
+     "line": 13759,
+     "tactic": "have activeWalk : (state.toMarking certificate abstractable).activeReferenceGraph.Walk left right := connected abstractLeftMarked abstractRightMarked sameThread"
+    },
+    {
+     "line": 13763,
+     "tactic": "rcases activeWalk.toSimple with ⟨steps, visited, simple⟩"
+    },
+    {
+     "line": 13764,
+     "tactic": "rcases simple.liftToEdgeSimplePathWithEdges ((state.toMarking certificate abstractable) |>.activeReferenceEdges_subset_referenceSwitchingGraph) with ⟨threadPath, threadStarts, threadFinishes, _threadVertices, threadEdgesActive⟩"
+    },
+    {
+     "line": 13769,
+     "tactic": "have threadStartFinishDifferent : threadPath.start ≠ threadPath.finish := by"
+    },
+    {
+     "line": 13771,
+     "tactic": "threadStarts"
+    },
+    {
+     "line": 13771,
+     "tactic": "threadFinishes"
+    },
+    {
+     "line": 13772,
+     "tactic": "exact wellFormed.1"
+    },
+    {
+     "line": 13773,
+     "tactic": "have threadNonempty : threadPath.traversed ≠ [] := by"
+    },
+    {
+     "line": 13774,
+     "tactic": "intro empty"
+    },
+    {
+     "line": 13775,
+     "tactic": "have finishMembership := threadPath.walk.finish_mem_visitedVertices"
+    },
+    {
+     "line": 13777,
+     "tactic": "have sameEndpoints : threadPath.finish = threadPath.start := by"
+    },
+    {
+     "line": 13778,
+     "tactic": "simpa [Graph.EdgeWalk.visitedVertices, empty] using finishMembership"
+    },
+    {
+     "line": 13779,
+     "tactic": "exact threadStartFinishDifferent sameEndpoints.symm"
+    },
+    {
+     "line": 13780,
+     "tactic": "have abstractConclusionUnmarked : (state.toMarking certificate abstractable).mark conclusion = none := by"
+    },
+    {
+     "line": 13782,
+     "tactic": "simpa only [UnificationState.toMarking_mark] using conclusionUnmarked"
+    },
+    {
+     "line": 13783,
+     "tactic": "have noActiveIncident : ∀ edge, edge ∈ (state.toMarking certificate abstractable).activeReferenceEdges → (edge.first = conclusion ∨ edge.second = conclusion) → False := by"
+    },
+    {
+     "line": 13789,
+     "tactic": "intro edge"
+    },
+    {
+     "line": 13789,
+     "tactic": "intro edgeActive"
+    },
+    {
+     "line": 13789,
+     "tactic": "intro incident"
+    },
+    {
+     "line": 13790,
+     "tactic": "have endpoints := (List.mem_filter.mp edgeActive).2"
+    },
+    {
+     "line": 13791,
+     "tactic": "simp only [Bool.and_eq_true] at endpoints"
+    },
+    {
+     "line": 13792,
+     "tactic": "rcases incident with firstConclusion | secondConclusion"
+    },
+    {
+     "line": 13793,
+     "tactic": "have markedConclusion : Option.isSome ((state.toMarking certificate abstractable).mark conclusion) = true := by"
+    },
+    {
+     "line": 13797,
+     "tactic": "simpa [firstConclusion] using endpoints.1"
+    },
+    {
+     "line": 13798,
+     "tactic": "abstractConclusionUnmarked"
+    },
+    {
+     "line": 13799,
+     "tactic": "simp at markedConclusion"
+    },
+    {
+     "line": 13800,
+     "tactic": "have markedConclusion : Option.isSome ((state.toMarking certificate abstractable).mark conclusion) = true := by"
+    },
+    {
+     "line": 13804,
+     "tactic": "simpa [secondConclusion] using endpoints.2"
+    },
+    {
+     "line": 13805,
+     "tactic": "abstractConclusionUnmarked"
+    },
+    {
+     "line": 13806,
+     "tactic": "simp at markedConclusion"
+    },
+    {
+     "line": 13807,
+     "tactic": "have conclusionNotInThreadPath : conclusion ∉ threadPath.vertices := by"
+    },
+    {
+     "line": 13809,
+     "tactic": "intro conclusionMembership"
+    },
+    {
+     "line": 13810,
+     "tactic": "change conclusion ∈ Graph.EdgeWalk.visitedVertices threadPath.start threadPath.traversed at conclusionMembership"
+    },
+    {
+     "line": 13813,
+     "tactic": "simp only [Graph.EdgeWalk.visitedVertices, List.mem_cons] at conclusionMembership"
+    },
+    {
+     "line": 13814,
+     "tactic": "rcases conclusionMembership with startConclusion | targetMembership"
+    },
+    {
+     "line": 13815,
+     "tactic": "apply wellFormed.2.1"
+    },
+    {
+     "line": 13816,
+     "tactic": "← threadStarts"
+    },
+    {
+     "line": 13817,
+     "tactic": "exact startConclusion.symm"
+    },
+    {
+     "line": 13818,
+     "tactic": "rcases List.mem_map.mp targetMembership with ⟨directed, directedMembership, targetConclusion⟩"
+    },
+    {
+     "line": 13820,
+     "tactic": "have edgeActive := threadEdgesActive directed directedMembership"
+    },
+    {
+     "line": 13821,
+     "tactic": "apply noActiveIncident directed.edge edgeActive"
+    },
+    {
+     "line": 13822,
+     "tactic": "cases forward : directed.forward with"
+    },
+    {
+     "line": 13822,
+     "tactic": "cases forward : directed.forward with"
+    },
+    {
+     "line": 13824,
+     "tactic": "exact Or.inl (by simpa [Graph.DirectedEdge.target, forward] using targetConclusion)"
+    },
+    {
+     "line": 13825,
+     "tactic": "simpa [Graph.DirectedEdge.target, forward] using targetConclusion"
+    },
+    {
+     "line": 13828,
+     "tactic": "exact Or.inr (by simpa [Graph.DirectedEdge.target, forward] using targetConclusion)"
+    },
+    {
+     "line": 13829,
+     "tactic": "simpa [Graph.DirectedEdge.target, forward] using targetConclusion"
+    },
+    {
+     "line": 13831,
+     "tactic": "have referenceTensorEdges := UnificationMarking.referenceSwitchingGraph_tensorEdges certificate membership"
+    },
+    {
+     "line": 13834,
+     "tactic": "let leftEdge : Edge := { first := left, second := conclusion }"
+    },
+    {
+     "line": 13835,
+     "tactic": "let rightEdge : Edge := { first := right, second := conclusion }"
+    },
+    {
+     "line": 13836,
+     "tactic": "have leftEdgeMembership : leftEdge ∈ certificate.referenceSwitchingGraph.edges := by"
+    },
+    {
+     "line": 13838,
+     "tactic": "simpa [leftEdge] using referenceTensorEdges.1"
+    },
+    {
+     "line": 13839,
+     "tactic": "have rightEdgeMembership : rightEdge ∈ certificate.referenceSwitchingGraph.edges := by"
+    },
+    {
+     "line": 13841,
+     "tactic": "simpa [rightEdge] using referenceTensorEdges.2"
+    },
+    {
+     "line": 13842,
+     "tactic": "rcases List.getElem?_of_mem leftEdgeMembership with ⟨leftIndex, leftEdgeLookup⟩"
+    },
+    {
+     "line": 13844,
+     "tactic": "rcases List.getElem?_of_mem rightEdgeMembership with ⟨rightIndex, rightEdgeLookup⟩"
+    },
+    {
+     "line": 13846,
+     "tactic": "let rightDirected : certificate.referenceSwitchingGraph.DirectedEdge := { index := rightIndex, edge := rightEdge, lookup := rightEdgeLookup, forward := true }"
+    },
+    {
+     "line": 13852,
+     "tactic": "let leftDirected : certificate.referenceSwitchingGraph.DirectedEdge := { index := leftIndex, edge := leftEdge, lookup := leftEdgeLookup, forward := false }"
+    },
+    {
+     "line": 13858,
+     "tactic": "have tensorIndicesDifferent : rightIndex ≠ leftIndex := by"
+    },
+    {
+     "line": 13859,
+     "tactic": "intro sameIndex"
+    },
+    {
+     "line": 13860,
+     "tactic": "have sameEdges : rightEdge = leftEdge := by"
+    },
+    {
+     "line": 13861,
+     "tactic": "apply Option.some.inj"
+    },
+    {
+     "line": 13862,
+     "tactic": "← rightEdgeLookup"
+    },
+    {
+     "line": 13862,
+     "tactic": "← leftEdgeLookup"
+    },
+    {
+     "line": 13862,
+     "tactic": "sameIndex"
+    },
+    {
+     "line": 13862,
+     "tactic": "rfl"
+    },
+    {
+     "line": 13863,
+     "tactic": "apply wellFormed.1"
+    },
+    {
+     "line": 13864,
+     "tactic": "have sameFirst := congrArg Edge.first sameEdges"
+    },
+    {
+     "line": 13865,
+     "tactic": "simpa [rightEdge, leftEdge] using sameFirst.symm"
+    },
+    {
+     "line": 13866,
+     "tactic": "let returnPath : certificate.referenceSwitchingGraph.EdgeSimplePath := { start := right, finish := left, traversed := [rightDirected, leftDirected], walk := by ..., verticesNodup := by ... }"
+    },
+    {
+     "line": 13871,
+     "tactic": "simpa [rightDirected, leftDirected, rightEdge, leftEdge, Graph.DirectedEdge.source, Graph.DirectedEdge.target] using Graph.EdgeWalk.step (Graph.EdgeWalk.step (Graph.EdgeWalk.refl (graph := certificate.referenceSwitchingGraph) right) rightDirected rfl rfl) leftDirected rfl rfl"
+    },
+    {
+     "line": 13880,
+     "tactic": "simp [Graph.EdgeWalk.visitedVertices, rightDirected, leftDirected, rightEdge, leftEdge, Graph.DirectedEdge.target, wellFormed.2.2.1]"
+    },
+    {
+     "line": 13883,
+     "tactic": "exact ⟨fun same => wellFormed.1 same.symm, fun same => wellFormed.2.1 same.symm⟩"
+    },
+    {
+     "line": 13886,
+     "tactic": "have returnNonempty : returnPath.traversed ≠ [] := by"
+    },
+    {
+     "line": 13887,
+     "tactic": "simp [returnPath]"
+    },
+    {
+     "line": 13888,
+     "tactic": "have meeting : threadPath.finish = returnPath.start := by"
+    },
+    {
+     "line": 13889,
+     "tactic": "simpa [returnPath] using threadFinishes"
+    },
+    {
+     "line": 13890,
+     "tactic": "have closing : returnPath.finish = threadPath.start := by"
+    },
+    {
+     "line": 13891,
+     "tactic": "simpa [returnPath] using threadStarts.symm"
+    },
+    {
+     "line": 13892,
+     "tactic": "have vertexDisjoint : ∀ vertex, vertex ∈ threadPath.vertices → vertex ∈ returnPath.vertices.tail.dropLast → False := by"
+    },
+    {
+     "line": 13897,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 13897,
+     "tactic": "intro threadMembership"
+    },
+    {
+     "line": 13897,
+     "tactic": "intro returnMembership"
+    },
+    {
+     "line": 13898,
+     "tactic": "have vertexConclusion : vertex = conclusion := by"
+    },
+    {
+     "line": 13899,
+     "tactic": "simpa [returnPath, Graph.EdgeSimplePath.vertices, Graph.EdgeWalk.visitedVertices, rightDirected, leftDirected, rightEdge, leftEdge, Graph.DirectedEdge.target] using returnMembership"
+    },
+    {
+     "line": 13903,
+     "tactic": "subst vertex"
+    },
+    {
+     "line": 13904,
+     "tactic": "exact conclusionNotInThreadPath threadMembership"
+    },
+    {
+     "line": 13905,
+     "tactic": "have leftEdgeNotActive : leftEdge ∉ (state.toMarking certificate abstractable).activeReferenceEdges := by"
+    },
+    {
+     "line": 13908,
+     "tactic": "intro active"
+    },
+    {
+     "line": 13909,
+     "tactic": "exact noActiveIncident leftEdge active (by exact Or.inr rfl)"
+    },
+    {
+     "line": 13910,
+     "tactic": "exact Or.inr rfl"
+    },
+    {
+     "line": 13911,
+     "tactic": "have rightEdgeNotActive : rightEdge ∉ (state.toMarking certificate abstractable).activeReferenceEdges := by"
+    },
+    {
+     "line": 13914,
+     "tactic": "intro active"
+    },
+    {
+     "line": 13915,
+     "tactic": "exact noActiveIncident rightEdge active (by exact Or.inr rfl)"
+    },
+    {
+     "line": 13916,
+     "tactic": "exact Or.inr rfl"
+    },
+    {
+     "line": 13917,
+     "tactic": "have edgeDisjoint : ∀ index, index ∈ threadPath.traversed.map Graph.DirectedEdge.index → index ∈ returnPath.traversed.map Graph.DirectedEdge.index → False := by"
+    },
+    {
+     "line": 13922,
+     "tactic": "intro index"
+    },
+    {
+     "line": 13922,
+     "tactic": "intro threadIndex"
+    },
+    {
+     "line": 13922,
+     "tactic": "intro returnIndex"
+    },
+    {
+     "line": 13923,
+     "tactic": "rcases List.mem_map.mp threadIndex with ⟨directed, directedMembership, directedIndex⟩"
+    },
+    {
+     "line": 13925,
+     "tactic": "have edgeActive := threadEdgesActive directed directedMembership"
+    },
+    {
+     "line": 13926,
+     "tactic": "change directed.edge ∈ (state.toMarking certificate abstractable).activeReferenceEdges at edgeActive"
+    },
+    {
+     "line": 13929,
+     "tactic": "have returnCases : index = rightIndex ∨ index = leftIndex := by"
+    },
+    {
+     "line": 13930,
+     "tactic": "simpa [returnPath, rightDirected, leftDirected] using returnIndex"
+    },
+    {
+     "line": 13931,
+     "tactic": "rcases returnCases with rightCase | leftCase"
+    },
+    {
+     "line": 13932,
+     "tactic": "have sameIndex : directed.index = rightIndex := directedIndex.trans rightCase"
+    },
+    {
+     "line": 13934,
+     "tactic": "have sameEdge : directed.edge = rightEdge := by"
+    },
+    {
+     "line": 13935,
+     "tactic": "apply Option.some.inj"
+    },
+    {
+     "line": 13936,
+     "tactic": "← directed.lookup"
+    },
+    {
+     "line": 13936,
+     "tactic": "← rightEdgeLookup"
+    },
+    {
+     "line": 13936,
+     "tactic": "sameIndex"
+    },
+    {
+     "line": 13936,
+     "tactic": "rfl"
+    },
+    {
+     "line": 13937,
+     "tactic": "sameEdge"
+    },
+    {
+     "line": 13938,
+     "tactic": "exact rightEdgeNotActive edgeActive"
+    },
+    {
+     "line": 13939,
+     "tactic": "have sameIndex : directed.index = leftIndex := directedIndex.trans leftCase"
+    },
+    {
+     "line": 13941,
+     "tactic": "have sameEdge : directed.edge = leftEdge := by"
+    },
+    {
+     "line": 13942,
+     "tactic": "apply Option.some.inj"
+    },
+    {
+     "line": 13943,
+     "tactic": "← directed.lookup"
+    },
+    {
+     "line": 13943,
+     "tactic": "← leftEdgeLookup"
+    },
+    {
+     "line": 13943,
+     "tactic": "sameIndex"
+    },
+    {
+     "line": 13943,
+     "tactic": "rfl"
+    },
+    {
+     "line": 13944,
+     "tactic": "sameEdge"
+    },
+    {
+     "line": 13945,
+     "tactic": "exact leftEdgeNotActive edgeActive"
+    },
+    {
+     "line": 13946,
+     "tactic": "let cycle : certificate.referenceSwitchingGraph.EdgeSimpleCycle := Graph.EdgeSimpleCycle.ofTwoPaths threadPath returnPath threadNonempty returnNonempty meeting closing vertexDisjoint edgeDisjoint"
+    },
+    {
+     "line": 13950,
+     "tactic": "have compact := certificate.declarativelyCorrect_iff_structural_cuspAcyclic_referenceConnected |>.mp correct"
+    },
+    {
+     "line": 13953,
+     "tactic": "have referenceAcyclic : certificate.referenceSwitchingGraph.Acyclic := by"
+    },
+    {
+     "line": 13955,
+     "tactic": "simpa [Certificate.referenceSwitchingGraph] using compact.2.1.occurrenceSwitching_acyclic compact.1 certificate.referenceFullSwitchingSelection"
+    },
+    {
+     "line": 13958,
+     "tactic": "exact referenceAcyclic cycle"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     15,
+     16
+    ],
+    [
+     13,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     20,
+     22
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     23,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     27,
+     28
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     30,
+     31
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     32,
+     33
+    ],
+    [
+     32,
+     34
+    ],
+    [
+     34,
+     35
+    ],
+    [
+     31,
+     36
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     36,
+     38
+    ],
+    [
+     38,
+     39
+    ],
+    [
+     25,
+     40
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     42,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     46,
+     47
+    ],
+    [
+     44,
+     48
+    ],
+    [
+     48,
+     49
+    ],
+    [
+     49,
+     50
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     51,
+     52
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     53,
+     54
+    ],
+    [
+     52,
+     55
+    ],
+    [
+     55,
+     56
+    ],
+    [
+     40,
+     57
+    ],
+    [
+     57,
+     58
+    ],
+    [
+     58,
+     59
+    ],
+    [
+     59,
+     60
+    ],
+    [
+     60,
+     61
+    ],
+    [
+     60,
+     62
+    ],
+    [
+     62,
+     63
+    ],
+    [
+     62,
+     64
+    ],
+    [
+     64,
+     65
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     66,
+     67
+    ],
+    [
+     67,
+     68
+    ],
+    [
+     68,
+     69
+    ],
+    [
+     69,
+     70
+    ],
+    [
+     70,
+     71
+    ],
+    [
+     71,
+     72
+    ],
+    [
+     72,
+     73
+    ],
+    [
+     73,
+     74
+    ],
+    [
+     74,
+     75
+    ],
+    [
+     70,
+     76
+    ],
+    [
+     76,
+     77
+    ],
+    [
+     77,
+     78
+    ],
+    [
+     68,
+     79
+    ],
+    [
+     79,
+     80
+    ],
+    [
+     79,
+     81
+    ],
+    [
+     81,
+     82
+    ],
+    [
+     79,
+     83
+    ],
+    [
+     83,
+     84
+    ],
+    [
+     83,
+     85
+    ],
+    [
+     85,
+     86
+    ],
+    [
+     85,
+     87
+    ],
+    [
+     87,
+     88
+    ],
+    [
+     87,
+     89
+    ],
+    [
+     89,
+     90
+    ],
+    [
+     90,
+     91
+    ],
+    [
+     91,
+     92
+    ],
+    [
+     92,
+     93
+    ],
+    [
+     93,
+     94
+    ],
+    [
+     93,
+     95
+    ],
+    [
+     95,
+     96
+    ],
+    [
+     89,
+     97
+    ],
+    [
+     97,
+     98
+    ],
+    [
+     98,
+     99
+    ],
+    [
+     99,
+     100
+    ],
+    [
+     97,
+     101
+    ],
+    [
+     101,
+     102
+    ],
+    [
+     102,
+     103
+    ],
+    [
+     103,
+     104
+    ],
+    [
+     101,
+     105
+    ],
+    [
+     105,
+     106
+    ],
+    [
+     106,
+     107
+    ],
+    [
+     107,
+     108
+    ],
+    [
+     108,
+     109
+    ],
+    [
+     109,
+     110
+    ],
+    [
+     110,
+     111
+    ],
+    [
+     111,
+     112
+    ],
+    [
+     112,
+     113
+    ],
+    [
+     112,
+     114
+    ],
+    [
+     114,
+     115
+    ],
+    [
+     115,
+     116
+    ],
+    [
+     116,
+     117
+    ],
+    [
+     117,
+     118
+    ],
+    [
+     118,
+     119
+    ],
+    [
+     119,
+     120
+    ],
+    [
+     120,
+     121
+    ],
+    [
+     116,
+     122
+    ],
+    [
+     122,
+     123
+    ],
+    [
+     114,
+     124
+    ],
+    [
+     124,
+     125
+    ],
+    [
+     125,
+     126
+    ],
+    [
+     126,
+     127
+    ],
+    [
+     127,
+     128
+    ],
+    [
+     128,
+     129
+    ],
+    [
+     129,
+     130
+    ],
+    [
+     125,
+     131
+    ],
+    [
+     131,
+     132
+    ],
+    [
+     105,
+     133
+    ],
+    [
+     133,
+     134
+    ],
+    [
+     134,
+     135
+    ],
+    [
+     135,
+     136
+    ],
+    [
+     135,
+     137
+    ]
+   ],
+   "notes": "Steps are in source order; steps on one line are in run order (an enclosing node before the internal nodes it runs). Rewrite-rule steps are listed by their rule text and the closing rfl of `rw` as `rfl`; a multi-binder `intro` is listed as one `intro x` step per binder (Lean 4.32 evalIntro makes one child info node per binder, the last child producing the result). `have x : T := by tacs` (core's have-by macro: `focus; refine no_implicit_lambda% (have x : T := ?body; ?_); case body => tacs`) is one step at the `have` line, the internal refine, which originates both the body goal (consumed by the first body tactic) and the continuation goal (consumed by the next tactic at the have's level). Generic `have x := e` / `have x : T := e` and `let x : T := v` are one step each (refine_lift's refine). `let returnPath ... := {...}` (step 79) also originates the goals of its nested `walk := by ...` and `verticesNodup := by ...`; `exact Or.inl (by ...)`, `exact Or.inr (by ...)` and `exact noActiveIncident ... (by ...)` originate the goal of their nested `by`. `cases forward : directed.forward with` is two steps (51 outer: consumes the incoming goal and originates the generalized goal with x✝ : Bool, forward : directed.forward = x✝, which Lean displays at the cases line; 52 inner: originates the `false`/`true` goals). The closing rfl of `rw` is a step only at 13862, 13936 and 13943, where it closes `edges[i]? = edges[i]?` (checked); it fails at 13771, 13798, 13805, 13816, 13937 and 13944. Every simpa here runs on a single focused goal, so it is one step whether its step node is the simpa node (simp left the target unchanged or closed it) or simpa's internal `simpa ... using` node (simp changed the target); not checked per instance because the count, line and edges are the same. Uncertainties: the rfl steps are synthetic macro nodes (line = the `rw` line, all single-line here); same-line order is run order.",
+   "part": 3
+  },
+  {
+   "module": "ProofNetIR.SequentialFigure7TerminalPartnerGeometry",
+   "declaration": "ProofNetIR.SequentialFigure7.referenceAcyclic_no_tensorBypass",
+   "steps": [
+    {
+     "line": 381,
+     "tactic": "have wellFormed : certificate.LinkWellFormed (.tensor left right conclusion) := structural.2.2.2.2.1 _ membership"
+    },
+    {
+     "line": 384,
+     "tactic": "have pathNonempty : path.traversed ≠ [] := by"
+    },
+    {
+     "line": 385,
+     "tactic": "intro empty"
+    },
+    {
+     "line": 386,
+     "tactic": "have finishMembership := path.walk.finish_mem_visitedVertices"
+    },
+    {
+     "line": 387,
+     "tactic": "have sameEndpoints : path.finish = path.start := by"
+    },
+    {
+     "line": 388,
+     "tactic": "simpa [Graph.EdgeWalk.visitedVertices, empty] using finishMembership"
+    },
+    {
+     "line": 389,
+     "tactic": "pathStarts"
+    },
+    {
+     "line": 389,
+     "tactic": "pathFinishes"
+    },
+    {
+     "line": 390,
+     "tactic": "exact wellFormed.1 sameEndpoints.symm"
+    },
+    {
+     "line": 391,
+     "tactic": "have referenceTensorEdges := UnificationMarking.referenceSwitchingGraph_tensorEdges certificate membership"
+    },
+    {
+     "line": 394,
+     "tactic": "let leftEdge : Edge := { first := left, second := conclusion }"
+    },
+    {
+     "line": 395,
+     "tactic": "let rightEdge : Edge := { first := right, second := conclusion }"
+    },
+    {
+     "line": 396,
+     "tactic": "have leftEdgeMembership : leftEdge ∈ certificate.referenceSwitchingGraph.edges := by"
+    },
+    {
+     "line": 398,
+     "tactic": "simpa [leftEdge] using referenceTensorEdges.1"
+    },
+    {
+     "line": 399,
+     "tactic": "have rightEdgeMembership : rightEdge ∈ certificate.referenceSwitchingGraph.edges := by"
+    },
+    {
+     "line": 401,
+     "tactic": "simpa [rightEdge] using referenceTensorEdges.2"
+    },
+    {
+     "line": 402,
+     "tactic": "rcases List.getElem?_of_mem leftEdgeMembership with ⟨leftIndex, leftEdgeLookup⟩"
+    },
+    {
+     "line": 404,
+     "tactic": "rcases List.getElem?_of_mem rightEdgeMembership with ⟨rightIndex, rightEdgeLookup⟩"
+    },
+    {
+     "line": 406,
+     "tactic": "let rightDirected : certificate.referenceSwitchingGraph.DirectedEdge := { index := rightIndex edge := rightEdge lookup := rightEdgeLookup forward := true }"
+    },
+    {
+     "line": 412,
+     "tactic": "let leftDirected : certificate.referenceSwitchingGraph.DirectedEdge := { index := leftIndex edge := leftEdge lookup := leftEdgeLookup forward := false }"
+    },
+    {
+     "line": 418,
+     "tactic": "have tensorIndicesDifferent : rightIndex ≠ leftIndex := by"
+    },
+    {
+     "line": 419,
+     "tactic": "intro sameIndex"
+    },
+    {
+     "line": 420,
+     "tactic": "have sameEdges : rightEdge = leftEdge := by"
+    },
+    {
+     "line": 421,
+     "tactic": "apply Option.some.inj"
+    },
+    {
+     "line": 422,
+     "tactic": "← rightEdgeLookup"
+    },
+    {
+     "line": 422,
+     "tactic": "← leftEdgeLookup"
+    },
+    {
+     "line": 422,
+     "tactic": "sameIndex"
+    },
+    {
+     "line": 422,
+     "tactic": "rfl"
+    },
+    {
+     "line": 423,
+     "tactic": "apply wellFormed.1"
+    },
+    {
+     "line": 424,
+     "tactic": "have sameFirst := congrArg Edge.first sameEdges"
+    },
+    {
+     "line": 425,
+     "tactic": "simpa [rightEdge, leftEdge] using sameFirst.symm"
+    },
+    {
+     "line": 426,
+     "tactic": "let returnPath : certificate.referenceSwitchingGraph.EdgeSimplePath := { start := right finish := left traversed := [rightDirected, leftDirected] walk := by ... verticesNodup := by ... }"
+    },
+    {
+     "line": 431,
+     "tactic": "simpa [rightDirected, leftDirected, rightEdge, leftEdge, Graph.DirectedEdge.source, Graph.DirectedEdge.target] using Graph.EdgeWalk.step (Graph.EdgeWalk.step (Graph.EdgeWalk.refl (graph := certificate.referenceSwitchingGraph) right) rightDirected rfl rfl) leftDirected rfl rfl"
+    },
+    {
+     "line": 440,
+     "tactic": "simp [Graph.EdgeWalk.visitedVertices, rightDirected, leftDirected, rightEdge, leftEdge, Graph.DirectedEdge.target, wellFormed.2.2.1]"
+    },
+    {
+     "line": 443,
+     "tactic": "exact ⟨fun same => wellFormed.1 same.symm, fun same => wellFormed.2.1 same.symm⟩"
+    },
+    {
+     "line": 446,
+     "tactic": "have returnNonempty : returnPath.traversed ≠ [] := by"
+    },
+    {
+     "line": 447,
+     "tactic": "simp [returnPath]"
+    },
+    {
+     "line": 448,
+     "tactic": "have meeting : path.finish = returnPath.start := by"
+    },
+    {
+     "line": 449,
+     "tactic": "simpa [returnPath] using pathFinishes"
+    },
+    {
+     "line": 450,
+     "tactic": "have closing : returnPath.finish = path.start := by"
+    },
+    {
+     "line": 451,
+     "tactic": "simpa [returnPath] using pathStarts.symm"
+    },
+    {
+     "line": 452,
+     "tactic": "have vertexDisjoint : ∀ vertex, vertex ∈ path.vertices → vertex ∈ returnPath.vertices.tail.dropLast → False := by"
+    },
+    {
+     "line": 456,
+     "tactic": "intro vertex"
+    },
+    {
+     "line": 456,
+     "tactic": "pathMembership"
+    },
+    {
+     "line": 456,
+     "tactic": "returnMembership"
+    },
+    {
+     "line": 457,
+     "tactic": "have vertexConclusion : vertex = conclusion := by"
+    },
+    {
+     "line": 458,
+     "tactic": "simpa [returnPath, Graph.EdgeSimplePath.vertices, Graph.EdgeWalk.visitedVertices, rightDirected, leftDirected, rightEdge, leftEdge, Graph.DirectedEdge.target] using returnMembership"
+    },
+    {
+     "line": 462,
+     "tactic": "subst vertex"
+    },
+    {
+     "line": 463,
+     "tactic": "exact conclusionNotInPath pathMembership"
+    },
+    {
+     "line": 464,
+     "tactic": "have edgeDisjoint : ∀ index, index ∈ path.traversed.map Graph.DirectedEdge.index → index ∈ returnPath.traversed.map Graph.DirectedEdge.index → False := by"
+    },
+    {
+     "line": 469,
+     "tactic": "intro index"
+    },
+    {
+     "line": 469,
+     "tactic": "pathIndex"
+    },
+    {
+     "line": 469,
+     "tactic": "returnIndex"
+    },
+    {
+     "line": 470,
+     "tactic": "rcases List.mem_map.mp pathIndex with ⟨directed, directedMembership, directedIndex⟩"
+    },
+    {
+     "line": 472,
+     "tactic": "have endpoints := path.directed_endpoints_mem_vertices directedMembership"
+    },
+    {
+     "line": 474,
+     "tactic": "have returnCases : index = rightIndex ∨ index = leftIndex := by"
+    },
+    {
+     "line": 475,
+     "tactic": "simpa [returnPath, rightDirected, leftDirected] using returnIndex"
+    },
+    {
+     "line": 476,
+     "tactic": "rcases returnCases with rightCase | leftCase"
+    },
+    {
+     "line": 477,
+     "tactic": "have sameIndex : directed.index = rightIndex := directedIndex.trans rightCase"
+    },
+    {
+     "line": 479,
+     "tactic": "have sameEdge : directed.edge = rightEdge := by"
+    },
+    {
+     "line": 480,
+     "tactic": "apply Option.some.inj"
+    },
+    {
+     "line": 481,
+     "tactic": "← directed.lookup"
+    },
+    {
+     "line": 481,
+     "tactic": "← rightEdgeLookup"
+    },
+    {
+     "line": 481,
+     "tactic": "sameIndex"
+    },
+    {
+     "line": 481,
+     "tactic": "rfl"
+    },
+    {
+     "line": 482,
+     "tactic": "cases forward : directed.forward with | false => ... | true => ..."
+    },
+    {
+     "line": 482,
+     "tactic": "cases forward : directed.forward with"
+    },
+    {
+     "line": 484,
+     "tactic": "have sourceConclusion : directed.source = conclusion := by"
+    },
+    {
+     "line": 486,
+     "tactic": "simp [Graph.DirectedEdge.source, forward, sameEdge, rightEdge]"
+    },
+    {
+     "line": 487,
+     "tactic": "sourceConclusion"
+    },
+    {
+     "line": 488,
+     "tactic": "exact conclusionNotInPath endpoints.1"
+    },
+    {
+     "line": 490,
+     "tactic": "have targetConclusion : directed.target = conclusion := by"
+    },
+    {
+     "line": 492,
+     "tactic": "simp [Graph.DirectedEdge.target, forward, sameEdge, rightEdge]"
+    },
+    {
+     "line": 493,
+     "tactic": "targetConclusion"
+    },
+    {
+     "line": 494,
+     "tactic": "exact conclusionNotInPath endpoints.2"
+    },
+    {
+     "line": 495,
+     "tactic": "have sameIndex : directed.index = leftIndex := directedIndex.trans leftCase"
+    },
+    {
+     "line": 497,
+     "tactic": "have sameEdge : directed.edge = leftEdge := by"
+    },
+    {
+     "line": 498,
+     "tactic": "apply Option.some.inj"
+    },
+    {
+     "line": 499,
+     "tactic": "← directed.lookup"
+    },
+    {
+     "line": 499,
+     "tactic": "← leftEdgeLookup"
+    },
+    {
+     "line": 499,
+     "tactic": "sameIndex"
+    },
+    {
+     "line": 499,
+     "tactic": "rfl"
+    },
+    {
+     "line": 500,
+     "tactic": "cases forward : directed.forward with | false => ... | true => ..."
+    },
+    {
+     "line": 500,
+     "tactic": "cases forward : directed.forward with"
+    },
+    {
+     "line": 502,
+     "tactic": "have sourceConclusion : directed.source = conclusion := by"
+    },
+    {
+     "line": 504,
+     "tactic": "simp [Graph.DirectedEdge.source, forward, sameEdge, leftEdge]"
+    },
+    {
+     "line": 505,
+     "tactic": "sourceConclusion"
+    },
+    {
+     "line": 506,
+     "tactic": "exact conclusionNotInPath endpoints.1"
+    },
+    {
+     "line": 508,
+     "tactic": "have targetConclusion : directed.target = conclusion := by"
+    },
+    {
+     "line": 510,
+     "tactic": "simp [Graph.DirectedEdge.target, forward, sameEdge, leftEdge]"
+    },
+    {
+     "line": 511,
+     "tactic": "targetConclusion"
+    },
+    {
+     "line": 512,
+     "tactic": "exact conclusionNotInPath endpoints.2"
+    },
+    {
+     "line": 513,
+     "tactic": "let cycle : certificate.referenceSwitchingGraph.EdgeSimpleCycle := Graph.EdgeSimpleCycle.ofTwoPaths path returnPath pathNonempty returnNonempty meeting closing vertexDisjoint edgeDisjoint"
+    },
+    {
+     "line": 517,
+     "tactic": "exact acyclic cycle"
+    }
+   ],
+   "edges": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     9,
+     10
+    ],
+    [
+     10,
+     11
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     14,
+     15
+    ],
+    [
+     14,
+     16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     19,
+     20
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     21,
+     22
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     23,
+     24
+    ],
+    [
+     24,
+     25
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     26,
+     27
+    ],
+    [
+     22,
+     28
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     29,
+     30
+    ],
+    [
+     20,
+     31
+    ],
+    [
+     31,
+     32
+    ],
+    [
+     31,
+     33
+    ],
+    [
+     33,
+     34
+    ],
+    [
+     31,
+     35
+    ],
+    [
+     35,
+     36
+    ],
+    [
+     35,
+     37
+    ],
+    [
+     37,
+     38
+    ],
+    [
+     37,
+     39
+    ],
+    [
+     39,
+     40
+    ],
+    [
+     39,
+     41
+    ],
+    [
+     41,
+     42
+    ],
+    [
+     42,
+     43
+    ],
+    [
+     43,
+     44
+    ],
+    [
+     44,
+     45
+    ],
+    [
+     45,
+     46
+    ],
+    [
+     45,
+     47
+    ],
+    [
+     47,
+     48
+    ],
+    [
+     41,
+     49
+    ],
+    [
+     49,
+     50
+    ],
+    [
+     50,
+     51
+    ],
+    [
+     51,
+     52
+    ],
+    [
+     52,
+     53
+    ],
+    [
+     53,
+     54
+    ],
+    [
+     54,
+     55
+    ],
+    [
+     55,
+     56
+    ],
+    [
+     55,
+     57
+    ],
+    [
+     57,
+     58
+    ],
+    [
+     58,
+     59
+    ],
+    [
+     59,
+     60
+    ],
+    [
+     60,
+     61
+    ],
+    [
+     61,
+     62
+    ],
+    [
+     62,
+     63
+    ],
+    [
+     63,
+     64
+    ],
+    [
+     59,
+     65
+    ],
+    [
+     65,
+     66
+    ],
+    [
+     66,
+     67
+    ],
+    [
+     67,
+     68
+    ],
+    [
+     67,
+     69
+    ],
+    [
+     69,
+     70
+    ],
+    [
+     66,
+     71
+    ],
+    [
+     71,
+     72
+    ],
+    [
+     71,
+     73
+    ],
+    [
+     73,
+     74
+    ],
+    [
+     57,
+     75
+    ],
+    [
+     75,
+     76
+    ],
+    [
+     76,
+     77
+    ],
+    [
+     77,
+     78
+    ],
+    [
+     78,
+     79
+    ],
+    [
+     79,
+     80
+    ],
+    [
+     80,
+     81
+    ],
+    [
+     76,
+     82
+    ],
+    [
+     82,
+     83
+    ],
+    [
+     83,
+     84
+    ],
+    [
+     84,
+     85
+    ],
+    [
+     84,
+     86
+    ],
+    [
+     86,
+     87
+    ],
+    [
+     83,
+     88
+    ],
+    [
+     88,
+     89
+    ],
+    [
+     88,
+     90
+    ],
+    [
+     90,
+     91
+    ],
+    [
+     49,
+     92
+    ],
+    [
+     92,
+     93
+    ]
+   ],
+   "notes": "Each `have ... := by` is one step that consumes the current goal and originates the nested goal and the continuation goal. The nested `by` blocks inside the `let returnPath := { ..., walk := by ..., verticesNodup := by ... }` structure instance run inside the let's refine, so both nested goals originate at the `let returnPath` step (line 426) and the walk simpa (431) and verticesNodup simp (440) each depend on it. Rule steps are named by their rule. On lines 422, 481 and 499 the three rewrites leave `edges[i]? = edges[i]?`, which the rw's appended `with_reducible rfl` closes, so each of those lines also has a closing-rfl step (listed after the rules; its node is synthetic, positioned at the `rw` keyword or the `]`, same line). The single-rule rw's at 389 (two rules), 487, 493, 505 and 511 rewrite a hypothesis while the goal is `False`, so their rfl fails and they have no rfl step. Multi-binder intros (456, 469) give one step per binder. Each `cases forward : directed.forward with` (482, 500) gives two steps: the cases node (consumes the incoming goal, originates the generalized goal with `x✝ : Bool` and `forward`) and the inner `cases ... with` node (consumes that goal, originates the false/true alternative goals). `rcases returnCases with rightCase | leftCase` (476) opens inl/inr, consumed by the first steps of the two `·` blocks (477, 495). Each `simpa ... using` is one step; the simplified goal its internal node shows is never consumed elsewhere. Uncertain: whether have/let steps are the outer macro node or the synthetic refine inside it (same line and edges); the exact line attribution of the synthetic closing-rfl nodes (all single-line rw's here, so unaffected); step texts of multi-line tactics are condensed.",
+   "part": 4
+  }
+ ]
+}
