@@ -127,6 +127,18 @@ these searches but decide almost no proof. The recorded costs do not
 compare the designs, since the searches of a task shared draws in a
 rotating order.
 
+Every one of these searches acts on the first goal. A search that may act on
+any goal (`goal-selection-v0.1`, the menu, 24 expansions, states identified by
+typed expression keys) proves nothing the first-goal search misses: 98
+theorems against 103, the five it misses lying at depth four or five, which
+its wider frontier does not reach. Free choice brings back order redundancy
+(7.7% of expansions are order duplicates, against 4.5%), and identifying
+states up to goal order removes it without proving anything more. On
+constructed tasks whose witness goal comes first
+(`goal-selection-diagnostic-v0.1`), only free choice proves them, always by
+acting first on the goal that pins the witness; with two witnesses it runs out
+of budget.
+
 The proposal's third layer, telling good proofs from mediocre ones, was
 tested on 294 golf pairs from Mathlib's history (`golf-v0.1`): the proof the
 community accepted as better is shorter in 210 of 238 pairs, and an

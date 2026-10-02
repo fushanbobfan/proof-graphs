@@ -162,9 +162,12 @@ def validate_registration() -> None:
     prereg = runner.read_json(PREREG)
     if prereg["tasks"] != TASKS or prereg["predictions"] != PREDICTIONS:
         raise SystemExit("tasks or predictions changed since registration")
+    expected = dict(prereg["implementationSha256"])
+    for amendment in sorted(EXPERIMENT.glob("amendment-*.json"), key=lambda p: int(p.stem.split("-")[1])):
+        expected.update(runner.read_json(amendment).get("implementationSha256AfterAmendment", {}))
     for name, path in IMPLEMENTATIONS.items():
-        if prereg["implementationSha256"][name] != sha256_file(path):
-            raise SystemExit(f"implementation {name} changed since registration")
+        if expected[name] != sha256_file(path):
+            raise SystemExit(f"implementation {name} changed since registration or amendment")
 
 
 def guarded(task: dict[str, Any], arm: str) -> dict[str, Any]:

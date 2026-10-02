@@ -1,0 +1,11 @@
+{
+ "amendment": 1,
+ "date": "2026-10-01 America/Los_Angeles",
+ "scope": "implementation hashes only: the tasks, predictions, rows, summary, report, and decisions are unchanged",
+ "observation": "goal-selection-v0.1's amendment 1 changed scripts/search_goal_selection.py (pick_goal is defined where a task's module lacks it, and a failed pick skips its goal position) after this diagnostic had run. The diagnostic poses its tasks in a full-Mathlib REPL, where Batteries' pick_goal is available, and none of its 72 units raised an error or failed a pick.",
+ "change": "The hashes below replace the registered ones when the committed results are checked, and run_goal_selection_diagnostic.validate_registration reads amendments as run_search_goal_selection's does. The committed rows, summary, and report stand as run.",
+ "implementationSha256AfterAmendment": {
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36",
+  "diagnostic": "5c0ff697960fcc697ec8af305dd6f52424b497ec5dcc388f718bb81882e80045"
+ }
+}
