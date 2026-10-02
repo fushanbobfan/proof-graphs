@@ -100,6 +100,13 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed audit of long proofs and graphs that are not forests
+        run: |
+          if test -f experiments/extraction-audit-v0.3/results.jsonl; then
+            python scripts/run_extraction_audit_v3.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
       - name: Check the committed goal-identity search experiment
         run: |
           if test -f experiments/search-v0.4/summary.json; then

@@ -1,0 +1,43 @@
+{
+ "experiment": "extraction-audit-v0.3",
+ "preregistrationSha256": "5475b54d16febc0ce574717e7dfcf5aef674b6789e0afcd5d5a10fc8c6ef90da",
+ "proofs": 28,
+ "agree": 28,
+ "stepsAgree": 28,
+ "countsAgree": 28,
+ "steps": 1084,
+ "byStratum": {
+  "non-forest": {
+   "proofs": 14,
+   "agree": 14
+  },
+  "21-50": {
+   "proofs": 8,
+   "agree": 8
+  },
+  "51-150": {
+   "proofs": 6,
+   "agree": 6
+  }
+ },
+ "byCorpus": {
+  "proofnet-ir": 19,
+  "mathlib-slice": 4,
+  "holdout-slice": 5
+ },
+ "disagreements": 0,
+ "categories": {
+  "extractor error": 0,
+  "reconstruction error": 0,
+  "definition gap": 0
+ },
+ "unadjudicated": [],
+ "hypotheses": {
+  "H82": {
+   "supported": true
+  }
+ },
+ "reconstructionsSha256": "9a8df84c234be4869e2162596f26b2e0452c6fdf135eb47a8579bb61fbf49781",
+ "adjudicationSha256": null,
+ "resultsSha256": "f7b0279a7e3148cd6635b75cc944d7dce1785c75df941def97fc30d901644f3e"
+}
