@@ -1,0 +1,113 @@
+{
+ "amendment": 1,
+ "date": "2026-10-01 America/Los_Angeles",
+ "scope": "execution only: the tasks, arms, proposer, budget, identity, measures, hypotheses, checks, and analyses are unchanged",
+ "observation": "In 20 units, the any and anyMultiset searches of ten tasks (five in Mathlib.Logic.Nontrivial.Defs, four in Mathlib.Combinatorics.Quiver.Path, one in Mathlib.Data.Sigma.Basic), the search stopped with 'pick_goal failed at position 2' at its first state with two goals, in the first run and again in its resume, so the runner recorded them as errors and the paired comparisons leave their tasks out. Replayed on subsingleton_or_nontrivial, the failing state lists two goals, both unsolved, and the REPL answers 'unknown tactic' at pick_goal: Batteries defines pick_goal, and these modules do not import it. The first-goal arms never pick, and no other unit failed a pick.",
+ "change": "search_goal_selection.ExportingSession checks whether pick_goal is available after defining the typed exporter and, where it is not, defines it with the semantics of Batteries.Tactic.PermuteGoals (goals counted with getGoals, 1-indexed, '-' counting from the back); a pick that still fails skips its goal position, recorded as skippedPositions in the expansion, instead of stopping the search. Every unit whose latest row is this error is run again under the amended implementation, and its new row replaces the old. Completed units are kept as they are: they never failed a pick, and neither change alters such a search.",
+ "units": [
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.comp_inj",
+   "any"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.comp_inj",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.eq_toPath_comp_of_length_eq_succ",
+   "any"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.eq_toPath_comp_of_length_eq_succ",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.length_ne_zero_iff_eq_comp",
+   "any"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.length_ne_zero_iff_eq_comp",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.length_ne_zero_iff_eq_cons",
+   "any"
+  ],
+  [
+   "Mathlib.Combinatorics.Quiver.Path",
+   "Quiver.Path.length_ne_zero_iff_eq_cons",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Data.Sigma.Basic",
+   "Function.eq_of_sigmaMk_comp",
+   "any"
+  ],
+  [
+   "Mathlib.Data.Sigma.Basic",
+   "Function.eq_of_sigmaMk_comp",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "Function.Injective.exists_ne",
+   "any"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "Function.Injective.exists_ne",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "Function.Surjective.nontrivial",
+   "any"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "Function.Surjective.nontrivial",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "Function.nontrivial_of_nontrivial",
+   "any"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "Function.nontrivial_of_nontrivial",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "not_subsingleton_iff_nontrivial",
+   "any"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "not_subsingleton_iff_nontrivial",
+   "anyMultiset"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "subsingleton_or_nontrivial",
+   "any"
+  ],
+  [
+   "Mathlib.Logic.Nontrivial.Defs",
+   "subsingleton_or_nontrivial",
+   "anyMultiset"
+  ]
+ ],
+ "resultsSeenBeforeAmendment": "the runner's progress lines; per-arm counts of units, errors, and theorems proved at 86% of the run; the first pass's results.jsonl, committed unchanged before this amendment (ce9b2a1). The amended implementation was committed (737a262) before the first pass ended. The 20 units have no outcome; they are named by their error.",
+ "implementationSha256AfterAmendment": {
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36"
+ }
+}
