@@ -57,6 +57,7 @@ it and lists where an independent cross-check is most valuable.
 
 ```text
 ProofGraphs/Extract.lean          goal-dependency graphs from info trees
+ProofGraphs/FirstGoal.lean        first-goal completeness, for goals that are values
 ProofGraphsExtract.lean           proof_graph_extract <module> <file> ...
 scripts/count_linearizations.py   exact orderings per graph
 scripts/run_linearizations.py     step 1: register, run, check
