@@ -1,0 +1,87 @@
+{
+ "analyses": {
+  "checkpoints": "proofs and discordant tasks at 48, 96, 192, and 256 expansions, reported without tests",
+  "interval": "the 95% percentile interval of the per-task difference in proof rate between the two searches, resampling modules (2,000 resamples, seed 20261003, drawn in the order H87, H88, H89)"
+ },
+ "budget": {
+  "checkpoints": [
+   48,
+   96,
+   192,
+   256
+  ],
+  "expansionsPerSearch": 256,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C28": "at least 98% of the searches stated here and in search-v0.8's first set repeat its first 48 expansions and, where it found one within them, its proof",
+  "C29": "no goal occurrence has two new draws within a task, and no new draw replaces a seeded one",
+  "C30": "at least 99% of the searches export through the defined tactic",
+  "C31": "at least 99% of the new draws have all 16 completions"
+ },
+ "decisionRule": "each hypothesis is decided on its own: H87 by its sign test, H88 and H89 by their intervals; a significant difference in the other direction than H87's would be reported, not tested",
+ "developmentChecksBeforeRegistration": [
+  "offline: the summary computed from search-v0.8's first set, read as if it were this run's rows, gives that set's proofs (whole states 40, groups 42 of the 164 tasks constructed in both) and C28 for every compared search",
+  "--prefix 4, with the seeds and 48 expansions, the three searches of an earlier version of this runner: on the first four tasks of the run, the three constructed tasks repeated search-v0.8's first set in all nine searches, expansions and outcomes, without a new draw; PolishSpace.Equiv.measurableEquiv was constructed in no search, as in search-v0.8",
+  "--develop 6 --budget 384 --workers 6, fresh draws on search-v0.8's development theorems: six REPLs importing at once left 0.6 GB of commit charge (a REPL holds 4 to 7 GB, the server 12 GB, growing by 2 GB with its prompt cache in RAM); a REPL's memory hardly grew with its candidate tactics (6.6 GB at 63 and at 160, 4.3 GB at 130 and at 287, 6.2 GB at 63 and at 145); draws ran at 380 to 390 an hour with three units running; a watchdog stopped the run when other programs took the commit charge left below 5 GB",
+  "--develop 6 --budget 256 --workers 3, the two searches, the server's prompt cache off (11.4 GB): stopped by the watchdog after five minutes, at 283 draws an hour, when other programs took the commit charge left below 8 GB with two REPLs running; hence at most three units at a time, the start gate, and the supervisor's floor"
+ ],
+ "draws": {
+  "seedSources": {
+   "searchV06Draws": "f86a6e35346e930f0d51a5848aa5c7dadd5d554e6ef69f0e9801300190f09f9b",
+   "searchV07Draws": "95b54cb7bf0ba1154ee27e06318cacc15ee39be4ea2e312d9c65850d46690e3e",
+   "searchV08Draws": "c26eb3cf8c570911666d254827837e613b22ef239af6acfa516b9391d9501796",
+   "searchV08Results": "de36640fa6b5a06734998c75aed26a51490d93ab660180fb50b8befadda361a6"
+  },
+  "seeds": "per task and printed goal, in occurrence order: the sets of search-v0.6 and search-v0.7 that seeded search-v0.8's first set, then that set's new draws (8,133 sets for 169 tasks)",
+  "seedsSha256": "9e7f8ad52ee462c0dd77c7a7ce9073388683643806250f16e96046423407673d",
+  "set": "search-v0.8's first set (replicate 0), continued",
+  "sharing": "within a task, the draws are shared by its two searches as in search-v0.6 to v0.8: the n-th expansion of a printed goal gets the n-th set for it, seeded or drawn anew by whichever search first needs it"
+ },
+ "execution": "a unit is one task: its two searches in turn, each in a fresh REPL; at most three units at a time, since other programs share the machine's memory: a unit starts only while at least 15 GB of commit charge is left and 45 s after the previous start, and a supervisor stops the runner while less than 8 GB is left (units in flight leave no rows and run again); a unit that raises is recorded as two error rows and run again, up to three attempts; a unit in which a search was not constructed, for any reason, or was abandoned by a REPL timeout runs once more; the latest attempt counts, and the new draws of earlier attempts are dropped; every row of every attempt is kept",
+ "experiment": "search-v0.9",
+ "hypotheses": {
+  "H87": "the coupled-group search proves more tasks than the whole-state search at 256 expansions: one-sided sign test at 0.05 on the stated tasks exactly one of the two proves",
+  "H88": "goal sharing grows with the budget: in the whole-state searches that run past 48 expansions, the share of goal duplicates among the expansions after the 48th exceeds the share among the first 48 (pooled over those searches); supported if the 95% interval of the difference, resampling modules (2,000 resamples, seed 20261003), lies above 0",
+  "H89": "order duplicates stay rare: over all expansions of the whole-state searches, the share of order duplicates is below 1%; supported if the upper end of its 95% interval, resampling modules, is below 1%"
+ },
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "1310a241a50903399efbbf3a7d27b30abf0f62a07f244c30d5231b7a3dd1194f",
+  "searchV08Runner": "8b5d33907160ccf27b42ecba4012baac405350eecd51d363aa7afed4fdf5c2af"
+ },
+ "measures": {
+  "cost": "expansions, draws (seeded, shared, new) and their tokens, REPL calls and seconds by kind, search seconds",
+  "frontier": "per search, the searches whose frontier emptied before the budget and those that used it up",
+  "mechanisms": "as search-v0.8: outside-coupled discards, groups of several goals made and used in proofs, whole-state proofs through a goal's later draw",
+  "proved": "tasks whose search finds a proof that re-verifies from the statement, by each checkpoint: a breadth-first search that proves a theorem within c expansions is the search with budget c",
+  "sharing": "in the whole-state search, the shares of expansions that are order duplicates and goal duplicates (faithful keys, as search-v0.8 recorded them), by checkpoint",
+  "stated": "tasks constructed in both searches; a search abandoned by a REPL timeout counts as not proving its task, as in search-v0.8"
+ },
+ "power": "search-v0.8's first set differed on 2 tasks between these searches; if the larger budget leaves the discordant tasks few, only a large effect can be detected: a one-sided p of at most 0.05 takes at least 5 discordant tasks, all in one direction, or 7 against 1; the decisions are reported whichever way they come out",
+ "proposer": "as search-v0.5 to v0.8: BFS-Prover-V2-7B in Q8_0, 16 completions at temperature 1.0, at most 64 tokens, the first goal followed by ':::', duplicates dropped; served by llama.cpp (build 11193) with 32 slots as for search-v0.8, on its own port and with the server's prompt cache in RAM switched off (--cache-ram 0) to bound its memory, which changes neither the prompts nor the sampling",
+ "question": "with 256 expansions instead of search-v0.8's 48, does a search over metavariable-coupled goal groups prove more than a search over whole states, and how do goal sharing and order duplicates change with the budget",
+ "registeredLocalDate": "2026-10-03 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier experiment, including search-v0.8 in full; the development runs below; no search of this registration had run on a corpus task beyond 48 expansions",
+ "searches": {
+  "groups": "search_faithful.coupled_search, unchanged from search-v0.8",
+  "identity": "goal_identity.py's export through the tactic defined once per task environment, as in search-v0.8",
+  "leftOut": "search-v0.8's search over independent goals, which proved the same theorems as the group search in each set except one theorem in one set; leaving it out saves a third of the REPL time",
+  "order": "the whole-state search first on tasks of even index, the group search first on odd",
+  "whole": "search_faithful.whole_state_search, unchanged from search-v0.8"
+ },
+ "tasks": {
+  "count": 200,
+  "order": "search-v0.6's: the 140 tasks search-v0.5 did not run, then its 60",
+  "source": "holdout-v0.1/tasks.json",
+  "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
+ }
+}

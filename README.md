@@ -94,6 +94,7 @@ scripts/recording_repl.py         a REPL session that records what a search does
 scripts/run_key_replay.py         finished searches re-keyed by Lean expressions
 scripts/search_faithful.py        searches over states, goals, and coupled goal groups
 scripts/run_search_coupled.py     the three, over three sets of draws
+scripts/run_search_coupled_deep.py states and groups at 256 expansions
 scripts/explore_range_rerun_v08.py  its eleven setup failures rerun (not registered)
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
 scripts/run_holdout.py            a second, disjoint Mathlib slice
@@ -125,6 +126,7 @@ experiments/search-v0.6/          the same, with shared draws
 experiments/search-v0.7/          goals and states up to renaming
 experiments/search-v0.8/          states, goals, and coupled goal groups
 experiments/search-v0.8-range-rerun/  its eleven setup failures rerun (not registered)
+experiments/search-v0.9/          states and coupled groups at 256 expansions
 experiments/goal-key-audit/       the keys' collisions, measured (not registered)
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
 experiments/holdout-v0.1/         the second slice
