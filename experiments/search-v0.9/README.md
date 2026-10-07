@@ -58,10 +58,10 @@ on port 8091 and a Mathlib REPL per worker).
 
 Memory decided the schedule. A REPL holds 4 to 7 GB and the server 11.4 GB, and on this machine other programs
 held most of the commit charge, so the runner admits a unit only while 15 GB is left, and a supervisor stopped it
-while less than 8 GB was left. Three such stops on 2026-10-03, the last when a game started, led to fewer workers
+while less than 8 GB was left. Three such stops on 2026-10-03, the last when another program started, led to fewer workers
 (three, two, one) until the paging file was enlarged at 17:31, raising the commit limit from 151 to 175 GB; three
-workers ran from then on. From 17:26 the supervisor also stopped the runner and the server while a game ran, four
-times, for minutes to 9 hours, and the run was stopped on 2026-10-06 at 08:42 while the machine was away, resuming
+workers ran from then on. From 17:26 the supervisor also stopped the runner and the server while the machine was in
+other interactive use, four times, for minutes to 9 hours, and the run was stopped on 2026-10-06 at 08:42 while the machine was away, resuming
 at 21:19 after a reboot. It ended on 2026-10-07 at 03:47. A unit in flight at a stop leaves no row and runs again
 with fresh draws beyond the seeds, as registered; neither the stops nor the number of workers changes what a
 unit computes. The server's flags were the same at every start.

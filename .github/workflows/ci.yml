@@ -186,7 +186,7 @@ jobs:
           else
             echo "no committed results yet"
           fi
-      - name: Check the committed search with eight times the budget
+      - name: Check the committed search with 256 expansions
         run: |
           if test -f experiments/search-v0.9/summary.json; then
             python scripts/run_search_coupled_deep.py --check-committed
