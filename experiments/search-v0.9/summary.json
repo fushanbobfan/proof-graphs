@@ -1,0 +1,685 @@
+{
+ "experiment": "search-v0.9",
+ "preregistrationSha256": "e588177c69aafc0aec2b52cd6c388563ea610d625ee6a691005ada22284586e0",
+ "stated": 169,
+ "tasks": 200,
+ "proved": {
+  "whole": {
+   "48": 41,
+   "96": 44,
+   "192": 46,
+   "256": 46
+  },
+  "groups": {
+   "48": 43,
+   "96": 46,
+   "192": 47,
+   "256": 48
+  }
+ },
+ "provedTasks": {
+  "whole": {
+   "48": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "96": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "ContinuousOn.sInf_image_Icc_le",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "192": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "ContinuousOn.sInf_image_Icc_le",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "GrpCat.FilteredColimits.colimitInvAux_eq_of_rel",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "256": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "ContinuousOn.sInf_image_Icc_le",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "GrpCat.FilteredColimits.colimitInvAux_eq_of_rel",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ]
+  },
+  "groups": {
+   "48": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.acceptsFrom_iUnion",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "96": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.acceptsFrom_iUnion",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Real.qaryEntropy_pos",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "192": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.acceptsFrom_iUnion",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.dvd_iff'",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Real.qaryEntropy_pos",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ],
+   "256": [
+    "AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated",
+    "CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+    "CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+    "CategoryTheory.Localization.equivalence_counitIso_app",
+    "CategoryTheory.MorphismProperty.map_isoClosure",
+    "CategoryTheory.MorphismProperty.map_map",
+    "ContinuousOn.le_sSup_image_Icc",
+    "DFinsupp.sum_single",
+    "ENat.card_eq_coe_natCard",
+    "Filter.lift'_pure",
+    "Finite.card_eq_zero_of_surjective",
+    "FractionalIdeal.one_mem_inv_coe_ideal",
+    "Function.mulSupport_one_sub'",
+    "GrpCat.FilteredColimits.colimitInvAux_eq_of_rel",
+    "HomologicalComplex.Hom.comm",
+    "HomologicalComplex.hom_ext",
+    "IsCompact.exists_forall_le'",
+    "Module.Basis.range_extend",
+    "MulArchimedeanClass.top_eq_mk_iff",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "MultilinearMap.map_update_sub",
+    "MultilinearMap.map_update_sum",
+    "MultilinearMap.mkPiRing_eq_zero_iff",
+    "Multiset.prod_filter_mul_prod_filter_not",
+    "MvPolynomial.mk_eq_eval\u2082",
+    "NFA.acceptsFrom_iUnion",
+    "NFA.evalFrom_iUnion",
+    "NFA.nil_mem_acceptsFrom",
+    "Nat.Ico_succ_right_eq_insert_Ico",
+    "Nat.card_Iic",
+    "Nat.card_eq",
+    "PNat.dvd_iff'",
+    "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
+    "Polynomial.monomial_mem_lifts",
+    "Real.fibRec_charPoly_eq",
+    "Real.qaryEntropy_pos",
+    "Set.inter_indicator_mul",
+    "SimpleGraph.Connected.ofBoxProdRight",
+    "SimpleGraph.edgeSet_subset_sym2_iff",
+    "SimpleGraph.edge_other_incident_set",
+    "SimpleGraph.iInf_adj_of_nonempty",
+    "SimpleGraph.neighborFinset_boxProd",
+    "SimpleGraph.subsingleton_iff",
+    "Submodule.ker_liftQ_eq_bot",
+    "Submodule.spanFinrank_of_not_fg",
+    "ppow_mul",
+    "smoothingFun_nonneg"
+   ]
+  }
+ },
+ "outcome": {
+  "whole": {
+   "proved": {
+    "48": 41,
+    "96": 44,
+    "192": 46,
+    "256": 46
+   },
+   "newProofs": [
+    "ContinuousOn.sInf_image_Icc_le",
+    "GrpCat.FilteredColimits.colimitInvAux_eq_of_rel",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "MultilinearMap.map_update_sum",
+    "Submodule.ker_liftQ_eq_bot"
+   ],
+   "exhausted": 52,
+   "capped": 70,
+   "abandoned": 1,
+   "expansionsToProof": {
+    "min": 1.0,
+    "q1": 2.0,
+    "median": 6.5,
+    "q3": 14.25,
+    "max": 174.0,
+    "count": 46
+   }
+  },
+  "groups": {
+   "proved": {
+    "48": 43,
+    "96": 46,
+    "192": 47,
+    "256": 48
+   },
+   "newProofs": [
+    "GrpCat.FilteredColimits.colimitInvAux_eq_of_rel",
+    "MultilinearMap.iteratedFDeriv_aux",
+    "PNat.dvd_iff'",
+    "Real.qaryEntropy_pos",
+    "Submodule.ker_liftQ_eq_bot"
+   ],
+   "exhausted": 47,
+   "capped": 74,
+   "abandoned": 0,
+   "expansionsToProof": {
+    "min": 1.0,
+    "q1": 2.0,
+    "median": 7.0,
+    "q3": 16.0,
+    "max": 217.0,
+    "count": 48
+   }
+  }
+ },
+ "pairs": {
+  "H87": {
+   "first": "groups",
+   "second": "whole",
+   "tasksFirstMore": 3,
+   "tasksSecondMore": 1,
+   "signTestFirstMore": 0.3125,
+   "rateDifference": 0.011834,
+   "interval95": [
+    -0.011173,
+    0.037234
+   ],
+   "checkpoints": {
+    "48": {
+     "firstOnly": 2,
+     "secondOnly": 0
+    },
+    "96": {
+     "firstOnly": 3,
+     "secondOnly": 1
+    },
+    "192": {
+     "firstOnly": 3,
+     "secondOnly": 2
+    },
+    "256": {
+     "firstOnly": 3,
+     "secondOnly": 1
+    }
+   }
+  }
+ },
+ "tests": {
+  "H87": {
+   "p": 0.3125,
+   "rejected": false
+  }
+ },
+ "goalSharing": {
+  "searches": 75,
+  "earlyFlagged": 3600,
+  "lateFlagged": 14826,
+  "earlyShare": 0.056944,
+  "lateShare": 0.059153,
+  "difference": 0.002208,
+  "interval95": [
+   -0.017076,
+   0.022708
+  ],
+  "holds": false
+ },
+ "orderDuplicates": {
+  "searches": 168,
+  "flagged": 19106,
+  "orderDuplicates": 40,
+  "share": 0.002094,
+  "interval95": [
+   0.001199,
+   0.003188
+  ],
+  "limit": 0.01,
+  "holds": true
+ },
+ "byCheckpoint": {
+  "48": {
+   "flagged": 4280,
+   "orderShare": 0.001869,
+   "goalShare": 0.057243,
+   "expansions": 4280
+  },
+  "96": {
+   "flagged": 7755,
+   "orderShare": 0.001934,
+   "goalShare": 0.056351,
+   "expansions": 7755
+  },
+  "192": {
+   "flagged": 14626,
+   "orderShare": 0.00212,
+   "goalShare": 0.057227,
+   "expansions": 14626
+  },
+  "256": {
+   "flagged": 19106,
+   "orderShare": 0.002094,
+   "goalShare": 0.058725,
+   "expansions": 19106
+  }
+ },
+ "costs": {
+  "whole": {
+   "units": 168,
+   "expansions": 19106,
+   "draws": {
+    "seeded": 4527,
+    "shared": 3502,
+    "drawn": 11077
+   },
+   "completionTokens": 2924386,
+   "promptTokens": 34979520,
+   "repl": {
+    "tactic": {
+     "calls": 240022,
+     "seconds": 14320.2
+    },
+    "export": {
+     "calls": 61738,
+     "seconds": 4223.6
+    },
+    "harness": {
+     "calls": 0,
+     "seconds": 0.0
+    },
+    "command": {
+     "calls": 1073,
+     "seconds": 7223.4
+    }
+   },
+   "searchSeconds": {
+    "min": 0.0,
+    "q1": 0.9,
+    "median": 7.25,
+    "q3": 2954.95,
+    "max": 7210.5,
+    "count": 168
+   },
+   "fastExport": 168,
+   "exportFailures": 0,
+   "rejected": 19
+  },
+  "groups": {
+   "units": 169,
+   "expansions": 20260,
+   "draws": {
+    "seeded": 5346,
+    "shared": 3839,
+    "drawn": 11075
+   },
+   "completionTokens": 2956819,
+   "promptTokens": 33198592,
+   "repl": {
+    "tactic": {
+     "calls": 254066,
+     "seconds": 13326.4
+    },
+    "export": {
+     "calls": 60644,
+     "seconds": 5129.6
+    },
+    "harness": {
+     "calls": 12040,
+     "seconds": 312.1
+    },
+    "command": {
+     "calls": 1068,
+     "seconds": 7214.9
+    }
+   },
+   "searchSeconds": {
+    "min": 0.0,
+    "q1": 1.05,
+    "median": 12.7,
+    "q3": 3120.95,
+    "max": 15003.6,
+    "count": 169
+   },
+   "fastExport": 169,
+   "exportFailures": 0,
+   "rejected": 6
+  }
+ },
+ "mechanisms": {
+  "groupsOutside": 86,
+  "groupsMade": {
+   "single": 65073,
+   "several": 2705
+  },
+  "groupSearchesWithSeveral": 75,
+  "proofsThroughGroups": 0,
+  "wholeProofsWithLaterDraws": 3,
+  "groupMerges": {
+   "arrivals": 67778,
+   "new": 46059,
+   "identical": 11522,
+   "renamed": 10197,
+   "reused": 1127,
+   "checks": 9605,
+   "refused": 535
+  }
+ },
+ "errors": 0,
+ "abandoned": 1,
+ "attempts": 234,
+ "C28": {
+  "compared": 331,
+  "matched": 331,
+  "differing": [],
+  "holds": true
+ },
+ "C29": {
+  "draws": 22168,
+  "repeated": 0,
+  "overlappingSeeds": 0,
+  "holds": true
+ },
+ "C30": {
+  "units": 337,
+  "fastExport": 337,
+  "holds": true
+ },
+ "C31": {
+  "draws": 22168,
+  "complete": 22168,
+  "holds": true
+ },
+ "hypotheses": {
+  "H87": {
+   "supported": false
+  },
+  "H88": {
+   "supported": false
+  },
+  "H89": {
+   "supported": true
+  }
+ },
+ "resultsSha256": "62c689fa7f35f4d3a6d814e20e6e695838bbce76c90fc6cdf48106859deb7759",
+ "drawsSha256": "8a47107f30f7f86c3f5446baf8f70bd3357f09870415a660bc77c87047b24453"
+}

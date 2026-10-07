@@ -125,7 +125,12 @@ task-sets against 121 for goals and 116 for whole states, no pair
 significant after Holm's adjustment. Coupled goals arise in a quarter of
 these searches but decide almost no proof. The recorded costs do not
 compare the designs, since the searches of a task shared draws in a
-rotating order.
+rotating order. With 256 expansions instead of 48 (`search-v0.9`: the
+whole-state and group searches in search-v0.8's first set of draws, whose
+first 48 expansions they repeat exactly), the group search proves 48 of
+169 theorems and the whole-state search 46, three theorems against one,
+not significant. Goal sharing stays near 6% of the whole-state search's
+expansions at every budget, and order duplicates near 0.2%.
 
 Every one of these searches acts on the first goal. A search that may act on
 any goal (`goal-selection-v0.1`, the menu, 24 expansions, states identified by
