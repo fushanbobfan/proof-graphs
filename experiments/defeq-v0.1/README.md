@@ -87,9 +87,9 @@ step-prover, 42 menu), the same 73 as in keys-v0.1.
 - **H93 supported**: the merge, bucket lookups and `isDefEq`, takes a median 0.008% of the step prover's tactic time
   per unit and 0.0004% of the menu's; no check exhausted its heartbeats (560 and 258 checks at instances
   transparency, 536 and 229 accepted). With the elaboration and hashing of the printed types added (amendment 1), the
-  median is 16% of the step prover's tactic time and 0.8% of the menu's. That time is mostly the text round trip that
-  carries goals from their states to the root state, which a search holding the expressions would not need, but it
-  also contains the hashing, which was not timed apart.
+  median is 16% of the step prover's tactic time and 0.8% of the menu's. That time holds the text round trip that
+  carries goals from their states to the root state, which a search holding the expressions would not need, and the
+  hashing, which was not timed apart.
 
 C33 holds: 11,382 of the 11,591 distinct goals without a metavariable round-trip (98.2%; 8,992 exactly, 2,390 up to
 reducible unfolding). C34 holds: all 427 merges complete, and 11,373 of the 11,382 round-tripped goals elaborate
