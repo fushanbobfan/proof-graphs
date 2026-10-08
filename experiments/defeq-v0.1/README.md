@@ -110,7 +110,9 @@ differ only in `QPF.{u,?_mvar.12318,v}` against `QPF.{u,?_mvar.193814,v}`. The r
 
 That analysis exposes a defect of `goal_identity.py`'s expression key, which keys-v0.1, search-v0.8, and search-v0.9
 use. Goals that differ only in the names of universe metavariables get different keys. The defect can only keep
-identical goals apart, never join different ones. Within one search a universe metavariable inherited from the root
+identical goals apart, never join different ones, so it can only add to keys-v0.1's false merges and false drops,
+where the printed key, which erases those names, joins what the expression key keeps apart: here at most 49 of the
+printed key's 596 false drops involve a goal with a metavariable. Within one search a universe metavariable inherited from the root
 keeps its name, so only those created during the search can split an identity; here the expansions whose first goal
 has a metavariable of either kind are 3.8% of the step prover's and 12.3% of the menu's. It leaves this experiment's
 comparisons alone, since the merge takes only goals without metavariables, so that goals with one enter the
