@@ -9,22 +9,30 @@ term while ignoring its implicit arguments, its proof arguments and the universe
 import it into a task's environment, so `DEFEQ_TEMPLATE` implements the same procedure.
 
 A goal is compared as its closed type, its local context abstracted over its target (`mkForallFVars`, implementation
-details skipped), so that goals from different proof states of one search can meet in one context. Two `run_tac`
+details skipped), so that goals from different proof states of one search can meet in one context. Two tactic
 blocks do the work:
 
 - `CLOSED_TACTIC`, in a proof state: for each goal, the closed type printed with `pp.all` (binder names replaced by
-  `x0`, `x1`, ... so that no inaccessible name is printed), its universe parameters, and whether the printed text
-  elaborates back, in the same state, to the same expression (`exact`), to one equal up to reducible unfolding
-  (`reducible`), or not (`differs`, or an error); a goal whose closed type has a metavariable is marked and not
-  printed, since a metavariable cannot be carried to another context;
-- `defeq_tactic(path)`, in a proof state of the same environment: reads the printed types of a unit's distinct goals
-  from a JSON file and elaborates each; beta-reduces it and normalizes its universe levels, which preserve definitional
+  `x0`, `x1`, ... so that no inaccessible name is printed), its universe parameters, its number of hypotheses, and
+  whether the printed text elaborates back, in the same state, to the same expression (`exact`), to one equal up to
+  reducible unfolding (`reducible`), or not (`differs`, or an error); a goal whose closed type has a metavariable is
+  marked and not printed, since a metavariable cannot be carried to another context;
+- `DEFEQ_TEMPLATE`, in a proof state of the same environment: reads the printed types of a unit's distinct goals from
+  a JSON file and elaborates each; beta-reduces it and normalizes its universe levels, which preserve definitional
   equality at every transparency; hashes it as the canonicalizer does, together with its number of hypotheses, since
   `h : P ⊢ Q` and `⊢ P → Q` share a closed type but are different goals; and then, in order, merges each goal into the
-  first earlier goal with the same hash that `isDefEq` accepts, at reducible and at instances transparency. Each
-  `isDefEq` runs with its own heartbeat budget (the `maxHeartbeats` the block runs under); one that exhausts it counts
-  as not equal and is reported. For each goal it returns the index of the first goal of its class, and the time of
-  each goal's elaboration and merge.
+  first earlier goal with the same hash that `isDefEq` accepts, separately at reducible, instances, and default
+  transparency. Each elaboration and each `isDefEq` runs with its own heartbeat budget (the `maxHeartbeats` the block
+  runs under); an elaboration that exhausts it counts as not elaborated, and a check that exhausts it as not equal and
+  is reported. For each goal it returns the index of the first goal of its class, and the time of each goal's
+  elaboration and merge.
+
+The merge runs as the tactic `pg_defeq_classes` (`DEFEQ_DEFINITION`), defined right after a task's imports, as the
+export tactics are: a `run_tac` block is elaborated in the declaration's scope, where an opened namespace can capture
+its names (`Prod.snd` becomes `CategoryTheory.Prod.snd`) and Lean can stop it (`internal exception abortTermElab`, as
+it stops keys-v0.1's export there). Its guards use `tryCatchRuntimeEx` and restore the state, as a backtracking `try`
+does: a plain `try` rethrows a heartbeat or recursion-depth exception, which would end the whole pass (defeq-v0.1,
+amendment 2).
 """
 
 from __future__ import annotations
@@ -127,8 +135,9 @@ DEFEQ_TEMPLATE = r"""run_tac do
     let s ← Lean.ofExcept (entry.getObjValAs? String "pp")
     let levels ← Lean.ofExcept (entry.getObjValAs? (Array String) "levels")
     let hyps ← Lean.ofExcept (entry.getObjValAs? Nat "hyps")
-    let e? ← try
-        Lean.withCurrHeartbeats do
+    let saved ← Lean.Elab.Tactic.saveState
+    let e? ← Lean.tryCatchRuntimeEx
+        (Lean.withCurrHeartbeats do
           let stx ← Lean.ofExcept (Lean.Parser.runParserCategory (← Lean.getEnv) `term s)
           let e ← Lean.Elab.Term.withLevelNames (levels.toList.map Lean.Name.mkSimple) do
             Lean.Elab.Term.withoutErrToSorry do
@@ -139,8 +148,10 @@ DEFEQ_TEMPLATE = r"""run_tac do
           let e ← normalize e
           -- The number of hypotheses is part of the key: `h : P ⊢ Q` and `⊢ P → Q` have one closed type but are
           -- different goals.
-          return some (e, mixHash (← keyOf e) (hash hyps))
-      catch _ => pure none
+          return some (e, mixHash (← keyOf e) (hash hyps)))
+        (fun _ => do
+          saved.restore
+          return none)
     terms := terms.push (e?.map Prod.fst)
     keys := keys.push ((e?.map Prod.snd).getD 0)
     elabNanos := elabNanos.push ((← IO.monoNanosNow) - start)
@@ -166,12 +177,19 @@ DEFEQ_TEMPLATE = r"""run_tac do
         let mut found : Option Nat := none
         for j in buckets.getD k #[] do
           checks := checks + 1
-          let verdict ← try
-              Lean.withCurrHeartbeats <| Lean.Meta.withTransparency mode <|
-                Lean.Meta.isDefEq e terms[j]!.get!
-            catch _ =>
-              exhausted := exhausted + 1
-              pure false
+          let saved ← Lean.Elab.Tactic.saveState
+          let verdict? ← Lean.tryCatchRuntimeEx
+              (do
+                let v ← Lean.withCurrHeartbeats <| Lean.Meta.withTransparency mode <|
+                  Lean.Meta.isDefEq e terms[j]!.get!
+                return some v)
+              (fun _ => do
+                saved.restore
+                return none)
+          let mut verdict := false
+          match verdict? with
+          | some v => verdict := v
+          | none => exhausted := exhausted + 1
           if verdict then
             accepted := accepted + 1
             found := some j
@@ -185,6 +203,9 @@ DEFEQ_TEMPLATE = r"""run_tac do
     result := result.push (label, Lean.Json.mkObj [("classes", Lean.toJson classes), ("nanos", Lean.toJson nanos),
       ("checks", Lean.toJson checks), ("accepted", Lean.toJson accepted), ("exhausted", Lean.toJson exhausted)])
   Lean.logInfo (Lean.Json.mkObj result.toList).compress"""
+
+DEFEQ_DEFINITION = ("open Lean Elab Tactic in\nelab \"pg_defeq_classes \" path:str : tactic => do"
+                    + DEFEQ_TEMPLATE.replace("run_tac do", "", 1).replace("PATH", "path.getString"))
 
 
 def _info(response: dict[str, Any]) -> Any:
@@ -214,11 +235,14 @@ def defeq_tactic(path: str) -> str:
     return DEFEQ_TEMPLATE.replace("PATH", json.dumps(path))
 
 
-def canonical_classes(repl: LeanRepl, proof_state: int, path: str, timeout: float) -> dict[str, Any] | None:
-    """The classes of the goals listed in `path` (a JSON array of {"pp", "levels"}), at reducible and instances
-    transparency, with elaboration and merge times; None if the tactic fails."""
+def canonical_classes(repl: LeanRepl, proof_state: int, path: str, timeout: float,
+                      defined: bool = False) -> dict[str, Any] | None:
+    """The classes of the goals listed in `path` (a JSON array of {"pp", "levels", "hyps"}), at reducible, instances,
+    and default transparency, with elaboration and merge times; None if the tactic fails. With `defined`, through
+    `pg_defeq_classes`, which the proof state's environment must define (`DEFEQ_DEFINITION`)."""
+    tactic = f"pg_defeq_classes {json.dumps(path)}" if defined else defeq_tactic(path)
     try:
-        response = repl._exchange({"tactic": f"set_option maxHeartbeats {DEFEQ_HEARTBEATS} in\n{defeq_tactic(path)}",
+        response = repl._exchange({"tactic": f"set_option maxHeartbeats {DEFEQ_HEARTBEATS} in\n{tactic}",
                                    "proofState": proof_state}, timeout)
     except ReplTimeout:
         return None

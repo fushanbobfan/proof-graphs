@@ -1,0 +1,148 @@
+{
+ "amendment": 2,
+ "date": "2026-10-08 America/Los_Angeles",
+ "scope": "execution only: the units, the replay, the identity, the merge's procedure and budgets, the measures, the hypotheses, the checks, and amendment 1 are unchanged",
+ "observation": {
+  "runTac": "The merge ran as a run_tac block in each task's root state, which Lean elaborates in the declaration's own scope. Of the 276 attempts recorded, 48 did not complete their merge, and with them the latest attempt of 24 units (19 step-prover, 5 menu), all in CategoryTheory, Polynomial, and MvPolynomial modules. Each failed in 0.15 to 1.6 s whatever its number of goals, while completed merges took 1.9 s at the median, and the 24 of these units attempted twice failed both times. Replayed by hand, the block fails in CategoryTheory modules with 'Application type mismatch', because its Prod.snd resolves to CategoryTheory.Prod.snd in files that open that namespace, and in Polynomial and MvPolynomial modules with 'internal exception abortTermElab', the failure that stopped keys-v0.1's export there and made search-v0.8 define its export as a tactic right after the imports. The same code as a tactic defined after the imports, before the file's opens, completed on every unit tried. These units would have left the measured set, and C34 (98% of the merges complete) would have failed on them.",
+  "runtimeExceptions": "Lean 4.32's try/catch rethrows heartbeat and recursion-depth exceptions (Core.tryCatch), and a test in this project's Lean confirms it, while tryCatchRuntimeEx catches them. In the registered code an elaboration or an isDefEq check that exhausted its heartbeats would therefore have ended the whole pass, instead of counting as not elaborated or as unequal, as the preregistration states. No completed merge met one (the completed merges report 0 exhausted checks), so the completed merges are what the amended code computes."
+ },
+ "change": "goal_defeq.DEFEQ_DEFINITION defines the merge as the tactic pg_defeq_classes from the text of DEFEQ_TEMPLATE, whose two guards now use tryCatchRuntimeEx and restore the state as the backtracking try did, so that an elaboration that exhausts its heartbeats counts as not elaborated and an isDefEq check that exhausts them as unequal; its docstrings now describe the three transparencies and the hypothesis count. run_defeq_replay.DefeqSession defines pg_defeq_classes after the two export tactics, and the merge runs through it (through the run_tac block only if the definition fails; each merge records which). Each row recorded after this amendment carries 'amendment': 2. A unit whose latest attempt before the amendment did not complete its merge runs again, whatever its outcome, and attempts under the amendment count afresh (two at most); every other row is kept. The run checks the amended files against the hashes recorded here.",
+ "checkedBeforeRegistration": {
+  "units": [
+   {
+    "unit": "PNat.dvd_iff",
+    "kind": "prover",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": true,
+    "outcomeMatches": true,
+    "usable": 49,
+    "registeredCompleted": true,
+    "amendedCompleted": true,
+    "identical": true,
+    "registeredMessage": ""
+   },
+   {
+    "unit": "Submodule.mapQ_pow",
+    "kind": "prover",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": true,
+    "outcomeMatches": true,
+    "usable": 4,
+    "registeredCompleted": true,
+    "amendedCompleted": true,
+    "identical": true,
+    "registeredMessage": ""
+   },
+   {
+    "unit": "Int.ModEq.pow_card_sub_one_eq_one",
+    "kind": "menu",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": true,
+    "outcomeMatches": true,
+    "usable": 5,
+    "registeredCompleted": true,
+    "amendedCompleted": true,
+    "identical": true,
+    "registeredMessage": ""
+   },
+   {
+    "unit": "SimpleGraph.exists_dist_eq_diam",
+    "kind": "menu",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": true,
+    "outcomeMatches": true,
+    "usable": 3,
+    "registeredCompleted": true,
+    "amendedCompleted": true,
+    "identical": true,
+    "registeredMessage": ""
+   },
+   {
+    "unit": "CategoryTheory.Limits.IsZero.obj",
+    "kind": "prover",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": true,
+    "outcomeMatches": true,
+    "usable": 1,
+    "registeredCompleted": false,
+    "amendedCompleted": true,
+    "identical": null,
+    "registeredMessage": "Lean error:\nApplication type mismatch: The argument\n  CategoryTheory.Prod.snd\nha"
+   },
+   {
+    "unit": "CategoryTheory.MorphismProperty.map_map",
+    "kind": "prover",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": true,
+    "outcomeMatches": true,
+    "usable": 14,
+    "registeredCompleted": false,
+    "amendedCompleted": true,
+    "identical": null,
+    "registeredMessage": "Lean error:\nApplication type mismatch: The argument\n  CategoryTheory.Prod.snd\nha"
+   },
+   {
+    "unit": "Polynomial.leadingCoeff_add_of_degree_eq",
+    "kind": "menu",
+    "defined": true,
+    "fastExport": true,
+    "replayMatches": false,
+    "outcomeMatches": true,
+    "usable": 6,
+    "registeredCompleted": false,
+    "amendedCompleted": true,
+    "identical": null,
+    "registeredMessage": "Lean error:\ninternal exception abortTermElab"
+   }
+  ],
+  "meaning": "per unit, with the amended session: whether the replay matches keys-v0.1's log and outcome; whether the registered run_tac merge (from the registration commit) and the amended defined merge complete on the same goals in the same state; and, where both complete, whether their classes, elaborations, checks, acceptances, and exhausted counts are identical at all three transparencies (compared, not printed). Polynomial.leadingCoeff_add_of_degree_eq is one of the ten units of amendment 1, whose states keys-v0.1 did not key, so the registered comparison counts its replay as differing although its outcome and number of expansions match keys-v0.1's"
+ },
+ "atAmendment": {
+  "rows": 276,
+  "unitsWithRows": 252,
+  "mergesCompleted": 188,
+  "notConstructed": 40,
+  "mergeNotCompleted": [
+   "menu Polynomial.leadingCoeff_add_of_degree_eq",
+   "menu CategoryTheory.SimplicialObject.Splitting.cofan_inj_comp_PInfty_eq_zero",
+   "menu CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.exists_ordinal",
+   "menu CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.pushouts_ofLE_le_largerSubobject",
+   "menu CategoryTheory.MonoidalClosed.curry'_comp",
+   "prover MvPolynomial.coeff_add_pow",
+   "prover CategoryTheory.Abelian.Pseudoelement.epi_of_pseudo_surjective",
+   "prover CategoryTheory.CatEnriched.id_hComp_heq",
+   "prover CategoryTheory.CatEnrichedOrdinary.eqToHom_hComp_eqToHom",
+   "prover CategoryTheory.CatEnrichedOrdinary.homEquiv_comp",
+   "prover CategoryTheory.Functor.IsStronglyCartesian.map_self",
+   "prover CategoryTheory.Functor.IsStronglyCartesian.universal_property",
+   "prover CategoryTheory.Idempotents.whiskeringLeft_obj_preimage_app",
+   "prover CategoryTheory.Limits.Multicofork.IsColimit.hom_ext",
+   "prover CategoryTheory.Limits.Multiequalizer.ιPi_π",
+   "prover CategoryTheory.Limits.IsZero.obj",
+   "prover CategoryTheory.Localization.equivalence_counitIso_app",
+   "prover CategoryTheory.obj_ε_app",
+   "prover CategoryTheory.μ_naturality₂",
+   "prover CategoryTheory.MorphismProperty.inverseImage_equivalence_inverse_eq_map_functor",
+   "prover CategoryTheory.MorphismProperty.map_isoClosure",
+   "prover CategoryTheory.MorphismProperty.map_map",
+   "prover CategoryTheory.CardinalDirectedPoset.isCardinalPresentable_iff",
+   "prover MvPolynomial.pow_idealOfVars"
+  ],
+  "notYetRun": 248
+ },
+ "resultsSeenBeforeAmendment": "the runner's progress lines; from the rows and logs, each unit's merge completion and time, its numbers of distinct and usable goals, its round-trip statuses and largest printed size, and the exhausted counts of the completed merges; and, while diagnosing, the amended merge's raw output on three of the units above (for Polynomial.leadingCoeff_add_of_degree_eq no merge at default transparency, for MvPolynomial.coeff_add_pow one accepted check at default; CategoryTheory.Limits.IsZero.obj has one goal). No share, measure, check, cost ratio, or hypothesis was computed.",
+ "implementationSha256BeforeAmendment": {
+  "defeq": "8af38dafb753cf4840a35870483351741b6904902e1b381c4039954c2c684493",
+  "runner": "f7ca8f5a65c846297af76dcd76116c06a311bd5858277abc9011cf394145cda7"
+ },
+ "implementationSha256AfterAmendment": {
+  "defeq": "2c75e23c31987bf0817209ce283625e10d80b2d4aeeb326fde70fa3f51444e0f",
+  "runner": "a63cc80b7596ca1a55a9ed37fb3afeb3f7d9c1f5e78ecea173043945b4ea6166"
+ }
+}

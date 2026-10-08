@@ -19,7 +19,9 @@ at reducible, instances, and default transparency, and times the merge.
 The exports run as tactics defined once per task environment, right after the imports (`DefeqSession`), as
 search-v0.8's export does; keys-v0.1 ran its export as a `run_tac` block, so check C32 compares every replay with
 keys-v0.1's log. `--replay-check` replays the first units of the run without the merge, to test that comparison;
-`--develop` runs everything on menu searches of theorems outside the corpus.
+`--develop` runs everything on menu searches of theorems outside the corpus. Amendment 2 defines the merge the same
+way, since its `run_tac` block failed to elaborate in some declarations' scope, and runs again the units whose merge
+had failed.
 """
 
 from __future__ import annotations
@@ -74,6 +76,7 @@ PASS_SHARE = 0.98      # C34
 BOOTSTRAP = 2000
 SEED = 20261007
 MAX_ATTEMPTS = 2
+AMENDMENT = 2          # rows recorded after amendment 2 carry it
 PASS_TIMEOUT = 1800.0
 CLOSED_DEFINITION = ("open Lean Elab Tactic in\nelab \"pg_closed_types\" : tactic => do"
                      + gd.CLOSED_TACTIC.replace("run_tac do", "", 1))
@@ -86,8 +89,8 @@ _start_lock = threading.Lock()
 
 
 class DefeqSession(harness.ModuleSession):
-    """A ModuleSession whose environment, right after the module's imports, defines search-v0.8's export tactic and
-    the closed-type tactic of `goal_defeq`."""
+    """A ModuleSession whose environment, right after the module's imports, defines search-v0.8's export tactic, the
+    closed-type tactic of `goal_defeq`, and (amendment 2) its merge tactic."""
 
     def __init__(self, repl: LeanRepl, *args: Any, **kwargs: Any) -> None:
         super().__init__(repl, *args, **kwargs)
@@ -99,6 +102,11 @@ class DefeqSession(harness.ModuleSession):
             else:
                 ok = False
         setattr(repl, "fast_export", ok)
+        response = repl._exchange({"cmd": gd.DEFEQ_DEFINITION, "env": self.env}, repl.import_timeout)
+        defined = "env" in response and not any(m.get("severity") == "error" for m in response.get("messages", []))
+        if defined:
+            self.env = response["env"]
+        setattr(repl, "defeq_defined", defined)
 
 
 class DefeqRecordingRepl(RecordingRepl):
@@ -173,17 +181,19 @@ def merge(repl: DefeqRecordingRepl, proof_state: int) -> dict[str, Any]:
                                  "hyps": repl.closed[k]["hyps"]} for k in usable], ensure_ascii=False),
                     encoding="utf-8")
     started = time.monotonic()
+    defined = getattr(repl, "defeq_defined", False)
     try:
-        out = gd.canonical_classes(repl, proof_state, str(path), PASS_TIMEOUT) if usable else \
+        out = gd.canonical_classes(repl, proof_state, str(path), PASS_TIMEOUT, defined=defined) if usable else \
             {"elaborated": [], "elabNanos": []} | {m: {"classes": [], "nanos": [], "checks": 0, "accepted": 0,
                                                         "exhausted": 0} for m in MODES}
     finally:
         path.unlink(missing_ok=True)
         folder.rmdir()
     seconds = round(time.monotonic() - started, 2)
+    tactic = "defined" if defined else "run_tac"
     if out is None:
-        return {"completed": False, "seconds": seconds, "goals": len(usable)}
-    record: dict[str, Any] = {"completed": True, "seconds": seconds, "goals": len(usable),
+        return {"completed": False, "seconds": seconds, "goals": len(usable), "tactic": tactic}
+    record: dict[str, Any] = {"completed": True, "seconds": seconds, "goals": len(usable), "tactic": tactic,
                               "elaborated": sum(1 for x in out["elaborated"] if x),
                               "elabSeconds": round(sum(out["elabNanos"]) / 1e9, 4)}
     for mode in MODES:
@@ -296,7 +306,13 @@ def write_logs(logs: dict[str, Any]) -> None:
 
 def final(rows: list[dict[str, Any]]) -> bool:
     """A unit's attempts are final when the latest neither raised nor was abandoned and its merge completed, or after
-    MAX_ATTEMPTS attempts."""
+    MAX_ATTEMPTS attempts. Amendment 2: a unit whose latest attempt before the amendment did not complete its merge
+    runs again, and attempts made under the amendment count afresh."""
+    amended = [r for r in rows if r.get("amendment") == AMENDMENT]
+    if amended:
+        rows = amended
+    elif rows[-1].get("constructed") and not rows[-1].get("mergeCompleted", True):
+        return False
     latest = rows[-1]
     if len(rows) >= MAX_ATTEMPTS:
         return True
@@ -331,6 +347,7 @@ def run_all(workers: int) -> None:
         def record(unit: tuple[str, dict[str, Any], str], result: tuple[dict[str, Any], dict[str, Any] | None]) -> None:
             row, log = result
             row["unit"] = list(kv.unit_key(*unit))
+            row["amendment"] = AMENDMENT
             if log is not None:
                 row["mergeCompleted"] = bool((log.get("merge") or {}).get("completed"))
             with lock:
@@ -762,9 +779,12 @@ def main() -> int:
         return 0
     prereg = json.loads(PREREG.read_text(encoding="utf-8"))
     if args.run:
+        expected = dict(prereg["implementationSha256"])
+        for amendment in sorted(EXPERIMENT.glob("amendment-*.json")):
+            expected |= json.loads(amendment.read_text(encoding="utf-8")).get("implementationSha256AfterAmendment", {})
         for name, path in IMPLEMENTATIONS.items():
-            if prereg["implementationSha256"][name] != sha256_file(path):
-                raise SystemExit(f"implementation {name} changed since registration")
+            if expected[name] != sha256_file(path):
+                raise SystemExit(f"implementation {name} changed since registration and its amendments")
         run_all(args.workers)
         summary = json.loads(json.dumps(summarize(read_rows(), read_logs())))
         write_lf(SUMMARY, json.dumps(summary, indent=1) + "\n")
