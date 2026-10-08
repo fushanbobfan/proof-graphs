@@ -1,0 +1,321 @@
+{
+ "experiment": "defeq-v0.1",
+ "preregistrationSha256": "e60924efe12b586a7f4f74a21501d74997a6a828fc0c74a06a84f7d80cc2d051",
+ "units": 500,
+ "attempts": 548,
+ "prover": {
+  "description": "search-v0.7 whole-state search, step prover",
+  "units": 200,
+  "measured": 169,
+  "notConstructed": 31,
+  "abandoned": 0,
+  "errors": 0,
+  "totals": {
+   "expansions": 4751,
+   "flagged": 4751,
+   "goalFaithful": 1324,
+   "children": 13416,
+   "childrenFlagged": 13416,
+   "mergeFaithful": 5700,
+   "conflations": 172,
+   "conflationsUndefined": 7,
+   "goal": {
+    "reducible": 1474,
+    "instances": 1474,
+    "default": 1474
+   },
+   "merge": {
+    "reducible": 469,
+    "instances": 470,
+    "default": 475
+   },
+   "conflationsDefeq": {
+    "reducible": 137,
+    "instances": 138,
+    "default": 145
+   }
+  },
+  "goalShare": {
+   "faithful": 0.2786781730162071,
+   "reducible": 0.3102504735845085,
+   "instances": 0.3102504735845085,
+   "default": 0.3102504735845085
+  },
+  "extraMergeShare": {
+   "reducible": 0.0349582587954681,
+   "instances": 0.035032796660703636,
+   "default": 0.035405485986881334
+  },
+  "conflationDefeqShare": {
+   "reducible": 0.8303030303030303,
+   "instances": 0.8363636363636363,
+   "default": 0.8787878787878788
+  },
+  "goalDifferenceInstances": 0.03157230056830141,
+  "goalDifferenceInterval": [
+   0.019845,
+   0.046512
+  ],
+  "cost": {
+   "mergeOverTactic": {
+    "min": 0.0,
+    "q1": 1.7034861831839458e-05,
+    "median": 8.030292372980705e-05,
+    "q3": 0.0002019530625299856,
+    "max": 0.011538461538461539,
+    "count": 168
+   },
+   "mergeSeconds": {
+    "min": 0.0,
+    "q1": 0.0001,
+    "median": 0.0004,
+    "q3": 0.0012,
+    "max": 0.0197,
+    "count": 169
+   },
+   "mergeDefaultSeconds": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0004,
+    "q3": 0.0012,
+    "max": 0.0246,
+    "count": 169
+   },
+   "elabSeconds": {
+    "min": 0.0,
+    "q1": 0.10855,
+    "median": 0.454,
+    "q3": 1.92275,
+    "max": 26.3728,
+    "count": 169
+   },
+   "tacticSeconds": {
+    "min": 0.0,
+    "q1": 0.56,
+    "median": 4.95,
+    "q3": 12.525,
+    "max": 196.15,
+    "count": 169
+   },
+   "goalsPerUnit": {
+    "min": 0.0,
+    "q1": 4.0,
+    "median": 36.0,
+    "q3": 75.5,
+    "max": 196.0,
+    "count": 169
+   },
+   "checks": {
+    "reducible": 560,
+    "instances": 560,
+    "default": 560
+   },
+   "accepted": {
+    "reducible": 535,
+    "instances": 536,
+    "default": 541
+   },
+   "exhausted": {
+    "reducible": 0,
+    "instances": 0,
+    "default": 0
+   }
+  }
+ },
+ "menu": {
+  "description": "search-v0.4 keys arm, menu",
+  "units": 300,
+  "measured": 258,
+  "notConstructed": 42,
+  "abandoned": 0,
+  "errors": 0,
+  "totals": {
+   "expansions": 3417,
+   "flagged": 3417,
+   "goalFaithful": 984,
+   "children": 12292,
+   "childrenFlagged": 12292,
+   "mergeFaithful": 7715,
+   "conflations": 424,
+   "conflationsUndefined": 42,
+   "goal": {
+    "reducible": 988,
+    "instances": 988,
+    "default": 990
+   },
+   "merge": {
+    "reducible": 254,
+    "instances": 257,
+    "default": 260
+   },
+   "conflationsDefeq": {
+    "reducible": 345,
+    "instances": 349,
+    "default": 362
+   }
+  },
+  "goalShare": {
+   "faithful": 0.28797190517998245,
+   "reducible": 0.28914252268071405,
+   "instances": 0.28914252268071405,
+   "default": 0.2897278314310799
+  },
+  "extraMergeShare": {
+   "reducible": 0.020663846404165312,
+   "instances": 0.020907907582167262,
+   "default": 0.021151968760169216
+  },
+  "conflationDefeqShare": {
+   "reducible": 0.9031413612565445,
+   "instances": 0.9136125654450262,
+   "default": 0.9476439790575916
+  },
+  "goalDifferenceInstances": 0.001170617500731636,
+  "goalDifferenceInterval": [
+   0.0,
+   0.003042
+  ],
+  "cost": {
+   "mergeOverTactic": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 4.212299915754003e-06,
+    "q3": 1.6782515214066813e-05,
+    "max": 0.0007190511489992587,
+    "count": 253
+   },
+   "mergeSeconds": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0001,
+    "q3": 0.0003,
+    "max": 0.0097,
+    "count": 258
+   },
+   "mergeDefaultSeconds": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 0.0001,
+    "q3": 0.0002,
+    "max": 0.0105,
+    "count": 258
+   },
+   "elabSeconds": {
+    "min": 0.0,
+    "q1": 0.0369,
+    "median": 0.079,
+    "q3": 0.209125,
+    "max": 4.4157,
+    "count": 258
+   },
+   "tacticSeconds": {
+    "min": 0.0,
+    "q1": 5.42,
+    "median": 13.45,
+    "q3": 26.17,
+    "max": 442.45,
+    "count": 258
+   },
+   "goalsPerUnit": {
+    "min": 0.0,
+    "q1": 3.0,
+    "median": 8.0,
+    "q3": 19.25,
+    "max": 89.0,
+    "count": 258
+   },
+   "checks": {
+    "reducible": 258,
+    "instances": 258,
+    "default": 258
+   },
+   "accepted": {
+    "reducible": 226,
+    "instances": 229,
+    "default": 232
+   },
+   "exhausted": {
+    "reducible": 0,
+    "instances": 0,
+    "default": 0
+   }
+  }
+ },
+ "goalStatus": {
+  "exact": 8992,
+  "reducible": 2390,
+  "mvar": 1027,
+  "error": 207,
+  "differs": 2
+ },
+ "C32": {
+  "compared": 426,
+  "matched": 391,
+  "differing": [
+   "prover Submodule.rank_le_spanRank",
+   "prover Equiv.Perm.nat_card_centralizer",
+   "prover CategoryTheory.CardinalDirectedPoset.isCardinalPresentable_iff",
+   "prover Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+   "prover WeierstrassCurve.hasGoodReduction_iff_isElliptic_reduction",
+   "prover MvPolynomial.pow_idealOfVars",
+   "prover Module.Basis.mk_eq_spanRank",
+   "prover MultilinearMap.comp_linearEquiv_eq_zero_iff",
+   "prover MvPolynomial.coeff_add_pow",
+   "prover MeasureTheory.Measure.nonempty_inter_support_of_pos",
+   "prover Topology.IsOpenEmbedding.coheight_eq",
+   "prover IsSeparatedMap.eqOn_of_comp_eqOn",
+   "prover AlgebraicGeometry.injective_germ_basicOpen",
+   "menu Polynomial.leadingCoeff_add_of_degree_eq",
+   "menu FirstOrder.Language.BoundedFormula.realize_foldr_inf",
+   "menu QPF.Fix.dest_mk",
+   "menu Polynomial.leadingCoeff_monic_mul",
+   "menu FirstOrder.Language.BoundedFormula.realize_relabel",
+   "menu FirstOrder.Language.Formula.realize_equivSentence",
+   "menu Polynomial.degree_le_mul_left",
+   "menu Polynomial.nextCoeff_X_sub_C",
+   "menu Quiver.Path.length_ne_zero_iff_eq_comp",
+   "menu FirstOrder.Language.StrongHomClass.realize_sentence",
+   "menu QPF.Fix.ind_aux",
+   "menu Polynomial.leadingCoeff_X_sub_C",
+   "menu FirstOrder.Language.HomClass.realize_term",
+   "menu Polynomial.natDegree_X_sub_C",
+   "menu Polynomial.degree_lt_degree",
+   "menu QPF.Fix.rec_unique",
+   "menu FirstOrder.Language.realize_iff_of_model_completeTheory"
+  ],
+  "holds": false
+ },
+ "C33": {
+  "withoutMetavariable": 11591,
+  "roundTripped": 11382,
+  "holds": true
+ },
+ "C34": {
+  "passes": 427,
+  "completed": 427,
+  "usable": 11382,
+  "elaborated": 11373,
+  "holds": true
+ },
+ "conflations": {
+  "defined": 547,
+  "defeqInstances": 487,
+  "share": 0.8903107861060329
+ },
+ "hypotheses": {
+  "H90": {
+   "supported": false
+  },
+  "H91": {
+   "supported": true
+  },
+  "H92": {
+   "supported": true
+  },
+  "H93": {
+   "supported": true
+  }
+ },
+ "resultsSha256": "a2fef460ec1fa56ec5154ac5ecb0fd6a8e64a3b19d95f027d7197859fc0957d5",
+ "logsSha256": "c057c43be5572c338c57c70f3cda60aeb152b909a1e8b5c821166bf61ab0631d"
+}

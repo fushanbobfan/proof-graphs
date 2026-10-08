@@ -1,0 +1,126 @@
+{
+ "experiment": "defeq-v0.1",
+ "amendment": 1,
+ "resultsSha256": "a2fef460ec1fa56ec5154ac5ecb0fd6a8e64a3b19d95f027d7197859fc0957d5",
+ "logsSha256": "c057c43be5572c338c57c70f3cda60aeb152b909a1e8b5c821166bf61ab0631d",
+ "C32": {
+  "compared": 426,
+  "registered": {
+   "matched": 391,
+   "holds": false
+  },
+  "onKeyedStates": {
+   "matched": 401,
+   "differing": [
+    "prover Submodule.rank_le_spanRank",
+    "prover Equiv.Perm.nat_card_centralizer",
+    "prover CategoryTheory.CardinalDirectedPoset.isCardinalPresentable_iff",
+    "prover Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "prover WeierstrassCurve.hasGoodReduction_iff_isElliptic_reduction",
+    "prover Module.Basis.mk_eq_spanRank",
+    "prover MultilinearMap.comp_linearEquiv_eq_zero_iff",
+    "prover MeasureTheory.Measure.nonempty_inter_support_of_pos",
+    "prover Topology.IsOpenEmbedding.coheight_eq",
+    "prover IsSeparatedMap.eqOn_of_comp_eqOn",
+    "prover AlgebraicGeometry.injective_germ_basicOpen",
+    "menu FirstOrder.Language.BoundedFormula.realize_foldr_inf",
+    "menu QPF.Fix.dest_mk",
+    "menu FirstOrder.Language.BoundedFormula.realize_relabel",
+    "menu FirstOrder.Language.Formula.realize_equivSentence",
+    "menu Quiver.Path.length_ne_zero_iff_eq_comp",
+    "menu FirstOrder.Language.StrongHomClass.realize_sentence",
+    "menu QPF.Fix.ind_aux",
+    "menu FirstOrder.Language.HomClass.realize_term",
+    "menu QPF.Fix.rec_unique",
+    "menu FirstOrder.Language.realize_iff_of_model_completeTheory",
+    "menu FirstOrder.Language.Formula.realize_graph",
+    "menu FirstOrder.Language.Term.realize_restrictVarLeft",
+    "menu FirstOrder.Language.Term.realize_functions_apply\u2082",
+    "menu FirstOrder.Language.Formula.realize_relabel_sumInr"
+   ],
+   "unitsWithUncomparedStates": 10,
+   "holds": false
+  },
+  "registeredDiffering": {
+   "onlyAtUnkeyedStates": [
+    "prover MvPolynomial.pow_idealOfVars",
+    "prover MvPolynomial.coeff_add_pow",
+    "menu Polynomial.leadingCoeff_add_of_degree_eq",
+    "menu Polynomial.leadingCoeff_monic_mul",
+    "menu Polynomial.degree_le_mul_left",
+    "menu Polynomial.nextCoeff_X_sub_C",
+    "menu Polynomial.leadingCoeff_X_sub_C",
+    "menu Polynomial.natDegree_X_sub_C",
+    "menu Polynomial.degree_lt_degree",
+    "menu Polynomial.natDegree_mul_X"
+   ],
+   "other": [
+    "prover Submodule.rank_le_spanRank",
+    "prover Equiv.Perm.nat_card_centralizer",
+    "prover CategoryTheory.CardinalDirectedPoset.isCardinalPresentable_iff",
+    "prover Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "prover WeierstrassCurve.hasGoodReduction_iff_isElliptic_reduction",
+    "prover Module.Basis.mk_eq_spanRank",
+    "prover MultilinearMap.comp_linearEquiv_eq_zero_iff",
+    "prover MeasureTheory.Measure.nonempty_inter_support_of_pos",
+    "prover Topology.IsOpenEmbedding.coheight_eq",
+    "prover IsSeparatedMap.eqOn_of_comp_eqOn",
+    "prover AlgebraicGeometry.injective_germ_basicOpen",
+    "menu FirstOrder.Language.BoundedFormula.realize_foldr_inf",
+    "menu QPF.Fix.dest_mk",
+    "menu FirstOrder.Language.BoundedFormula.realize_relabel",
+    "menu FirstOrder.Language.Formula.realize_equivSentence",
+    "menu Quiver.Path.length_ne_zero_iff_eq_comp",
+    "menu FirstOrder.Language.StrongHomClass.realize_sentence",
+    "menu QPF.Fix.ind_aux",
+    "menu FirstOrder.Language.HomClass.realize_term",
+    "menu QPF.Fix.rec_unique",
+    "menu FirstOrder.Language.realize_iff_of_model_completeTheory",
+    "menu FirstOrder.Language.Formula.realize_graph",
+    "menu FirstOrder.Language.Term.realize_restrictVarLeft",
+    "menu FirstOrder.Language.Term.realize_functions_apply\u2082",
+    "menu FirstOrder.Language.Formula.realize_relabel_sumInr"
+   ]
+  }
+ },
+ "H93": {
+  "prover": {
+   "registered": {
+    "min": 0.0,
+    "q1": 1.7034861831839458e-05,
+    "median": 8.030292372980705e-05,
+    "q3": 0.0002019530625299856,
+    "max": 0.011538461538461539,
+    "count": 168
+   },
+   "withElaboration": {
+    "min": 0.0,
+    "q1": 0.07692797888386123,
+    "median": 0.1615745254529767,
+    "q3": 0.3583149109792285,
+    "max": 3.42,
+    "count": 168
+   },
+   "medianBelowShare": false
+  },
+  "menu": {
+   "registered": {
+    "min": 0.0,
+    "q1": 0.0,
+    "median": 4.212299915754003e-06,
+    "q3": 1.6782515214066813e-05,
+    "max": 0.0007190511489992587,
+    "count": 253
+   },
+   "withElaboration": {
+    "min": 0.0,
+    "q1": 0.0035703456066407757,
+    "median": 0.007782258064516129,
+    "q3": 0.014741018886929727,
+    "max": 0.262483660130719,
+    "count": 253
+   },
+   "medianBelowShare": true
+  }
+ }
+}
