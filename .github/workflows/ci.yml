@@ -193,6 +193,13 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed goal identity up to definitional equality
+        run: |
+          if test -f experiments/defeq-v0.1/summary.json; then
+            python scripts/run_defeq_replay.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
       - name: Check the golf replication clustered by commit
         run: python scripts/golf_clusters.py --check
       - name: Check the committed holdout slice

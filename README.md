@@ -111,6 +111,8 @@ scripts/check_slice_options.py    the slice's graphs under Mathlib's options
 scripts/goal_identity.py          goal identity from Lean's expressions
 scripts/recording_repl.py         a REPL session that logs a search for re-keying
 scripts/run_key_replay.py         finished searches re-keyed by expressions
+scripts/goal_defeq.py             goal identity up to definitional equality
+scripts/run_defeq_replay.py       the replays merged up to definitional equality
 scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests
@@ -139,6 +141,7 @@ experiments/extraction-audit-v0.3/  the same on long proofs and non-forest graph
 experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
 experiments/keys-v0.1-conflations/  what the text keys conflate (not registered)
 experiments/keys-v0.1-matched-support/  its shares on matched support (not registered)
+experiments/defeq-v0.1/           the whole-state replays up to definitional equality
 experiments/goal-selection-v0.1/  first goal against free goal choice, and the order quotient
 experiments/goal-selection-diagnostic-v0.1/  the same on constructed tasks
 experiments/recount-v0.1/         the corrected counts

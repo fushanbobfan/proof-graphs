@@ -1,0 +1,57 @@
+{
+ "checks": {
+  "C32": "at least 98% of the units recorded in both reach keys-v0.1's outcome and expand the same states, by faithful keys, in the same order",
+  "C33": "at least 90% of the distinct goals without a metavariable round-trip through their printed closed type (exactly or up to reducible unfolding)",
+  "C34": "at least 98% of the merges complete, and at least 98% of the round-tripped goals elaborate again in the merge"
+ },
+ "decisionRule": "each hypothesis is decided on its own, by the criterion it states",
+ "developmentChecksBeforeRegistration": [
+  "goal_defeq in a Mathlib REPL on hand-made goals: every closed type round-tripped exactly (universe parameters included once the round trip declares them); at all three transparencies a beta redex merged with its reduct and two spellings of one universe level merged, `@id ℕ a` stayed apart from `a` (different hashes, as in Lean's canonicalizer), and with Nat's instances imported an addition through `AddSemigroup.toAdd` merged with one through `instAddNat`; `h : P ⊢ Q` stayed apart from `⊢ P → Q`; a goal with a metavariable was marked and not printed. Three defects were fixed on the way: erasing constants' universe levels before reading their argument kinds turned type arguments into proofs and collapsed every hash (now the head keeps its levels until its kinds are read); a test whose instance was missing had elaborated to sorryAx; and a closed type alone joined a goal with a hypothesis to the goal with that hypothesis not yet introduced, which share one closed type (now the number of hypotheses is part of the hash)",
+  "--develop 3, the menu's whole-state search with the merge on three theorems of the first slice outside both corpora (seed 13): 40 of 40 distinct goals round-tripped exactly; every merge completed; the instances merge took 0.1 to 0.4 ms per unit against 6 to 58 s of candidate tactics; units took 56 to 90 s in all. The merges it made on the first two, inspected side by side, were all the introduced/not-introduced joins of the third defect; after the fix those two units have no merge beyond the faithful key",
+  "--replay-check 4, the first four units of the run replayed without the merge: the three constructed units expanded the same states, by faithful keys, and reached keys-v0.1's outcomes; PolishSpace.Equiv.measurableEquiv was not constructed, as in keys-v0.1"
+ ],
+ "execution": "a unit is one task and search in a fresh REPL; at most three units at a time, each started only while 15 GB of commit charge is left and 45 s after the previous start; a unit that raises, is abandoned by a REPL timeout, or whose merge does not complete runs once more (2 attempts at most), and the latest attempt counts",
+ "experiment": "defeq-v0.1",
+ "hypotheses": {
+  "H90": "search-v0.7's whole-state units: the goal-duplicate share at instances transparency exceeds the faithful key's by less than 2 points: the upper end of the 95% interval of the difference, resampling modules (2,000 resamples, seed 20261007), is below 2 points",
+  "H91": "search-v0.4's keys-arm units: the same, below 2 points",
+  "H92": "of the printed key's false drops (child states whose printed state key an earlier state had while their faithful state keys differ, both states' goals round-tripped), pooled over both sets of units, at least half are merged at instances transparency",
+  "H93": "in both sets of units, the median over units of the instances-transparency merge time over the candidate-tactic time is below 1%"
+ },
+ "identity": {
+  "closedType": "a goal's local context (implementation details skipped) abstracted over its target, binder names replaced, printed with pp.all and raw literals, and elaborated back in the same state: exact, equal up to reducible unfolding, or neither; a goal with a metavariable is not printed",
+  "defeq": "after the search, in the task's root state: each round-tripped goal elaborated, beta-reduced, its universe levels normalized, hashed ignoring implicit and proof arguments and constants' universe levels as Lean's Meta.Canonicalizer does, and merged in order of first appearance into the first earlier goal of its hash that isDefEq accepts, separately at reducible, instances, and default transparency, each isDefEq with 200000 heartbeats; a check that exhausts them counts as unequal",
+  "faithful": "goal_identity.py's key, as in keys-v0.1",
+  "state": "a state's goals' classes in order; a state with goals coupled by metavariables keeps its faithful state key"
+ },
+ "implementationSha256": {
+  "defeq": "8af38dafb753cf4840a35870483351741b6904902e1b381c4039954c2c684493",
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "keyReplay": "c438ec76c447a7c831feb3131226e167d1210a64875a4c06c8031c75937d07ac",
+  "keys": "68b8aacc720f43b6d588ae718bc57fc28c355df66328e6c8fb4a1a96217b2874",
+  "recorder": "c993a008c8246ac135e92c755a8a7177045b9d368f458834e70b7b45bb8788f6",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "f7ca8f5a65c846297af76dcd76116c06a311bd5858277abc9011cf394145cda7"
+ },
+ "measures": {
+  "conflations": "the printed key's false drops, as keys-v0.1 counted them (H63): child states whose printed state key, by which the search drops duplicates, an earlier state had while their faithful state keys differ; the share whose classes agree, over those whose goals all round-tripped",
+  "cost": "per unit, the time of the instances-transparency merge (hashing and isDefEq, not elaboration of the printed types) over the time of the search's candidate tactics; isDefEq checks, accepted, and exhausted",
+  "extraMergeShare": "child states whose class an earlier state of the search had while their faithful state key is new, over the children with an exported key",
+  "goalShare": "whole-state expansions whose first goal was already a first goal, under the faithful key and up to definitional equality at each transparency, over the expansions with an exported key"
+ },
+ "question": "how much does identifying goals up to definitional equality, in the manner of Lean's canonicalizer, add to the faithful expression key on the searches keys-v0.1 re-keyed, and at what cost",
+ "recording": "keys-v0.1's recording session (recording_repl.py), unchanged except that its exports run as tactics defined once per task environment right after the imports: search-v0.8's faithful export and goal_defeq's closed-type export, printed the first time a faithful goal key appears",
+ "registeredLocalDate": "2026-10-07 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "resultsSeenBeforeRegistration": "every earlier experiment, including keys-v0.1 and keys-v0.1-conflations in full; the development runs below; no merge had run on a corpus task",
+ "units": {
+  "count": 500,
+  "keysV01Logs": "b9b60174d1e500fb3fb2978eabf80857ea93ff348cd314d94cce45ac76b77603",
+  "keysV01Results": "f3e7f0377e6bf4dddb774834d482b55c525fa590bc018c9951405b4e22eedc0a",
+  "menu": "keys-v0.1's search-v0.4 keys-arm units (the menu's whole-state search at 24 expansions)",
+  "prover": "keys-v0.1's search-v0.7 whole-state units (step prover, replayed from recorded draws)"
+ }
+}
