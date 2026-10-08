@@ -113,6 +113,8 @@ scripts/recording_repl.py         a REPL session that logs a search for re-keyin
 scripts/run_key_replay.py         finished searches re-keyed by expressions
 scripts/goal_defeq.py             goal identity up to definitional equality
 scripts/run_defeq_replay.py       the replays merged up to definitional equality
+scripts/defeq_v01_amendment.py    its amendment's analyses beside the registered ones
+scripts/defeq_v01_c32_mechanism.py why its replay check fails (not registered)
 scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests

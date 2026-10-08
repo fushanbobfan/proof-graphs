@@ -26,16 +26,18 @@ The units are keys-v0.1's whole-state units: search-v0.7's step-prover search, r
 - `results.jsonl`, `logs.jsonl.gz`: per attempt, the replay's outcome and costs, and per unit its log (every expanded
   state with its faithful keys, each distinct goal's round-trip status, and the merge's classes at each transparency);
 - `summary.json`, `report.md`: the shares, the costs, the checks, and the decisions;
-- `amendment-1-results.json`: the amendment's two analyses.
+- `amendment-1-results.json`: the amendment's two analyses;
+- `c32-mechanism.json`: why C32 fails, from the logs (exploratory, not registered).
 
 ## Reproduction
 
 ```text
 python scripts/run_defeq_replay.py --check-committed
 python scripts/defeq_v01_amendment.py --check
+python scripts/defeq_v01_c32_mechanism.py --check
 ```
 
-recompute the summary from the rows and logs, and the amendment's analyses; CI runs both. `--run` replays the
+recompute the summary from the rows and logs, the amendment's analyses, and the analysis of C32; CI runs all three. `--run` replays the
 searches and merges their goals (a Mathlib REPL per unit; about seven hours on three workers).
 
 ## Amendment 1
@@ -95,7 +97,8 @@ again in them.
 
 **C32 fails**: 391 of 426 replays match keys-v0.1 by faithful keys, and 401 of 426 over the states keys-v0.1 keyed
 (amendment 1). Yet every one of the 426 reaches keys-v0.1's outcome and expands as many states, with the same printed
-keys at every expansion: the searches are reproduced, and what differs is the expression key of some states. Ten
+keys at every expansion (`c32-mechanism.json`): the searches are reproduced, and what differs is the expression key
+of some states. Ten
 units are amendment 1's. In the other 25, 255 expanded states have keys different from keys-v0.1's, and 253 of them
 hold a goal with a metavariable. The expression key writes universe metavariables with Lean's internal names, since
 its renumbering expects another spelling (`?u.N`), and this run's three added definitions advance Lean's name

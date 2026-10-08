@@ -198,6 +198,7 @@ jobs:
           if test -f experiments/defeq-v0.1/summary.json; then
             python scripts/run_defeq_replay.py --check-committed
             python scripts/defeq_v01_amendment.py --check
+            python scripts/defeq_v01_c32_mechanism.py --check
           else
             echo "no committed results yet"
           fi
