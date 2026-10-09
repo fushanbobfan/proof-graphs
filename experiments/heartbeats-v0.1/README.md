@@ -48,8 +48,9 @@ stopped 2,650 candidate applications in 413 searches (C39): 1,314 `exact?`, 1,06
 
 Of the 2,341 searches that produced a result in both experiments, 2,273 took the same steps, expansion by expansion.
 The other 68, 34 of each search, differ in which candidate applications succeeded (132 fewer valid applications among
-them), none in its outcome or its proof. Three of the 68 had no stop at all and differ by one valid application, so
-part of the difference is run to run rather than the limit's.
+them), none in its outcome or its proof. Three of the 68 had no stop at all and differ by one valid application each,
+so not every difference comes from a stop; the rows do not show whether the wrapping tactic or the wall clock made
+them.
 
 One task lies outside the 1,170: search-v0.3's AND-OR search of
 `FirstOrder.Language.BoundedFormula.realize_ex` ended on a `RecursionError` in the harness, which search-v0.3 counts
