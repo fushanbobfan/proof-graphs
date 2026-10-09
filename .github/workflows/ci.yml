@@ -199,6 +199,7 @@ jobs:
             python scripts/run_defeq_replay.py --check-committed
             python scripts/defeq_v01_amendment.py --check
             python scripts/defeq_v01_c32_mechanism.py --check
+            python scripts/explore_defeq_merges.py --check
           else
             echo "no committed results yet"
           fi

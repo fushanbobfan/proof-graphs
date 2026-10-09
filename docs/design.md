@@ -134,7 +134,8 @@ expansions at every budget, and order duplicates near 0.2%. Lean's
 expressions are themselves a syntactic identity: identifying goals up to
 definitional equality, as Lean's canonicalizer does (`defeq-v0.1`, on
 keys-v0.1's whole-state replays), raises the step prover's goal duplicates
-from 27.9% to 31.0% of expansions, all at reducible transparency, and the
+from 27.9% to 31.0% of expansions, all at reducible transparency and mostly
+goals that differ only in let-bound hypotheses they do not use, and the
 menu's by 0.1 points, for a merge that costs almost nothing beside the
 tactics; 89% of the states the printed key dropped while their expressions
 differ are equal up to unfolding.

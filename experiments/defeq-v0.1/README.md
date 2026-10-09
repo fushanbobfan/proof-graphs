@@ -125,5 +125,6 @@ The merge joins goals that `isDefEq` proves equal within 200,000 heartbeats, and
 compared: definitionally equal goals that hash differently (the canonicalizer hashes `@id ℕ a` and `a` differently)
 stay apart. The shares are therefore lower bounds on identity up to definitional equality at each transparency. The
 goals are compared after the searches, which ran with text keys; the replays do not show what a search keyed by
-definitional equality would prove. The logs keep a hash of each printed closed type, not the text, so which
-differences the merges bridge is not recorded.
+definitional equality would prove. The logs keep a hash of each printed closed type, not the text; an exploratory
+replay (`../defeq-v0.1-merges/`) finds that most of the step prover's added duplicates join goals that differ
+only in let-bound hypotheses the goal does not use.

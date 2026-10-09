@@ -115,6 +115,7 @@ scripts/goal_defeq.py             goal identity up to definitional equality
 scripts/run_defeq_replay.py       the replays merged up to definitional equality
 scripts/defeq_v01_amendment.py    its amendment's analyses beside the registered ones
 scripts/defeq_v01_c32_mechanism.py why its replay check fails (not registered)
+scripts/explore_defeq_merges.py   what its merges bridge (not registered)
 scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests
@@ -144,6 +145,7 @@ experiments/keys-v0.1/            finished searches re-keyed by Lean expressions
 experiments/keys-v0.1-conflations/  what the text keys conflate (not registered)
 experiments/keys-v0.1-matched-support/  its shares on matched support (not registered)
 experiments/defeq-v0.1/           the whole-state replays up to definitional equality
+experiments/defeq-v0.1-merges/    what its merges bridge (not registered)
 experiments/goal-selection-v0.1/  first goal against free goal choice, and the order quotient
 experiments/goal-selection-diagnostic-v0.1/  the same on constructed tasks
 experiments/recount-v0.1/         the corrected counts

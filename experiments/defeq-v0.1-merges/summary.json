@@ -1,0 +1,420 @@
+{
+ "experiment": "defeq-v0.1-merges",
+ "registered": false,
+ "source": "defeq-v0.1",
+ "defeqLogsSha256": "c057c43be5572c338c57c70f3cda60aeb152b909a1e8b5c821166bf61ab0631d",
+ "units": 43,
+ "unitsFailed": [
+  "AlgebraicGeometry.injective_germ_basicOpen"
+ ],
+ "addedDuplicates": 145,
+ "addedByCategory": {
+  "unused let hypotheses": 102,
+  "same closed type, other": 9,
+  "beta-reduction or universe levels": 7,
+  "binder names and kinds": 0,
+  "proofs": 1,
+  "instance arguments": 20,
+  "instance arguments and proofs": 0,
+  "implicit arguments and proofs": 4,
+  "other": 2,
+  "unmatched": 0
+ },
+ "mergedPairs": 440,
+ "pairsByCategory": {
+  "unused let hypotheses": 303,
+  "same closed type, other": 26,
+  "beta-reduction or universe levels": 23,
+  "binder names and kinds": 0,
+  "proofs": 4,
+  "instance arguments": 63,
+  "instance arguments and proofs": 0,
+  "implicit arguments and proofs": 17,
+  "other": 4
+ },
+ "addedByUnit": {
+  "Algebra.FormallySmooth.adjoin_of_algebraicIndependent": {
+   "beta-reduction or universe levels": 1
+  },
+  "AlgebraicIndependent.isTranscendenceBasis_iff_isAlgebraic": {
+   "unused let hypotheses": 1
+  },
+  "AlgebraicIndependent.matroid_isFlat_iff": {
+   "unused let hypotheses": 2
+  },
+  "AlgebraicIndependent.matroid_spanning_iff": {
+   "unused let hypotheses": 1,
+   "same closed type, other": 2
+  },
+  "CStarAlgebra.span_unitary": {
+   "instance arguments": 1
+  },
+  "DFinsupp.sumZeroHom_apply": {
+   "unused let hypotheses": 1,
+   "beta-reduction or universe levels": 2,
+   "other": 2
+  },
+  "DFinsupp.sum_sub_index": {
+   "instance arguments": 2
+  },
+  "Finite.card_eq_zero_of_surjective": {
+   "instance arguments": 3
+  },
+  "Ideal.exists_spanRank_eq_and_height_eq": {
+   "unused let hypotheses": 7
+  },
+  "Ideal.finrank_quotient_eq_sum": {
+   "unused let hypotheses": 23
+  },
+  "Ideal.liesOver_iff_dvd_map": {
+   "unused let hypotheses": 1
+  },
+  "IsTranscendenceBasis.isAlgebraic_iff": {
+   "same closed type, other": 2
+  },
+  "IsTranscendenceBasis.mvPolynomial'": {
+   "same closed type, other": 2
+  },
+  "MeasurableSet.isClopenable'": {
+   "unused let hypotheses": 5,
+   "beta-reduction or universe levels": 1
+  },
+  "MeasureTheory.AnalyticSet.preimage": {
+   "unused let hypotheses": 6
+  },
+  "MeasureTheory.ContinuousOn.hasBoxIntegral": {
+   "unused let hypotheses": 2
+  },
+  "MeasureTheory.LocallyIntegrableOn.exists_countable_integrableOn": {
+   "unused let hypotheses": 2
+  },
+  "MeasureTheory.MeasurablySeparable.iUnion": {
+   "unused let hypotheses": 5
+  },
+  "MeasureTheory.Measure.everywherePosSubset_ae_eq": {
+   "unused let hypotheses": 3
+  },
+  "MeasureTheory.borel_eq_borel_of_le": {
+   "unused let hypotheses": 4
+  },
+  "MeasureTheory.integrableOn_Iio_iff_integrableAtFilter_atBot_nhdsWithin": {
+   "unused let hypotheses": 1
+  },
+  "MeasureTheory.meas_le_lintegral₀": {
+   "unused let hypotheses": 4,
+   "beta-reduction or universe levels": 1
+  },
+  "MulArchimedeanClass.subgroup_strictAntiOn": {
+   "instance arguments": 2
+  },
+  "MultilinearMap.comp_linearEquiv_eq_zero_iff": {
+   "unused let hypotheses": 3
+  },
+  "MultilinearMap.map_add_sub_map_add_sub_linearDeriv": {
+   "unused let hypotheses": 5
+  },
+  "MultilinearMap.map_coord_zero": {
+   "unused let hypotheses": 3,
+   "same closed type, other": 2
+  },
+  "MvPolynomial.pow_idealOfVars": {
+   "implicit arguments and proofs": 3
+  },
+  "Nat.card_eq": {
+   "proofs": 1
+  },
+  "PNat.dvd_iff": {
+   "instance arguments": 1
+  },
+  "PNat.mod_le": {
+   "instance arguments": 2
+  },
+  "ProbabilityTheory.HasSubgaussianMGF.measure_sum_range_ge_le_of_iIndepFun": {
+   "unused let hypotheses": 5
+  },
+  "ProbabilityTheory.mgf_le_of_mem_Icc_of_integral_eq_zero": {
+   "unused let hypotheses": 5
+  },
+  "Real.goldenRatio_irrational": {
+   "unused let hypotheses": 8
+  },
+  "Ring.ordFrac_add": {
+   "instance arguments": 2
+  },
+  "Submodule.FG.finite_generators": {
+   "unused let hypotheses": 1
+  },
+  "Submodule.FG.generators_ncard": {
+   "unused let hypotheses": 1
+  },
+  "Submodule.ker_liftQ_eq_bot": {
+   "instance arguments": 1
+  },
+  "Submodule.rank_le_spanRank": {
+   "instance arguments": 3
+  },
+  "Topology.IsOpenEmbedding.coheight_eq": {
+   "implicit arguments and proofs": 1
+  },
+  "ValueDistribution.proximity_add_top_le": {
+   "instance arguments": 1
+  },
+  "WeierstrassCurve.hasGoodReduction_iff_isElliptic_reduction": {
+   "unused let hypotheses": 3,
+   "same closed type, other": 1
+  },
+  "iteratedDerivWithin_one_div": {
+   "beta-reduction or universe levels": 2,
+   "instance arguments": 2
+  }
+ },
+ "examples": {
+  "unused let hypotheses": [
+   {
+    "unit": "Ideal.finrank_quotient_eq_sum",
+    "printed": [
+     "",
+     ""
+    ],
+    "expressionKeys": [
+     "+ 1} h18 ) := ( Classical.decEq.{u_5 + 1} h18 ) ( DecidableEq.{u_5 + 1} h18 ) := ( Classical.decEq.{u_5 + 1} h18 ) |- ( (",
+     "+ 1} h18 ) := ( Classical.decEq.{u_5 + 1} h18 ) ( pi h18 -> h1 ) := ( ( ( ( ( ( ("
+    ]
+   },
+   {
+    "unit": "Ideal.finrank_quotient_eq_sum",
+    "printed": [
+     "",
+     ""
+    ],
+    "expressionKeys": [
+     "+ 1} h18 ) := ( Classical.decEq.{u_5 + 1} h18 ) ( DecidableEq.{u_3 + 1} h2 ) := ( Classical.decEq.{u_3 + 1} h2 ) |- ( ( (",
+     "+ 1} h18 ) := ( Classical.decEq.{u_5 + 1} h18 ) ( pi h18 -> h1 ) := ( ( ( ( ( ( ( ( ( ("
+    ]
+   },
+   {
+    "unit": "Ideal.finrank_quotient_eq_sum",
+    "printed": [
+     "",
+     ""
+    ],
+    "expressionKeys": [
+     "h18 ) h19 ) ) h20 ) h16 ) h17 ) ( DecidableEq.{u_5 + 1} h18 ) := ( Classical.decEq.{u_5 + 1} h18 ) |-",
+     "h18 ) h19 ) ) h20 ) h16 ) h17 ) ( DecidableEq.{u_2 + 1} h1 ) := ( Classical.decEq.{u_2 + 1} h1 ) |-"
+    ]
+   }
+  ],
+  "same closed type, other": [
+   {
+    "unit": "IsTranscendenceBasis.mvPolynomial'",
+    "printed": [
+     "",
+     ""
+    ],
+    "expressionKeys": [
+     ") ) h11 ) ) ( Nonempty.{u + 1} h0 ) ( ( ( MvPolynomial.{u,u_1} h0 ) h2 ) ( ( CommRing.toCommSemiring.{u_1} h2 )",
+     ") ) h11 ) ) ( Nonempty.{u + 1} h0 ) ( DecidableEq.{u + 1} h0 ) := ( Classical.decEq.{u + 1} h0 ) ( ( ( MvPolynomial.{u,u_1} h0 ) h2 ) ( ( CommRing.toCommSemiring.{u_1} h2 )"
+    ]
+   },
+   {
+    "unit": "IsTranscendenceBasis.mvPolynomial'",
+    "printed": [
+     "",
+     ""
+    ],
+    "expressionKeys": [
+     "Classical.decEq.{u + 1} h0 ) ( DecidableEq.{w + 1} h4 ) ( ( ( MvPolynomial.{u,u_1} h0 ) h2 ) ( ( CommRing.toCommSemiring.{u_1} h2 )",
+     "Classical.decEq.{u + 1} h0 ) ( DecidableEq.{w + 1} h4 ) ( DecidableEq.{w + 1} h4 ) := ( Classical.decEq.{w + 1} h4 ) ( ( ( MvPolynomial.{u,u_1} h0 ) h2 ) ( ( CommRing.toCommSemiring.{u_1} h2 )"
+    ]
+   },
+   {
+    "unit": "WeierstrassCurve.hasGoodReduction_iff_isElliptic_reduction",
+    "printed": [
+     "",
+     ""
+    ],
+    "expressionKeys": [
+     "( ( FractionRing.field.{u_1} h0 ) h1 ) h2 ) ) ( ( IsField.{u_1} h0 ) ( ( CommSemiring.toSemiring.{u_1} h0 ) ( ( CommRing.toCommSemiring.{u_1} h0 ) h1 ) ) ) := h10 |- ( pi ( ( ( ( ( ( ( ( ( WeierstrassCurve.HasGoodReduction.{u_1,u_2} h0 ) h1 )",
+     "( ( FractionRing.field.{u_1} h0 ) h1 ) h2 ) ) ( ( ( ( ( ( ( ( ( WeierstrassCurve.HasGoodReduction.{u_1,u_2} h0 ) h1 )"
+    ]
+   }
+  ],
+  "beta-reduction or universe levels": [
+   {
+    "unit": "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+    "printed": [
+     "x10 ) ) ) x8 ) ) ) ) ) ) , @Eq.{ ( max u_1 u_2 ) + 1} ( @Algebra.H1Cotangent.{u_1, u_2} x13 (",
+     "x10 ) ) ) x8 ) ) ) ) ) ) , @Eq.{max ( u_1 + 1 ) ( u_2 + 1 ) } ("
+    ],
+    "expressionKeys": [
+     ") h5 ) ) ) ) ) ) -> ( ( ( Eq.{ ( max u_1 u_2 ) + 1} ( ( ( ( (",
+     ") h5 ) ) ) ) ) ) -> ( ( ( Eq.{max ( u_1 + 1 ) ( u_2 + 1 ) } ("
+    ]
+   },
+   {
+    "unit": "iteratedDerivWithin_one_div",
+    "printed": [
+     "∀ {x7 : Type u_1} [x6 : NontriviallyNormedField.{u_1} x7] {x5 : Set.{u_1} x7} (",
+     "∀ {x8 : Type u_1} [x7 : NontriviallyNormedField.{u_1} x8] {x6 : Set.{u_1} x8} ("
+    ],
+    "expressionKeys": [
+     ") ) ) #0 ) ) ) h2 ) h5 ) ) ( ( ( ( ( ( HMul.hMul.{u_1,u_1,u_1} h0 ) h0 ) h0",
+     ") ) ) #0 ) ) ) h2 ) h5 ) ) ( ( fun h0 => ( ( ( ( ( ( HMul.hMul.{u_1,u_1,u_1} h0 ) h0 ) h0"
+    ]
+   },
+   {
+    "unit": "iteratedDerivWithin_one_div",
+    "printed": [
+     "∀ {x14 : Type u_1} [x13 : NontriviallyNormedField.{u_1} x14] {x12 : Set.{u_1} x14} (",
+     "∀ {x15 : Type u_1} [x14 : NontriviallyNormedField.{u_1} x15] {x13 : Set.{u_1} x15} ("
+    ],
+    "expressionKeys": [
+     ") ) ) ) ) ) ) ) ) ) ( ( ( ( ( ( HMul.hMul.{u_1,u_1,u_1} h0 ) h0 ) h0 ) (",
+     ") ) ) ) ) ) ) ) ) ) ( ( fun h0 => ( ( ( ( ( ( HMul.hMul.{u_1,u_1,u_1} h0 ) h0 ) h0 ) ("
+    ]
+   }
+  ],
+  "binder names and kinds": [],
+  "proofs": [
+   {
+    "unit": "Nat.card_eq",
+    "printed": [
+     "@Eq.{1} Nat ( Nat.card.{u_4} x1 ) ( @Fintype.card.{u_4} x1 ( @Fintype.ofFinite.{u_4} x1 ( @of_eq_true ( Finite.{u_4 + 1} x1 ) ( @eq_true ( Finite.{u_4 + 1} x1 ) x0 ) ) ) )",
+     "@Eq.{1} Nat ( Nat.card.{u_4} x1 ) ( @Fintype.card.{u_4} x1 ( @Fintype.ofFinite.{u_4} x1 x0 ) )"
+    ],
+    "expressionKeys": [
+     ") ) ( ( Fintype.card.{u_4} h3 ) ( ( Fintype.ofFinite.{u_4} h3 ) ( ( of_eq_true.{} ( Finite.{u_4 + 1} h3 ) ) ( ( eq_true.{} ( Finite.{u_4 + 1} h3 ) ) h4 ) ) ) ) )",
+     ") ) ( ( Fintype.card.{u_4} h3 ) ( ( Fintype.ofFinite.{u_4} h3 ) h4 ) ) )"
+    ]
+   },
+   {
+    "unit": "PNat.dvd_iff",
+    "printed": [
+     "∀ {x5 x4 : PNat} ( x3 : Nat ) ( x2 : @Eq.{1} Nat",
+     "∀ {x8 x7 : PNat} ( x6 : Nat ) ( x5 : @Eq.{1} Nat"
+    ],
+    "expressionKeys": [
+     ") 0 ) ( instOfNatNat.{} 0 ) ) ) => ( ( False.elim.{0} False.{} ) ( ( ( ( Eq.mp.{0} ( ( ( Eq.{1}",
+     ") 0 ) ( instOfNatNat.{} 0 ) ) ) => ( ( ( ( ( ( ( Eq.ndrec.{0,1} Nat.{} ) ( ( ( OfNat.ofNat.{0} Nat.{} ) 0 ) ( instOfNatNat.{} 0 ) ) ) ( fun Nat.{} => ( pi ( ( ( Eq.{1} Nat.{} ) ( PNat.val.{} h1 ) ) ( ( ( ( ( ( HMul.hMul.{0,0,0} Nat.{} ) Nat.{} ) Nat.{} ) ( ( instHMul.{0} Nat.{} ) instMulNat.{} ) ) ( PNat.val.{} h0 ) ) "
+    ]
+   },
+   {
+    "unit": "Nat.card_eq",
+    "printed": [
+     "Nat ( @Fintype.card.{u_4} x2 x0 ) ( @Fintype.card.{u_4} x2 ( @Fintype.ofFinite.{u_4} x2 x1 ) )",
+     "Nat ( @Fintype.card.{u_4} x2 x0 ) ( @Fintype.card.{u_4} x2 ( @Fintype.ofFinite.{u_4} x2 ( @Eq.mpr_prop ( Finite.{u_4 + 1} x2 ) True ( @eq_true ( Finite.{u_4 + 1} x2 ) x1 ) ( @of_eq_true True ( @Eq.refl.{1} Prop True ) ) )"
+    ],
+    "expressionKeys": [
+     ") ) ( ( Fintype.card.{u_4} h3 ) ( ( Fintype.ofFinite.{u_4} h3 ) h4 ) ) )",
+     ") ) ( ( Fintype.card.{u_4} h3 ) ( ( Fintype.ofFinite.{u_4} h3 ) ( ( ( ( Eq.mpr_prop.{} ( Finite.{u_4 + 1} h3 ) ) True.{} ) ( ( eq_true.{} ( Finite.{u_4 + 1} h3 ) ) h4 ) ) ( ( of_eq_true.{} True.{} ) ( ( Eq.refl.{1} ("
+    ]
+   }
+  ],
+  "instance arguments": [
+   {
+    "unit": "PNat.dvd_iff",
+    "printed": [
+     "x2 ) ( @HMul.hMul.{0, 0, 0} Nat Nat Nat ( @instHMul.{0} Nat ( @Semigroup.toMul.{0} Nat Nat.instSemigroup ) ) ( PNat.val x3 ) ( PNat.val x1 ) )",
+     "x2 ) ( @HMul.hMul.{0, 0, 0} Nat Nat Nat ( @instHMul.{0} Nat instMulNat ) ( PNat.val x3 ) ( PNat.val x1 ) )"
+    ],
+    "expressionKeys": [
+     "HMul.hMul.{0,0,0} Nat.{} ) Nat.{} ) Nat.{} ) ( ( instHMul.{0} Nat.{} ) ( ( Semigroup.toMul.{0} Nat.{} ) Nat.instSemigroup.{} ) ) ) ( PNat.val.{} h0 ) ) ( PNat.val.{} h2 ) )",
+     "HMul.hMul.{0,0,0} Nat.{} ) Nat.{} ) Nat.{} ) ( ( instHMul.{0} Nat.{} ) instMulNat.{} ) ) ( PNat.val.{} h0 ) ) ( PNat.val.{} h2 ) )"
+    ]
+   },
+   {
+    "unit": "Submodule.rank_le_spanRank",
+    "printed": [
+     "1} Cardinal.{u_2} ( @Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ( @PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} Cardinal.partialOrder.{u_2} ) ) ( Cardinal.mk.{u_2} ( @Set.Elem.{u_2} x7 ( @Subtype.val.{u_2 + 1} (",
+     "1} Cardinal.{u_2} ( @Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ( @PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} ( @ConditionallyCompletePartialOrderSup.toPartialOrder.{u_2 + 1} Cardinal.{u_2} ( @ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup.{u_2 + 1} Cardinal.{u_2} ( @ConditionallyCompleteLat"
+    ],
+    "expressionKeys": [
+     "Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ) ( ( PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} ) Cardinal.partialOrder.{u_2} ) ) ) ( Cardinal.mk.{u_2} ( ( Set.Elem.{u_2} h1 ) ( (",
+     "Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ) ( ( PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} ) ( ( ConditionallyCompletePartialOrderSup.toPartialOrder.{u_2 + 1} Cardinal.{u_2} ) ( ( ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup.{u_2 + 1} Cardinal.{u_2} ) ( ( ConditionallyCompleteLattice.toCo"
+    ]
+   },
+   {
+    "unit": "Submodule.rank_le_spanRank",
+    "printed": [
+     "1} Cardinal.{u_2} ( @Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ( @PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} Cardinal.partialOrder.{u_2} ) ) ( Cardinal.mk.{u_2} ( @Set.Elem.{u_2} x7 ( @Subtype.val.{u_2 + 1} (",
+     "1} Cardinal.{u_2} ( @Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ( @PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} ( @ConditionallyCompletePartialOrderSup.toPartialOrder.{u_2 + 1} Cardinal.{u_2} ( @ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup.{u_2 + 1} Cardinal.{u_2} ( @ConditionallyCompleteLat"
+    ],
+    "expressionKeys": [
+     "Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ) ( ( PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} ) Cardinal.partialOrder.{u_2} ) ) ) ( Cardinal.mk.{u_2} ( ( Set.Elem.{u_2} h1 ) ( (",
+     "Preorder.toLE.{u_2 + 1} Cardinal.{u_2} ) ( ( PartialOrder.toPreorder.{u_2 + 1} Cardinal.{u_2} ) ( ( ConditionallyCompletePartialOrderSup.toPartialOrder.{u_2 + 1} Cardinal.{u_2} ) ( ( ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup.{u_2 + 1} Cardinal.{u_2} ) ( ( ConditionallyCompleteLattice.toCo"
+    ]
+   }
+  ],
+  "instance arguments and proofs": [],
+  "implicit arguments and proofs": [
+   {
+    "unit": "MvPolynomial.pow_idealOfVars",
+    "printed": [
+     ": Type u_2} [x4 : CommSemiring.{u_2} x5] ( x3 : Nat ) ( x2 : @MvPolynomial.{u_1, u_2} x6 x5 x4 ) ( x1 : @Membership.mem.{max u_1",
+     ": Type u_2} [x4 : CommSemiring.{u_2} x5] ( x3 : Nat ) ⦃x2 : @MvPolynomial.{u_1, u_2} x6 x5 x4⦄ ( x1 : @Membership.mem.{max u_1 u_2,"
+    ],
+    "expressionKeys": [
+     "( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 ) ) ( ( Ideal.{max u_1 u_2} ( ( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 )",
+     "( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 ) ) ( ( ( ( ( Submodule.{max u_1 u_2,max u_1 u_2} ( ( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 )"
+    ]
+   },
+   {
+    "unit": "MvPolynomial.pow_idealOfVars",
+    "printed": [
+     ": Type u_2} [x7 : CommSemiring.{u_2} x8] ( x6 : Nat ) ( x5 : @MvPolynomial.{u_1, u_2} x9 x8 x7 ) ( x4 : @Membership.mem.{max u_1",
+     ": Type u_2} [x7 : CommSemiring.{u_2} x8] ( x6 : Nat ) ⦃x5 : @MvPolynomial.{u_1, u_2} x9 x8 x7⦄ ( x4 : @Membership.mem.{max u_1 u_2,"
+    ],
+    "expressionKeys": [
+     "( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 ) ) ( ( Ideal.{max u_1 u_2} ( ( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 )",
+     "( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 ) ) ( ( ( ( ( Submodule.{max u_1 u_2,max u_1 u_2} ( ( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 )"
+    ]
+   },
+   {
+    "unit": "MvPolynomial.pow_idealOfVars",
+    "printed": [
+     ": Type u_2} [x4 : CommSemiring.{u_2} x5] ( x3 : Nat ) ( x2 : @MvPolynomial.{u_1, u_2} x6 x5 x4 ) ( x1 : @Membership.mem.{max u_1",
+     ": Type u_2} [x4 : CommSemiring.{u_2} x5] ( x3 : Nat ) ⦃x2 : @MvPolynomial.{u_1, u_2} x6 x5 x4⦄ ( x1 : @Membership.mem.{max u_1 u_2,"
+    ],
+    "expressionKeys": [
+     "( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 ) ) ( ( Ideal.{max u_1 u_2} ( ( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 )",
+     "( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 ) ) ( ( ( ( ( Submodule.{max u_1 u_2,max u_1 u_2} ( ( ( MvPolynomial.{u_1,u_2} h0 ) h1 ) h2 )"
+    ]
+   }
+  ],
+  "other": [
+   {
+    "unit": "DFinsupp.sumZeroHom_apply",
+    "printed": [
+     "∀ {x51 : Type u} {x50 : Type w} {x49 : ( x0 :",
+     "∀ {x36 : Type u} {x35 : Type w} {x34 : ( x0 :"
+    ],
+    "expressionKeys": [
+     ") ) ) ) ) ) ( ( ( ( ( ( Eq.ndrec.{0,max ( u + 1 ) ( w + 1 ) } ( pi ( ( Subtype.{u + 1} ( Multiset.{u} h0 ) ) ( fun ( Multiset.{u} h0 ) => ( pi h0 -> ( ( Or.{} ( ( ( ( ( Membership.mem.{u,u} h0 ) ( Multiset.{u} h0 ) ) ( Multiset.instMembership.{u} h0 ) ) #1 ) #0 ) ) ( ( ( Eq.{v + 1} ( h2 #0 ) ) ( ( ( ( ( ( DFunLike.coe.",
+     ") ) ) ) ) ) ( ( ( ( ( ( ( ( DFinsupp.sumZeroHom._proof_1.{u,v,w} h0 ) h1 ) h2 ) h5 ) ("
+    ]
+   },
+   {
+    "unit": "DFinsupp.sumZeroHom_apply",
+    "printed": [
+     "∀ {x52 : Type u} {x51 : Type w} {x50 : ( x0 :",
+     "∀ {x37 : Type u} {x36 : Type w} {x35 : ( x0 :"
+    ],
+    "expressionKeys": [
+     ") ) ) ) ) ) ( ( ( ( ( ( Eq.ndrec.{0,max ( u + 1 ) ( w + 1 ) } ( pi ( ( Subtype.{u + 1} ( Multiset.{u} h0 ) ) ( fun ( Multiset.{u} h0 ) => ( pi h0 -> ( ( Or.{} ( ( ( ( ( Membership.mem.{u,u} h0 ) ( Multiset.{u} h0 ) ) ( Multiset.instMembership.{u} h0 ) ) #1 ) #0 ) ) ( ( ( Eq.{v + 1} ( h2 #0 ) ) ( ( ( ( ( ( DFunLike.coe.",
+     ") ) ) ) ) ) ( ( ( ( ( ( ( ( DFinsupp.sumZeroHom._proof_1.{u,v,w} h0 ) h1 ) h2 ) h5 ) ("
+    ]
+   },
+   {
+    "unit": "DFinsupp.sumZeroHom_apply",
+    "printed": [
+     "∀ {x54 : Type u} {x53 : Type w} {x52 : ( x0 :",
+     "∀ {x39 : Type u} {x38 : Type w} {x37 : ( x0 :"
+    ],
+    "expressionKeys": [
+     ") ) ) ) ) ) ( ( ( ( ( ( Eq.ndrec.{0,max ( u + 1 ) ( w + 1 ) } ( pi ( ( Subtype.{u + 1} ( Multiset.{u} h0 ) ) ( fun ( Multiset.{u} h0 ) => ( pi h0 -> ( ( Or.{} ( ( ( ( ( Membership.mem.{u,u} h0 ) ( Multiset.{u} h0 ) ) ( Multiset.instMembership.{u} h0 ) ) #1 ) #0 ) ) ( ( ( Eq.{v + 1} ( h2 #0 ) ) ( ( ( ( ( ( DFunLike.coe.",
+     ") ) ) ) ) ) ( ( ( ( ( ( ( ( DFinsupp.sumZeroHom._proof_1.{u,v,w} h0 ) h1 ) h2 ) h5 ) ("
+    ]
+   }
+  ]
+ }
+}
