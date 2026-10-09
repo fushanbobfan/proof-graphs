@@ -223,6 +223,14 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Test the held-out comparison and check its committed results
+        run: |
+          python scripts/test_search_confirm.py
+          if test -f experiments/search-v0.11/preregistration.json; then
+            python scripts/run_search_confirm.py --check-committed
+          else
+            echo "not registered yet"
+          fi
       - name: Check the golf replication clustered by commit
         run: python scripts/golf_clusters.py --check
       - name: Check the committed holdout slice
