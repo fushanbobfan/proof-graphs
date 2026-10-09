@@ -9,7 +9,8 @@ but not the elaborator's heartbeat limit (`Core.Context.maxHeartbeats`, fixed wh
 the option, so kernel checks made inside the tactic do see it. This runs `omega`, whose elaboration needs more than a
 thousand heartbeats, under a limit of 1 set at the command level and inside the tactic, and in the REPL's tactic
 mode as the harness sends it, and asserts which phase fails: the elaborator at the command level, the kernel inside
-the tactic. Lean core only, a few seconds.
+the tactic. A tactic that sets the limit in its own context (`withTheReader Core.Context`) does stop the elaborator,
+which is the way to bound a tactic from inside. Lean core only, a few seconds.
 """
 
 from __future__ import annotations
@@ -23,6 +24,11 @@ from lean_repl import LeanRepl  # noqa: E402
 from run_linearizations import find_lake  # noqa: E402
 
 GOAL = "∀ (a b c d : Nat), a < b → b < c → c < d → a + 3 ≤ d"
+# `omega` with the elaborator's own limit set to 1 (in thousands, as `maxHeartbeats` counts) for this call.
+LIMITED = """open Lean Elab Tactic in
+elab "pg_limited_omega" : tactic =>
+  withTheReader Core.Context (fun c => { c with maxHeartbeats := 1000 }) <| withCurrHeartbeats do
+    evalTactic (← `(tactic| omega))"""
 
 
 def text(response: dict[str, Any]) -> str:
@@ -40,6 +46,8 @@ def main() -> int:
         made = repl._exchange({"cmd": f"example : {GOAL} := by sorry", "env": 0}, 120)
         harness = repl._exchange({"tactic": "set_option maxHeartbeats 1 in (omega)",
                                   "proofState": made["sorries"][0]["proofState"]}, 120)
+        defined = repl._exchange({"cmd": LIMITED, "env": 0}, 120)
+        limited = repl._exchange({"cmd": f"example : {GOAL} := by pg_limited_omega", "env": defined["env"]}, 120)
     finally:
         repl.close()
     checks = {
@@ -49,6 +57,8 @@ def main() -> int:
             "maximum number of heartbeats" not in text(inside) and "(kernel) deterministic timeout" in text(inside),
         "so in the REPL's tactic mode, as the harness sends it":
             "maximum number of heartbeats" not in text(harness) and "(kernel) deterministic timeout" in text(harness),
+        "a tactic that sets the limit in its own context stops the elaborator":
+            "maximum number of heartbeats (1)" in text(limited),
     }
     for name, ok in checks.items():
         print(f"{'ok  ' if ok else 'FAIL'} {name}")

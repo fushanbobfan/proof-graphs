@@ -19,3 +19,15 @@ defeq-v0.1's merge, written with 200,000, which is the default, ran under what i
 elaborator when the limit is set at the command level, and when it is set inside the tactic, also in the REPL's
 tactic mode as the harness sends it, `omega` elaborates and only the kernel's check fails. This was found on
 2026-10-08, while classifying defeq-v0.1's merges, when a limit of 2,000,000 sent the same way left 200,000 in force.
+
+A tactic can bound its own elaboration by setting the limit in its context, which the same script checks:
+
+```lean
+open Lean Elab Tactic in
+elab "pg_limited_omega" : tactic =>
+  withTheReader Core.Context (fun c => { c with maxHeartbeats := 1000 }) <| withCurrHeartbeats do
+    evalTactic (← `(tactic| omega))
+```
+
+Here `maxHeartbeats` is in heartbeats, a thousand per unit of the option, and `withCurrHeartbeats` counts from the
+call; `omega` then stops in the elaborator at the limit.
