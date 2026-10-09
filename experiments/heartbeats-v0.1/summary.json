@@ -1,0 +1,89 @@
+{
+ "experiment": "heartbeats-v0.1",
+ "preregistrationSha256": "7e3e7d212cc024e7e03d6d1d98b0e1647df5968046c0447f292b63aa42747725",
+ "units": 2694,
+ "tasks": 1347,
+ "posedInBoth": 1170,
+ "errors": 0,
+ "abandoned": 0,
+ "searches": {
+  "whole": {
+   "proved": 102,
+   "provedV03": 102,
+   "lost": [],
+   "gained": []
+  },
+  "andor": {
+   "proved": 102,
+   "provedV03": 102,
+   "lost": [],
+   "gained": []
+  }
+ },
+ "comparison": {
+  "andorOnly": 2,
+  "wholeOnly": 2,
+  "pTwoSided": 1.0
+ },
+ "whole": {
+  "expansions": 16093,
+  "orderDuplicates": 729,
+  "goalDuplicates": 2399,
+  "orderFraction": 0.045299198409246254,
+  "goalFraction": 0.1490710246691108
+ },
+ "stops": {
+  "total": 2650,
+  "byTactic": {
+   "aesop": 1061,
+   "assumption": 2,
+   "constructor": 18,
+   "exact?": 1314,
+   "ext x": 10,
+   "linarith": 10,
+   "rcases \u2039_ \u2227 _\u203a with \u27e8h\u2081, h\u2082\u27e9": 62,
+   "rfl": 30,
+   "simp at *": 30,
+   "simp_all": 55,
+   "symm": 10,
+   "trivial": 30,
+   "use 0": 18
+  }
+ },
+ "hypotheses": {
+  "H100": {
+   "whole": {
+    "proved": 102,
+    "provedV03": 102
+   },
+   "andor": {
+    "proved": 102,
+    "provedV03": 102
+   },
+   "holds": true
+  },
+  "H101": {
+   "andorOnly": 2,
+   "wholeOnly": 2,
+   "p": 1.0,
+   "holds": true
+  },
+  "H102": {
+   "orderFraction": 0.045299198409246254,
+   "goalFraction": 0.1490710246691108,
+   "holds": true
+  }
+ },
+ "checks": {
+  "C38": {
+   "sessions": 2694,
+   "undefined": 0,
+   "holds": true
+  },
+  "C39": {
+   "stops": 2650,
+   "holds": true
+  }
+ },
+ "resultsSha256": "7513114b3c4d75c635df91185bc072512efe77018a682444f4b9ed89bd5cd950"
+}

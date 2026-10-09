@@ -53,7 +53,8 @@ numbers and its boundaries;
 [HANDOFF.md](HANDOFF.md) maps every claim to the command that re-verifies
 it and lists where an independent cross-check is most valuable.
 [docs/heartbeat-limit.md](docs/heartbeat-limit.md) corrects the per-tactic
-heartbeat limit the search registrations state.
+heartbeat limit the search registrations state; enforced, it changes no outcome
+of search-v0.3's searches (heartbeats-v0.1).
 
 ## Layout
 
