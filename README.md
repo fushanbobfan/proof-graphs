@@ -188,3 +188,13 @@ fetches Mathlib's build for the slice and search experiments (about 6 GB);
 the search experiment needs a local OpenAI-compatible server on port 8080. On Windows, clone into a short path or set
 `git config --global core.longpaths true`; several module names of the
 dependency exceed 100 characters.
+
+## License
+
+The code and data of this repository are under the MIT License
+([LICENSE](LICENSE)). Some committed files reproduce text from Mathlib: the
+declarations of the golf pairs (`experiments/golf-v0.1`, `experiments/golf-v0.2`)
+and the proofs in the extraction audits' worksheets. That text remains under
+Mathlib's Apache License 2.0, copyright its authors, reproduced in
+[third_party/mathlib/LICENSE](third_party/mathlib/LICENSE); text from
+ProofNet-IR is under its own MIT License.
