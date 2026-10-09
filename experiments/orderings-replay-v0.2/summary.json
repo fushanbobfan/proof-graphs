@@ -1,0 +1,78 @@
+{
+ "experiment": "orderings-replay-v0.2",
+ "preregistrationSha256": "b43a7de598cd2c64cf1c0dd98e5bef443a0d4c3cb6f81d3b9ccd20c56f42a8fa",
+ "proofs": 134,
+ "stated": 97,
+ "errors": 0,
+ "abandoned": 0,
+ "originalReplays": 87,
+ "originalFailures": {
+  "tactic error": 10
+ },
+ "coupledProofs": 1,
+ "coupledInTargetOnly": 0,
+ "byCorpus": {
+  "proofnet-ir": {
+   "proofs": 67,
+   "stated": 38,
+   "originalReplays": 32,
+   "coupled": 0
+  },
+  "mathlib-slice": {
+   "proofs": 27,
+   "stated": 27,
+   "originalReplays": 27,
+   "coupled": 1
+  },
+  "mathlib-holdout": {
+   "proofs": 40,
+   "stated": 32,
+   "originalReplays": 28,
+   "coupled": 0
+  }
+ },
+ "uncoupled": {
+  "proofs": 86,
+  "proofsWithOthers": 86,
+  "orderings": 909,
+  "replayed": 909,
+  "fraction": 1.0,
+  "failures": {},
+  "proofsAllReplay": 86,
+  "proofsNoneReplay": 0
+ },
+ "coupled": {
+  "proofs": 1,
+  "proofsWithOthers": 1,
+  "orderings": 1,
+  "replayed": 1,
+  "fraction": 1.0,
+  "failures": {},
+  "proofsAllReplay": 1,
+  "proofsNoneReplay": 0
+ },
+ "hypotheses": {
+  "H97": {
+   "fraction": 1.0,
+   "orderings": 909,
+   "supported": true
+  },
+  "H98": {
+   "fraction": 1.0,
+   "orderings": 1,
+   "supported": false
+  },
+  "H99": {
+   "coupled": 1.0,
+   "uncoupled": 1.0,
+   "supported": false
+  }
+ },
+ "checks": {
+  "C37": {
+   "fraction": 0.8969072164948454,
+   "holds": true
+  }
+ },
+ "resultsSha256": "f44527bcd7479891fdab2b914fca9f2ec1ead2714383d3a0d7bfceb62ebccd8f"
+}
