@@ -77,7 +77,7 @@ def experiment(name: str, arm_key: str, keep: Callable | None = None) -> dict[st
 
 
 def summarize() -> dict[str, Any]:
-    return {
+    out = {
         "note": "tasks proved within a per-task budget of candidate applications; exploratory, not registered",
         "grid": GRID,
         "search-v0.3": experiment("search-v0.3", "search"),
@@ -85,6 +85,10 @@ def summarize() -> dict[str, Any]:
         "search-v0.8": experiment("search-v0.8", "search"),
         "search-v0.9": experiment("search-v0.9", "search"),
     }
+    for name in ("search-v0.10", "search-v0.11"):  # once their runs are complete
+        if (ROOT / "experiments" / name / "summary.json").exists():
+            out[name] = experiment(name, "search")
+    return out
 
 
 def main() -> int:
