@@ -6,6 +6,7 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import run_search_confirm as confirm
@@ -64,6 +65,49 @@ class UnitTests(unittest.TestCase):
             rows, _ = confirm.run_unit({"module": "M", "declaration": "t1", "index": 1})
             self.assertEqual(calls, ["groups", "whole"])
             self.assertEqual([r["position"] for r in rows], [0, 1])
+
+
+class ProcessTests(unittest.TestCase):
+    """The unit's own process, emulated in this one: what the child writes is what the runner records."""
+
+    def fake_run(self, unit_rows, returncode=0):
+        def run(command, **kwargs):
+            self.assertEqual(command[2:4], [str(Path(confirm.__file__).resolve()), "--unit"])
+            if returncode == 0:
+                with patch.object(confirm, "run_unit", lambda task: (unit_rows(task), [{"index": task["index"]}])):
+                    confirm.child_main(Path(command[4]), Path(command[5]))
+            return SimpleNamespace(returncode=returncode, stdout="", stderr="Traceback ...\nRuntimeError: boom")
+        return run
+
+    def test_a_unit_comes_back_whole_from_its_process(self):
+        rows = lambda task: [row(task["declaration"], s, proof=True) for s in confirm.SEARCHES]  # noqa: E731
+        with patch.object(confirm.subprocess, "run", self.fake_run(rows)), \
+                patch.object(confirm.prover, "ENDPOINT", "unset"):
+            got, log = confirm.unit_in_child({"module": "M0", "declaration": "t0", "index": 3})
+            self.assertEqual(confirm.prover.ENDPOINT, confirm.deep.ENDPOINT)
+        self.assertEqual(got, rows({"declaration": "t0"}))
+        self.assertEqual(log, [{"index": 3}])
+
+    def test_a_failed_process_raises_with_its_reason(self):
+        with patch.object(confirm.subprocess, "run", self.fake_run(None, returncode=1)):
+            with self.assertRaisesRegex(RuntimeError, "exited with 1: .*boom"):
+                confirm.unit_in_child({"module": "M0", "declaration": "t0", "index": 0})
+
+    def test_a_pass_records_every_unit_once(self):
+        tasks = [{"module": f"M{i}", "declaration": f"t{i}", "index": i} for i in range(5)]
+
+        def unit(task):
+            return ([row(task["declaration"], s) for s in confirm.SEARCHES],
+                    [{"index": task["index"], "declaration": task["declaration"], "prompt": "A:::"}])
+
+        with tempfile.TemporaryDirectory() as tmp, patch.object(confirm, "RESULTS", Path(tmp) / "results.jsonl"), \
+                patch.object(confirm, "DRAWS", Path(tmp) / "draws.jsonl.gz"), \
+                patch.object(confirm, "unit_in_child", unit), patch.object(confirm.deep, "admit", lambda: None):
+            self.assertEqual(confirm.run_pass(tasks, 2), 5)
+            self.assertEqual(len(confirm.read_rows()), 10)
+            self.assertEqual(confirm.done_tasks(confirm.read_rows()), {t["declaration"] for t in tasks})
+            self.assertEqual([e["index"] for e in confirm.read_draws()], [0, 1, 2, 3, 4])
+            self.assertEqual(confirm.run_pass(tasks, 2), 0)
 
 
 class SummaryTests(unittest.TestCase):

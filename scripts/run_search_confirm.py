@@ -24,7 +24,9 @@ import json
 import math
 import os
 import random
+import subprocess
 import sys
+import tempfile
 import threading
 import time
 from pathlib import Path
@@ -62,6 +64,7 @@ ALPHA = 0.05
 BOOTSTRAP = 2000
 SEED = 20261010
 MAX_ATTEMPTS = 3
+DEFAULT_WORKERS = 4
 
 QUESTION = ("on theorems no experiment has used, does a coupled-group search prove more than a whole-state search, "
             "both with the typed key and the step prover at 48 expansions, and is a gain of three points excluded")
@@ -188,6 +191,33 @@ def run_unit(task: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str,
     return rows, log
 
 
+def unit_in_child(task: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """run_unit in a fresh Python process. A search keeps every state it exported until it returns, and the
+    allocator keeps what it freed, so a runner that ran the units in its own threads grew by about 0.85 GB a unit in
+    search-v0.10; a unit's process returns its memory when it exits. Scheduling only: the unit is the same."""
+    with tempfile.TemporaryDirectory() as tmp:
+        given, taken = Path(tmp) / "task.json", Path(tmp) / "unit.json"
+        given.write_text(json.dumps(task, ensure_ascii=False), encoding="utf-8")
+        done = subprocess.run([sys.executable, "-B", str(Path(__file__).resolve()), "--unit", str(given), str(taken)],
+                              cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace",
+                              env=dict(os.environ, PYTHONUTF8="1", PYTHONIOENCODING="utf-8"),
+                              creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        if done.returncode != 0 or not taken.exists():
+            reason = (done.stderr.strip().splitlines() or [""])[-1]  # the exception's own line
+            raise RuntimeError(f"unit process exited with {done.returncode}: {reason[:200]}")
+        out = json.loads(taken.read_text(encoding="utf-8"))
+    return out["rows"], out["log"]
+
+
+def child_main(given: Path, taken: Path) -> int:
+    """The `--unit` entry: one unit, with the prover's endpoint as the runner sets it, written to `taken`."""
+    prover.ENDPOINT = deep.ENDPOINT
+    prover.MODEL_LOG = None
+    rows, log = run_unit(json.loads(given.read_text(encoding="utf-8")))
+    taken.write_text(json.dumps({"rows": rows, "log": log}, ensure_ascii=False), encoding="utf-8")
+    return 0
+
+
 def unit_done(rows: list[dict[str, Any]]) -> bool:
     latest = {r["search"]: r for r in rows}
     if set(latest) != set(SEARCHES):
@@ -209,8 +239,7 @@ def done_tasks(rows: list[dict[str, Any]]) -> set[str]:
 
 
 def run_pass(tasks: list[dict[str, Any]], workers: int) -> int:
-    rows = read_rows()
-    done = done_tasks(rows)
+    done = done_tasks(read_rows())
     draws_log = [e for e in read_draws() if e["declaration"] in done]
     lock = threading.Lock()
     prover.MODEL_LOG = None
@@ -219,7 +248,7 @@ def run_pass(tasks: list[dict[str, Any]], workers: int) -> int:
         started = time.monotonic()
         try:
             deep.admit()
-            return run_unit(task)
+            return unit_in_child(task)
         except Exception as error:  # noqa: BLE001
             message = f"{type(error).__name__}: {error}"[:300]
             return [{"module": task["module"], "declaration": task["declaration"], "search": s, "index": task["index"],
@@ -242,9 +271,11 @@ def run_pass(tasks: list[dict[str, Any]], workers: int) -> int:
 
     todo = [t for t in tasks if t["declaration"] not in done]
     with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = [pool.submit(guarded, t) for t in todo]
-        for future in concurrent.futures.as_completed(futures):
-            record(future.result())
+        pending = {pool.submit(guarded, t) for t in todo}
+        while pending:  # a recorded unit's future is let go, so its rows do not stay in memory
+            finished, pending = concurrent.futures.wait(pending, return_when=concurrent.futures.FIRST_COMPLETED)
+            for future in finished:
+                record(future.result())
     draws_log.sort(key=lambda e: e["index"])
     write_draws(draws_log, 9)
     return len(todo)
@@ -366,6 +397,11 @@ def registration_payload(tasks: list[dict[str, Any]], size: dict[str, Any]) -> d
                     f"at temperature {v8.TEMPERATURE}, at most {v8.MAX_TOKENS} tokens, the first goal followed by "
                     f"':::', duplicates dropped",
         "budget": {"expansions": BUDGET, "checkpoints": list(CHECKPOINTS), "tacticWallClockSeconds": 60},
+        "execution": f"each task's unit in its own Python process; {DEFAULT_WORKERS} units at a time, each started only "
+                     f"while at least {deep.START_GATE_GB:g} GB of commit charge is left and {deep.START_SPACING:g} s "
+                     f"after the previous start; units resumed by search-v0.10's attempt rule (a unit that raised is "
+                     f"repeated up to {MAX_ATTEMPTS} attempts, one in which a search was not constructed or was "
+                     f"abandoned is repeated once, and the latest row of each search counts)",
         "sampleSize": size,
         "hypotheses": HYPOTHESES, "checks": CHECKS,
         "tests": "H109 by a one-sided sign test at 0.05; H110 by the upper limit of Newcombe's 95% hybrid score "
@@ -380,11 +416,13 @@ def registration_payload(tasks: list[dict[str, Any]], size: dict[str, Any]) -> d
 
 
 def main() -> int:
+    if sys.argv[1:2] == ["--unit"]:  # one unit in its own process (unit_in_child)
+        return child_main(Path(sys.argv[2]), Path(sys.argv[3]))
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     for flag in ("--register", "--run", "--check-committed"):
         mode.add_argument(flag, action="store_true")
-    parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--workers", type=int, default=DEFAULT_WORKERS)
     args = parser.parse_args()
     if args.register:
         if RESULTS.exists():
