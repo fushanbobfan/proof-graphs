@@ -12,8 +12,9 @@ remain open. Two public repositories:
   program. Its own entry points are `docs/current-status.md`,
   `docs/goal-ledger.md`, and `CONTRIBUTING.md`.
 - proof-graphs (this repository): the same founding question at Lean's
-  scale, five preregistered experiments and a dataset. The answer is stated
-  in [docs/design.md](docs/design.md), "Where this ends".
+  scale, its preregistered experiments (five at the handoff; the table below
+  lists every one since) and a dataset. The answer is stated in
+  [docs/design.md](docs/design.md), "Where this ends".
 
 Everything the conclusions rest on is committed and re-verified by CI on
 every push; nothing needed for verification lives outside the two
@@ -45,6 +46,15 @@ GitHub.
 | Identified by Lean's expressions instead of text, goal sharing is 27.2% of the step-prover search's expansions against 26.2% by the coarse key, and order duplicates stay at 0.1%; item by item, 8.7% of printed-goal merges and 5.6% of drops join goals whose expressions differ | `experiments/keys-v0.1` | `python scripts/run_key_replay.py --check-committed` |
 | A second blind reconstruction, of 40 proofs drawn for the constructs the step derivation handles by special rules, agrees on every graph | `experiments/extraction-audit-v0.2` | `python scripts/run_extraction_audit_v2.py --check-committed` |
 | With goals identified by Lean expressions and three sets of draws, a search over metavariable-coupled goal groups proves 122 of 474 task-sets against 121 for independent goals and 116 for whole states (no pair significant after Holm; one proof passed through a group of several goals); rerunning the eleven tasks a flaky setup failure excluded changes no comparison | `experiments/search-v0.8`, `experiments/search-v0.8-range-rerun` | `python scripts/run_search_coupled.py --check-committed`, `python scripts/explore_range_rerun_v08.py --check` |
+| At 256 expansions, over 169 theorems, the group search proves 48 and the whole-state search 46 (3 against 1, p = 0.31); goal sharing stays near 6% of expansions and order duplicates at 0.2% | `experiments/search-v0.9` | `python scripts/run_search_coupled_deep.py --check-committed` |
+| Choosing goals freely proves no theorem the first-goal search misses (98 against 103 of 1,171) and brings back order duplicates (7.7% against 4.5%), with nearly twice the candidate applications | `experiments/goal-selection-v0.1` | `python scripts/run_search_goal_selection.py --check-committed` |
+| On constructed tasks, free goal choice proves the coupled one-witness tasks the first-goal search cannot, but none within the first-goal search's candidate applications | `experiments/goal-selection-diagnostic-v0.1` | `python scripts/run_goal_selection_diagnostic.py --check-committed` |
+| A third blind reconstruction, of 28 long or non-forest proofs (3 to 138 steps), agrees on every graph | `experiments/extraction-audit-v0.3` | `python scripts/run_extraction_audit_v3.py --check-committed` |
+| Most of the printed key's false merges and drops join syntactic variants of one term (instance paths, universe levels, unreduced lambdas); 33 merges, all in one theorem, join different hypotheses that print alike | `experiments/keys-v0.1-conflations` | `python scripts/explore_false_merges.py` (replays in the REPL; not in CI) |
+| On matched denominators, goal sharing in the step prover's whole-state search is 27.7% by expression key and 25.9% by the coarse key; 5.9% of the printed key's drops there are false | `experiments/keys-v0.1-matched-support` | `python scripts/audit_key_denominators.py --check` |
+| A key that cannot capture across goals gives the coarse key's goal-duplicate shares exactly; erasing metavariable numbers moves the default key's shares by at most 0.02 points | `experiments/goal-key-audit` | `python scripts/audit_goal_keys.py --check` |
+| Identity up to definitional equality adds 3.2 points of goal duplicates to the step prover's whole-state search (registered ceiling 2) and 0.1 to the menu's; most added merges differ only in let-bound hypotheses the goal does not use; 89% of the printed key's false drops join definitionally equal goals | `experiments/defeq-v0.1`, `experiments/defeq-v0.1-merges` | `python scripts/run_defeq_replay.py --check-committed`, `python scripts/explore_defeq_merges.py --check` |
+| Theorems proved against candidate applications rather than expansions, for search-v0.3, goal-selection-v0.1, search-v0.8 and v0.9 (exploratory) | `experiments/cost-curves` | `python scripts/explore_cost_curves.py --check` |
 | 7,285 step-dependency graphs, corrected derivation | `datasets/proof-graphs-v0.2.jsonl.gz` | `python scripts/run_recount.py --check-committed` |
 | Every derived graph satisfies the structural invariants below | all three extractions | `python scripts/audit_graphs.py` |
 
