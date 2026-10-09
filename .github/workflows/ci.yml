@@ -223,6 +223,13 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the committed second orderings replay
+        run: |
+          if test -f experiments/orderings-replay-v0.2/summary.json; then
+            python scripts/run_orderings_replay_v2.py --check-committed
+          else
+            echo "no committed results yet"
+          fi
       - name: Check that the replay's sample rule admits a proof with a shared metavariable, whose other ordering fails
         run: |
           ~/.elan/bin/lake build repl

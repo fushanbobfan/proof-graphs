@@ -1,0 +1,1208 @@
+[
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.DerivationTree",
+  "declaration": "ProofNetIR.CutFreeDerivation.reorderCandidate?_map",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/DerivationTree.lean",
+  "byLine": 438,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.DerivationTree",
+  "declaration": "ProofNetIR.CutFreeDerivation.infer?_eq_some_iff_build?_conclusions",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/DerivationTree.lean",
+  "byLine": 932,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.axiom_endpoint_atom",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 567,
+  "steps": 12,
+  "orderings": 5544
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.pop_class_eq",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 866,
+  "steps": 6,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.pop_marked_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 877,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.axiom_region",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 1111,
+  "steps": 5,
+  "orderings": 8
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Figure7.Closure",
+  "declaration": "ProofNetIR.SequentialFigure7.ReachableByImplementedDispatcher.dispatch_or_allMarked",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Figure7/Closure.lean",
+  "byLine": 2472,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.retainedIndex_injective_of_kept",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 206,
+  "steps": 6,
+  "orderings": 30
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.EdgeSimplePath.sources_nodup",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 2434,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.adjacent_right_in_bounds",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 4284,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.mem_closureN_iff_walkWithin",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 4341,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.isTree_iff_isTree",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 4506,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.IntrinsicCanonical",
+  "declaration": "ProofNetIR.Certificate.uniqueProducer?_eq_some_of_count",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/IntrinsicCanonical.lean",
+  "byLine": 153,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.IntrinsicCanonical",
+  "declaration": "ProofNetIR.Certificate.uniqueOwnedLink?_eq_some_of_count",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/IntrinsicCanonical.lean",
+  "byLine": 166,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.IntrinsicCanonical",
+  "declaration": "ProofNetIR.Certificate.StructurallyWellFormed.intrinsicOrderedLinks_perm",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/IntrinsicCanonical.lean",
+  "byLine": 1246,
+  "steps": 5,
+  "orderings": 12
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.NetEquivalence",
+  "declaration": "ProofNetIR.Graph.adjacent_iff_of_edges_perm",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/NetEquivalence.lean",
+  "byLine": 10,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.VertexRenaming.contains_map_forward",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 49,
+  "steps": 7,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.Graph.bounded_reindex_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 753,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.Graph.connected_reindex_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 777,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.Graph.isTree_reindex_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 791,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.Graph.acyclic_reindex_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 863,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Reindex",
+  "declaration": "ProofNetIR.Certificate.declarativelyCorrect_reindex_iff",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Reindex.lean",
+  "byLine": 1252,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialConsumerIndex",
+  "declaration": "ProofNetIR.ConsumerIndex.build_sound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialConsumerIndex.lean",
+  "byLine": 332,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentEscapeTemporal",
+  "declaration": "ProofNetIR.SequentialFigure7.submittedParPremise_bound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ActiveTopDebtParentEscapeTemporal.lean",
+  "byLine": 133,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentExternalTemporalOutcome",
+  "declaration": "ProofNetIR.SequentialFigure7.submittedTensorPremise_bound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ActiveTopDebtParentExternalTemporalOutcome.lean",
+  "byLine": 197,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ActiveTopDebtParentTemporalOutcome",
+  "declaration": "ProofNetIR.SequentialFigure7.submittedTensorPremise_bound",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ActiveTopDebtParentTemporalOutcome.lean",
+  "byLine": 76,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7CommitmentEdgeTargetAvoidance",
+  "declaration": "ProofNetIR.SequentialFigure7.ReadyHeadInput.connectiveConclusion_not_owned_of_accounted",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7CommitmentEdgeTargetAvoidance.lean",
+  "byLine": 159,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7ContinuationCreditPreservation",
+  "declaration": "ProofNetIR.SequentialFigure7.FutureWorkAt.afterPrepared_or_selected",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7ContinuationCreditPreservation.lean",
+  "byLine": 173,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7MarkedTargetRawReturnTerminalCausalOrder",
+  "declaration": "ProofNetIR.SequentialFigure7.MarkedConclusionChain.rawMarkedBefore_or_eq",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7MarkedTargetRawReturnTerminalCausalOrder.lean",
+  "byLine": 321,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7NewEnabledCore",
+  "declaration": "ProofNetIR.SequentialFigure7.new?_success_iff_enabled",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7NewEnabledCore.lean",
+  "byLine": 239,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7OlderRawMarkedRegionSeparation",
+  "declaration": "ProofNetIR.SequentialFigure7.SchedulerInvariant.exactMarkedOccurrenceOwner_iff_exists_rawMark",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7OlderRawMarkedRegionSeparation.lean",
+  "byLine": 80,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7PriorityEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.dispatch?_kind_success_iff_priorityEnabled",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7PriorityEnabled.lean",
+  "byLine": 544,
+  "steps": 7,
+  "orderings": 20
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7QueueHistory",
+  "declaration": "ProofNetIR.SequentialFigure7.CanonicalTagHistory.newEnabled_iff_inputNecessary",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7QueueHistory.lean",
+  "byLine": 320,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7QueueHistory",
+  "declaration": "ProofNetIR.SequentialFigure7.ReachableByImplementedDispatcher.newEnabled_iff_inputNecessary",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7QueueHistory.lean",
+  "byLine": 353,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7RegionBoundaries",
+  "declaration": "ProofNetIR.SequentialFigure7.carrierFresh",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7RegionBoundaries.lean",
+  "byLine": 53,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7StableEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.ForwardInput.stored_premise_tokens",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7StableEnabled.lean",
+  "byLine": 669,
+  "steps": 11,
+  "orderings": 9072
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7TouchCompleteness",
+  "declaration": "ProofNetIR.SequentialFigure7.ReservationEvent.touched_iff_sourceLeftRegion",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7TouchCompleteness.lean",
+  "byLine": 388,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFreshSourceLeftRun",
+  "declaration": "ProofNetIR.SequentialUnification.FreshSourceLeftRun.execution_iff_nonempty",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFreshSourceLeftRun.lean",
+  "byLine": 542,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialUnification",
+  "declaration": "ProofNetIR.SequentialUnification.nextAxiomWithFuel?_touched_tagged",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialUnification.lean",
+  "byLine": 1448,
+  "steps": 4,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialUnification",
+  "declaration": "ProofNetIR.SequentialUnification.nextAxiomWithFuel?_tagged_iff_input_or_touched",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialUnification.lean",
+  "byLine": 1467,
+  "steps": 10,
+  "orderings": 1890
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.compactVertex_lt",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1675,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.expandVertex_lt",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1685,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.expandVertex_ne",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1693,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Graph.isTree_iff_bounded_connected_acyclic",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 3140,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Graph.Adjacent.symm",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 3901,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.declarativelyCorrect_iff_structural_cuspAcyclic_referenceConnected",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 12837,
+  "steps": 6,
+  "orderings": 6
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.mem_enqueueWorklist_of_mem",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 7500,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_balance",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8098,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_core",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8159,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_successfulFirings",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8170,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_waitingRequeues",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8181,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_initialEnqueues",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8192,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_queued_size",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8203,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_waiting",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8214,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.QueueFlagSound.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8263,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.WaitingFlagSound.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8306,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.QueueFlagComplete.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8318,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.QueueNodup.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8331,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.WaitingFlagComplete.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8343,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.WaitingNodup.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8355,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.enqueueConsumers_waitingFlags_size",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8366,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.SchedulerCoverage.enqueueConsumers",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8379,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.mem_enqueueConsumers_of_mem",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 8392,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.initializeWorklist_firingsAccounted",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 9428,
+  "steps": 5,
+  "orderings": 24
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.canonicalWorklistRun_coreInvariant",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 13592,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.canonicalWorklistRun_runInvariant",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 14017,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.unificationWorklistCheck_eq_check",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 41763,
+  "steps": 10,
+  "orderings": 112
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.CharP.Defs",
+  "declaration": "expChar_one_iff_char_zero",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/CharP/Defs.lean",
+  "byLine": 416,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.Homology.HomotopyCategory.ShortExact",
+  "declaration": "CochainComplex.mappingCone.descShortComplex_naturality",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean",
+  "byLine": 172,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.Module.LocalizedModule.Int",
+  "declaration": "IsLocalizedModule.finsetIntegerMultiple_image",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Module/LocalizedModule/Int.lean",
+  "byLine": 112,
+  "steps": 9,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.AlgebraicGeometry.PullbackCarrier",
+  "declaration": "AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff",
+  "source": ".lake/packages/mathlib/Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+  "byLine": 248,
+  "steps": 7,
+  "orderings": 15
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.AlgebraicTopology.SimplicialSet.Monoidal",
+  "declaration": "SSet.Subcomplex.range_tensorHom",
+  "source": ".lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialSet/Monoidal.lean",
+  "byLine": 147,
+  "steps": 7,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+  "declaration": "smul_closedBall",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Module/Ball/Pointwise.lean",
+  "byLine": 371,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.Normed.Module.Ball.Pointwise",
+  "declaration": "smul_sphere",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Module/Ball/Pointwise.lean",
+  "byLine": 388,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Analysis.RCLike.Basic",
+  "declaration": "RCLike.inv_I",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/RCLike/Basic.lean",
+  "byLine": 541,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives",
+  "declaration": "CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.le_largerSubobject",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+  "byLine": 175,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived",
+  "declaration": "CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+  "byLine": 57,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Sites.Point.Basic",
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "byLine": 227,
+  "steps": 6,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.CategoryTheory.Subfunctor.Basic",
+  "declaration": "CategoryTheory.Subfunctor.eq_top_iff_isIso",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Subfunctor/Basic.lean",
+  "byLine": 179,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.ENat.Basic",
+  "declaration": "ENat.lift_eq_toNat_of_lt_top",
+  "source": ".lake/packages/mathlib/Mathlib/Data/ENat/Basic.lean",
+  "byLine": 173,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.List.Basic",
+  "declaration": "Decidable.List.eq_or_ne_mem_of_mem",
+  "source": ".lake/packages/mathlib/Mathlib/Data/List/Basic.lean",
+  "byLine": 66,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.List.Basic",
+  "declaration": "List.IsPrefix.mem_iff_idxOf_lt_length",
+  "source": ".lake/packages/mathlib/Mathlib/Data/List/Basic.lean",
+  "byLine": 571,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.FieldTheory.Finite.Basic",
+  "declaration": "FiniteField.sum_subgroup_units",
+  "source": ".lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean",
+  "byLine": 173,
+  "steps": 7,
+  "orderings": 15
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Geometry.Manifold.VectorBundle.Tensoriality",
+  "declaration": "TensorialAt.pointwise₂",
+  "source": ".lake/packages/mathlib/Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean",
+  "byLine": 174,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Logic.Nontrivial.Defs",
+  "declaration": "Function.Injective.exists_ne",
+  "source": ".lake/packages/mathlib/Mathlib/Logic/Nontrivial/Defs.lean",
+  "byLine": 47,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Logic.Nontrivial.Defs",
+  "declaration": "Decidable.exists_ne",
+  "source": ".lake/packages/mathlib/Mathlib/Logic/Nontrivial/Defs.lean",
+  "byLine": 54,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.MeasureTheory.PiSystem",
+  "declaration": "generateFrom_piiUnionInter_measurableSet",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/PiSystem.lean",
+  "byLine": 486,
+  "steps": 6,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.KrullDimension.Zero",
+  "declaration": "Ring.KrullDimLE.radical_eq_maximalIdeal",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Zero.lean",
+  "byLine": 121,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.Polynomial.Eisenstein.Basic",
+  "declaration": "Polynomial.IsEisensteinAt.coeff_mem",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/Polynomial/Eisenstein/Basic.lean",
+  "byLine": 217,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.RingTheory.PowerSeries.Restricted",
+  "declaration": "PowerSeries.IsRestricted.one",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/PowerSeries/Restricted.lean",
+  "byLine": 47,
+  "steps": 5,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.Algebra.Module.LinearPMap",
+  "declaration": "LinearPMap.closureHasCore",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Algebra/Module/LinearPMap.lean",
+  "byLine": 156,
+  "steps": 10,
+  "orderings": 35
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.Constructions.SumProd",
+  "declaration": "isOpen_prod_iff'",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Constructions/SumProd.lean",
+  "byLine": 494,
+  "steps": 11,
+  "orderings": 700
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.Constructions.SumProd",
+  "declaration": "isOpenMap_prodMap_iff",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Constructions/SumProd.lean",
+  "byLine": 610,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Topology.Constructions.SumProd",
+  "declaration": "isClosedMap_sum",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Constructions/SumProd.lean",
+  "byLine": 842,
+  "steps": 8,
+  "orderings": 21
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Algebra.Lie.DirectSum",
+  "declaration": "DirectSum.lie_of",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Lie/DirectSum.lean",
+  "byLine": 139,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Algebra.Module.SpanRank",
+  "declaration": "Submodule.lift_spanRank_le_iff_exists_span_set_card_le",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Module/SpanRank.lean",
+  "byLine": 202,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Algebra.Order.Archimedean.Class",
+  "declaration": "MulArchimedeanClass.mk_le_mk_iff_lt",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Order/Archimedean/Class.lean",
+  "byLine": 276,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Algebra.Order.Archimedean.Class",
+  "declaration": "MulArchimedeanClass.subsemigroup",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Order/Archimedean/Class.lean",
+  "byLine": 587,
+  "steps": 4,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.RelativeCellComplex",
+  "declaration": "SSet.Subcomplex.Pairing.RankFunction.isPushout_aux₁",
+  "source": ".lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/RelativeCellComplex.lean",
+  "byLine": 540,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Analysis.Complex.ValueDistribution.Proximity.Basic",
+  "declaration": "ValueDistribution.proximity",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Complex/ValueDistribution/Proximity/Basic.lean",
+  "byLine": 50,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Analysis.Normed.Unbundled.SmoothingSeminorm",
+  "declaration": "tendsto_smoothingFun_of_map_one_le_one",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/Normed/Unbundled/SmoothingSeminorm.lean",
+  "byLine": 244,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
+  "declaration": "Real.binEntropy_nonneg",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/BinaryEntropy.lean",
+  "byLine": 93,
+  "steps": 5,
+  "orderings": 8
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
+  "declaration": "Real.binEntropy_nonpos_of_nonpos",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/BinaryEntropy.lean",
+  "byLine": 116,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Analysis.SpecialFunctions.BinaryEntropy",
+  "declaration": "Real.binEntropy_le_log_two",
+  "source": ".lake/packages/mathlib/Mathlib/Analysis/SpecialFunctions/BinaryEntropy.lean",
+  "byLine": 157,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.CategoryTheory.Limits.Filtered",
+  "declaration": "CategoryTheory.IsFiltered.iff_nonempty_limit",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Filtered.lean",
+  "byLine": 44,
+  "steps": 6,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.CategoryTheory.Limits.Filtered",
+  "declaration": "CategoryTheory.IsCofiltered.iff_nonempty_limit",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Filtered.lean",
+  "byLine": 56,
+  "steps": 6,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer",
+  "declaration": "CategoryTheory.Limits.Multicofork.ofSigmaCofork",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Multiequalizer.lean",
+  "byLine": 940,
+  "steps": 5,
+  "orderings": 24
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.CategoryTheory.MorphismProperty.Basic",
+  "declaration": "CategoryTheory.MorphismProperty.ofHoms_homFamily",
+  "source": ".lake/packages/mathlib/Mathlib/CategoryTheory/MorphismProperty/Basic.lean",
+  "byLine": 336,
+  "steps": 8,
+  "orderings": 15
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Combinatorics.SimpleGraph.Basic",
+  "declaration": "SimpleGraph.adj_incidenceSet_inter",
+  "source": ".lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Basic.lean",
+  "byLine": 812,
+  "steps": 7,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Combinatorics.SimpleGraph.Basic",
+  "declaration": "SimpleGraph.IsUniversal.not_isIsolated",
+  "source": ".lake/packages/mathlib/Mathlib/Combinatorics/SimpleGraph/Basic.lean",
+  "byLine": 1049,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Data.DFinsupp.BigOperators",
+  "declaration": "DFinsupp.prod_single_index",
+  "source": ".lake/packages/mathlib/Mathlib/Data/DFinsupp/BigOperators.lean",
+  "byLine": 146,
+  "steps": 5,
+  "orderings": 4
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Data.Int.CharZero",
+  "declaration": "Int.cast_div_charZero",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Int/CharZero.lean",
+  "byLine": 28,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Data.List.Lex",
+  "declaration": "List.Lex.isOrderConnected.aux",
+  "source": ".lake/packages/mathlib/Mathlib/Data/List/Lex.lean",
+  "byLine": 67,
+  "steps": 4,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Data.PNat.Basic",
+  "declaration": "PNat.caseStrongInductionOn",
+  "source": ".lake/packages/mathlib/Mathlib/Data/PNat/Basic.lean",
+  "byLine": 150,
+  "steps": 7,
+  "orderings": 8
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Dynamics.FixedPoints.Support",
+  "declaration": "Function.HasCompactFixedSupport_iff'",
+  "source": ".lake/packages/mathlib/Mathlib/Dynamics/FixedPoints/Support.lean",
+  "byLine": 39,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.GroupTheory.Perm.Centralizer",
+  "declaration": "Equiv.Perm.Basis.ofPermHomFun_mul",
+  "source": ".lake/packages/mathlib/Mathlib/GroupTheory/Perm/Centralizer.lean",
+  "byLine": 334,
+  "steps": 7,
+  "orderings": 18
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+  "declaration": "MeasureTheory.analyticSet_iff_exists_polishSpace_range",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Constructions/Polish/Basic.lean",
+  "byLine": 213,
+  "steps": 11,
+  "orderings": 480
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+  "declaration": "MeasurableSet.isClopenable",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Constructions/Polish/Basic.lean",
+  "byLine": 307,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+  "declaration": "Measurable.measurableSet_preimage_iff_of_surjective",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Constructions/Polish/Basic.lean",
+  "byLine": 549,
+  "steps": 7,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+  "declaration": "MeasureTheory.locallyIntegrable_map_homeomorph",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+  "byLine": 389,
+  "steps": 11,
+  "orderings": 120
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+  "declaration": "MeasureTheory.integrable_iff_integrableAtFilter_atBot_atTop",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+  "byLine": 500,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+  "declaration": "MeasureTheory.integrable_iff_integrableAtFilter_atBot",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+  "byLine": 507,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+  "declaration": "MonotoneOn.memLp_isCompact",
+  "source": ".lake/packages/mathlib/Mathlib/MeasureTheory/Function/LocallyIntegrable.lean",
+  "byLine": 658,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Order.SuccPred.CompleteLinearOrder",
+  "declaration": "Order.IsSuccPrelimit.sSup_Iio",
+  "source": ".lake/packages/mathlib/Mathlib/Order/SuccPred/CompleteLinearOrder.lean",
+  "byLine": 113,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Probability.Kernel.Composition.CompProd",
+  "declaration": "ProbabilityTheory.Kernel.compProd_add_left",
+  "source": ".lake/packages/mathlib/Mathlib/Probability/Kernel/Composition/CompProd.lean",
+  "byLine": 498,
+  "steps": 4,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Probability.Moments.SubGaussian",
+  "declaration": "ProbabilityTheory.Kernel.HasSubgaussianMGF.zero_kernel",
+  "source": ".lake/packages/mathlib/Mathlib/Probability/Moments/SubGaussian.lean",
+  "byLine": 256,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.RingTheory.FinitePresentation",
+  "declaration": "Algebra.FinitePresentation.quotient",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/FinitePresentation.lean",
+  "byLine": 113,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.RingTheory.FinitePresentation",
+  "declaration": "Algebra.FinitePresentation.iff",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/FinitePresentation.lean",
+  "byLine": 130,
+  "steps": 6,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.RingTheory.Ideal.KrullsHeightTheorem",
+  "declaration": "Ideal.height_le_spanRank",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean",
+  "byLine": 266,
+  "steps": 3,
+  "orderings": 2
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.RingTheory.MvPolynomial.Ideal",
+  "declaration": "MvPolynomial.pow_idealOfVars",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/MvPolynomial/Ideal.lean",
+  "byLine": 90,
+  "steps": 6,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.RingTheory.OrderOfVanishing.Noetherian",
+  "declaration": "Ring.ordFrac_eq_inverse_comp_valuation",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/OrderOfVanishing/Noetherian.lean",
+  "byLine": 176,
+  "steps": 5,
+  "orderings": 3
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Topology.Compactness.Bases",
+  "declaration": "isCompact_open_iff_eq_finite_iUnion_of_isTopologicalBasis",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Compactness/Bases.lean",
+  "byLine": 57,
+  "steps": 6,
+  "orderings": 10
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Topology.Order.Compact",
+  "declaration": "IsCompact.exists_forall_le'",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Order/Compact.lean",
+  "byLine": 238,
+  "steps": 5,
+  "orderings": 6
+ },
+ {
+  "corpus": "mathlib-holdout",
+  "module": "Mathlib.Topology.Order.Compact",
+  "declaration": "IsCompact.bddBelow",
+  "source": ".lake/packages/mathlib/Mathlib/Topology/Order/Compact.lean",
+  "byLine": 315,
+  "steps": 4,
+  "orderings": 3
+ }
+]

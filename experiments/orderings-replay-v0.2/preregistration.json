@@ -1,0 +1,48 @@
+{
+ "checks": {
+  "C37": "the original order replays for at least 80% of the proofs that can be stated"
+ },
+ "developmentChecksBeforeRegistration": "the procedure was exercised only outside the sample: on fixtures/Coupled.lean (check_coupled_orderings.py: its original order replays and its other ordering fails on decide), and the static pool sizes were counted at 3 to 8, 3 to 12, and 3 to 20 steps (125, 134 and 137 proofs) before the range was fixed; no proof of the sample was replayed",
+ "experiment": "orderings-replay-v0.2",
+ "hypotheses": {
+  "H97": "over the proofs whose original order replays and none of whose goals shows a metavariable, at least 90% of the other orderings replay",
+  "H98": "over the coupled proofs whose original order replays, fewer than 90% of the other orderings replay",
+  "H99": "the share of the other orderings that replay is lower over the coupled proofs than over the others"
+ },
+ "implementationSha256": {
+  "counter": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "counter2": "1b31cff799255d58719ebb0c16480385a1924adf90b26b0e4f1e39ee8c5264d0",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "replayV1": "0fe7dc4a28b0aa50976e25127a6759b83d86b445e592daa5b2d9107f6f3373f1",
+  "runner": "65bfeb9a23e5306a64fa08008fda808a0e1e838e63a3421db739caeefe665a8e"
+ },
+ "measures": {
+  "failures": "for each ordering that does not replay, the first failure (goal selection, tactic error, goal count, goal missing, goals left, or verification) and, for a tactic error, Lean's message",
+  "replayed": "the other orderings that replay, over all other orderings replayed, pooled over the proofs of a class (coupled, or not) whose original order replays"
+ },
+ "procedure": [
+  "a fresh REPL per proof; the theorem is stated as an `example` in its module's context, as in v0.1 and the search experiments",
+  "the original order first, then every other ordering (if there are more than 120, 119 others drawn with seed 20261009), replayed step by step as in v0.1: `rotate_left k` brings the goal the step consumed in the original proof to the front, then the step's tactic text runs",
+  "an ordering replays when every tactic succeeds, every step leaves exactly the number of goals the graph says it creates, no goal is left, and the script re-verifies from the statement",
+  "after every step, each goal is searched for a metavariable (a `?` followed by a name, after a space, bracket, comma, or the start of a line), in its target and in its hypotheses; a proof is coupled when some goal of its original replay shows one",
+  "a proof whose original order does not replay is reported and excluded from the measures"
+ ],
+ "question": "whether the orderings of a goal-origin graph replay as Lean scripts over every proof the replay can pose, and whether they replay when goals share a metavariable",
+ "registeredLocalDate": "2026-10-09 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sample": {
+  "count": 134,
+  "holdoutExtractionSha256": "a46a0d312c528dcdff8d455909d1b2aaf8a8beed28335c935ea96984d14f4c49",
+  "libraryExtractionSha256": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff",
+  "pools": {
+   "mathlib-holdout": 40,
+   "mathlib-slice": 27,
+   "proofnet-ir": 67
+  },
+  "rule": "every proof of the library and of both Mathlib slices with one root `by` block, a name that is not generated, 3 to 12 steps under the corrected step derivation (count_linearizations_v2), a forest graph whose steps each consume one goal, at least 2 orderings, and steps that can be cut out of the source one line each (v0.1's rule: every other line of the body blank, a comment, or a bullet; no step line with `<;>`, `;`, a nested `by`, or a structural tactic)",
+  "sliceExtractionSha256": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b"
+ },
+ "sampleSha256": "f7d49ef5114ca2e923d0b1781e6810aac7bcc7fa3079d890b5eadeecc9c7e941",
+ "tests": "H97 and H98 are decided by the pooled shares as stated; H99 compares the pooled shares, and is untested if no coupled proof has another ordering"
+}
