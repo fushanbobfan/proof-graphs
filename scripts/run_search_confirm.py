@@ -192,9 +192,12 @@ def run_unit(task: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str,
 
 
 def unit_in_child(task: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """run_unit in a fresh Python process. A search keeps every state it exported until it returns, and the
-    allocator keeps what it freed, so a runner that ran the units in its own threads grew by about 0.85 GB a unit in
-    search-v0.10; a unit's process returns its memory when it exits. Scheduling only: the unit is the same."""
+    """run_unit in a fresh Python process. search-v0.10's runner, which runs its units in its own threads, grew by
+    about 0.85 GB a unit (13 to 28 GB in 41 minutes). Run one at a time in one process, the same searches leave
+    nothing behind once their rows are dropped, and keeping their rows holds 0.14 GB for the first 256-expansion
+    search and 0.02 GB for each further one; so most of the growth comes from what the runner adds (units side by
+    side, heavier tasks, hundreds of kept units), which these measurements do not separate. A unit's own process
+    returns all of its memory when it exits, whatever the cause. Scheduling only: the unit is the same."""
     with tempfile.TemporaryDirectory() as tmp:
         given, taken = Path(tmp) / "task.json", Path(tmp) / "unit.json"
         given.write_text(json.dumps(task, ensure_ascii=False), encoding="utf-8")
