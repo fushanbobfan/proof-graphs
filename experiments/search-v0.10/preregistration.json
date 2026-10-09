@@ -1,0 +1,81 @@
+{
+ "budgets": {
+  "checkpoints": [
+   48,
+   96,
+   192,
+   256
+  ],
+  "note": "breadth-first searches with the same draws, so a search's first 48 expansions are its 48-expansion search",
+  "set0": {
+   "goals": 48,
+   "groups": 256,
+   "whole": 256
+  },
+  "sets1and2": 48
+ },
+ "checks": {
+  "C40": "every unit is final, and no latest row records an error",
+  "C41": "the typed export fails on fewer than 1% of the states the searches export"
+ },
+ "comparedResults": {
+  "searchV08Draws": "c26eb3cf8c570911666d254827837e613b22ef239af6acfa516b9391d9501796",
+  "searchV08Results": "de36640fa6b5a06734998c75aed26a51490d93ab660180fb50b8befadda361a6",
+  "searchV09Draws": "8a47107f30f7f86c3f5446baf8f70bd3357f09870415a660bc77c87047b24453",
+  "searchV09Results": "62c689fa7f35f4d3a6d814e20e6e695838bbce76c90fc6cdf48106859deb7759"
+ },
+ "developmentChecksBeforeRegistration": [
+  "the hypotheses, checks, and measures above were written before any development run",
+  "--develop 2 --budget 4 ran the three typed searches on search-v0.9's first two development theorems (hard theorems of the first slice outside the corpus) with fresh draws: in every session both exporters and the needed pick_goal were defined, no export failed, and every search was constructed; it printed the audit counts on these two theorems (all 50 decisions agreed); no unit of the corpus was run"
+ ],
+ "execution": "each (set, task) unit in search-v0.8's rotating order of searches, each search in a fresh REPL whose environment defines the typed and the expression exporters after its imports (and pick_goal where missing); set 0 first; four units at a time, started only while enough commit charge is left; units resumed by search-v0.9's attempt rule",
+ "experiment": "search-v0.10",
+ "hypotheses": {
+  "H103": "at 48 expansions over the three sets of draws, no comparison of two searches is significant after Holm's adjustment (one-sided sign tests on the tasks whose scores, the sets in which a search proves the task, differ, as registered in search-v0.8), as in search-v0.8",
+  "H104": "at 256 expansions in the first set, the group search does not prove significantly more than the whole-state search (one-sided sign test, p >= 0.05), as in search-v0.9",
+  "H105": "where both keys exported, the typed and expression keys agree on at least 99% of the whole-state searches' decisions whether a generated state had been generated before",
+  "H106": "in every set, each search proves within 2 tasks of what it proved with the expression key at the same budget (search-v0.8 at 48 expansions, search-v0.9 at 256)"
+ },
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "identityTyped": "08c3cbbd84cd44ce2e84749e191ddfe153bd3cc3ebf5a9b64d94e9b93f26e28d",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "c5440292aebaf8620bb4442907ab379d671373079bc5ff362391f7c6a4f833a8",
+  "searchV08Runner": "8b5d33907160ccf27b42ecba4012baac405350eecd51d363aa7afed4fdf5c2af",
+  "searchV09Runner": "1310a241a50903399efbbf3a7d27b30abf0f62a07f244c30d5231b7a3dd1194f",
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36",
+  "typed": "10c40ad3d7a6c2d28d3821eea0c07b13814297d78436f1ff265fc18f69060572"
+ },
+ "kind": "a correction and sensitivity study of search-v0.8 and search-v0.9, whose results were known when it was registered; not a fresh confirmation",
+ "measures": {
+  "audit": "at each whole-state drop decision and each goal arrival, whether the typed key and the expression key had each met the state or goal before",
+  "duplicates": "order and goal duplicates of the whole-state search under the typed key, beside search-v0.8's and v0.9's under the expression key",
+  "migration": "tasks proved under each key, per set and search, with the tasks gained and lost",
+  "proved": "tasks proved within a budget, over the tasks stated in all nine searches",
+  "scores": "per task and search, the number of sets in which the search proves it at 48"
+ },
+ "proposer": "BFS-Prover-V2-7B as in search-v0.8, served on port 8091 as in search-v0.9; 16 samples per draw at temperature 1.0, 64 tokens",
+ "question": "do search-v0.8's comparison of whole-state, independent-goal, and coupled-group searches at 48 expansions, and search-v0.9's comparison of the whole-state and group searches at 256, come out the same when every identity decision is made by the typed key instead of the expression key",
+ "registeredLocalDate": "2026-10-09 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": "search_typed: search-v0.8's three searches with the typed key for every identity decision; a state or goal whose typed export fails is never merged; where an export fails, the check that a candidate left the carried goals unchanged falls back to printed goals; groups of several goals merge only when their printed goals also agree, since their proofs are reused verbatim; draws are keyed by printed goal text, what the prover sees",
+ "seeds": {
+  "rule": "per set, task, and goal, in occurrence order: set 0 has search-v0.6's and search-v0.7's recorded draws, search-v0.8's first set's new draws, and search-v0.9's; sets 1 and 2 have search-v0.8's draws of those sets; a goal expanded more often than its seeds cover is drawn afresh, shared by the set's searches",
+  "sha256": {
+   "0": "74e0d1da8a933ebc766c48b64630468dacf68f9bd8f80e89a71cef74f537640d",
+   "1": "620e9c123b51f8d23e65494cbc4e3aa113da54da08dda02d90eb6f633679cc63",
+   "2": "79b02e8682e5dd9ad9f9dff973c68ab4172067b5a446858b22d1f2dd159547a4"
+  }
+ },
+ "tasks": {
+  "count": 200,
+  "source": "holdout-v0.1/tasks.json, as in search-v0.6 to search-v0.9",
+  "sourceSha256": "f8caca650c29d98d6bb18dacda73435f7959928d1c3c202705d7b629183cb54e"
+ },
+ "tests": "H103 by one-sided sign tests on task scores under Holm's procedure at 0.05, as search-v0.8 registered; H104 by a one-sided sign test at 0.05; intervals resample modules and do not decide"
+}
