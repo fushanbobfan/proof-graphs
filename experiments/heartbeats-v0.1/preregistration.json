@@ -1,0 +1,53 @@
+{
+ "arm": "menu only, as in search-v0.3",
+ "budget": {
+  "expansionsPerSearch": 24,
+  "heartbeats": 40000,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C38": "every unit whose module session was set up defined the limiting tactic",
+  "C39": "the limit is reached: at least one candidate application stops on the heartbeat limit"
+ },
+ "comparedResults": {
+  "path": "experiments/search-v0.3/results.jsonl",
+  "sha256": "78a0e7275a125d8eb154c1bb9f7a58ce7d931f9bfb30a237b7afbb3a2c537694"
+ },
+ "developmentChecksBeforeRegistration": "scripts/check_tactic_heartbeats.py shows that a tactic setting Core.Context.maxHeartbeats stops the elaborator; --dev ran the first task's whole-state search at budget 4 under the limiting session: the tactic defined, the search ran; no other unit was run",
+ "execution": "every (task, search) unit in a fresh REPL, six units at a time, resumable",
+ "experiment": "heartbeats-v0.1",
+ "hypotheses": {
+  "H100": "each search proves at least 95% as many tasks under the limit as it proved in search-v0.3",
+  "H101": "under the limit, the AND-OR and whole-state searches do not differ significantly: a two-sided sign test on the tasks exactly one of them proves gives p >= 0.05, as in search-v0.3",
+  "H102": "under the limit, the whole-state search's order-duplicate fraction is below 5% and its goal-duplicate fraction at least twice its order-duplicate fraction, as search-v0.3's H22 and H23 found"
+ },
+ "implementationSha256": {
+  "deepRunner": "cb73a2ecd68bf83bba8ac8611f2ddb261f9012581536522b9355dce7c9dbd218",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "dd93cab9a7d558596cf649925509409e0e0486bae8a0086640828cd9ea168f4c",
+  "v1Runner": "fea3c23a5dbbe366daa65a5881881524b4ad0f1ff29110f7cce812180e52ac49",
+  "wideRunner": "d54a8652fdfbc9182bcf75cbb2d9ae3dfe81c0323d5f0717feb75031e2fc0dae"
+ },
+ "limit": {
+  "candidate": "set_option maxHeartbeats 40000 in pg_hb_limited (tac)",
+  "definition": "open Lean Elab Tactic in\nelab \"pg_hb_limited \" t:tactic : tactic =>\n  withTheReader Core.Context (fun c => { c with maxHeartbeats := 40000 * 1000 }) <| withCurrHeartbeats do\n    evalTactic t",
+  "placement": "the tactic is defined in each module session right after the module's imports, so that the module's own scope cannot capture its names"
+ },
+ "measures": {
+  "lostGained": "tasks proved in search-v0.3 and not under the limit, and the reverse, per search",
+  "orderFraction, goalFraction": "as in search-v0.3",
+  "proved": "tasks with a proof that re-verifies from the statement, per search, over the tasks posed in both experiments",
+  "stops": "candidate applications whose error is a heartbeat stop (maximum number of heartbeats, or the kernel's deterministic timeout), by tactic"
+ },
+ "question": "do the menu searches of search-v0.3, and the comparison between them, come out the same when every candidate tactic runs under the registered limit of 40,000 heartbeats, in the elaborator as well as in the kernel",
+ "registeredLocalDate": "2026-10-09 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": "search-v0.3's whole-state and AND-OR searches, unchanged, run by a copy of run_search_deep.run_unit that uses the limiting session",
+ "tasks": {
+  "count": 1347,
+  "rule": "search-v0.3's tasks, all of them, in its order",
+  "source": "search-v0.3",
+  "tasksSha256": "9f0bb3d1c3596ff82593c3d7e001b92af1a0c2de85deb3fa15a1e0583f00e321"
+ }
+}
