@@ -207,6 +207,8 @@ jobs:
         run: |
           ~/.elan/bin/lake build repl
           python scripts/check_tactic_heartbeats.py
+      - name: Check the cost curves against the committed rows
+        run: python scripts/explore_cost_curves.py --check
       - name: Check the committed searches with the typed key
         run: |
           if test -f experiments/search-v0.10/summary.json; then
