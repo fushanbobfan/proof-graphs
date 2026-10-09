@@ -52,6 +52,8 @@ numbers and its boundaries;
 [docs/design.md](docs/design.md) states the answer in full.
 [HANDOFF.md](HANDOFF.md) maps every claim to the command that re-verifies
 it and lists where an independent cross-check is most valuable.
+[docs/heartbeat-limit.md](docs/heartbeat-limit.md) corrects the per-tactic
+heartbeat limit the search registrations state.
 
 ## Layout
 
@@ -116,6 +118,7 @@ scripts/run_defeq_replay.py       the replays merged up to definitional equality
 scripts/defeq_v01_amendment.py    its amendment's analyses beside the registered ones
 scripts/defeq_v01_c32_mechanism.py why its replay check fails (not registered)
 scripts/explore_defeq_merges.py   what its merges bridge (not registered)
+scripts/check_tactic_heartbeats.py what a heartbeat limit set inside a tactic bounds
 scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests

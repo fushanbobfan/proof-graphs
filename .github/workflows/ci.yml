@@ -203,6 +203,10 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check what a heartbeat limit set inside a tactic bounds
+        run: |
+          ~/.elan/bin/lake build repl
+          python scripts/check_tactic_heartbeats.py
       - name: Check the golf replication clustered by commit
         run: python scripts/golf_clusters.py --check
       - name: Check the committed holdout slice

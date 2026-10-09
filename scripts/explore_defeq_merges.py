@@ -39,7 +39,6 @@ ROWS = OUT / "rows.jsonl"
 SUMMARY = OUT / "summary.json"
 EXAMPLES = 3
 WINDOW = 160
-KINDS_HEARTBEATS = 2000000
 
 # The elaboration of `goal_defeq`'s merge, unchanged, followed by the reducible pass and the classification.
 _PREFIX = gd.DEFEQ_TEMPLATE.split("  let mut result : Array")[0]
@@ -244,9 +243,9 @@ def run_unit(kind: str, task: dict[str, Any], search: str, sets: dict[str, Any] 
                                             "hyps": repl.closed[k]["hyps"]} for k in usable], ensure_ascii=False),
                                encoding="utf-8")
             try:
-                # A larger budget than the registered merge's, since the erasures run outside its guards. No check
-                # of the registered run exhausted its budget, so each completes as it did there and the merges agree.
-                response = repl._exchange({"tactic": f"set_option maxHeartbeats {KINDS_HEARTBEATS} in\n"
+                # A limit set inside a tactic does not bound elaboration (docs/heartbeat-limit.md), so this runs
+                # under the declaration's limit, as the registered merge did.
+                response = repl._exchange({"tactic": f"set_option maxHeartbeats {gd.DEFEQ_HEARTBEATS} in\n"
                                                      f"pg_defeq_kinds {json.dumps(str(entries))}",
                                            "proofState": made.proof_state}, dq.PASS_TIMEOUT)
             finally:
