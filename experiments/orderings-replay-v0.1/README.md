@@ -43,8 +43,14 @@ replay, 100%.
 ## Interpretation boundary
 
 The sample is small proofs whose graphs are forests with one goal per step and
-whose steps are single lines, so it excludes by construction the proofs where
-goals share a metavariable, which is where an ordering is most likely to fail;
-none of the replayed originals had a metavariable goal. The result says that
-the orderings of such proofs are real alternative scripts, not that every
-ordering of every graph is.
+whose steps are single lines. The rule does not test whether goals share a
+metavariable, and it admits proofs where they do:
+`scripts/check_coupled_orderings.py` shows one (`fixtures/Coupled.lean`) whose
+other ordering fails. In the sample, no goal of the 41 replayed proofs shows a
+metavariable in its target at any step of any ordering (`mvarGoals` is 0 in all
+238 replays), so the sample happens to contain no proof whose goals visibly
+share one, which is where an ordering is most likely to fail. The 19 proofs
+that could not be stated are ProofNet-IR proofs, 17 of them from one module,
+`ProofNetIR.Unification`; the 4 originals that failed did so on a tactic error.
+The result says that the orderings of such proofs are real alternative scripts,
+not that every ordering of every graph is.

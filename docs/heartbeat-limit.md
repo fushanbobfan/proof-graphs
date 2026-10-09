@@ -10,8 +10,9 @@ default of 200,000 in the proof states checked (a declaration may set its own wi
 harness keeps), and the 40,000 bounded only kernel checks made inside a tactic. The 60-second wall-clock limit per
 tactic applied as stated.
 
-Every search of every comparison ran under the same harness, so no comparison is affected; the budget per tactic was
-larger than the registrations state. The other `set_option maxHeartbeats` prefixes the replays send in tactic mode
+Every search of a comparison ran under the same harness and the same limits, so each comparison holds at the limits
+it ran under; the budget per tactic was larger than the registrations state, and whether a comparison would come out
+the same under an enforced limit of 40,000 has not been tested. The other `set_option maxHeartbeats` prefixes the replays send in tactic mode
 behave alike: the expression-key and closed-type exports, written with 400,000, ran under the default, and
 defeq-v0.1's merge, written with 200,000, which is the default, ran under what it states.
 

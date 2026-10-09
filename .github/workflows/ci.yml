@@ -223,6 +223,10 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check that the replay's sample rule admits a proof with a shared metavariable, whose other ordering fails
+        run: |
+          ~/.elan/bin/lake build repl
+          python scripts/check_coupled_orderings.py
       - name: Check the committed recount and the corrected dataset
         run: |
           if test -f experiments/recount-v0.1/summary.json; then

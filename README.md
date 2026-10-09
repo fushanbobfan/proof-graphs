@@ -99,6 +99,7 @@ scripts/run_search_coupled.py     the three, over three sets of draws
 scripts/run_search_coupled_deep.py states and groups at 256 expansions
 scripts/explore_range_rerun_v08.py  its eleven setup failures rerun (not registered)
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
+scripts/check_coupled_orderings.py a proof its sample rule admits whose other ordering fails
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
 scripts/run_golf.py               golfed proofs against their predecessors
@@ -123,6 +124,7 @@ scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests
 fixtures/Fixtures.lean            hand-checkable proofs
+fixtures/Coupled.lean             a proof whose goals share a metavariable
 experiments/linearizations-v0.1/  step 1 artifacts
 experiments/linearizations-mathlib-v0.1/  the Mathlib slice
 experiments/search-v0.1/          steps 2 and 3 artifacts
