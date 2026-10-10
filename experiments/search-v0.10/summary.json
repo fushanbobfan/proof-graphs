@@ -12,10 +12,10 @@
   "goals": {
    "0": 43,
    "1": 42,
-   "2": 43
+   "2": 44
   },
   "groups": {
-   "0": 42,
+   "0": 43,
    "1": 42,
    "2": 45
   }
@@ -273,6 +273,7 @@
     "Nat.Ico_succ_right_eq_insert_Ico",
     "Nat.card_eq",
     "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
     "Polynomial.monomial_mem_lifts",
     "ProbabilityTheory.Kernel.compProd_zero_left",
     "Real.fibRec_charPoly_eq",
@@ -320,6 +321,7 @@
     "Nat.card_Iic",
     "Nat.card_eq",
     "PNat.pos_of_div_pos",
+    "PointedCone.DualFG.dual_of_fg",
     "Polynomial.monomial_mem_lifts",
     "Real.fibRec_charPoly_eq",
     "Set.inter_indicator_mul",
@@ -434,10 +436,10 @@
    "256": 46
   },
   "groups": {
-   "48": 42,
-   "96": 45,
-   "192": 46,
-   "256": 47
+   "48": 43,
+   "96": 46,
+   "192": 47,
+   "256": 48
   }
  },
  "pairs48": {
@@ -455,14 +457,14 @@
    "perReplicate": {
     "0": {
      "firstOnly": 0,
-     "secondOnly": 1
+     "secondOnly": 0
     },
     "1": {
      "firstOnly": 0,
      "secondOnly": 0
     },
     "2": {
-     "firstOnly": 2,
+     "firstOnly": 1,
      "secondOnly": 0
     }
    }
@@ -471,17 +473,17 @@
    "first": "groups",
    "second": "whole",
    "tasksFirstMore": 8,
-   "tasksSecondMore": 2,
-   "signTestFirstMore": 0.0546875,
-   "meanRateDifference": 0.011834,
+   "tasksSecondMore": 1,
+   "signTestFirstMore": 0.01953125,
+   "meanRateDifference": 0.013807,
    "interval95": [
-    0.001996,
-    0.023679
+    0.005348,
+    0.024609
    ],
    "perReplicate": {
     "0": {
      "firstOnly": 2,
-     "secondOnly": 1
+     "secondOnly": 0
     },
     "1": {
      "firstOnly": 3,
@@ -497,12 +499,12 @@
    "first": "goals",
    "second": "whole",
    "tasksFirstMore": 8,
-   "tasksSecondMore": 3,
-   "signTestFirstMore": 0.11328125,
-   "meanRateDifference": 0.009862,
+   "tasksSecondMore": 2,
+   "signTestFirstMore": 0.0546875,
+   "meanRateDifference": 0.011834,
    "interval95": [
-    -0.001642,
-    0.021277
+    0.001996,
+    0.022831
    ],
    "perReplicate": {
     "0": {
@@ -515,7 +517,7 @@
     },
     "2": {
      "firstOnly": 3,
-     "secondOnly": 3
+     "secondOnly": 2
     }
    }
   }
@@ -527,24 +529,24 @@
    "rejected": false
   },
   "groupsOverWhole": {
-   "p": 0.0546875,
-   "adjusted": 0.1640625,
+   "p": 0.01953125,
+   "adjusted": 0.05859375,
    "rejected": false
   },
   "goalsOverWhole": {
-   "p": 0.11328125,
-   "adjusted": 0.2265625,
+   "p": 0.0546875,
+   "adjusted": 0.109375,
    "rejected": false
   }
  },
  "pair256": {
   "groupsOnly": 3,
-  "wholeOnly": 2,
-  "signTestGroupsMore": 0.5,
-  "rateDifference": 0.005917,
+  "wholeOnly": 1,
+  "signTestGroupsMore": 0.3125,
+  "rateDifference": 0.011834,
   "interval95": [
-   -0.018987,
-   0.031746
+   -0.007092,
+   0.037037
   ]
  },
  "audit": {
@@ -556,19 +558,19 @@
    "agreement": 0.9978298774445239
   },
   "merges": {
-   "agree": 123874,
+   "agree": 124376,
    "typedOnly": 37,
    "expressionOnly": 390,
-   "unexported": 8,
-   "agreement": 0.996564790307399
+   "unexported": 0,
+   "agreement": 0.9965786078860284
   },
   "carriedChecks": {
-   "typed": 76936,
+   "typed": 77215,
    "printed": 0,
    "disagree": 55
   },
   "typedExports": {
-   "attempts": 205715,
+   "attempts": 206206,
    "failures": 0
   }
  },
@@ -590,12 +592,10 @@
    },
    "0:groups": {
     "tasks": 166,
-    "typed": 42,
+    "typed": 43,
     "expression": 43,
     "gained": [],
-    "lost": [
-     "PointedCone.DualFG.dual_of_fg"
-    ]
+    "lost": []
    },
    "1:whole": {
     "tasks": 166,
@@ -627,12 +627,10 @@
    },
    "2:goals": {
     "tasks": 169,
-    "typed": 43,
+    "typed": 44,
     "expression": 44,
     "gained": [],
-    "lost": [
-     "PointedCone.DualFG.dual_of_fg"
-    ]
+    "lost": []
    },
    "2:groups": {
     "tasks": 169,
@@ -652,12 +650,10 @@
    },
    "groups": {
     "tasks": 169,
-    "typed": 47,
+    "typed": 48,
     "expression": 48,
     "gained": [],
-    "lost": [
-     "PointedCone.DualFG.dual_of_fg"
-    ]
+    "lost": []
    }
   }
  },
@@ -719,11 +715,11 @@
  },
  "mechanisms": {
   "groupsMade": {
-   "single": 82758,
-   "several": 3277
+   "single": 83126,
+   "several": 3282
   },
   "proofsThroughGroups": 1,
-  "entangled": 648,
+  "entangled": 645,
   "outside": 23
  },
  "costs": {
@@ -737,11 +733,11 @@
    "repl": {
     "tactic": {
      "calls": 313557,
-     "seconds": 27515.2
+     "seconds": 27385.8
     },
     "export": {
      "calls": 160422,
-     "seconds": 20925.7
+     "seconds": 20757.2
     },
     "harness": {
      "calls": 0,
@@ -749,14 +745,14 @@
     },
     "command": {
      "calls": 4088,
-     "seconds": 18323.9
+     "seconds": 18363.2
     }
    },
    "searchSeconds": {
     "min": 0.0,
     "q1": 3.2,
     "median": 19.55,
-    "q3": 121.475,
+    "q3": 119.07499999999999,
     "max": 24219.3,
     "count": 492
    }
@@ -764,67 +760,67 @@
   "goals": {
    "units": 495,
    "draws": {
-    "seeded": 13080,
+    "seeded": 13094,
     "shared": 62,
-    "drawn": 55
+    "drawn": 49
    },
    "repl": {
     "tactic": {
-     "calls": 156652,
-     "seconds": 13958.4
+     "calls": 156679,
+     "seconds": 13911.5
     },
     "export": {
-     "calls": 77366,
-     "seconds": 11457.8
+     "calls": 77570,
+     "seconds": 10629.6
     },
     "harness": {
-     "calls": 8352,
-     "seconds": 473.9
+     "calls": 8367,
+     "seconds": 473.8
     },
     "command": {
-     "calls": 4097,
-     "seconds": 18764.6
+     "calls": 4098,
+     "seconds": 18807.0
     }
    },
    "searchSeconds": {
     "min": 0.0,
     "q1": 3.4,
-    "median": 21.3,
-    "q3": 98.7,
-    "max": 1891.5,
+    "median": 21.2,
+    "q3": 97.1,
+    "max": 966.5,
     "count": 495
    }
   },
   "groups": {
    "units": 491,
    "draws": {
-    "seeded": 26059,
+    "seeded": 26112,
     "shared": 50,
-    "drawn": 160
+    "drawn": 151
    },
    "repl": {
     "tactic": {
-     "calls": 325453,
-     "seconds": 27795.7
+     "calls": 325970,
+     "seconds": 27830.3
     },
     "export": {
-     "calls": 158446,
-     "seconds": 23181.5
+     "calls": 159129,
+     "seconds": 22962.8
     },
     "harness": {
-     "calls": 15690,
-     "seconds": 803.9
+     "calls": 15727,
+     "seconds": 801.4
     },
     "command": {
-     "calls": 4073,
-     "seconds": 19039.7
+     "calls": 4074,
+     "seconds": 19036.6
     }
    },
    "searchSeconds": {
     "min": 0.0,
     "q1": 3.2,
-    "median": 22.7,
-    "q3": 149.0,
+    "median": 22.5,
+    "q3": 143.7,
     "max": 3243.7,
     "count": 491
    }
@@ -836,7 +832,7 @@
  },
  "errors": 0,
  "abandoned": 43,
- "attempts": 724,
+ "attempts": 728,
  "hypotheses": {
   "H103": {
    "tests": {
@@ -846,20 +842,20 @@
      "rejected": false
     },
     "groupsOverWhole": {
-     "p": 0.0546875,
-     "adjusted": 0.1640625,
+     "p": 0.01953125,
+     "adjusted": 0.05859375,
      "rejected": false
     },
     "goalsOverWhole": {
-     "p": 0.11328125,
-     "adjusted": 0.2265625,
+     "p": 0.0546875,
+     "adjusted": 0.109375,
      "rejected": false
     }
    },
    "holds": true
   },
   "H104": {
-   "p": 0.5,
+   "p": 0.3125,
    "holds": true
   },
   "H105": {
@@ -877,11 +873,11 @@
    "holds": true
   },
   "C41": {
-   "attempts": 205715,
+   "attempts": 206206,
    "failures": 0,
    "holds": true
   }
  },
- "resultsSha256": "17c85d448ab43f49486849c72880fc44323cbbc5f86235e34e836e4df23a8c90",
+ "resultsSha256": "ca9986f54c8ceb80b3949521637a2502b5273bb5c247f4f78b18ed7a6501d620",
  "drawsSha256": "c84312587b42d84644eed39ab2648cb993a51b72f7dac66a28fb84d74643563d"
 }

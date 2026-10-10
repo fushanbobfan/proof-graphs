@@ -2,17 +2,17 @@
 
 Frozen in `preregistration.json` (SHA-256 `39624a8b1caca3321106ef358daf71610e20e904a692316b3cd573f065430e39`).
 
-Tasks: 200; stated in all nine searches: 169; unit attempts: 724.
+Tasks: 200; stated in all nine searches: 169; unit attempts: 728.
 
 | Search | set 0 | set 1 | set 2 | (48 expansions) |
 |---|---:|---:|---:|---|
 | whole | 41 | 39 | 43 | |
-| goals | 43 | 42 | 43 | |
-| groups | 42 | 42 | 45 | |
+| goals | 43 | 42 | 44 | |
+| groups | 43 | 42 | 45 | |
 
-At 256 expansions in set 0: {'whole': {48: 41, 96: 44, 192: 46, 256: 46}, 'groups': {48: 42, 96: 45, 192: 46, 256: 47}}; groups only 3, whole only 2, one-sided p 0.5.
+At 256 expansions in set 0: {'whole': {48: 41, 96: 44, 192: 46, 256: 46}, 'groups': {48: 43, 96: 46, 192: 47, 256: 48}}; groups only 3, whole only 1, one-sided p 0.3125.
 
-Audit of the expression key: drops {'agree': 79546, 'typedOnly': 16, 'expressionOnly': 157, 'unexported': 0, 'agreement': 0.9978298774445239}; merges {'agree': 123874, 'typedOnly': 37, 'expressionOnly': 390, 'unexported': 8, 'agreement': 0.996564790307399}.
+Audit of the expression key: drops {'agree': 79546, 'typedOnly': 16, 'expressionOnly': 157, 'unexported': 0, 'agreement': 0.9978298774445239}; merges {'agree': 124376, 'typedOnly': 37, 'expressionOnly': 390, 'unexported': 0, 'agreement': 0.9965786078860284}.
 
 ## Hypotheses
 
