@@ -101,7 +101,8 @@ def pilot_cells() -> dict[str, int]:
     """search-v0.10's paired outcomes of the group and whole-state searches within 48 expansions, one pair per task
     stated in all its searches and set of draws: both prove, groups only, whole only, neither."""
     summary = json.loads(rt.SUMMARY.read_text(encoding="utf-8"))
-    assert summary["checks"]["C40"]["holds"], "search-v0.10 must be complete before the sample size is fixed"
+    # Every unit final; a task whose unit ended on errors is not stated, so the cells do not depend on it.
+    assert summary["checks"]["C40"]["final"], "search-v0.10 must be complete before the sample size is fixed"
     proved = summary["provedTasks48"]
     cells = {"both": 0, "groupsOnly": 0, "wholeOnly": 0, "neither": 0}
     for r in range(rt.REPLICATES):
@@ -148,6 +149,7 @@ def sample_size(available: int) -> dict[str, Any]:
                       wholeOnly=(cells["groupsOnly"] + cells["wholeOnly"]) / 2)
     return {"pilot": "search-v0.10 within 48 expansions, the group and whole-state searches, one pair per task and set "
                      "of draws stated in all its searches", "pilotCells": cells,
+            "pilotSummarySha256": sha256_file(rt.SUMMARY) if rt.SUMMARY.exists() else None,
             "rule": f"the smallest of {list(SIZES)} tasks, or all {available} remaining candidates, for which the "
                     f"upper limit of the 95% Newcombe interval is below {100 * MARGIN:.0f} points in at least "
                     f"{TARGET:.0%} of {SIMULATION_RUNS:,} simulated runs, drawing each task's paired outcome from the "
@@ -411,8 +413,11 @@ def registration_payload(tasks: list[dict[str, Any]], size: dict[str, Any]) -> d
                  "interval for paired proportions over the tasks stated in both searches; a percentile interval "
                  "resampling modules is reported beside it and does not decide",
         "implementationSha256": {name: sha256_file(path) for name, path in IMPLEMENTATIONS.items()},
-        "developmentChecksBeforeRegistration": "none on these tasks: the implementation is search-v0.10's, run on its "
-                                               "200 tasks before this registration",
+        "developmentChecksBeforeRegistration": "none on these tasks: the searches are search-v0.10's, run on its 200 "
+                                               "tasks before this registration; the runner's unit process was run "
+                                               "once on one of search-v0.10's tasks (not posable), and "
+                                               "scripts/test_search_confirm.py tests the units, the attempt rule, the "
+                                               "sample-size rule and the summary without Lean",
         "resultsAbsentAtRegistration": True,
         "registeredLocalDate": time.strftime("%Y-%m-%d") + " America/Los_Angeles",
     }
