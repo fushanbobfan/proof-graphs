@@ -66,6 +66,8 @@ scripts/count_linearizations.py   exact orderings per graph
 scripts/run_linearizations.py     step 1: register, run, check
 scripts/run_mathlib_slice.py      step 1 on a Mathlib slice
 scripts/lean_repl.py              a Lean REPL session
+scripts/lean_repl_v2.py           the same; a restart never reads the killed session's output
+scripts/test_lean_repl.py         both sessions' restarts on a fake process
 scripts/search_harness.py         whole-state and AND-OR tactic searches
 scripts/run_search.py             steps 2 and 3: register, run, check
 scripts/run_search_deep.py        the same searches at eight times the budget

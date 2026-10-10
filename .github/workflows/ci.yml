@@ -135,6 +135,8 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Test the REPL session's restart, without Lean
+        run: python scripts/test_lean_repl.py
       - name: Test the renaming step, in print and in Lean
         run: |
           python scripts/test_renaming.py
