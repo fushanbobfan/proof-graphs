@@ -48,6 +48,8 @@ class FakeProcess:
     """Answers request n with `{"env": n}` unless told not to; its output ends when the test ends it, killed
     or not."""
 
+    pid = 0
+
     def __init__(self, answers: bool = True, on_request: Callable[[], None] | None = None) -> None:
         self.answers = answers
         self.on_request = on_request
@@ -73,6 +75,9 @@ class FakeProcess:
 
     def kill(self) -> None:
         self.killed = True
+
+    def poll(self) -> int | None:
+        return 0 if self.killed else None
 
     def wait(self) -> int:
         return 0

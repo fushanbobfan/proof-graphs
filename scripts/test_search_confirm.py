@@ -41,6 +41,12 @@ class UnitTests(unittest.TestCase):
         self.assertFalse(confirm.unit_done(unposed))
         self.assertTrue(confirm.unit_done(unposed * 2))
 
+    def test_a_search_that_lost_its_session_is_tried_twice(self):
+        lost = [row("t0", "whole"), {"module": "M0", "declaration": "t0", "search": "groups", "constructed": True,
+                                     "abandoned": "repl timeout"}]
+        self.assertFalse(confirm.unit_done(lost))
+        self.assertTrue(confirm.unit_done(lost * 2))
+
     def test_the_two_searches_share_draws_in_alternating_order(self):
         calls = []
 
@@ -54,7 +60,7 @@ class UnitTests(unittest.TestCase):
         def draw(self_, goal):
             return [f"tac{len(self_.log)}"], {"prompt": goal + ":::", "replies": [], "candidates": []}
 
-        with patch.object(confirm.rt, "run_one", run_one), patch.object(confirm.v8.ReplicateDraws, "draw", draw):
+        with patch.object(confirm.guarded, "run_one", run_one), patch.object(confirm.v8.ReplicateDraws, "draw", draw):
             rows, log = confirm.run_unit({"module": "M", "declaration": "t0", "index": 0})
             self.assertEqual(calls, ["whole", "groups"])
             self.assertEqual(rows[0]["result"]["candidates"], rows[1]["result"]["candidates"])

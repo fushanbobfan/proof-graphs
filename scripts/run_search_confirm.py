@@ -9,7 +9,8 @@ Every step-prover comparison so far ran on the same 200 tasks of the second Math
 and none found a significant difference between searching whole states and searching goals or goal groups. This
 experiment takes the next tasks of the same seeded order of that slice's candidates, which no experiment has used,
 and compares the two searches of search-v0.10 (the typed key throughout) at 48 expansions, with fresh draws shared by
-the two searches of a task. The registered decision is whether a gain of three points or more for the group search
+the two searches of a task. Unlike search-v0.10, a search whose REPL session is lost is abandoned wherever the loss
+happens (`search_typed_v2`). The registered decision is whether a gain of three points or more for the group search
 is excluded. The number of tasks is fixed at registration by a stated rule: by simulation from search-v0.10's paired
 outcomes at 48 expansions, the smallest of the candidate sizes for which the 95% interval's upper limit falls below
 three points in at least 80% of simulated runs, or every remaining candidate if none does.
@@ -37,6 +38,7 @@ import run_holdout as holdout  # noqa: E402
 import run_search_coupled as v8  # noqa: E402
 import run_search_coupled_deep as deep  # noqa: E402
 import run_search_typed as rt  # noqa: E402
+import search_typed_v2 as guarded  # noqa: E402
 import step_prover as prover  # noqa: E402
 from run_linearizations import read_gz_lines, sha256_file, write_lf  # noqa: E402
 
@@ -49,6 +51,7 @@ DRAWS = EXPERIMENT / "draws.jsonl.gz"
 SUMMARY = EXPERIMENT / "summary.json"
 REPORT = EXPERIMENT / "report.md"
 IMPLEMENTATIONS = dict(rt.IMPLEMENTATIONS) | {"typedRunner": rt.IMPLEMENTATIONS["runner"],
+                                              "typedV2": Path(guarded.__file__).resolve(),
                                               "runner": Path(__file__).resolve()}
 SEARCHES = ("whole", "groups")
 BUDGET = 48
@@ -186,7 +189,7 @@ def run_unit(task: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str,
     rows = []
     order = SEARCHES if task["index"] % 2 == 0 else SEARCHES[::-1]
     for position, search in enumerate(order):
-        row = rt.run_one(task, search, draws.proposer(search), BUDGET)
+        row = guarded.run_one(task, search, draws.proposer(search), BUDGET)
         rows.append(row | {"index": task["index"], "position": position,
                            "draws": dict(draws.counts.get(search, {"seeded": 0, "shared": 0, "drawn": 0}))})
     log = [{"index": task["index"], "declaration": task["declaration"]} | e for e in draws.log]
@@ -388,7 +391,7 @@ def write_report(s: dict[str, Any]) -> None:
 def registration_payload(tasks: list[dict[str, Any]], size: dict[str, Any]) -> dict[str, Any]:
     return {
         "experiment": "search-v0.11", "question": QUESTION,
-        "kind": "confirmatory: the tasks are held out from every earlier experiment, and the implementation is "
+        "kind": "confirmatory: the tasks are held out from every earlier experiment, and the searches are "
                 "search-v0.10's, unchanged",
         "tasks": {"rule": f"holdout-v0.1's candidates (one `by` block of 3 to 20 steps under the corrected step "
                           f"counts, not generated) in its seeded order (random.Random({holdout.SEED})): positions "
@@ -397,7 +400,10 @@ def registration_payload(tasks: list[dict[str, Any]], size: dict[str, Any]) -> d
                   "holdoutExtractionSha256": sha256_file(holdout.EXTRACTION)},
         "searches": "search_typed's whole-state and coupled-group searches, as in search-v0.10; breadth-first; each "
                     "task's two searches in fresh REPLs, in alternating order, sharing one set of fresh draws: the nth "
-                    "time a search expands a goal it gets the nth set of candidates drawn for that goal in the task",
+                    "time a search expands a goal it gets the nth set of candidates drawn for that goal in the task; "
+                    "a search whose REPL session is lost (a request times out, or the REPL's output ends) is "
+                    "abandoned wherever that happens (search_typed_v2), where search-v0.10 restarted the session and, "
+                    "after a loss inside an export or a verification, went on in the new, empty session",
         "proposer": f"BFS-Prover-V2-7B in Q8_0 as in search-v0.10, served on port {deep.PORT}: {v8.SAMPLES} completions "
                     f"at temperature {v8.TEMPERATURE}, at most {v8.MAX_TOKENS} tokens, the first goal followed by "
                     f"':::', duplicates dropped",
@@ -417,7 +423,9 @@ def registration_payload(tasks: list[dict[str, Any]], size: dict[str, Any]) -> d
                                                "tasks before this registration; the runner's unit process was run "
                                                "once on one of search-v0.10's tasks (not posable), and "
                                                "scripts/test_search_confirm.py tests the units, the attempt rule, the "
-                                               "sample-size rule and the summary without Lean",
+                                               "sample-size rule and the summary without Lean; "
+                                               "scripts/test_search_typed_v2.py tests, without Lean, that a search "
+                                               "whose session is lost is abandoned",
         "resultsAbsentAtRegistration": True,
         "registeredLocalDate": time.strftime("%Y-%m-%d") + " America/Los_Angeles",
     }

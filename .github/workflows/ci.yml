@@ -228,6 +228,7 @@ jobs:
       - name: Test the held-out comparison and check its committed results
         run: |
           python scripts/test_search_confirm.py
+          python scripts/test_search_typed_v2.py
           if test -f experiments/search-v0.11/preregistration.json; then
             python scripts/run_search_confirm.py --check-committed
           else
