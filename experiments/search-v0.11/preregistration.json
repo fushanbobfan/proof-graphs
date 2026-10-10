@@ -1,0 +1,108 @@
+{
+ "budget": {
+  "checkpoints": [
+   24,
+   48
+  ],
+  "expansions": 48,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C43": "every unit is final, and no latest row records an error",
+  "C44": "the typed export fails on fewer than 1% of the states the searches export"
+ },
+ "developmentChecksBeforeRegistration": "none on these tasks: the searches are search-v0.10's, run on its 200 tasks before this registration; the runner's unit process was run once on one of search-v0.10's tasks (not posable), and scripts/test_search_confirm.py tests the units, the attempt rule, the sample-size rule and the summary without Lean; scripts/test_search_typed_v2.py tests, without Lean, that a search whose session is lost is abandoned",
+ "execution": "each task's unit in its own Python process; 4 units at a time, each started only while at least 15 GB of commit charge is left and 45 s after the previous start; units resumed by search-v0.10's attempt rule (a unit that raised is repeated up to 3 attempts, one in which a search was not constructed or was abandoned is repeated once, and the latest row of each search counts)",
+ "experiment": "search-v0.11",
+ "hypotheses": {
+  "H109": "the group search does not prove significantly more tasks than the whole-state search (one-sided sign test on the tasks exactly one of them proves, p >= 0.05)",
+  "H110": "the upper limit of the 95% interval (Newcombe's hybrid score interval for paired proportions) for the group search's proof rate minus the whole-state search's is below 3 points",
+  "H111": "goal duplicates under the typed key are below 10% of the whole-state search's expansions"
+ },
+ "implementationSha256": {
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "identityTyped": "08c3cbbd84cd44ce2e84749e191ddfe153bd3cc3ebf5a9b64d94e9b93f26e28d",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "2f4d00bd1a955aa3dc96d81cb214750900da51251f90a25fc5137e06f2e50396",
+  "searchV08Runner": "8b5d33907160ccf27b42ecba4012baac405350eecd51d363aa7afed4fdf5c2af",
+  "searchV09Runner": "1310a241a50903399efbbf3a7d27b30abf0f62a07f244c30d5231b7a3dd1194f",
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36",
+  "typed": "10c40ad3d7a6c2d28d3821eea0c07b13814297d78436f1ff265fc18f69060572",
+  "typedRunner": "c5440292aebaf8620bb4442907ab379d671373079bc5ff362391f7c6a4f833a8",
+  "typedV2": "fc9c367e4cbc4652fccc8910f302fc00b0a73115653573c16f26b05c5de9aa3b"
+ },
+ "kind": "confirmatory: the tasks are held out from every earlier experiment, and the searches are search-v0.10's, unchanged",
+ "proposer": "BFS-Prover-V2-7B in Q8_0 as in search-v0.10, served on port 8091: 16 completions at temperature 1.0, at most 64 tokens, the first goal followed by ':::', duplicates dropped",
+ "question": "on theorems no experiment has used, does a coupled-group search prove more than a whole-state search, both with the typed key and the step prover at 48 expansions, and is a gain of three points excluded",
+ "registeredLocalDate": "2026-10-10 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sampleSize": {
+  "chosen": 720,
+  "noDifference": {
+   "medianHalfWidthPoints": 1.15,
+   "posable": 608,
+   "signTestPower": 0.027,
+   "upperBelowMargin": 0.998,
+   "withinMargin": 0.996
+  },
+  "pilot": "search-v0.10 within 48 expansions, the group and whole-state searches, one pair per task and set of draws stated in all its searches",
+  "pilotCells": {
+   "both": 121,
+   "groupsOnly": 8,
+   "neither": 376,
+   "wholeOnly": 2
+  },
+  "pilotSummarySha256": "9eade68da0204aa0ae1e6a093ab7f541e05a78d9c7659ebcb712e94879c1b279",
+  "rule": "the smallest of [480, 560, 640, 720] tasks, or all 826 remaining candidates, for which the upper limit of the 95% Newcombe interval is below 3 points in at least 80% of 4,000 simulated runs, drawing each task's paired outcome from the pilot's cell shares; posable tasks taken as 0.845 of those drawn (search-v0.9's share)",
+  "simulation": {
+   "480": {
+    "medianHalfWidthPoints": 1.43,
+    "posable": 406,
+    "signTestPower": 0.37,
+    "upperBelowMargin": 0.686,
+    "withinMargin": 0.686
+   },
+   "560": {
+    "medianHalfWidthPoints": 1.3,
+    "posable": 473,
+    "signTestPower": 0.44,
+    "upperBelowMargin": 0.752,
+    "withinMargin": 0.752
+   },
+   "640": {
+    "medianHalfWidthPoints": 1.21,
+    "posable": 541,
+    "signTestPower": 0.505,
+    "upperBelowMargin": 0.792,
+    "withinMargin": 0.792
+   },
+   "720": {
+    "medianHalfWidthPoints": 1.15,
+    "posable": 608,
+    "signTestPower": 0.581,
+    "upperBelowMargin": 0.839,
+    "withinMargin": 0.839
+   },
+   "826": {
+    "medianHalfWidthPoints": 1.07,
+    "posable": 698,
+    "signTestPower": 0.661,
+    "upperBelowMargin": 0.886,
+    "withinMargin": 0.886
+   }
+  }
+ },
+ "searches": "search_typed's whole-state and coupled-group searches, as in search-v0.10; breadth-first; each task's two searches in fresh REPLs, in alternating order, sharing one set of fresh draws: the nth time a search expands a goal it gets the nth set of candidates drawn for that goal in the task; a search whose REPL session is lost (a request times out, or the REPL's output ends) is abandoned wherever that happens (search_typed_v2), where search-v0.10 restarted the session and, after a loss inside an export or a verification, went on in the new, empty session",
+ "tasks": {
+  "count": 720,
+  "holdoutExtractionSha256": "a46a0d312c528dcdff8d455909d1b2aaf8a8beed28335c935ea96984d14f4c49",
+  "rule": "holdout-v0.1's candidates (one `by` block of 3 to 20 steps under the corrected step counts, not generated) in its seeded order (random.Random(20260927)): positions 200 to 919, after the 200 it drew; no earlier experiment ran them",
+  "tasksSha256": "cb423ec38de74a3f528a42c8b3bfdb9b999955a71a5bc118831524373734c696"
+ },
+ "tests": "H109 by a one-sided sign test at 0.05; H110 by the upper limit of Newcombe's 95% hybrid score interval for paired proportions over the tasks stated in both searches; a percentile interval resampling modules is reported beside it and does not decide"
+}
