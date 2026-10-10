@@ -3,8 +3,9 @@
 The search experiments count their budgets in expansions, and an expansion of one design can apply more candidate
 tactics than an expansion of another: a free-choice expansion applies every candidate to every open goal, and the goal
 and group searches expand a merged goal once where the whole-state search expands it in every state that carries it.
-`scripts/explore_cost_curves.py` reads the committed rows of search-v0.3, goal-selection-v0.1, search-v0.8 and
-search-v0.9 and gives, per search and set of draws, how many tasks are proved within a per-task budget of candidate
+`scripts/explore_cost_curves.py` reads the committed rows of search-v0.3, goal-selection-v0.1, search-v0.8,
+search-v0.9, and, once their runs are complete, search-v0.10 and v0.11, and gives, per search and set of draws, how
+many tasks are proved within a per-task budget of candidate
 applications (16 to 16,384). A search's applications at its proof are those of the expansions up to and including the
 one that found it; goal-selection-v0.1 records the exact count.
 
