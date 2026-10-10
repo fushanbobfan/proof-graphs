@@ -1,0 +1,174 @@
+{
+ "note": "exploratory, not registered: search-v0.10's counted searches that went on after a REPL restart, and every registered decision with each of them counted as proved within 48 expansions",
+ "lostAttempts": 8,
+ "lost": [
+  {
+   "replicate": 0,
+   "declaration": "PointedCone.DualFG.dual_of_fg",
+   "search": "groups",
+   "budget": 256,
+   "expansions": 27,
+   "restarts": 1,
+   "expressionExportFailures": 1
+  },
+  {
+   "replicate": 0,
+   "declaration": "MeasureTheory.borel_eq_borel_of_le",
+   "search": "groups",
+   "budget": 256,
+   "expansions": 204,
+   "restarts": 1,
+   "expressionExportFailures": 1
+  },
+  {
+   "replicate": 2,
+   "declaration": "PointedCone.DualFG.dual_of_fg",
+   "search": "goals",
+   "budget": 48,
+   "expansions": 48,
+   "restarts": 1,
+   "expressionExportFailures": 1
+  },
+  {
+   "replicate": 1,
+   "declaration": "Algebra.FormallySmooth.adjoin_of_algebraicIndependent",
+   "search": "goals",
+   "budget": 48,
+   "expansions": 34,
+   "restarts": 1,
+   "expressionExportFailures": 1
+  }
+ ],
+ "actual": {
+  "H103": {
+   "holds": true,
+   "tests": {
+    "groupsOverGoals": {
+     "p": 0.5,
+     "adjusted": 0.5,
+     "rejected": false
+    },
+    "groupsOverWhole": {
+     "p": 0.0546875,
+     "adjusted": 0.1640625,
+     "rejected": false
+    },
+    "goalsOverWhole": {
+     "p": 0.11328125,
+     "adjusted": 0.2265625,
+     "rejected": false
+    }
+   }
+  },
+  "H104": {
+   "holds": true,
+   "p": 0.5
+  },
+  "H105": {
+   "holds": true,
+   "agreement": 0.9978298774445239
+  },
+  "H106": {
+   "holds": true
+  },
+  "proved48": {
+   "whole": {
+    "0": 41,
+    "1": 39,
+    "2": 43
+   },
+   "goals": {
+    "0": 43,
+    "1": 42,
+    "2": 43
+   },
+   "groups": {
+    "0": 42,
+    "1": 42,
+    "2": 45
+   }
+  },
+  "proved256": {
+   "whole": {
+    "48": 41,
+    "96": 44,
+    "192": 46,
+    "256": 46
+   },
+   "groups": {
+    "48": 42,
+    "96": 45,
+    "192": 46,
+    "256": 47
+   }
+  }
+ },
+ "bestCase": {
+  "H103": {
+   "holds": false,
+   "tests": {
+    "groupsOverGoals": {
+     "p": 0.5,
+     "adjusted": 0.5,
+     "rejected": false
+    },
+    "groupsOverWhole": {
+     "p": 0.0107421875,
+     "adjusted": 0.0322265625,
+     "rejected": true
+    },
+    "goalsOverWhole": {
+     "p": 0.03271484375,
+     "adjusted": 0.0654296875,
+     "rejected": false
+    }
+   }
+  },
+  "H104": {
+   "holds": true,
+   "p": 0.1875
+  },
+  "H105": {
+   "holds": true,
+   "agreement": 0.9978298774445239
+  },
+  "H106": {
+   "holds": true
+  },
+  "proved48": {
+   "whole": {
+    "0": 41,
+    "1": 39,
+    "2": 43
+   },
+   "goals": {
+    "0": 43,
+    "1": 43,
+    "2": 44
+   },
+   "groups": {
+    "0": 44,
+    "1": 42,
+    "2": 45
+   }
+  },
+  "proved256": {
+   "whole": {
+    "48": 41,
+    "96": 44,
+    "192": 46,
+    "256": 46
+   },
+   "groups": {
+    "48": 44,
+    "96": 47,
+    "192": 48,
+    "256": 49
+   }
+  }
+ },
+ "changed": [
+  "H103"
+ ],
+ "resultsSha256": "17c85d448ab43f49486849c72880fc44323cbbc5f86235e34e836e4df23a8c90"
+}
