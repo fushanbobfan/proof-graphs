@@ -100,17 +100,19 @@ def run() -> None:
     for name, path in (("amendmentRunner", Path(__file__).resolve()), ("typedV2", Path(guarded.__file__).resolve())):
         if amendment["implementationSha256"][name] != sha256_file(path):
             raise SystemExit(f"{name} changed since the amendment was written")
-    if any(r.get("amendment") for r in rt.read_rows()):
-        raise SystemExit("the amendment's rows are already in results.jsonl")
     if not deep.server_alive():
         raise SystemExit(f"the prover does not answer on port {deep.PORT}")
     prover.ENDPOINT = deep.ENDPOINT
     prover.MODEL_LOG = None
     tasks = {t["declaration"]: t for t in v6.tasks()}
     sets = rt.seeds()
-    new_draws: list[dict[str, Any]] = []
+    recorded = {(r["replicate"], r["declaration"]) for r in rt.read_rows() if r.get("amendment") == 1}
+    new_draws: list[dict[str, Any]] = ([json.loads(l) for l in gzip.decompress(DRAWS.read_bytes()).decode("utf-8")
+                                        .splitlines() if l.strip()] if DRAWS.exists() else [])
     for unit in amendment["affectedUnits"]:
         replicate, task = unit["replicate"], tasks[unit["declaration"]]
+        if (replicate, task["declaration"]) in recorded:  # repeated already, before an interruption
+            continue
         deep.admit()
         draws = v8.ReplicateDraws(sets[replicate].get(task["index"], {}))
         rows = []
@@ -120,6 +122,11 @@ def run() -> None:
             rows.append(row | {"replicate": replicate, "index": task["index"], "position": position, "budget": budget,
                                "draws": dict(draws.counts.get(search, {"seeded": 0, "shared": 0, "drawn": 0})),
                                "amendment": 1})
+        # The prover's server is stopped while the machine's owner plays; a draw made then comes back empty, so the
+        # unit is not recorded and can be run again.
+        if not deep.server_alive() or any(not e.get("replies") for e in draws.log):
+            raise SystemExit(f"the prover stopped answering during {task['declaration']}; nothing of this unit was "
+                             "recorded, and --run repeats it")
         new_draws += [{"replicate": replicate, "index": task["index"], "declaration": task["declaration"],
                        "amendment": 1} | e for e in draws.log]
         with rt.RESULTS.open("a", encoding="utf-8", newline="\n") as handle:
