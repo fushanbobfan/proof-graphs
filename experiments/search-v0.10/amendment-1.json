@@ -1,0 +1,35 @@
+{
+ "amendment": 1,
+ "date": "2026-10-10 America/Los_Angeles",
+ "scope": "execution of the units listed below: the tasks, sets, searches, proposer, budgets, measures, hypotheses, and analyses are unchanged",
+ "observation": "When a REPL request timed out inside an expression export or a verification, the harness started a new session and the helper returned None or False, so the search went on in a session without the task's environment or its proof states: each later candidate failed, and the search ended unproved instead of abandoned. The registered attempt rule repeats a unit once when one of its searches is abandoned; these searches were not recorded as abandoned, so their units were not repeated. 4 counted searches went on in this way, all of them goal or group searches, each after one expression export failed.",
+ "rule": "fixed on 2026-10-09, before the run ended, and committed with scripts/explore_lost_sessions_v010.py (proof-graphs da9ab4b): recompute every registered decision with each such search counted as proved within 48 expansions; if a decision changes, amend search-v0.10 and rerun the affected units",
+ "trigger": "in that best case H103 changes: the group search's one-sided sign test against the whole-state search at 48 expansions goes from p = 0.0547 (Holm 0.1641) to p = 0.0107 (Holm 0.0322) (experiments/search-v0.10-lost-sessions)",
+ "change": "the searches count as abandoned; each of their units is repeated once under the registered attempt rule, its three searches in the rotating order with the set's seeded draws and fresh draws beyond them, run by search_typed_v2.run_one, in which a lost session abandons the search; the repetition's rows are appended to results.jsonl with \"amendment\": 1 and replace the unit's earlier rows by the latest-row rule, and a repetition that abandons a search again is final; its new draws are in amendment-1-draws.jsonl.gz; summary.json and report.md are recomputed by run_search_typed's own summarize; summary-as-run.json keeps the summary as run",
+ "resultsSeenBeforeAmendment": "the complete summary as run (every hypothesis and check held) and the sensitivity analysis above",
+ "affectedUnits": [
+  {
+   "replicate": 0,
+   "declaration": "MeasureTheory.borel_eq_borel_of_le"
+  },
+  {
+   "replicate": 0,
+   "declaration": "PointedCone.DualFG.dual_of_fg"
+  },
+  {
+   "replicate": 1,
+   "declaration": "Algebra.FormallySmooth.adjoin_of_algebraicIndependent"
+  },
+  {
+   "replicate": 2,
+   "declaration": "PointedCone.DualFG.dual_of_fg"
+  }
+ ],
+ "summaryAsRunSha256": "9eade68da0204aa0ae1e6a093ab7f541e05a78d9c7659ebcb712e94879c1b279",
+ "resultsAsRunSha256": "17c85d448ab43f49486849c72880fc44323cbbc5f86235e34e836e4df23a8c90",
+ "implementationSha256": {
+  "amendmentRunner": "fb541dc6289670e4193b3c3242dfbca8cbac8c5159331724e725c204926bf57b",
+  "typedV2": "fc9c367e4cbc4652fccc8910f302fc00b0a73115653573c16f26b05c5de9aa3b",
+  "lostSessions": "52141cdaa6bcb140831838c07075fb08f0da9c27535ab32babbd9643ff89bb44"
+ }
+}
