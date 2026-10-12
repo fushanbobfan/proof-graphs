@@ -60,12 +60,15 @@ attempts alone the counts are 6 against 1 (p = 0.0625). The two tasks abandoned 
 in both attempts, so any reading that gives a task's two searches the same outcome leaves 7 against 1; counting only
 their whole-state searches as proved gives 7 against 3 (p = 0.17), and only their group searches 9 against 1
 (p = 0.011). In every reading the difference favours the group search (+0.7 to +1.4 points) and the interval's upper
-limit stays below three points (at most 2.5).
+limit stays below three points (at most 2.5). The group search made 1,776 groups of several goals, and one of its
+proofs passed through one; it is not among the seven, whose proofs keep every goal in a group of its own.
 
 ## Interpretation boundary
 
 On held-out theorems the coupled-group search proves slightly more than the whole-state search with the same draws:
 about one theorem in a hundred, with a gain of three points excluded in every reading. The registered sign test is
 significant at 0.05, but by one task, so the direction is better supported than its significance: it matches
-search-v0.10's estimate on other theorems (+1.4 points at 48 expansions over three sets). The comparison is of the
+search-v0.10's estimate on other theorems (+1.4 points at 48 expansions over three sets). The gain does not come
+through a group of coupled goals, since no proof that decides it passes through one; it is what the group search gains
+as a search over goals. The comparison is of the
 step prover at 48 expansions on one slice of Mathlib, with one set of draws per task.

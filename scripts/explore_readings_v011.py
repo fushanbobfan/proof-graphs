@@ -9,8 +9,9 @@ repeated once, both searches with fresh shared draws, and an abandoned search co
 turns on few tasks, so this recomputes the paired outcome within 48 expansions (cells, one-sided sign test, Newcombe's
 interval) on the first attempt of every unit, and with the searches abandoned in the latest rows counted as proved,
 for either search or both. It also lists the units that were repeated and, for each task that only one search proves,
-what the first attempt gave, and counts the searches that went on after a REPL restart, which `search_typed_v2`
-abandons. None of this changes a registered decision.
+what the first attempt gave and whether the group search's proof passed through a group of several goals, and counts
+the searches that went on after a REPL restart, which `search_typed_v2` abandons. None of this changes a registered
+decision.
 """
 
 from __future__ import annotations
@@ -98,7 +99,12 @@ def analyse() -> dict[str, Any]:
 
     def discordant(names: set[str]) -> list[dict[str, Any]]:
         return [{"declaration": d, "module": module_of[d], "attempts": attempts[d],
-                 "firstAttempt": {s: outcome(first[(d, s)]) for s in rc.SEARCHES}} for d in sorted(names)]
+                 "firstAttempt": {s: outcome(first[(d, s)]) for s in rc.SEARCHES},
+                 "groupsInProof": ((latest[(d, "groups")].get("result") or {}).get("groupsInProof") or 0)}
+                for d in sorted(names)]
+
+    # The group search's groups of several goals and its proofs through one, counted as search-v0.10's summary does.
+    grouped = [r["result"] for (_, s), r in latest.items() if s == "groups" and r.get("result")]
 
     return {
         "note": "exploratory, not registered: search-v0.11's paired outcome within 48 expansions on the first attempt "
@@ -113,6 +119,8 @@ def analyse() -> dict[str, Any]:
         # a search that went on after its REPL session was restarted, as in search-v0.10 before amendment 1
         "restartedNotAbandoned": sum(1 for r in rows if (r.get("result") or {}).get("restarts") and not r.get("abandoned")),
         "repeated": {"units": len(repeated), "after": after},
+        "groups": {"several": sum(r["groups"]["several"] for r in grouped),
+                   "proofsThroughSeveral": sum(1 for r in grouped if r.get("proof") and r.get("groupsInProof"))},
         "groupsOnly": discordant(g - w), "wholeOnly": discordant(w - g),
         "resultsSha256": sha256_file(rc.RESULTS),
     }

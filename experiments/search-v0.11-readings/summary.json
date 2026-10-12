@@ -146,6 +146,10 @@
    "notConstructed": 129
   }
  },
+ "groups": {
+  "several": 1776,
+  "proofsThroughSeveral": 1
+ },
  "groupsOnly": [
   {
    "declaration": "DFinsupp.prod_mapRange_index",
@@ -154,7 +158,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "abandoned"
-   }
+   },
+   "groupsInProof": 0
   },
   {
    "declaration": "Fin.image_castSucc",
@@ -163,7 +168,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "proved"
-   }
+   },
+   "groupsInProof": 0
   },
   {
    "declaration": "Finset.range_image_pred_top_sub",
@@ -172,7 +178,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "proved"
-   }
+   },
+   "groupsInProof": 0
   },
   {
    "declaration": "Nat.leRec_trans",
@@ -181,7 +188,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "proved"
-   }
+   },
+   "groupsInProof": 0
   },
   {
    "declaration": "ProbabilityTheory.Kernel.ae_compProd_of_ae_ae",
@@ -190,7 +198,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "proved"
-   }
+   },
+   "groupsInProof": 0
   },
   {
    "declaration": "SimpleGraph.nontrivial_iff",
@@ -199,7 +208,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "proved"
-   }
+   },
+   "groupsInProof": 0
   },
   {
    "declaration": "Submodule.Quotient.equiv_trans",
@@ -208,7 +218,8 @@
    "firstAttempt": {
     "whole": "unproved",
     "groups": "proved"
-   }
+   },
+   "groupsInProof": 0
   }
  ],
  "wholeOnly": [
@@ -219,7 +230,8 @@
    "firstAttempt": {
     "whole": "proved",
     "groups": "unproved"
-   }
+   },
+   "groupsInProof": 0
   }
  ],
  "resultsSha256": "3428b9f6f7e00dd48b4b03a57cfba2ff8602e9462e6d4887d508ec06a31a60e9"
