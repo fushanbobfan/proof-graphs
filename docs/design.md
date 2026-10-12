@@ -146,7 +146,9 @@ gain), the group search proves 153 of the 591 it can pose and the
 whole-state search 147, seven theorems against one (one-sided p = 0.035): a
 gain of one point, with three points excluded. The significance rests on one
 theorem, decided when its unit was repeated after a lost REPL session; on
-first attempts alone the count is six against one.
+first attempts alone the count is six against one. None of the seven passes
+through a group of several goals, so the group search gains as a search over
+goals, not through coupled ones.
 
 Every one of these searches acts on the first goal. A search that may act on
 any goal (`goal-selection-v0.1`, the menu, 24 expansions, states identified by
