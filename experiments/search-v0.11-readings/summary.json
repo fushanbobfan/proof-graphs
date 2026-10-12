@@ -1,0 +1,226 @@
+{
+ "note": "exploratory, not registered: search-v0.11's paired outcome within 48 expansions on the first attempt of each unit, and with the searches abandoned in the latest rows counted as proved",
+ "readings": {
+  "registered": {
+   "stated": 591,
+   "proved": {
+    "whole": 147,
+    "groups": 153
+   },
+   "cells": {
+    "both": 146,
+    "groupsOnly": 7,
+    "wholeOnly": 1,
+    "neither": 437
+   },
+   "difference": 0.01015228426395939,
+   "newcombe95": [
+    0.00044865549155779887,
+    0.020130234141936272
+   ],
+   "signTestGroupsMore": 0.03515625,
+   "h109Holds": false,
+   "h110Holds": true
+  },
+  "firstAttempts": {
+   "stated": 591,
+   "proved": {
+    "whole": 147,
+    "groups": 152
+   },
+   "cells": {
+    "both": 146,
+    "groupsOnly": 6,
+    "wholeOnly": 1,
+    "neither": 438
+   },
+   "difference": 0.008460236886632826,
+   "newcombe95": [
+    -0.000700343266493271,
+    0.017867522199131486
+   ],
+   "signTestGroupsMore": 0.0625,
+   "h109Holds": true,
+   "h110Holds": true
+  },
+  "abandonedWholeProved": {
+   "stated": 591,
+   "proved": {
+    "whole": 149,
+    "groups": 153
+   },
+   "cells": {
+    "both": 146,
+    "groupsOnly": 7,
+    "wholeOnly": 3,
+    "neither": 435
+   },
+   "difference": 0.00676818950930626,
+   "newcombe95": [
+    -0.00405835356046977,
+    0.017753653792223885
+   ],
+   "signTestGroupsMore": 0.171875,
+   "h109Holds": true,
+   "h110Holds": true
+  },
+  "abandonedGroupsProved": {
+   "stated": 591,
+   "proved": {
+    "whole": 147,
+    "groups": 155
+   },
+   "cells": {
+    "both": 146,
+    "groupsOnly": 9,
+    "wholeOnly": 1,
+    "neither": 435
+   },
+   "difference": 0.01353637901861252,
+   "newcombe95": [
+    0.002831919784403286,
+    0.024560289551875274
+   ],
+   "signTestGroupsMore": 0.0107421875,
+   "h109Holds": false,
+   "h110Holds": true
+  },
+  "abandonedBothProved": {
+   "stated": 591,
+   "proved": {
+    "whole": 149,
+    "groups": 155
+   },
+   "cells": {
+    "both": 148,
+    "groupsOnly": 7,
+    "wholeOnly": 1,
+    "neither": 435
+   },
+   "difference": 0.01015228426395939,
+   "newcombe95": [
+    0.00045829274934430266,
+    0.02011193023486555
+   ],
+   "signTestGroupsMore": 0.03515625,
+   "h109Holds": false,
+   "h110Holds": true
+  }
+ },
+ "allReadings": {
+  "maxUpper": 0.024560289551875274,
+  "minDifference": 0.00676818950930626,
+  "h109Holds": [
+   "abandonedWholeProved",
+   "firstAttempts"
+  ]
+ },
+ "abandonedLatest": [
+  {
+   "declaration": "Equiv.Perm.card_isConj_mul_eq",
+   "search": "groups",
+   "attempts": 2
+  },
+  {
+   "declaration": "Equiv.Perm.card_isConj_mul_eq",
+   "search": "whole",
+   "attempts": 2
+  },
+  {
+   "declaration": "ValueDistribution.proximity_sum_top_le",
+   "search": "groups",
+   "attempts": 2
+  },
+  {
+   "declaration": "ValueDistribution.proximity_sum_top_le",
+   "search": "whole",
+   "attempts": 2
+  }
+ ],
+ "abandonedAttempts": 21,
+ "restartedNotAbandoned": 0,
+ "repeated": {
+  "units": 141,
+  "after": {
+   "abandonment": 12,
+   "notConstructed": 129
+  }
+ },
+ "groupsOnly": [
+  {
+   "declaration": "DFinsupp.prod_mapRange_index",
+   "module": "Mathlib.Data.DFinsupp.BigOperators",
+   "attempts": 2,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "abandoned"
+   }
+  },
+  {
+   "declaration": "Fin.image_castSucc",
+   "module": "Mathlib.Data.Fintype.Basic",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "proved"
+   }
+  },
+  {
+   "declaration": "Finset.range_image_pred_top_sub",
+   "module": "Mathlib.Order.Interval.Finset.Nat",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "proved"
+   }
+  },
+  {
+   "declaration": "Nat.leRec_trans",
+   "module": "Mathlib.Data.Nat.Init",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "proved"
+   }
+  },
+  {
+   "declaration": "ProbabilityTheory.Kernel.ae_compProd_of_ae_ae",
+   "module": "Mathlib.Probability.Kernel.Composition.CompProd",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "proved"
+   }
+  },
+  {
+   "declaration": "SimpleGraph.nontrivial_iff",
+   "module": "Mathlib.Combinatorics.SimpleGraph.Basic",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "proved"
+   }
+  },
+  {
+   "declaration": "Submodule.Quotient.equiv_trans",
+   "module": "Mathlib.LinearAlgebra.Quotient.Basic",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "unproved",
+    "groups": "proved"
+   }
+  }
+ ],
+ "wholeOnly": [
+  {
+   "declaration": "MeasureTheory.LocallyIntegrableOn.congr",
+   "module": "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+   "attempts": 1,
+   "firstAttempt": {
+    "whole": "proved",
+    "groups": "unproved"
+   }
+  }
+ ],
+ "resultsSha256": "3428b9f6f7e00dd48b4b03a57cfba2ff8602e9462e6d4887d508ec06a31a60e9"
+}

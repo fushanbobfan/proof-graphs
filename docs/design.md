@@ -138,7 +138,15 @@ from 27.9% to 31.0% of expansions, all at reducible transparency and mostly
 goals that differ only in let-bound hypotheses they do not use, and the
 menu's by 0.1 points, for a merge that costs almost nothing beside the
 tactics; 89% of the states the printed key dropped while their expressions
-differ are equal up to unfolding.
+differ are equal up to unfolding. With goals identified by typed expression
+trees instead (`search-v0.10`), search-v0.8's and v0.9's searches prove
+exactly what they proved before. On 720 theorems of the second slice that no
+experiment had used (`search-v0.11`, its size fixed in advance to bound the
+gain), the group search proves 153 of the 591 it can pose and the
+whole-state search 147, seven theorems against one (one-sided p = 0.035): a
+gain of one point, with three points excluded. The significance rests on one
+theorem, decided when its unit was repeated after a lost REPL session; on
+first attempts alone the count is six against one.
 
 Every one of these searches acts on the first goal. A search that may act on
 any goal (`goal-selection-v0.1`, the menu, 24 expansions, states identified by

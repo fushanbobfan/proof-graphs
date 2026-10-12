@@ -43,7 +43,12 @@ Kept together in the groups their shared metavariables make, as HyperTree
 Proof Search splits states, such goals arise in a quarter of the searches
 and decide one proof: over three sets of draws the group search proves 122
 of 474 task-sets against 121 for goals and 116 for whole states, no pair
-significant after Holm's adjustment. Mathlib's
+significant after Holm's adjustment. With goals identified by typed
+expressions every search proves what it proved before (search-v0.10), and on
+720 held-out theorems (search-v0.11) the group search proves 153 of the 591
+it can pose against 147 for whole states, seven theorems against one
+(one-sided p = 0.035): a gain of about one point, three points excluded,
+whose significance rests on a single theorem. Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
 this program proposed as a quality measure, separates the two proofs on one
@@ -85,6 +90,7 @@ scripts/test_renaming.py          the renaming step on printed goals
 scripts/check_renaming_repl.py    the renaming searches in a Mathlib REPL
 scripts/audit_goal_keys.py        the text keys audited on the logged goals
 scripts/goal_identity.py          goal identity from Lean's expressions
+scripts/check_goal_identity.py    goal identity on hand-made goals in a Mathlib REPL
 scripts/goal_identity_typed.py    the same on typed expression trees, states up to goal order
 scripts/test_goal_identity_typed.py the typed identity on synthetic trees
 scripts/check_identity_v2_repl.py the typed identity on adversarial goals in a Mathlib REPL
@@ -98,31 +104,43 @@ scripts/test_goal_selection_diagnostic.py the diagnostic's decisions on syntheti
 scripts/recording_repl.py         a REPL session that records what a search does
 scripts/run_key_replay.py         finished searches re-keyed by Lean expressions
 scripts/search_faithful.py        searches over states, goals, and coupled goal groups
+scripts/check_faithful_repl.py    the three on hand-made theorems in a Mathlib REPL
 scripts/run_search_coupled.py     the three, over three sets of draws
 scripts/run_search_coupled_deep.py states and groups at 256 expansions
 scripts/explore_range_rerun_v08.py  its eleven setup failures rerun (not registered)
+scripts/search_typed.py           the three with goals identified by the typed key
+scripts/run_search_typed.py       search-v0.8 and v0.9 again with the typed key
+scripts/explore_lost_sessions_v010.py its searches that went on in an empty session (not registered)
+scripts/search_v010_amendment.py  its amendment: those searches' units repeated
+scripts/search_typed_v2.py        the same searches, abandoned when the REPL session is lost
+scripts/test_search_typed_v2.py   a lost session under both runners, without Lean
+scripts/run_search_confirm.py     whole states against coupled groups on held-out theorems
+scripts/test_search_confirm.py    its units, attempt rule, sample size, and summary, without Lean
+scripts/explore_readings_v011.py  its outcome under other readings of the attempts (not registered)
+scripts/explore_cost_curves.py    theorems proved against candidate applications (not registered)
 scripts/run_orderings_replay.py   replaying a graph's orderings in Lean
+scripts/run_orderings_replay_v2.py every proof the replay can pose, coupled goals detected
 scripts/check_coupled_orderings.py a proof its sample rule admits whose other ordering fails
 scripts/run_holdout.py            a second, disjoint Mathlib slice
 scripts/mine_golf.py              golf pairs from Mathlib's history
 scripts/run_golf.py               golfed proofs against their predecessors
 scripts/run_golf_structure.py     depth, width, and branching of golf pairs
 scripts/run_golf_replication.py   the golf findings on an earlier window
+scripts/golf_clusters.py          the second window's branching result clustered by commit (not registered)
 scripts/run_extraction_audit.py   derived graphs against blind reconstructions
 scripts/count_linearizations_v2.py the step derivation the audit corrected
 scripts/run_recount.py            every extraction under the corrected rule
 scripts/export_graphs.py          the dataset of step-dependency graphs
 scripts/audit_graphs.py           structural invariants of every derived graph
 scripts/check_slice_options.py    the slice's graphs under Mathlib's options
-scripts/goal_identity.py          goal identity from Lean's expressions
-scripts/recording_repl.py         a REPL session that logs a search for re-keying
-scripts/run_key_replay.py         finished searches re-keyed by expressions
 scripts/goal_defeq.py             goal identity up to definitional equality
 scripts/run_defeq_replay.py       the replays merged up to definitional equality
 scripts/defeq_v01_amendment.py    its amendment's analyses beside the registered ones
 scripts/defeq_v01_c32_mechanism.py why its replay check fails (not registered)
 scripts/explore_defeq_merges.py   what its merges bridge (not registered)
 scripts/check_tactic_heartbeats.py what a heartbeat limit set inside a tactic bounds
+scripts/run_search_heartbeats.py  search-v0.3's searches under the registered heartbeat limit
+scripts/search_v03_sensitivity.py search-v0.3's error units rerun (not registered)
 scripts/explore_false_merges.py   what the text keys conflate (not registered)
 scripts/run_extraction_audit_v2.py the audit on the constructs the derivation handles by rule
 scripts/run_extraction_audit_v3.py the audit on long proofs and graphs that are not forests
@@ -140,8 +158,15 @@ experiments/search-v0.7/          goals and states up to renaming
 experiments/search-v0.8/          states, goals, and coupled goal groups
 experiments/search-v0.8-range-rerun/  its eleven setup failures rerun (not registered)
 experiments/search-v0.9/          states and coupled groups at 256 expansions
+experiments/search-v0.10/         search-v0.8 and v0.9 with the typed key
+experiments/search-v0.10-lost-sessions/  its searches that lost their session (not registered)
+experiments/search-v0.11/         whole states against coupled groups on held-out theorems
+experiments/search-v0.11-readings/  its outcome under other readings (not registered)
+experiments/heartbeats-v0.1/      search-v0.3 under the registered heartbeat limit
+experiments/cost-curves/          theorems against candidate applications (not registered)
 experiments/goal-key-audit/       the keys' collisions, measured (not registered)
 experiments/orderings-replay-v0.1/  orderings replayed as Lean scripts
+experiments/orderings-replay-v0.2/  every proof the replay can pose, coupled goals detected
 experiments/holdout-v0.1/         the second slice
 experiments/golf-v0.1/            golf pairs (Mathlib excerpts, Apache-2.0)
 experiments/golf-structure-v0.1/  depth, width, branching
