@@ -146,6 +146,21 @@
    "notConstructed": 129
   }
  },
+ "attemptFlow": {
+  "abandonedInEveryAttempt": 2,
+  "abandonedThenComplete": 10,
+  "notPosed:declaration range not found": 21,
+  "notPosed:statement not posed": 108,
+  "posedFirstAttempt": 579
+ },
+ "modules": {
+  "stated": 104,
+  "discordant": 8,
+  "discordantTasks": 8,
+  "groupsMore": 7,
+  "wholeMore": 1,
+  "signTestGroupsMore": 0.03515625
+ },
  "groups": {
   "several": 1776,
   "proofsThroughSeveral": 1

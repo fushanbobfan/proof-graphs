@@ -9,9 +9,11 @@ repeated once, both searches with fresh shared draws, and an abandoned search co
 turns on few tasks, so this recomputes the paired outcome within 48 expansions (cells, one-sided sign test, Newcombe's
 interval) on the first attempt of every unit, and with the searches abandoned in the latest rows counted as proved,
 for either search or both. It also lists the units that were repeated and, for each task that only one search proves,
-what the first attempt gave and whether the group search's proof passed through a group of several goals, and counts
-the searches that went on after a REPL restart, which `search_typed_v2` abandons. None of this changes a registered
-decision.
+what the first attempt gave and whether the group search's proof passed through a group of several goals, counts
+the searches that went on after a REPL restart, which `search_typed_v2` abandons, follows each unit through its
+attempts, and gives the modules of the tasks one search alone proves, with a sign test over modules. A proof that
+passes through no group of several goals shows what the proof used, not what coupling did to the search before it.
+None of this changes a registered decision.
 """
 
 from __future__ import annotations
@@ -106,6 +108,36 @@ def analyse() -> dict[str, Any]:
     # The group search's groups of several goals and its proofs through one, counted as search-v0.10's summary does.
     grouped = [r["result"] for (_, s), r in latest.items() if s == "groups" and r.get("result")]
 
+    # Each unit's course over its attempts, from the attempt ledger.
+    by_unit: dict[str, list[dict[str, Any]]] = {}
+    for r in rows:
+        by_unit.setdefault(r["declaration"], []).append(r)
+    flow: dict[str, int] = {}
+    for d, unit_rows in by_unit.items():
+        final = [latest[(d, s)] for s in rc.SEARCHES]
+        if all(r.get("constructed") is False for r in unit_rows):
+            reasons = {r.get("reason") or "" for r in unit_rows}
+            assert len(reasons) == 1, (d, reasons)  # the same failure in both searches and every attempt
+            label = "notPosed:" + (reasons.pop() or "statement not posed")
+        elif any(r.get("abandoned") for r in final):
+            label = "abandonedInEveryAttempt" if all(r.get("abandoned") for r in unit_rows) else "abandonedFinally"
+        elif attempts[d] == 1:
+            label = "posedFirstAttempt"
+        else:
+            assert all(outcome(r) in ("proved", "unproved") for r in final), d
+            label = "abandonedThenComplete"
+        flow[label] = flow.get(label, 0) + 1
+
+    # Modules: of the stated tasks, of the tasks one search alone proves, and a sign test over modules.
+    stated = [t["declaration"] for t in tasks
+              if all((latest.get((t["declaration"], s)) or {}).get("constructed") for s in rc.SEARCHES)]
+    net: dict[str, int] = {}
+    for x in g - w:
+        net[module_of[x]] = net.get(module_of[x], 0) + 1
+    for x in w - g:
+        net[module_of[x]] = net.get(module_of[x], 0) - 1
+    more, fewer = sum(v > 0 for v in net.values()), sum(v < 0 for v in net.values())
+
     return {
         "note": "exploratory, not registered: search-v0.11's paired outcome within 48 expansions on the first attempt "
                 "of each unit, and with the searches abandoned in the latest rows counted as proved",
@@ -119,6 +151,10 @@ def analyse() -> dict[str, Any]:
         # a search that went on after its REPL session was restarted, as in search-v0.10 before amendment 1
         "restartedNotAbandoned": sum(1 for r in rows if (r.get("result") or {}).get("restarts") and not r.get("abandoned")),
         "repeated": {"units": len(repeated), "after": after},
+        "attemptFlow": dict(sorted(flow.items())),
+        "modules": {"stated": len({module_of[x] for x in stated}), "discordant": len(net),
+                    "discordantTasks": len(g ^ w), "groupsMore": more, "wholeMore": fewer,
+                    "signTestGroupsMore": v8.sign_upper(more, more + fewer)},
         "groups": {"several": sum(r["groups"]["several"] for r in grouped),
                    "proofsThroughSeveral": sum(1 for r in grouped if r.get("proof") and r.get("groupsInProof"))},
         "groupsOnly": discordant(g - w), "wholeOnly": discordant(w - g),

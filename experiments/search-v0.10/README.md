@@ -73,6 +73,25 @@ As run, before the amendment, every hypothesis also held: groups over whole stat
 search of `PointedCone.DualFG.dual_of_fg` in set 0 (at both budgets) and its goal search in set 2, both through a lost
 session, which the amendment's repetitions restore.
 
+## Bridge to search-v0.8 and its range rerun
+
+| Run | Tasks × sets | Identity | Candidates | Whole / goals / groups, 48 expansions |
+| --- | --- | --- | --- | --- |
+| search-v0.8, registered | 158 × 3 | expression key | set 0 seeded with search-v0.6's and v0.7's draws, then fresh shared draws | 116 / 121 / 122 of 474 |
+| search-v0.8 with its range rerun (not registered) | 169 × 3 | expression key | the eleven rerun units: set 0 seeded, sets 1 and 2 fresh | 123 / 128 / 129 of 507 |
+| search-v0.10 as run | 169 × 3 | typed key | every candidate set recorded for that set in search-v0.6 to v0.9 (not the range rerun's), then fresh shared draws | 123 / 128 / 129 of 507 |
+| search-v0.10, amendment 1 | 169 × 3 | typed key | the same; four units repeated with `search_typed_v2` | 123 / 129 / 130 of 507 |
+
+H106 compares each search with search-v0.8's own rows (search-v0.9's at 256 expansions) wherever those posed the
+search, 166 to 169 tasks per set and search. With the amendment no task is gained or lost in any set or search at
+either budget, which is stronger than H106 asked: it tolerated two tasks per set. As run, the group search of
+`PointedCone.DualFG.dual_of_fg` in set 0 (at both budgets) and its goal search in set 2 were lost through lost
+sessions. Against the range rerun the amended totals differ in one unit, `PNat.dvd_iff` in set 1, which the goal and
+group searches prove here and neither proves there: the rerun drew that set's candidates afresh, while this
+experiment reused search-v0.8's, with which search-v0.8's goal search had proved it (its group search had not been
+posed). In every run the candidate stream of a goal is keyed by its printed text, without the case tag and with
+metavariable numbers erased, whatever key decides identity.
+
 ## Interpretation boundary
 
 The typed key changes no search's outcome against the expression key, so search-v0.8's and v0.9's comparisons stand as
