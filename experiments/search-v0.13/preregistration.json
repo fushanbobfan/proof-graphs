@@ -1,0 +1,70 @@
+{
+ "analysis": "over the tasks stated in all six searches, a search's score on a task is the number of the two new sets in which it proves the task within 48 expansions; each comparison counts the tasks whose scores differ, by direction, and gives the mean difference in proof rate with a 95% percentile interval resampling modules (2000 resamples); search-v0.11's set and search-v0.12's goal search are pooled with the new sets only descriptively",
+ "budget": {
+  "checkpoints": [
+   24,
+   48
+  ],
+  "expansions": 48,
+  "tacticWallClockSeconds": 60
+ },
+ "checks": {
+  "C48": "every unit is final, and no latest row records an error",
+  "C49": "the typed export fails on fewer than 1% of the states the searches export",
+  "C50": "no candidate set is drawn twice for the same goal and occurrence in a unit, and every set a search takes as seeded is one an earlier attempt of the unit drew"
+ },
+ "developmentChecksBeforeRegistration": "none on these tasks: scripts/test_search_replicates_holdout.py tests the units, the rotation, the attempt rule with its candidate bank, the power simulation and the summary without Lean; the unit process was run once on one of search-v0.10's tasks (NFA.nil_mem_acceptsFrom) in a new set, while search-v0.12 ran: each search proved it in 2 expansions, the first drawing 2 sets and the other two sharing them",
+ "execution": "each unit (a task in a set) in its own Python process; 4 units at a time, each started only while at least 15 GB of commit charge is left and 45 s after the previous start; search-v0.11's attempt rule (a unit that raised is repeated up to 3 attempts, one in which a search was not constructed or was abandoned is repeated once, and the latest row of each search counts), a repeat reusing every candidate set drawn for the unit before",
+ "experiment": "search-v0.13",
+ "hypotheses": {
+  "H115": "over the two new sets, the group search's score (the sets in which it proves the task within 48 expansions) exceeds the whole-state search's on significantly more tasks than the reverse (one-sided sign test at 0.05 on the tasks whose scores differ)",
+  "H116": "the upper limit of the 95% interval, resampling modules, for the group search's proof rate minus the whole-state search's over the two new sets is below 3 points",
+  "H117": "the group search's score does not exceed the independent-goal search's on significantly more tasks than the reverse (one-sided sign test on the tasks whose scores differ, Holm's procedure at 0.05 over this test and H118's)",
+  "H118": "the independent-goal search's score exceeds the whole-state search's on significantly more tasks than the reverse (one-sided sign test on the tasks whose scores differ, Holm's procedure at 0.05 over this test and H117's)"
+ },
+ "implementationSha256": {
+  "confirmRunner": "2f4d00bd1a955aa3dc96d81cb214750900da51251f90a25fc5137e06f2e50396",
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "goalsRunner": "247f4634865fbe8ca2a97e255c63496bfe9510c6cb037e8ac1f1fb0b69602db9",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "identityTyped": "08c3cbbd84cd44ce2e84749e191ddfe153bd3cc3ebf5a9b64d94e9b93f26e28d",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "1c03cbf0f63bb9a57de9b7e68cdd16dc9022b7527121734e9c98dc036abf7522",
+  "searchV08Runner": "8b5d33907160ccf27b42ecba4012baac405350eecd51d363aa7afed4fdf5c2af",
+  "searchV09Runner": "1310a241a50903399efbbf3a7d27b30abf0f62a07f244c30d5231b7a3dd1194f",
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36",
+  "typed": "10c40ad3d7a6c2d28d3821eea0c07b13814297d78436f1ff265fc18f69060572",
+  "typedRunner": "c5440292aebaf8620bb4442907ab379d671373079bc5ff362391f7c6a4f833a8",
+  "typedV2": "fc9c367e4cbc4652fccc8910f302fc00b0a73115653573c16f26b05c5de9aa3b"
+ },
+ "inputs": {
+  "confirmResults": "3428b9f6f7e00dd48b4b03a57cfba2ff8602e9462e6d4887d508ec06a31a60e9",
+  "confirmTasks": "cb423ec38de74a3f528a42c8b3bfdb9b999955a71a5bc118831524373734c696",
+  "pilotResults": "ca9986f54c8ceb80b3949521637a2502b5273bb5c247f4f78b18ed7a6501d620"
+ },
+ "kind": "a replication on new draws of search-v0.11's held-out comparison, whose result was known at registration, with the independent-goal search added; search-v0.12 was running, and only its first four rows had been read, to check that its units completed",
+ "power": {
+  "informationOnly": true,
+  "medianDifferencePoints": 1.35,
+  "pilot": "search-v0.10's per-task outcomes of the group and whole-state searches within 48 expansions in its three sets; each simulated task takes a random pilot task's outcomes in two random sets of its three",
+  "runs": 4000,
+  "signTestPower": 0.982,
+  "tasks": 591
+ },
+ "proposer": "BFS-Prover-V2-7B in Q8_0 as in search-v0.11, served on port 8091: 16 completions at temperature 1.0, at most 64 tokens, the first goal followed by ':::', duplicates dropped",
+ "question": "on search-v0.11's held-out tasks and two new sets of draws, does the coupled-group search score higher than the whole-state search, by less than three points, and how do the two compare with the independent-goal search on the same candidates",
+ "registeredLocalDate": "2026-10-13 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": "search-v0.10's three searches (search_typed: whole states, independent goals, coupled groups), the typed key throughout, breadth-first, 48 expansions, each in a fresh REPL and run through search_typed_v2 so that a lost session abandons it",
+ "sets": "two new sets of draws, numbered 1 and 2 (search-v0.11's draws are set 0); in each, a task's three searches run one after another in an order that rotates with the task's index and the set, sharing one candidate stream: the nth time a search expands a goal it receives the nth candidate set drawn for that goal in the task and set, keyed by the goal's printed text without its case tag and with metavariable numbers erased; every set of the first set of draws is run before the second",
+ "tasks": {
+  "count": 591,
+  "rule": "search-v0.11's tasks whose latest rows are constructed in both its searches, in its order (search-v0.12's tasks)",
+  "tasksSha256": "59174059ed4e12e29c47ad1265eb1fdf83cf0c06f0c3bbd33629609062d5315a"
+ },
+ "tests": "H115 by a one-sided sign test at 0.05; H116 by the upper limit of the interval resampling modules; H117 and H118 by one-sided sign tests with Holm's procedure at 0.05 over the two"
+}
