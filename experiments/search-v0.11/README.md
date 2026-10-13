@@ -4,7 +4,7 @@ Every step-prover comparison before this one ran on the same 200 tasks of the se
 significant difference between searching whole states and searching goals or goal groups after adjustment; on
 search-v0.10's 169 posable tasks the group search led the whole-state search by about one point. This experiment is
 the confirmation search-v0.10 deferred to: it runs search-v0.10's whole-state and coupled-group searches, unchanged and
-with the typed key throughout, on 720 tasks no experiment had used, positions 200 to 919 of holdout-v0.1's seeded order
+with the typed key throughout, on 720 tasks no search had used, positions 200 to 919 of holdout-v0.1's seeded order
 of the slice's candidates. Each task's two searches run in fresh REPLs at 48 expansions and share one set of fresh
 draws. A search whose REPL session is lost is abandoned where the loss happens (`search_typed_v2`), the defect behind
 search-v0.10's amendment 1. The number of tasks was fixed at registration by a stated rule: the smallest of 480, 560,
@@ -94,6 +94,7 @@ comparison passes through a group of several goals. That shows what the winning 
 found them: coupled groups that fail can still change what a search expands and when, and an independent-goal arm on
 the same tasks and candidates would be needed to separate coupling from searching goals. The gain is in theorems proved
 at an equal number of expansions, not an end-to-end speedup, since the two searches apply different numbers of
-candidates per expansion. The tasks are held out from this program's earlier experiments, not from the prover's
-training data or from the slice's modules, and the comparison is of the step prover at 48 expansions on one slice of
+candidates per expansion. The tasks are held out from this program's earlier searches, not from its counts
+(holdout-v0.1 counted all of their proofs, orderings-replay-v0.2 replayed 32 and extraction-audit-v0.3 reconstructed
+4), from the prover's training data, or from the slice's modules, and the comparison is of the step prover at 48 expansions on one slice of
 Mathlib, with one set of draws per task.

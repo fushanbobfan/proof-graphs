@@ -44,5 +44,5 @@ print alike whichever they mention; no text key can tell them apart.
 ## Boundary
 
 The units were chosen for having the most conflations, and each theorem contributes mostly one category, so the
-shares describe these six theorems, not the population. Categories come from the first differing identifier,
+shares describe the eight theorems these twelve units come from, not the population. Categories come from the first differing identifier,
 a heuristic (`category` in the script).
