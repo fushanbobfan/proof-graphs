@@ -1,0 +1,63 @@
+{
+ "budget": {
+  "checkpoints": [
+   24,
+   48
+  ],
+  "expansions": 48,
+  "tacticWallClockSeconds": 60
+ },
+ "candidates": "the nth time the search expands a goal it receives the nth candidate set drawn for that goal in the task, keyed by the goal's printed text without its case tag and with metavariable numbers erased (search_harness.canonical_goal): first the sets search-v0.11 recorded for the task, in their order, then the sets this experiment drew for the task in earlier attempts, then fresh draws, made as in search-v0.11 and logged",
+ "checks": {
+  "C45": "every unit is final, and no latest row records an error",
+  "C46": "the typed export fails on fewer than 1% of the states the search exports",
+  "C47": "every candidate set the search takes as seeded is one search-v0.11 recorded, or an earlier attempt of the unit drew, for that goal and occurrence in the task"
+ },
+ "developmentChecksBeforeRegistration": "none on these tasks: scripts/test_search_goals_holdout.py tests the seeding, the attempt rule with its candidate bank, and the summary without Lean; the unit process was run once on one of search-v0.10's tasks (Polynomial.monomial_mem_lifts), seeded with the sets search-v0.10 recorded for its first goal only so that later expansions drew from the server: proved in 6 expansions, 1 seeded and 5 drawn sets, no export failure",
+ "execution": "each task's unit in its own Python process; 4 units at a time, each started only while at least 15 GB of commit charge is left and 45 s after the previous start; search-v0.11's attempt rule (a unit that raised is repeated up to 3 attempts, one whose search was not constructed or was abandoned is repeated once, and the latest row counts), a repeat reusing every candidate set drawn for the unit before",
+ "experiment": "search-v0.12",
+ "hypotheses": {
+  "H112": "the coupled-group search (search-v0.11's rows) does not prove significantly more tasks than the independent-goal search within 48 expansions (one-sided sign test on the tasks exactly one of them proves, Holm's procedure at 0.05 over this test and H113's)",
+  "H113": "the independent-goal search proves significantly more tasks than the whole-state search (search-v0.11's rows) within 48 expansions (one-sided sign test on the tasks exactly one of them proves, Holm's procedure at 0.05 over this test and H112's)",
+  "H114": "the upper limit of the 95% interval (Newcombe's hybrid score interval for paired proportions) for the group search's proof rate minus the independent-goal search's is below 1 point, about the gain search-v0.11 estimated for the group search over the whole-state search"
+ },
+ "implementationSha256": {
+  "confirmRunner": "2f4d00bd1a955aa3dc96d81cb214750900da51251f90a25fc5137e06f2e50396",
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "identityTyped": "08c3cbbd84cd44ce2e84749e191ddfe153bd3cc3ebf5a9b64d94e9b93f26e28d",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "247f4634865fbe8ca2a97e255c63496bfe9510c6cb037e8ac1f1fb0b69602db9",
+  "searchV08Runner": "8b5d33907160ccf27b42ecba4012baac405350eecd51d363aa7afed4fdf5c2af",
+  "searchV09Runner": "1310a241a50903399efbbf3a7d27b30abf0f62a07f244c30d5231b7a3dd1194f",
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36",
+  "typed": "10c40ad3d7a6c2d28d3821eea0c07b13814297d78436f1ff265fc18f69060572",
+  "typedRunner": "c5440292aebaf8620bb4442907ab379d671373079bc5ff362391f7c6a4f833a8",
+  "typedV2": "fc9c367e4cbc4652fccc8910f302fc00b0a73115653573c16f26b05c5de9aa3b"
+ },
+ "inputs": {
+  "confirmDraws": "b6fc9e07318def1666900bc95100ce5db5a2f5ba86ba4c4b590f925209d82787",
+  "confirmPreregistration": "f29909ce8961c10ee21d4a59c54d1a24e54f4ba82a680cb2226a5cfb2f314854",
+  "confirmResults": "3428b9f6f7e00dd48b4b03a57cfba2ff8602e9462e6d4887d508ec06a31a60e9",
+  "confirmSummary": "0e4d6adbcc5c06b21a9e4e94a2ef9e714c4b6458045f04d67fcd1b158db0ddac",
+  "confirmTasks": "cb423ec38de74a3f528a42c8b3bfdb9b999955a71a5bc118831524373734c696"
+ },
+ "kind": "an ablation on search-v0.11's tasks and candidates, whose results were known at registration: the third search of search-v0.10, paired with search-v0.11's two",
+ "limits": "search-v0.11's two searches ran on 2026-10-10 to 12 and this search runs later, on the same machine, REPL, Mathlib and model; where it reaches a goal or an occurrence search-v0.11 did not draw, its candidates are fresh samples, so the pairing matches candidates only where the searches meet",
+ "pairing": "over the tasks this search states, its latest row against search-v0.11's latest rows of the same task: proved within 48 expansions by both, by one only, or by neither",
+ "proposer": "BFS-Prover-V2-7B in Q8_0 as in search-v0.11, served on port 8091: 16 completions at temperature 1.0, at most 64 tokens, the first goal followed by ':::', duplicates dropped",
+ "question": "on search-v0.11's held-out tasks and with its candidates, does the coupled-group search prove more than the independent-goal search, and the independent-goal search more than the whole-state search, at 48 expansions",
+ "registeredLocalDate": "2026-10-13 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "search": "search_typed.and_or_search, search-v0.10's independent-goal search: single goals merged by the typed key, a candidate that changes another goal discarded as entangled; breadth-first, 48 expansions, in a fresh REPL, run through search_typed_v2 so that a lost session abandons it",
+ "tasks": {
+  "count": 591,
+  "rule": "search-v0.11's tasks whose latest rows are constructed in both its searches, in its order",
+  "tasksSha256": "59174059ed4e12e29c47ad1265eb1fdf83cf0c06f0c3bbd33629609062d5315a"
+ },
+ "tests": "H112 and H113 by one-sided sign tests on the tasks exactly one of the two searches proves, with Holm's procedure at 0.05 over the two; H114 by the upper limit of Newcombe's 95% hybrid score interval; percentile intervals resampling modules are reported beside them and do not decide"
+}

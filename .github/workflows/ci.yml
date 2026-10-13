@@ -243,6 +243,10 @@ jobs:
           if test -f experiments/search-v0.11-readings/summary.json; then
             python scripts/explore_readings_v011.py --check
           fi
+          python scripts/test_search_goals_holdout.py
+          if test -f experiments/search-v0.12/preregistration.json; then
+            python scripts/run_search_goals_holdout.py --check-committed
+          fi
       - name: Check the golf replication clustered by commit
         run: python scripts/golf_clusters.py --check
       - name: Check the committed holdout slice
