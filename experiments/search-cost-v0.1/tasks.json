@@ -1,0 +1,302 @@
+[
+ {
+  "module": "Mathlib.Order.SuccPred.CompleteLinearOrder",
+  "declaration": "Order.IsSuccPrelimit.sSup_Iio",
+  "line": 113,
+  "steps": 3,
+  "structure": 0.3868528072345416,
+  "linearizations": "2",
+  "draw": 201,
+  "index": 1
+ },
+ {
+  "module": "Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis",
+  "declaration": "isAlgebraic_iff_exists_isTranscendenceBasis_subset",
+  "line": 406,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 211,
+  "index": 11
+ },
+ {
+  "module": "Mathlib.Combinatorics.SimpleGraph.Basic",
+  "declaration": "SimpleGraph.adj_congr_of_sym2",
+  "line": 193,
+  "steps": 9,
+  "structure": 0.2777219164233564,
+  "linearizations": "35",
+  "draw": 229,
+  "index": 29
+ },
+ {
+  "module": "Mathlib.Computability.NFA",
+  "declaration": "NFA.disjoint_evalFrom_reverse",
+  "line": 392,
+  "steps": 9,
+  "structure": 0.2378193615294719,
+  "linearizations": "21",
+  "draw": 235,
+  "index": 35
+ },
+ {
+  "module": "Mathlib.Order.Interval.Finset.Nat",
+  "declaration": "Finset.range_add_eq_union",
+  "line": 232,
+  "steps": 10,
+  "structure": 0.09178075310198028,
+  "linearizations": "4",
+  "draw": 248,
+  "index": 48
+ },
+ {
+  "module": "Mathlib.GroupTheory.GroupAction.Hom",
+  "declaration": "DistribMulActionHom.ext_ring",
+  "line": 863,
+  "steps": 7,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 253,
+  "index": 53
+ },
+ {
+  "module": "Mathlib.RingTheory.Smooth.Field",
+  "declaration": "Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable",
+  "line": 47,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 270,
+  "index": 70
+ },
+ {
+  "module": "Mathlib.CategoryTheory.MorphismProperty.Basic",
+  "declaration": "CategoryTheory.MorphismProperty.ofHoms_homFamily",
+  "line": 336,
+  "steps": 8,
+  "structure": 0.2553655451258026,
+  "linearizations": "15",
+  "draw": 273,
+  "index": 73
+ },
+ {
+  "module": "Mathlib.Order.Interval.Finset.Nat",
+  "declaration": "Nat.multiset_Ico_map_mod",
+  "line": 198,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 283,
+  "index": 83
+ },
+ {
+  "module": "Mathlib.AlgebraicGeometry.EllipticCurve.Reduction",
+  "declaration": "WeierstrassCurve.integralModel_a₃_eq",
+  "line": 107,
+  "steps": 4,
+  "structure": 0.34568712404340535,
+  "linearizations": "3",
+  "draw": 420,
+  "index": 220
+ },
+ {
+  "module": "Mathlib.Algebra.Order.Archimedean.Class",
+  "declaration": "MulArchimedeanClass.mk_div_comm",
+  "line": 251,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 425,
+  "index": 225
+ },
+ {
+  "module": "Mathlib.Combinatorics.SimpleGraph.Basic",
+  "declaration": "SimpleGraph.fromEdgeSet_inter",
+  "line": 680,
+  "steps": 10,
+  "structure": 0.5644152872427495,
+  "linearizations": "5040",
+  "draw": 441,
+  "index": 241
+ },
+ {
+  "module": "Mathlib.AlgebraicGeometry.SpreadingOut",
+  "declaration": "AlgebraicGeometry.spread_out_of_isGermInjective'",
+  "line": 371,
+  "steps": 10,
+  "structure": 0.41197075609305517,
+  "linearizations": "504",
+  "draw": 446,
+  "index": 246
+ },
+ {
+  "module": "Mathlib.RingTheory.Smooth.Field",
+  "declaration": "Algebra.FormallySmooth.of_algebraicIndependent",
+  "line": 38,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 461,
+  "index": 261
+ },
+ {
+  "module": "Mathlib.Geometry.Convex.Cone.DualFinite",
+  "declaration": "PointedCone.DualFG.exists_fg_dual",
+  "line": 52,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 488,
+  "index": 288
+ },
+ {
+  "module": "Mathlib.Geometry.Euclidean.Volume.Measure",
+  "declaration": "MeasureTheory.euclideanHausdorffMeasure_homothety_image",
+  "line": 169,
+  "steps": 7,
+  "structure": 0.16261209640572027,
+  "linearizations": "4",
+  "draw": 489,
+  "index": 289
+ },
+ {
+  "module": "Mathlib.Algebra.Order.Archimedean.Class",
+  "declaration": "MulArchimedeanClass.subgroup_antitone",
+  "line": 647,
+  "steps": 10,
+  "structure": 0.2520232065532899,
+  "linearizations": "45",
+  "draw": 494,
+  "index": 294
+ },
+ {
+  "module": "Mathlib.RingTheory.Ideal.KrullsHeightTheorem",
+  "declaration": "ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank",
+  "line": 369,
+  "steps": 6,
+  "structure": 0.2446232649539434,
+  "linearizations": "5",
+  "draw": 538,
+  "index": 338
+ },
+ {
+  "module": "Mathlib.MeasureTheory.Measure.EverywherePos",
+  "declaration": "MeasureTheory.Measure.exists_isOpen_everywherePosSubset_eq_sdiff",
+  "line": 66,
+  "steps": 18,
+  "structure": 0.21863113029602946,
+  "linearizations": "2856",
+  "draw": 539,
+  "index": 339
+ },
+ {
+  "module": "Mathlib.Topology.SeparatedMap",
+  "declaration": "IsSeparatedMap.comp_right",
+  "line": 117,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 643,
+  "index": 443
+ },
+ {
+  "module": "Mathlib.MeasureTheory.Function.LocallyIntegrable",
+  "declaration": "ContinuousOn.integrableOn_of_subset_isCompact",
+  "line": 575,
+  "steps": 9,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 693,
+  "index": 493
+ },
+ {
+  "module": "Mathlib.NumberTheory.LSeries.Deriv",
+  "declaration": "LSeries.abscissaOfAbsConv_logMul",
+  "line": 106,
+  "steps": 15,
+  "structure": 0.32950648090994955,
+  "linearizations": "9828",
+  "draw": 695,
+  "index": 495
+ },
+ {
+  "module": "Mathlib.Probability.Kernel.Composition.CompProd",
+  "declaration": "ProbabilityTheory.Kernel.compProd_null",
+  "line": 239,
+  "steps": 4,
+  "structure": 0.21810429198553155,
+  "linearizations": "2",
+  "draw": 699,
+  "index": 499
+ },
+ {
+  "module": "Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis",
+  "declaration": "IsTranscendenceBasis.algebraMap_comp",
+  "line": 138,
+  "steps": 12,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 734,
+  "index": 534
+ },
+ {
+  "module": "Mathlib.Data.Nat.Init",
+  "declaration": "Nat.decreasingInduction_self",
+  "line": 284,
+  "steps": 3,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 753,
+  "index": 553
+ },
+ {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated",
+  "declaration": "AlgebraicGeometry.IsAffineOpen.isQuasiSeparated",
+  "line": 164,
+  "steps": 3,
+  "structure": 0.3868528072345416,
+  "linearizations": "2",
+  "draw": 800,
+  "index": 600
+ },
+ {
+  "module": "Mathlib.MeasureTheory.Constructions.Polish.Basic",
+  "declaration": "Measurable.tprod'",
+  "line": 1064,
+  "steps": 16,
+  "structure": 0.5791847005333577,
+  "linearizations": "51891840",
+  "draw": 821,
+  "index": 621
+ },
+ {
+  "module": "Mathlib.LinearAlgebra.Basis.VectorSpace",
+  "declaration": "Module.Basis.range_extendLe",
+  "line": 109,
+  "steps": 4,
+  "structure": 0.0,
+  "linearizations": "1",
+  "draw": 856,
+  "index": 656
+ },
+ {
+  "module": "Mathlib.FieldTheory.IsAlgClosed.Spectrum",
+  "declaration": "spectrum.map_polynomial_aeval_of_nonempty",
+  "line": 119,
+  "steps": 5,
+  "structure": 0.28956590122791626,
+  "linearizations": "4",
+  "draw": 889,
+  "index": 689
+ },
+ {
+  "module": "Mathlib.LinearAlgebra.Multilinear.Basic",
+  "declaration": "MultilinearMap.mkPiRing_eq_iff",
+  "line": 1269,
+  "steps": 7,
+  "structure": 0.2101730856862202,
+  "linearizations": "6",
+  "draw": 915,
+  "index": 715
+ }
+]

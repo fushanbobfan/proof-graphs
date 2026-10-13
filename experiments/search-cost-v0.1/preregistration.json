@@ -1,0 +1,51 @@
+{
+ "checks": {
+  "C53": "every search of every sampled task runs to an outcome (a proof, an exhausted frontier, the budget, or an abandoned session), and none raises",
+  "C54": "no other search experiment's runner runs while a search of this one does"
+ },
+ "developmentChecksBeforeRegistration": "none on these tasks: scripts/test_search_cost.py tests the accounting, the rotation, the memory poll and the summary without Lean",
+ "draws": "each search draws its own candidates as search-v0.11 draws them, none shared with another search: the nth time it expands a goal it receives the nth set it drew for that goal",
+ "execution": "one search at a time, in an order that rotates with the task's index; run only after search-v0.13 has finished, with no other search experiment's runner running (C54); the model server on port 8091 serves no one else",
+ "experiment": "search-cost-v0.1",
+ "hypotheses": {
+  "H122": "in each search, the model's time is the largest of the recorded components of elapsed time (model draws, candidate tactics, exports, setup and verification commands) in more than half of the tasks",
+  "H123": "the median over tasks of the group search's elapsed time divided by the whole-state search's lies between 0.8 and 1.25",
+  "H124": "in the independent-goal and group searches, the exports that decide identity take less than a fifth of the elapsed time in the median task"
+ },
+ "implementationSha256": {
+  "confirmRunner": "2f4d00bd1a955aa3dc96d81cb214750900da51251f90a25fc5137e06f2e50396",
+  "draws": "1e0d75ac6389f813305c81ef575fd70e482cb15d4c54ad632f512dd09dadefe9",
+  "faithful": "48d4ff0ab682497787ac6635e47442cca86d8b0c2ad3f7beccbbe468da15f0ec",
+  "goalsRunner": "247f4634865fbe8ca2a97e255c63496bfe9510c6cb037e8ac1f1fb0b69602db9",
+  "harness": "9d3371f05e98532b26b384e092c80204ba745d9ae3a09a047f1511ab7deae3b0",
+  "identity": "c15d45c88d445fdbc412f262a94957278e29c016084739bc4760cddc49432798",
+  "identityTyped": "08c3cbbd84cd44ce2e84749e191ddfe153bd3cc3ebf5a9b64d94e9b93f26e28d",
+  "prover": "20b2e1804fc5dd08178ebafd0f7a1afa44136782326087be71faf73c3c3740d6",
+  "renaming": "945665db20663c1584f808d2f63027e705d6e153d2e36ea62442148f82981188",
+  "repl": "3593c519c260e43e83ad45faf6b315d7c63e6dcec9cfeafda47b2bbc5c6374f4",
+  "runner": "ccd186c01151c30ab89a69d325c31a5e2a5edefb9ea8312e71a94663df64be77",
+  "searchV08Runner": "8b5d33907160ccf27b42ecba4012baac405350eecd51d363aa7afed4fdf5c2af",
+  "searchV09Runner": "1310a241a50903399efbbf3a7d27b30abf0f62a07f244c30d5231b7a3dd1194f",
+  "selection": "7934ab8a44d6eb197b344a15ae739a8805c35545e317cefc6ad9a00b3dff1c36",
+  "typed": "10c40ad3d7a6c2d28d3821eea0c07b13814297d78436f1ff265fc18f69060572",
+  "typedRunner": "c5440292aebaf8620bb4442907ab379d671373079bc5ff362391f7c6a4f833a8",
+  "typedV2": "fc9c367e4cbc4652fccc8910f302fc00b0a73115653573c16f26b05c5de9aa3b"
+ },
+ "kind": "a cost characterization on a seeded sample of search-v0.11's held-out tasks, whose outcomes under shared draws were known (search-v0.11, v0.12) or being measured (search-v0.13) at registration",
+ "measures": {
+  "elapsed": "wall-clock time of the search, from its process's start of run_one to its end",
+  "lean": "candidate tactic calls, exports that decide identity, and setup and verification commands, each with its time (the REPL's cost summary)",
+  "memory": "the largest total resident memory of the search's process and its descendants, polled every 0.5 s",
+  "model": "draw requests, 16 completions each, their prompt and generated tokens, and the time spent drawing"
+ },
+ "question": "what each of the three searches costs on held-out tasks when it runs alone and pays for its own draws: model requests, tokens and time, Lean candidate executions, identity exports, memory, and elapsed time",
+ "registeredLocalDate": "2026-10-13 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "searches": "search-v0.10's three searches (search_typed), the typed key, breadth-first, 48 expansions, each run through search_typed_v2 in its own Python process and a fresh REPL",
+ "tasks": {
+  "count": 30,
+  "rule": "random.Random(20261015).sample of 30 of search-v0.11's tasks stated in both its searches (search-v0.12's tasks), in their order",
+  "tasksSha256": "425dbc1a46f162df04ced5fd94bdb300872985f2952802a17bbca2a359ca1799"
+ },
+ "tests": "H122 to H124 decided by the rules as stated; medians are reported with percentile bootstrap intervals over tasks (2000 resamples), which do not decide"
+}
