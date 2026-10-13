@@ -31,7 +31,7 @@ recomputes the summary from the committed rows; CI runs it.
 second slice could not), and the original order replays in 87 of them (10 failed on a tactic error): C37 holds.
 
 - **H97 holds**: over the 86 replayable proofs none of whose goals shows a metavariable, every other ordering
-  replayed replays: 909 of their 3,619, all of each proof's but for the three with more than 120 orderings, of
+  tried replays: 909 of their 3,619, all of each proof's but for the three with more than 120 orderings, of
   which the registered rule drew 119 each.
 - **H98 and H99 fail**: one proof is coupled, `CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension`
   (3 steps, 2 orderings), whose goals show a metavariable in a hypothesis but never in a target; its other ordering
