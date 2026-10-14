@@ -92,7 +92,8 @@ significant at 0.05, but by one task, so the direction is better supported than 
 search-v0.10's estimate on other theorems (+1.4 points at 48 expansions over three sets). No proof that decides the
 comparison passes through a group of several goals. That shows what the winning proofs used, not why the group search
 found them: coupled groups that fail can still change what a search expands and when, and an independent-goal arm on
-the same tasks and candidates would be needed to separate coupling from searching goals. The gain is in theorems proved
+the same tasks and candidates would be needed to separate coupling from searching goals. (search-v0.12 ran it: the
+goal search proves every theorem the group search proves and one more.) The gain is in theorems proved
 at an equal number of expansions, not an end-to-end speedup, since the two searches apply different numbers of
 candidates per expansion. The tasks are held out from this program's earlier searches, not from its counts
 (holdout-v0.1 counted all of their proofs, orderings-replay-v0.2 replayed 32 and extraction-audit-v0.3 reconstructed

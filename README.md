@@ -48,7 +48,11 @@ expressions every search proves what it proved before (search-v0.10), and on
 720 held-out theorems (search-v0.11) the group search proves 153 of the 591
 it can pose against 147 for whole states, seven theorems against one
 (one-sided p = 0.035): a gain of about one point, three points excluded,
-whose significance rests on a single theorem. Mathlib's
+whose significance rests on a single theorem. An independent-goal search on
+the same tasks and candidates (search-v0.12) proves 154, every theorem the
+group search proves and one more, and leads whole states 8 to 1
+(Holm-adjusted p = 0.039): the gain is that of searching goals, not of
+keeping coupled goals together. Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
 this program proposed as a quality measure, separates the two proofs on one
@@ -162,6 +166,9 @@ experiments/search-v0.10/         search-v0.8 and v0.9 with the typed key
 experiments/search-v0.10-lost-sessions/  its searches that lost their session (not registered)
 experiments/search-v0.11/         whole states against coupled groups on held-out theorems
 experiments/search-v0.11-readings/  its outcome under other readings (not registered)
+experiments/search-v0.12/         the independent-goal search on those theorems and candidates
+experiments/search-v0.13/         two more sets of draws for the three searches (registered)
+experiments/search-cost-v0.1/     what each search costs, run alone (registered)
 experiments/heartbeats-v0.1/      search-v0.3 under the registered heartbeat limit
 experiments/cost-curves/          theorems against candidate applications (not registered)
 experiments/goal-key-audit/       the keys' collisions, measured (not registered)

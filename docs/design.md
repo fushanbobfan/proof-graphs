@@ -141,14 +141,17 @@ tactics; 89% of the states the printed key dropped while their expressions
 differ are equal up to unfolding. With goals identified by typed expression
 trees instead (`search-v0.10`), search-v0.8's and v0.9's searches prove
 exactly what they proved before. On 720 theorems of the second slice that no
-experiment had used (`search-v0.11`, its size fixed in advance to bound the
+search had used (`search-v0.11`, its size fixed in advance to bound the
 gain), the group search proves 153 of the 591 it can pose and the
 whole-state search 147, seven theorems against one (one-sided p = 0.035): a
 gain of one point, with three points excluded. The significance rests on one
 theorem, decided when its unit was repeated after a lost REPL session; on
 first attempts alone the count is six against one. None of the seven proofs
-passes through a group of several goals; whether coupling changes the search
-before a proof is found would take an independent-goal arm on the same tasks.
+passes through a group of several goals, and an independent-goal search on
+the same tasks and candidates (`search-v0.12`) proves 154: every theorem the
+group search proves and one more, 8 against 1 over whole states
+(Holm-adjusted p = 0.039). The held-out gain is that of searching goals;
+keeping coupled goals together adds nothing measurable to it.
 
 Every one of these searches acts on the first goal. A search that may act on
 any goal (`goal-selection-v0.1`, the menu, 24 expansions, states identified by
