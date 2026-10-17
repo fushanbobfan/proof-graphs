@@ -64,4 +64,5 @@ machine, REPL, Mathlib and model, and it shares search-v0.11's candidates only w
 occurrence; its 561 fresh sets are new samples. So the pairing is not a joint run, though it compares like one where
 the candidates are shared. The comparison is of the step prover at 48 expansions on one slice, with one set of draws
 per task, at an equal number of expansions rather than equal computation; search-v0.13 adds two fresh sets of draws
-for all three searches, and search-cost-v0.1 measures what each search costs.
+for all three searches, and search-cost-v0.1 measures what each search costs. (search-v0.13 found that neither the
+goal search's lead nor the group search's replicates on the two new sets.)
