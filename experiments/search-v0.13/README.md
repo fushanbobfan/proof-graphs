@@ -22,7 +22,9 @@ only, gave the H115 sign test a power of 98% at a median difference of 1.35 poin
 - `draws.jsonl.gz`: the 42,668 candidate sets drawn;
 - `summary.json`, `report.md`: the summary, by this experiment's own code;
 - `../search-v0.13-pooled/summary.json`: the descriptive pooling with search-v0.11's set that the registration names
-  (`scripts/explore_pooled_v013.py`).
+  (`scripts/explore_pooled_v013.py`);
+- `../search-v0.13-abandoned/summary.json`: the comparisons with whole states under other treatments of the abandoned
+  searches (`scripts/explore_abandoned_v013.py`, not registered).
 
 ## Reproduction
 
@@ -30,10 +32,11 @@ only, gave the H115 sign test a power of 98% at a median difference of 1.35 poin
 python scripts/test_search_replicates_holdout.py
 python scripts/run_search_replicates_holdout.py --check-committed
 python scripts/explore_pooled_v013.py --check
+python scripts/explore_abandoned_v013.py --check
 ```
 
 test the rotation, the attempt rule and the summary without Lean, recompute the summary from the committed rows, and
-recompute the pooled description; CI runs all three.
+recompute the pooled description and the sensitivity analysis; CI runs all four.
 
 ## Outcome
 
@@ -70,6 +73,12 @@ Pooled with search-v0.11's set, as the registration allows descriptively: groups
 goals 2 to 2 (-0.1, -0.6 to +0.2). Goal duplicates are 4.7% of the whole-state search's expansions and order
 duplicates 0.11%; the group search made 3,383 groups of several goals, and 2 of its proofs passed through one.
 
+The 25 abandoned searches count as unproved, as registered. Counted as proved for the goal or the group search alone,
+the case most favourable to it, they would give goals over whole states +0.51 points (-0.34 to +1.34) and groups
+over whole states +0.76 (-0.15 to +1.85); leaving out their 11 tasks gives 0.00 (-0.73 to +0.76) and -0.09 (-0.77 to
++0.67). This sensitivity analysis is not registered (`../search-v0.13-abandoned/summary.json`,
+`scripts/explore_abandoned_v013.py`).
+
 The run took from 2026-10-13 18:13 to 2026-10-17 15:31. Its supervisor stopped the runner, with the units in flight,
 three times when the commit charge left fell below 8 GB (five minutes each), three times for a game (Hearthstone for
 44 minutes; DOAX Venus Vacation for 2 h 48 min, until Bob exempted it as an idle game; another game for 64 minutes),
@@ -85,7 +94,8 @@ The leads search-v0.11 and v0.12 found on one set of draws do not replicate on t
 goal search and the whole-state search prove the same share of the tasks, and the group search no more. The new sets
 also show how much a set alone moves the counts (the goal search proves 140 tasks in one and 146 in the other), and
 the earlier significance rested on one theorem in each experiment. Pooled over all three sets, searching goals or
-coupled groups instead of whole states changes the proof rate by less than one point, with intervals that include
-zero, and coupled groups add nothing to independent goals. The comparison is of the step prover at 48 expansions on
-one slice, at an equal number of expansions rather than equal computation; search-cost-v0.1 measures what each search
-costs.
+coupled groups moves the proof rate by less than one point from that of whole states, with intervals that include
+zero, and coupled groups add nothing to independent goals. The upper limits rest on counting abandoned searches as
+unproved; the case most favourable to a goal-level search raises them to about 1.3 and 1.9 points, still below three.
+The comparison is of the step prover at 48 expansions on one slice, with the number of expansions held equal;
+search-cost-v0.1 measures what each search costs.

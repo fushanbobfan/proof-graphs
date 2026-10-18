@@ -158,8 +158,8 @@ proof rate by under a point, with intervals that include zero. Coupled groups
 add nothing to independent goals in any set. Run alone with their own draws
 (`search-cost-v0.1`), the goal and group searches take a median 1.10 and 1.21
 times as long per theorem as the whole-state search; the model takes nearly
-two thirds of every search's time, and the exports that decide goal identity
-about one percent.
+two thirds of every search's time, and the exports, typed and expression
+together, about one percent.
 
 Every one of these searches acts on the first goal. A search that may act on
 any goal (`goal-selection-v0.1`, the menu, 24 expansions, states identified by

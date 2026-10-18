@@ -7,8 +7,9 @@ sample of 30 of search-v0.12's 591 held-out tasks. The searches run one at a tim
 task's index, each in its own Python process with a fresh REPL, and the model server serves no one else. Each search
 draws its own candidates as search-v0.11 draws them, none shared with another search. For every search the runner
 records the model's draw requests (16 completions each), their prompt and generated tokens and the time spent
-drawing; the REPL's cost summary of candidate tactic calls, identity exports, and setup and verification commands,
-each with its time; the largest resident memory of the search's process and its descendants, polled every 0.5 s;
+drawing; the REPL's cost summary of candidate tactic calls, exports (for each state reached, the typed export that
+decides identity and the expression export kept beside it for audit, timed together), and setup and verification
+commands, each with its time; the largest resident memory of the search's process and its descendants, polled every 0.5 s;
 and the elapsed time. H122 predicts that in each search the model's time is the largest recorded component of
 elapsed time in more than half of the tasks; H123 that the median over tasks of the group search's elapsed time
 divided by the whole-state search's lies between 0.8 and 1.25; H124 that in the goal and group searches the exports
@@ -36,7 +37,8 @@ committed rows; CI runs both.
 ## Outcome
 
 All 90 searches ran to an outcome, and none raised or was abandoned (C53 holds); no other search experiment's
-runner ran during any of them (C54 holds). The run took from 2026-10-17 15:34 to 21:50 without a pause.
+runner was running when any of them started (C54 holds; the check runs as each search starts). The run took from
+2026-10-17 15:34 to 21:50 without a pause.
 
 | Search | Proved | Empty frontier | Expansions | Elapsed, all tasks | Model | Tactics | Exports | Commands | Model largest |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -55,8 +57,9 @@ largest component. Per task:
 - **H122 holds**: the model's time is the largest component in 16, 20 and 21 of the 30 tasks, in the whole-state
   search by one task.
 - **H123 holds**: the median ratio is 1.21, inside 0.8 to 1.25; its interval reaches 1.50.
-- **H124 holds**: identity exports take a median 1.2% of the goal search's elapsed time and 1.1% of the group
-  search's.
+- **H124 holds**: the exports, typed and expression together, take a median 1.2% of the goal search's elapsed time
+  and 1.1% of the group search's. The Python side of identity is outside every recorded component; counting all the
+  time no component records as identity work too, an upper limit for it, gives medians of 4.3% and 3.7%.
 
 The searches differ in how often they stop before their budget: the whole-state search did on 17 tasks (8 proofs, 9
 empty frontiers), the goal search on 13 and the group search on 12. On the 11 tasks where both the goal and the
@@ -73,7 +76,7 @@ these medians. The peak memory was a median of 3.9, 4.1 and 4.0 GiB, and at most
 
 At 48 expansions the three searches prove the same share of the held-out tasks (search-v0.13). Run alone with their
 own draws, the goal and group searches take a median 10% and 21% longer per task, longer on most tasks, and nearly
-two thirds of every search's time is the model's; the exports that decide goal identity take about one percent.
-Searching goals, then, buys no proofs and costs a little more time. The proof counts above come from one set of
+two thirds of every search's time is the model's; the exports take about one percent, and with all unrecorded time
+added, at most about four. Searching goals, then, gains no proofs that replicate and costs a little more time. The proof counts above come from one set of
 unshared draws per search and do not compare the designs. The times are of one machine and one llama.cpp server;
 with a faster model server the Lean side's share would grow.

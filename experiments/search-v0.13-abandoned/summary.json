@@ -1,0 +1,80 @@
+{
+ "source": {
+  "rows": "4a3c698baeea3300264802e3f5fdf6a2f206574b13914e3dde312620d6d8c2d7",
+  "summary": "d1dc00f325266de1bec3ab85a8deef7846e240ce597c04b32a12660b21e086bc"
+ },
+ "stated": 591,
+ "abandoned": 25,
+ "abandonedTheorems": 11,
+ "abandonedBySearch": {
+  "whole": 9,
+  "goals": 6,
+  "groups": 10
+ },
+ "pairs": {
+  "goalsOverWhole": {
+   "registered": {
+    "tasks": 591,
+    "firstMore": 8,
+    "wholeMore": 9,
+    "meanRateDifference": 0.0,
+    "moduleInterval95": [
+     -0.007282,
+     0.00738
+    ]
+   },
+   "favourable": {
+    "tasks": 591,
+    "firstMore": 14,
+    "wholeMore": 9,
+    "meanRateDifference": 0.005076142131979695,
+    "moduleInterval95": [
+     -0.003361,
+     0.013445
+    ]
+   },
+   "leftOut": {
+    "tasks": 580,
+    "firstMore": 8,
+    "wholeMore": 9,
+    "meanRateDifference": 0.0,
+    "moduleInterval95": [
+     -0.007282,
+     0.00764
+    ]
+   }
+  },
+  "groupsOverWhole": {
+   "registered": {
+    "tasks": 591,
+    "firstMore": 8,
+    "wholeMore": 11,
+    "meanRateDifference": -0.0008460236886632825,
+    "moduleInterval95": [
+     -0.007614,
+     0.006108
+    ]
+   },
+   "favourable": {
+    "tasks": 591,
+    "firstMore": 17,
+    "wholeMore": 11,
+    "meanRateDifference": 0.007614213197969543,
+    "moduleInterval95": [
+     -0.001502,
+     0.018519
+    ]
+   },
+   "leftOut": {
+    "tasks": 580,
+    "firstMore": 8,
+    "wholeMore": 11,
+    "meanRateDifference": -0.0008620689655172414,
+    "moduleInterval95": [
+     -0.007666,
+     0.006723
+    ]
+   }
+  }
+ }
+}

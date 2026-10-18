@@ -58,8 +58,8 @@ sets searching goals or groups changes the proof rate by less than a point,
 with intervals that include zero. Run alone with their own draws
 (search-cost-v0.1), the goal and group searches take a median 1.10 and 1.21
 times as long per theorem as the whole-state search; the model takes nearly
-two thirds of every search's time, and the exports that decide goal identity
-about one percent. Mathlib's
+two thirds of every search's time, and the exports, typed and expression
+together, about one percent. Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
 this program proposed as a quality measure, separates the two proofs on one
@@ -176,6 +176,7 @@ experiments/search-v0.11-readings/  its outcome under other readings (not regist
 experiments/search-v0.12/         the independent-goal search on those theorems and candidates
 experiments/search-v0.13/         two more sets of draws for the three searches
 experiments/search-v0.13-pooled/  all three sets pooled, descriptively as registered
+experiments/search-v0.13-abandoned/  its abandoned searches treated otherwise (not registered)
 experiments/search-cost-v0.1/     what each search costs, run alone with its own draws
 experiments/heartbeats-v0.1/      search-v0.3 under the registered heartbeat limit
 experiments/cost-curves/          theorems against candidate applications (not registered)
@@ -203,15 +204,17 @@ datasets/proof-graphs-v0.1.jsonl.gz  the same graphs under the earlier derivatio
 
 ## Dataset
 
-`datasets/proof-graphs-v0.2.jsonl.gz` holds the step-dependency graph of
-every proof the experiments extracted, under the corrected derivation of
-`scripts/count_linearizations_v2.py` (`python scripts/run_recount.py
---check-committed` rebuilds it); `proof-graphs-v0.1` keeps the earlier
-derivation, which loses the closing steps of `simpa ... using ...` and similar
-tactics. Both cover 3,994 tactic proofs of ProofNet-IR
-v0.10.0, 2,807 of the Mathlib v4.32.0 slice, and the 484 tactic sides of the
-golf pairs, one JSON line each with its source, module, declaration, steps
-(tactic kind and line), dependency edges, and exact number of orderings.
+`datasets/proof-graphs-v0.2.jsonl.gz` holds the step-dependency graphs of the
+library, the first Mathlib slice and the first window of golf pairs, under the
+corrected derivation of `scripts/count_linearizations_v2.py` (`python
+scripts/run_recount.py --check-committed` rebuilds it); `proof-graphs-v0.1`
+keeps the earlier derivation, which loses the closing steps of
+`simpa ... using ...` and similar tactics. Both cover 3,994 tactic proofs of
+ProofNet-IR v0.10.0, 2,807 of the Mathlib v4.32.0 slice, and the 484 tactic
+sides of the golf pairs, one JSON line each with its source, module,
+declaration, steps (tactic kind and line), dependency edges, and exact number
+of orderings. The second slice and the second window keep their extractions in
+`experiments/holdout-v0.1` and `experiments/golf-v0.2`.
 `python scripts/export_graphs.py --check` rebuilds v0.1 from the committed
 extractions; CI runs both checks.
 
@@ -227,7 +230,8 @@ python scripts/run_linearizations.py --check-committed
 imports module by module (about ten minutes on CI); `lake exe cache get`
 fetches Mathlib's build for the slice and search experiments (about 6 GB);
 `lake build repl` builds the Lean REPL the searches drive; the model arm of
-the search experiment needs a local OpenAI-compatible server on port 8080. On Windows, clone into a short path or set
+the search experiment needs a local OpenAI-compatible server on port 8080. The
+cost study and its check need `psutil` (`pip install psutil`). On Windows, clone into a short path or set
 `git config --global core.longpaths true`; several module names of the
 dependency exceed 100 characters.
 
