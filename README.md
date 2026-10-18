@@ -55,7 +55,11 @@ group search proves and one more, and leads whole states 8 to 1
 (search-v0.13): over them the goal and whole-state searches prove the same
 share of the tasks and the group search no more, and pooled over all three
 sets searching goals or groups changes the proof rate by less than a point,
-with intervals that include zero. Mathlib's
+with intervals that include zero. Run alone with their own draws
+(search-cost-v0.1), the goal and group searches take a median 1.10 and 1.21
+times as long per theorem as the whole-state search; the model takes nearly
+two thirds of every search's time, and the exports that decide goal identity
+about one percent. Mathlib's
 golfed proofs are shorter than their predecessors and, adjusted for length,
 branch more, on two windows of Mathlib's history; the structure index, which
 this program proposed as a quality measure, separates the two proofs on one
@@ -172,7 +176,7 @@ experiments/search-v0.11-readings/  its outcome under other readings (not regist
 experiments/search-v0.12/         the independent-goal search on those theorems and candidates
 experiments/search-v0.13/         two more sets of draws for the three searches
 experiments/search-v0.13-pooled/  all three sets pooled, descriptively as registered
-experiments/search-cost-v0.1/     what each search costs, run alone (registered)
+experiments/search-cost-v0.1/     what each search costs, run alone with its own draws
 experiments/heartbeats-v0.1/      search-v0.3 under the registered heartbeat limit
 experiments/cost-curves/          theorems against candidate applications (not registered)
 experiments/goal-key-audit/       the keys' collisions, measured (not registered)

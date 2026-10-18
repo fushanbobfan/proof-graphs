@@ -1,0 +1,122 @@
+{
+ "experiment": "search-cost-v0.1",
+ "preregistrationSha256": "6bd3b3f17ff5caafc1797f9a0b8cf087525655d74f78affc352daadb7de72d54",
+ "tasks": 30,
+ "searches": {
+  "whole": {
+   "searches": 30,
+   "proved": 8,
+   "abandoned": 0,
+   "medianElapsedSeconds": 128.62,
+   "medianPeakMemoryMB": 4038.8500000000004,
+   "totals": {
+    "elapsedSeconds": 6310.4,
+    "modelRequests": 716,
+    "completionTokens": 173537,
+    "promptTokens": 1714544,
+    "modelSeconds": 3989.2,
+    "tacticSeconds": 661.3,
+    "exportSeconds": 203.9,
+    "commandSeconds": 1012.5,
+    "tacticCalls": 8667,
+    "exportCalls": 4064
+   },
+   "modelLargestShareOfTasks": 0.5333333333333333,
+   "medianExportShare": 0.007103774478658596
+  },
+  "goals": {
+   "searches": 30,
+   "proved": 9,
+   "abandoned": 0,
+   "medianElapsedSeconds": 237.59,
+   "medianPeakMemoryMB": 4226.15,
+   "totals": {
+    "elapsedSeconds": 8011.9,
+    "modelRequests": 874,
+    "completionTokens": 222827,
+    "promptTokens": 2062816,
+    "modelSeconds": 5320.8,
+    "tacticSeconds": 673.6,
+    "exportSeconds": 328.5,
+    "commandSeconds": 1029.8,
+    "tacticCalls": 10842,
+    "exportCalls": 5202
+   },
+   "modelLargestShareOfTasks": 0.6666666666666666,
+   "medianExportShare": 0.011634142049124642
+  },
+  "groups": {
+   "searches": 30,
+   "proved": 5,
+   "abandoned": 0,
+   "medianElapsedSeconds": 252.885,
+   "medianPeakMemoryMB": 4084.8500000000004,
+   "totals": {
+    "elapsedSeconds": 8106.2,
+    "modelRequests": 929,
+    "completionTokens": 221277,
+    "promptTokens": 1969360,
+    "modelSeconds": 5343.8,
+    "tacticSeconds": 945.2,
+    "exportSeconds": 249.0,
+    "commandSeconds": 982.5,
+    "tacticCalls": 11076,
+    "exportCalls": 5662
+   },
+   "modelLargestShareOfTasks": 0.7,
+   "medianExportShare": 0.011444671786451154
+  }
+ },
+ "ratios": {
+  "goalsOverWhole": {
+   "tasks": 30,
+   "median": 1.1026543283195842,
+   "interval95": [
+    1.069986259633192,
+    1.163119860453526
+   ]
+  },
+  "groupsOverWhole": {
+   "tasks": 30,
+   "median": 1.2139258441671008,
+   "interval95": [
+    1.1191344720321474,
+    1.50496149849221
+   ]
+  }
+ },
+ "hypotheses": {
+  "H122": {
+   "shares": {
+    "whole": 0.5333333333333333,
+    "goals": 0.6666666666666666,
+    "groups": 0.7
+   },
+   "holds": true
+  },
+  "H123": {
+   "median": 1.2139258441671008,
+   "holds": true
+  },
+  "H124": {
+   "shares": {
+    "goals": 0.011634142049124642,
+    "groups": 0.011444671786451154
+   },
+   "holds": true
+  }
+ },
+ "checks": {
+  "C53": {
+   "expected": 90,
+   "ran": 90,
+   "errors": 0,
+   "holds": true
+  },
+  "C54": {
+   "contaminated": 0,
+   "holds": true
+  }
+ },
+ "resultsSha256": "f0f3b9164fb518612e3f59d50fa3593e322980f6e393443e5a4f60f6d8147641"
+}
