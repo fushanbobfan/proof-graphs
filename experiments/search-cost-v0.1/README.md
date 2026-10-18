@@ -63,7 +63,8 @@ empty frontiers), the goal search on 13 and the group search on 12. On the 11 ta
 whole-state search used all 48 expansions, the goal search took a median 1.11 times as long, its model time 1.11
 times, at about the same tokens per request; on the 12 such tasks for the group search, 1.15 times. A request of 16
 completions took 5.6, 6.1 and 5.8 s on average, and the setup and verification commands about 33 s per search.
-Elapsed times fall into a quick group (at most 122 s) and a slow one (at least 166 s). The whole-state search has 15
+Elapsed times fall into a quick group (at most 122 s), every search in which ended before its budget, and a slow one
+(at least 166 s), in which 48 of 50 searches used all 48 expansions. The whole-state search has 15
 quick tasks, the goal search 13 and the group search 12, so the whole-state search's median falls between the groups
 (129 s) and the others' inside the slow one (238 and 253 s); the per-task ratios compare the searches better than
 these medians. The peak memory was a median of 3.9, 4.1 and 4.0 GiB, and at most 9.7 GiB.
