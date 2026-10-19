@@ -107,6 +107,8 @@ jobs:
           else
             echo "no committed results yet"
           fi
+      - name: Check the human audit of difficult constructs and windows of long proofs
+        run: python scripts/run_extraction_audit_v4.py --check-committed
       - name: Check the committed goal-identity search experiment
         run: |
           if test -f experiments/search-v0.4/summary.json; then

@@ -1,0 +1,176 @@
+[
+ {
+  "id": "P01",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.SchedulerTaggedProvenance.strictInteriorEndpointWitness",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 35822,
+  "lastLine": 35871,
+  "kind": "proof",
+  "construct": "simpa-using"
+ },
+ {
+  "id": "P02",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.runUnificationWorklist_attempts_eq_fuel_of_queue_ne_nil",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 13022,
+  "lastLine": 13048,
+  "kind": "proof",
+  "construct": "simpa-using"
+ },
+ {
+  "id": "P03",
+  "corpus": "holdout-slice",
+  "module": "Mathlib.RingTheory.Polynomial.SmallDegreeVieta",
+  "declaration": "Polynomial.eq_mul_mul_of_roots_quadratic_eq_pair",
+  "source": ".lake/packages/mathlib/Mathlib/RingTheory/Polynomial/SmallDegreeVieta.lean",
+  "byLine": 44,
+  "lastLine": 51,
+  "kind": "proof",
+  "construct": "nested-by"
+ },
+ {
+  "id": "P04",
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Data.Nat.Digits.Lemmas",
+  "declaration": "List.sum_fixedLengthDigits_sum",
+  "source": ".lake/packages/mathlib/Mathlib/Data/Nat/Digits/Lemmas.lean",
+  "byLine": 515,
+  "lastLine": 529,
+  "kind": "proof",
+  "construct": "nested-by"
+ },
+ {
+  "id": "P05",
+  "corpus": "mathlib-slice",
+  "module": "Mathlib.Algebra.Polynomial.Degree.Operations",
+  "declaration": "Polynomial.leadingCoeff_monic_mul",
+  "source": ".lake/packages/mathlib/Mathlib/Algebra/Polynomial/Degree/Operations.lean",
+  "byLine": 366,
+  "lastLine": 370,
+  "kind": "proof",
+  "construct": "case-analysis"
+ },
+ {
+  "id": "P06",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Certificate.TerminalPar.parChoice_incident_agreement",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 15385,
+  "lastLine": 15408,
+  "kind": "proof",
+  "construct": "case-analysis"
+ },
+ {
+  "id": "P07",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyPayloadEnabled",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadInput.ready_two_levels",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyPayloadEnabled.lean",
+  "byLine": 226,
+  "lastLine": 254,
+  "kind": "proof",
+  "construct": "calc"
+ },
+ {
+  "id": "P08",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialSchedulerBridge",
+  "declaration": "ProofNetIR.SequentialSchedulerBridge.new_reserve_carrier_realizesSigma",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialSchedulerBridge.lean",
+  "byLine": 1475,
+  "lastLine": 1528,
+  "kind": "proof",
+  "construct": "calc"
+ },
+ {
+  "id": "P09",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Sequentialization",
+  "declaration": "ProofNetIR.Link.restrictTo?_eq_none_of_mem_not_mem",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Sequentialization.lean",
+  "byLine": 1951,
+  "lastLine": 1964,
+  "kind": "proof",
+  "construct": "all-goals"
+ },
+ {
+  "id": "P10",
+  "corpus": "holdout-slice",
+  "module": "Mathlib.LinearAlgebra.Multilinear.Basic",
+  "declaration": "MultilinearMap.mkPiRing_eq_iff",
+  "source": ".lake/packages/mathlib/Mathlib/LinearAlgebra/Multilinear/Basic.lean",
+  "byLine": 1269,
+  "lastLine": 1273,
+  "kind": "proof",
+  "construct": "all-goals"
+ },
+ {
+  "id": "P11",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7OlderRawMarkedRegionNewPreservation",
+  "declaration": "ProofNetIR.SequentialFigure7.tensorReferencePath",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7OlderRawMarkedRegionNewPreservation.lean",
+  "byLine": 42,
+  "lastLine": 92,
+  "kind": "proof",
+  "construct": "try-first-repeat"
+ },
+ {
+  "id": "P12",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Graph",
+  "declaration": "ProofNetIR.Graph.EdgeWalk.CyclicImmediateReverseSite.segmentJunction_of_flatten",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Graph.lean",
+  "byLine": 1627,
+  "lastLine": 1670,
+  "kind": "proof",
+  "construct": "try-first-repeat"
+ },
+ {
+  "id": "W1",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.Unification",
+  "declaration": "ProofNetIR.Certificate.fireTensor?_success_frontier_of_ne",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/Unification.lean",
+  "byLine": 5666,
+  "lastLine": 6009,
+  "kind": "window",
+  "window": [
+   5753,
+   5788
+  ]
+ },
+ {
+  "id": "W2",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.SequentialFigure7UnifyPayloadInvariant",
+  "declaration": "ProofNetIR.SequentialFigure7.UnifyPayloadStep.tensorShadow_readyBucketFrontierExactWithGap",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/SequentialFigure7UnifyPayloadInvariant.lean",
+  "byLine": 2285,
+  "lastLine": 2600,
+  "kind": "window",
+  "window": [
+   2505,
+   2546
+  ]
+ },
+ {
+  "id": "W3",
+  "corpus": "proofnet-ir",
+  "module": "ProofNetIR.StructuralComposition",
+  "declaration": "ProofNetIR.Certificate.StructurallyWellFormed.appendTensorOccurrence",
+  "source": ".lake/packages/proofnet-ir/ProofNetIR/StructuralComposition.lean",
+  "byLine": 1216,
+  "lastLine": 1550,
+  "kind": "window",
+  "window": [
+   1392,
+   1420
+  ]
+ }
+]

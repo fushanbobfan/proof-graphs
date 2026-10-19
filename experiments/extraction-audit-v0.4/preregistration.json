@@ -1,0 +1,59 @@
+{
+ "checks": {
+  "C58": "every item's root `by` lies on the line the extraction gives, so the worksheet's line numbers are the extraction's"
+ },
+ "developmentChecksBeforeRegistration": [
+  "extraction-audit-v0.3's committed reconstructions through this comparison: 28 of 28 agree, as v0.3 reports",
+  "a window of 25 steps of v0.3's longest proof against the derivation itself agrees (True) and against a copy with one outside flag changed disagrees (True)",
+  "an answer workbook for one v0.3 proof and that window, filled with their derived graphs (one blank row left in the proof's steps) and read back, compares as agreeing (True)",
+  "the sample was drawn once to write sample.json and the kit; no derived graph of a sampled item was displayed"
+ ],
+ "experiment": "extraction-audit-v0.4",
+ "hypotheses": {
+  "H127": "no disagreement is adjudicated as an extractor error"
+ },
+ "implementationSha256": {
+  "base": "e620fd7095f25adb35bfe91129d306163a9d46d0b8d19e0c10c3c448058c424a",
+  "counter": "1b31cff799255d58719ebb0c16480385a1924adf90b26b0e4f1e39ee8c5264d0",
+  "runner": "4ce4b2b41e51673f2721ea9b663a8e5f14ddc6fdeb7dfdcd529c7c4fa258256e",
+  "v1": "36f4b46f2776cc69d201099cd6c716f9c8e590fbe4ce26b5c5502fb1e0f51657",
+  "v3": "38d80c0573363dae4716c512e671a45437fc48431aa8b2f1752ff9e8fe1583c9"
+ },
+ "kitSha256": {
+  "README.md": "0ba8c3de9070b0e2cb5a13b37aa91068a1f931bd4e5e973408c573375b168cf8",
+  "answers.xlsx": "0330ff523df592c3745f53369d5f4468df81f866333c10c79191144660fb4c76",
+  "instructions.md": "9b7e7f53088c2fb3ccbdf2dac107d4e4caf4e5bd0ac695b713ffa44430816369",
+  "worksheet.md": "9d63f0dc2e0768dad7c1f69bc9bf657ef89cc3aea4668c2084264672cd5feead"
+ },
+ "protocol": [
+  "the reconstructor is a person, a co-author of the paper, who receives the kit (human-kit/README.md, instructions.md, worksheet.md, answers.xlsx): items by location and line range only, not their constructs, sizes or shapes",
+  "the reconstructor works from the source and Lean's goal display, may read Lean's and Mathlib's source and documentation, opens only the kit's folder and the source files the worksheet names (not the repository's extractions, datasets, results, scripts, or this experiment's README, sample.json or preregistration.json), runs no extractor or script, and reconstructs without help from a language model",
+  "the filled answers.xlsx is converted (--import-hand) and committed as reconstructions-by-hand.json before --compare first runs",
+  "--compare matches steps by source line and order within the line, as extraction-audit-v0.1 does, and compares edges with the corrected derivation's; in a window it compares the steps on the window's lines, the edges between them, and the set of them that consume a goal created by a step outside the window (a goal with no origin counts as created by none)",
+  "every disagreement is adjudicated with its evidence (Lean's info tree and goal display) into: extractor error; reconstruction error; definition gap"
+ ],
+ "question": "does a person, rebuilding goal-origin graphs by hand from the source and Lean's goal display, agree with the corrected step derivation on difficult constructs and on windows of very long proofs",
+ "registeredLocalDate": "2026-10-18 America/Los_Angeles",
+ "resultsAbsentAtRegistration": true,
+ "sample": {
+  "byKind": {
+   "proof": 12,
+   "window": 3
+  },
+  "constructs": {
+   "all-goals": "a `<;>`, `all_goals` or `any_goals` node",
+   "calc": "a `calc` tactic node (`Lean.calcTactic`)",
+   "case-analysis": "an `induction`, `cases`, `rcases` or `obtain` node",
+   "nested-by": "a `by` node nested in a term (a `Lean.Parser.Term.byTactic` node that is not the root)",
+   "simpa-using": "a `simpa` node whose line, or the next, has `using`",
+   "try-first-repeat": "`try`, `first`, `repeat` or `repeat'` written in the proof's source, comments removed"
+  },
+  "count": 15,
+  "extractionSha256": {
+   "holdout-slice": "a46a0d312c528dcdff8d455909d1b2aaf8a8beed28335c935ea96984d14f4c49",
+   "mathlib-slice": "ffb541297c733daf7cd745c86cd4751f78a07014ba7ed138a58ade24352ae25b",
+   "proofnet-ir": "92244073961760698acb7cdd53de41e4d937fbdac1d68ae8aa882e8a664b7cff"
+  },
+  "rule": "seed 20261018; pool: every proof with one root `by` block and a name that is not generated, from the library, the first slice or holdout-v0.1's slice, outside extraction-audit-v0.1's, v0.2's and v0.3's samples, in (corpus, module, line, declaration) order; for each construct in order, 2 proofs of 5 to 30 steps drawn uniformly without replacement among those with the construct and not yet drawn; then 3 proofs of at least 151 steps drawn uniformly, and in each a window of 25 consecutive steps in line order, its start drawn uniformly, given to the reconstructor as the line range from its first step's line to its last's"
+ }
+}
