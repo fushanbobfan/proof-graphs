@@ -2,8 +2,8 @@
 
 Experiments on the order redundancy of Lean tactic proofs: how many orderings
 of its steps a proof admits, how much of a real proof search is spent on
-orderings of the same steps, and whether searching over goal-dependency
-graphs instead of tactic sequences pays at equal budget. The program is the
+orderings of the same steps, and whether a search over goal-dependency graphs
+does better than a search over tactic sequences at equal budget. The program is the
 Lean-scale continuation of the MLL results of
 [ProofNet-IR](https://github.com/fushanbobfan/proofnet-ir) v0.11, and its
 corpus is that library's own proofs.
@@ -23,10 +23,10 @@ and over every one of the 1,171 theorems of a slice that can be posed, 4.5
 percent of a real search's expansions are states that differ from an earlier
 one only in goal order. What the search does meet is goal sharing: 14.9
 percent of its expansions, and 28.0 percent once goals that differ only in
-the names of their hypotheses are identified. Searching over goals instead of
-whole states proves neither more nor fewer theorems (103 against 102, sign
-test p = 1), at eight times the budget, or with the menu's one-shot provers
-removed, where neither search proves anything at all. With a step-level Lean
+the names of their hypotheses are identified. A search over goals proves 102 of
+those theorems and a search over whole states 103 (sign test p = 1); eight
+times the budget adds no proof, and with the menu's one-shot provers removed
+neither search proves anything at all. With a step-level Lean
 prover (BFS-Prover-V2-7B) as the proposer, searches run deep and the depth
 pays and order duplicates all but vanish; the goal search first led by 10
 theorems to 8, but with the prover's draws shared between the two searches the
@@ -35,8 +35,8 @@ lead disappears on the same tasks, and over 169 theorems the two prove 41 and
 the names of their hypotheses; identifying goals and states up to those names
 lets both searches find their proofs about a fifth sooner and prove a few more
 (43 and 42), but the search over goals still does no better than the search
-over states. Identified by Lean's expressions instead of text, the sharing
-measures hold in aggregate, though item by item about one text
+over states. Identified by Lean's expressions, the sharing measures agree
+with the text keys' in aggregate, though item by item about one text
 identification in fifteen joins goals whose expressions differ. A goal search that treats goals as
 independent also loses proofs whose goals share an existential witness.
 Kept together in the groups their shared metavariables make, as HyperTree
@@ -70,7 +70,10 @@ numbers and its boundaries;
 it and lists where an independent cross-check is most valuable.
 [docs/heartbeat-limit.md](docs/heartbeat-limit.md) corrects the per-tactic
 heartbeat limit the search registrations state; enforced, it changes no outcome
-of search-v0.3's searches (heartbeats-v0.1).
+of search-v0.3's searches (heartbeats-v0.1). The docstring of
+`scripts/search_harness.py` calls its search best-first; both of its searches are
+breadth-first (`frontier.pop(0)`), as the paper states. The file keeps its text
+because the registrations of search-v0.1 and search-v0.3 record its hash.
 
 ## Layout
 
